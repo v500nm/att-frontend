@@ -5,7 +5,7 @@ import { ChatComponent } from './chat/chat.component';
 
 const routes: Routes = [
   { path: '', component: DashboardComponent },
-  { path: 'chat', component: ChatComponent },
+  { path: '/chat', component: ChatComponent },
 ];
 
 @NgModule({
