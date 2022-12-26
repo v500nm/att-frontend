@@ -9,6 +9,9 @@ import { ChatComponent } from './chat/chat.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { HeaderComponent } from './components/header/header.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { AttendanceComponent } from './pages/attendance/attendance.component';
+import { DefaulterComponent } from './pages/defaulter/defaulter.component';
+import { SubjectComponent } from './pages/subject/subject.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +19,10 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
     ChatComponent,
     DashboardComponent,
     HeaderComponent,
-    SidebarComponent
+    SidebarComponent,
+    AttendanceComponent,
+    DefaulterComponent,
+    SubjectComponent
   ],
   imports: [
     BrowserModule,

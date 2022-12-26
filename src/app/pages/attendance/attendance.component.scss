@@ -1,0 +1,35 @@
+.head{
+  width:15%;
+  float:right;
+  color: white;
+  padding: 5px 15px;
+  
+  select{
+      height:100%;
+      width:100%;
+      font-size:25px;
+      text-align: center;
+      background-color: #46adfc;
+      color: white;
+      cursor: pointer;
+  }
+}
+h1{
+  float: left;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+  th, td {
+    text-align: left;
+    padding: 8px;
+  }
+  
+  tr:nth-child(even){background-color: #f2f2f2}
+  
+  th {
+    background-color: #46adfc;
+    color: white;
+  }
+}
