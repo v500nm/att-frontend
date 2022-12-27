@@ -1,17 +1,122 @@
-
-
 .wrapper {
+<<<<<<< HEAD
     width: 100%;
 }
+=======
+    .title {
+        background: #007bff;
+        color: white;
+        line-height: 2.5;
+        border-radius: 5px 5px 0 0;
+        text-align: center;
+        font-size: 20px;
+    }
+    .box {
+        border: 1px solid #efefef;
+        padding: 10px 15px;
+        min-height: 600px;
+        max-height: 600px;
+        .item {
+            display: flex;
+            float: left;
+            margin: 10px 0;
+            .icon {
+                background: #007bff;
+                color: white;
+                width: 40px;
+                height: 40px;
+                text-align: center;
+                line-height: 40px;
+                border-radius: 50%;
+            }
+            .msg {
+                background: #007bff;
+                color: white;
+                border-radius: 30px;
+                width: 180px;
+                margin-left: 10px;
+                p {
+                    padding: 10px 24px;
+                    
+                }
+            }
+        }
+        .itemRight {
+            float: right;
+            .msg {
+                background:rgb(149, 206, 244);
+                color: #333;
+            }
+            .btn-group {
+                button{
+                    background-color: #4093ec; 
+                    border: 1px solid white; 
+                    color: white; 
+                    padding: 10px 24px; 
+                    cursor: pointer;
+                    width: 180px; 
+                    border-radius: 30px;
+                    display: block;
+                }
+                button:not(:last-child) {
+                    border-bottom: none; 
+                  }
+                  button:hover {
+                    background-color:  #072749;
+                  }
+              }
+        }
+    }
+    .typing-area {
+        width: 100%;
+        background: #efefef;
+        height: 100px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 10px 24px;
+        .input-field {
+            width: 100%;
+            position: relative;
+            input {
+                width: 100%;
+                padding: 10px;
+                border: 1px solid transparent;
+                border-radius: 3px;
+                outline: none;
+                padding-right: 70px;
+                font-family: 'Poppins', sans-serif;
+                transition: 0.3s all ease;
+            }
+            input:focus {
+                border-color: #007bff;
+            }
+            button {
+                position: absolute;
+                top: 50%;
+                right: 10px;
+                transform: translateY(-50%);
+                background: transparent;
+                border: 1px solid #007bff;
+                padding: 5px 10px;
+                border-radius: 3px;
+                color: #007bff;
+                outline: none;
+                cursor: pointer;
+                opacity: 0;
+                pointer-events: none;
+                transition: 0.3s all ease;
+            }
+            button:hover {
+                background: #007bff;
+                color: white;
+            }
+        }
+    }
+>>>>>>> 8dc5f13b037c3adef9eb35c9c8892ce0523243f3
 
-.wrapper .title {
-    background: #007bff;
-    color: white;
-    line-height: 2.5;
-    border-radius: 5px 5px 0 0;
-    text-align: center;
-    font-size: 20px;
 }
+<<<<<<< HEAD
 
 .wrapper .box {
     border: 1px solid #efefef;
@@ -106,26 +211,9 @@
     color: white;
 }
 
+=======
+>>>>>>> 8dc5f13b037c3adef9eb35c9c8892ce0523243f3
 .wrapper .typing-area .input-field input:valid ~ button {
     opacity: 1;
     pointer-events: auto;
 }
-
-.btn-group button {
-    background-color: #4093ec; 
-    border: 1px solid white; 
-    color: white; 
-    padding: 10px 24px; 
-    cursor: pointer;
-    width: 180px; 
-    border-radius: 30px;
-    display: block;
-  }
-  
-  .btn-group button:not(:last-child) {
-    border-bottom: none; 
-  }
-  
-  .btn-group button:hover {
-    background-color:  #072749;
-  }
