@@ -1,7 +1,7 @@
 
 
 .wrapper {
-    width: 1535px;
+    width: 100%;
 }
 
 .wrapper .title {
@@ -42,13 +42,9 @@
     border-radius: 30px;
     width: 180px;
     margin-left: 10px;
-    
+    text-align: center;
 }
 
-.wrapper .box .item .msg p {
-    padding: 10px 24px;
-    
-}
 
 .wrapper .box .item.right {
     float: right;
@@ -61,8 +57,7 @@
 
 .wrapper .typing-area {
     width: 100%;
-    background: #efefef;
-    height: 100px;
+    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;

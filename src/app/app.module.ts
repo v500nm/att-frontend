@@ -12,6 +12,7 @@ import { AttendanceComponent } from './pages/attendance/attendance.component';
 import { DefaulterComponent } from './pages/defaulter/defaulter.component';
 import { SubjectComponent } from './pages/subject/subject.component';
 import { ChatComponent } from './pages/chat/chat.component';
+import { ScheduleComponent } from './pages/schedule/schedule.component';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { ChatComponent } from './pages/chat/chat.component';
     AttendanceComponent,
     DefaulterComponent,
     SubjectComponent,
-    ChatComponent
+    ChatComponent,
+    ScheduleComponent
   ],
   imports: [
     BrowserModule,
