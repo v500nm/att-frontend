@@ -1,11 +1,18 @@
 header{
     .main{
-        // display: flex;
+        display: flex;
         align-items: center;
         gap: 2rem;
         .head{
-            // display: flex;
+            display: flex;
             align-items: center;
+            justify-content: space-between;
+            .creds{
+                .btns{
+                    display: flex;
+                    gap: 4px; 
+                }
+            }
         }
     }
 }
