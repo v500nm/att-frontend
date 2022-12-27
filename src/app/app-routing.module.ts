@@ -11,7 +11,7 @@ const routes: Routes = [
   { path: 'chat', component: ChatComponent },
   { path: 'defaulter', component: DefaulterComponent },
   { path: 'subject', component: SubjectComponent },
-  { path: 'attendance', component:AttendanceComponent }
+  { path: 'attendance', component: AttendanceComponent }
 ];
 
 @NgModule({
