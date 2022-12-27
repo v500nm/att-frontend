@@ -5,10 +5,18 @@
     padding: 2rem;
     .cards {
         width: 100%;
+<<<<<<< HEAD
         padding: 2rem;
         display: grid;
         grid-template-columns: 1fr 1fr 1fr 1fr;
         grid-gap: 10px;
+=======
+        padding: 35px 20px;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-gap: 20px;
+    
+>>>>>>> 0285b9a10a828f5313d87a94fd4de32c712d7fd1
         .card {
             padding: 2rem;
             display: flex;
