@@ -13,6 +13,7 @@ import { DefaulterComponent } from './pages/defaulter/defaulter.component';
 import { SubjectComponent } from './pages/subject/subject.component';
 import { ChatComponent } from './pages/chat/chat.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,

@@ -1,6 +1,47 @@
 <p-sidebar [(visible)]="visibleSidebar1" [baseZIndex]="10000">
-    <h1 style="font-weight:normal">Left Sidebar</h1>
-    
+    <h1 style="font-weight:normal">Attendance Portal</h1><hr>
+    <div class="sideNav">
+      <div class="subNav" routerLink="">
+        <div>
+          <a >Dashboard</a>
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="36" height="36"><path fill="none" d="M0 0h24v24H0z"/><path d="M13.172 12l-4.95-4.95 1.414-1.414L16 12l-6.364 6.364-1.414-1.414z"/></svg>
+        </div>
+      </div>
+      <div class="subNav" routerLink="/attendance">
+        <div>
+          <a >Attendance</a>
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="36" height="36"><path fill="none" d="M0 0h24v24H0z"/><path d="M13.172 12l-4.95-4.95 1.414-1.414L16 12l-6.364 6.364-1.414-1.414z"/></svg>
+        </div>
+      </div>
+      <div class="subNav" routerLink="/subject">
+        <div>
+          <a>Subjects</a>
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="36" height="36"><path fill="none" d="M0 0h24v24H0z"/><path d="M13.172 12l-4.95-4.95 1.414-1.414L16 12l-6.364 6.364-1.414-1.414z"/></svg>
+        </div>
+      </div>
+      <div class="subNav" routerLink="/defaulter">
+        <div>
+          <a>Defaulters</a>
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="36" height="36"><path fill="none" d="M0 0h24v24H0z"/><path d="M13.172 12l-4.95-4.95 1.414-1.414L16 12l-6.364 6.364-1.414-1.414z"/></svg>
+        </div>
+      </div>
+      <div class="subNav" routerLink="/chat">
+        <div>
+          <a>Chat</a>
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="36" height="36"><path fill="none" d="M0 0h24v24H0z"/><path d="M13.172 12l-4.95-4.95 1.414-1.414L16 12l-6.364 6.364-1.414-1.414z"/></svg>
+        </div>
+      </div>
+    </div>
     
   </p-sidebar>
   <p-button type="button" (click)="visibleSidebar1 = true" icon="pi pi-arrow-right"></p-button> 
