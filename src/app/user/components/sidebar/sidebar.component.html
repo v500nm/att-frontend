@@ -1,7 +1,7 @@
 <p-sidebar [(visible)]="visibleSidebar1" [baseZIndex]="10000">
     <h1 style="font-weight:normal">Attendance Portal</h1><hr>
     <div class="sideNav">
-      <div class="subNav" routerLink="">
+      <div class="subNav" routerLinkActive="user">
         <div>
           <a >Dashboard</a>
         </div>
@@ -9,7 +9,7 @@
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="36" height="36"><path fill="none" d="M0 0h24v24H0z"/><path d="M13.172 12l-4.95-4.95 1.414-1.414L16 12l-6.364 6.364-1.414-1.414z"/></svg>
         </div>
       </div>
-      <div class="subNav" routerLink="/attendance">
+      <div class="subNav" [ngClass]="{active :activeTab  == 'attendance'}" (click)="attendance()">
         <div>
           <a >Attendance</a>
         </div>
@@ -17,7 +17,7 @@
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="36" height="36"><path fill="none" d="M0 0h24v24H0z"/><path d="M13.172 12l-4.95-4.95 1.414-1.414L16 12l-6.364 6.364-1.414-1.414z"/></svg>
         </div>
       </div>
-      <div class="subNav" routerLink="/subject">
+      <div class="subNav" [ngClass]="{active :activeTab  == 'subject'}" (click)="subject()">
         <div>
           <a>Subjects</a>
         </div>
@@ -25,7 +25,7 @@
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="36" height="36"><path fill="none" d="M0 0h24v24H0z"/><path d="M13.172 12l-4.95-4.95 1.414-1.414L16 12l-6.364 6.364-1.414-1.414z"/></svg>
         </div>
       </div>
-      <div class="subNav" routerLink="/defaulter">
+      <div class="subNav" [ngClass]="{active :activeTab  == 'defaulter'}" (click)="defaulter()" >
         <div>
           <a>Defaulters</a>
         </div>
@@ -33,9 +33,17 @@
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="36" height="36"><path fill="none" d="M0 0h24v24H0z"/><path d="M13.172 12l-4.95-4.95 1.414-1.414L16 12l-6.364 6.364-1.414-1.414z"/></svg>
         </div>
       </div>
-      <div class="subNav" routerLink="/chat">
+      <div class="subNav" [ngClass]="{active :activeTab  == 'chat'}" (click)="chat()" >
         <div>
           <a>Chat</a>
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="36" height="36"><path fill="none" d="M0 0h24v24H0z"/><path d="M13.172 12l-4.95-4.95 1.414-1.414L16 12l-6.364 6.364-1.414-1.414z"/></svg>
+        </div>
+      </div>
+      <div class="subNav" [ngClass]="{active :activeTab  == 'schedule'}" (click)="schedule()" >
+        <div>
+          <a>Schedule</a>
         </div>
         <div>
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="36" height="36"><path fill="none" d="M0 0h24v24H0z"/><path d="M13.172 12l-4.95-4.95 1.414-1.414L16 12l-6.364 6.364-1.414-1.414z"/></svg>

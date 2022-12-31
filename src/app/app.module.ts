@@ -5,14 +5,14 @@ import { BrowserModule } from '@angular/platform-browser';
 import {SidebarModule} from 'primeng/sidebar';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { DashboardComponent } from './pages/dashboard/dashboard.component';
-import { HeaderComponent } from './components/header/header.component';
-import { SidebarComponent } from './components/sidebar/sidebar.component';
-import { AttendanceComponent } from './pages/attendance/attendance.component';
-import { DefaulterComponent } from './pages/defaulter/defaulter.component';
-import { SubjectComponent } from './pages/subject/subject.component';
-import { ChatComponent } from './pages/chat/chat.component';
-import { ScheduleComponent } from './pages/schedule/schedule.component';
+import { DashboardComponent } from './user/pages/dashboard/dashboard.component';
+import { HeaderComponent } from './user/components/header/header.component';
+import { SidebarComponent } from './user/components/sidebar/sidebar.component';
+import { AttendanceComponent } from './user/pages/attendance/attendance.component';
+import { DefaulterComponent } from './user/pages/defaulter/defaulter.component';
+import { SubjectComponent } from './user/pages/subject/subject.component';
+import { ChatComponent } from './user/pages/chat/chat.component';
+import { ScheduleComponent } from './user/pages/schedule/schedule.component';
 
 
 @NgModule({
@@ -25,7 +25,7 @@ import { ScheduleComponent } from './pages/schedule/schedule.component';
     DefaulterComponent,
     SubjectComponent,
     ChatComponent,
-    ScheduleComponent
+    ScheduleComponent,
   ],
   imports: [
     BrowserModule,
