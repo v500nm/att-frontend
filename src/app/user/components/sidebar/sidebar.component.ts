@@ -10,7 +10,11 @@ export class SidebarComponent {
   visibleSidebar1:any;
   activeTab ='user';
   constructor ( private router:Router){}
-
+  
+  userDash(){
+    this.activeTab = 'user/';
+    this.router.navigate(['user/']);
+  }
   attendance(){
     this.activeTab = 'user/attendance';
     this.router.navigate(['user/attendance']);

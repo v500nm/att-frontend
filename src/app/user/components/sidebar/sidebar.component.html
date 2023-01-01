@@ -1,7 +1,7 @@
 <p-sidebar [(visible)]="visibleSidebar1" [baseZIndex]="10000">
-    <h1 style="font-weight:normal">Attendance Portal</h1><hr>
+    <h1 style="font-weight:normal">Attendance Portal (user)</h1><hr>
     <div class="sideNav">
-      <div class="subNav" routerLinkActive="user">
+      <div class="subNav" [ngClass]="{active :activeTab == 'userDash'}" (click)="userDash()">
         <div>
           <a >Dashboard</a>
         </div>
