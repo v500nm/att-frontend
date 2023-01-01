@@ -1,0 +1,30 @@
+.container{
+    display: flex;
+    flex-direction: column; 
+    justify-content: center;
+    border: 2px solid #6ec1e4;
+    background-color: white;
+    margin: 6rem;
+    padding: 6rem;
+    border-radius: 18%;
+    .title{
+        h1{
+            text-align: center;
+            font-size: 38px;
+        }
+    }
+    .options{
+        display: flex;
+        justify-content: center;
+        gap: 0.8rem;
+       button{
+        border: none;
+        color: white;
+        background-color: #6ec1e4;
+        border-radius: 18%;
+        font-size: 24px;
+        padding: 1.4rem;
+        margin: 0.4rem;
+       }
+    }
+}

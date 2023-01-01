@@ -15,7 +15,6 @@ export class SidebarComponent {
     this.activeTab = 'user/attendance';
     this.router.navigate(['user/attendance']);
   }
-  
   subject(){
     this.activeTab = 'user/subject';
     this.router.navigate(['user/subject']);  
@@ -31,5 +30,9 @@ export class SidebarComponent {
   schedule(){
     this.activeTab = 'user/schedule';
     this.router.navigate(['user/schedule']);
+  }
+  logout(){
+    this.activeTab = '';
+    this.router.navigate(['']);
   }
 }
