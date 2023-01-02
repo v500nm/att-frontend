@@ -24,6 +24,14 @@ export class SidebarComponent {
     this.activeTab = 'admin/chatbot';
     this.router.navigate(['admin/chatbot']);   
   }
+  schedules(){
+    this.activeTab = 'admin/schedules';
+    this.router.navigate(['admin/schedules']);
+  }
+  students(){
+    this.activeTab = 'admin/students';
+    this.router.navigate(['admin/students'])
+  }
   logout(){
     this.activeTab = '';
     this.router.navigate(['']);
