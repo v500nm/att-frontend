@@ -3,7 +3,9 @@ import { Injectable } from '@angular/core';
 @Injectable({
   providedIn: 'root'
 })
-export class ScheduleService {
+export class AdminService {
 
   constructor() { }
+  baselink= "http://localhost:3000";
+  
 }
