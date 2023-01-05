@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http';
 import {ButtonModule} from 'primeng/button';
 import { BrowserModule } from '@angular/platform-browser';
 import {SidebarModule} from 'primeng/sidebar';
@@ -31,6 +32,7 @@ import { ScheduleComponent } from './user/pages/schedule/schedule.component';
     BrowserModule,
     AppRoutingModule,
     SidebarModule,
+    HttpClientModule,
     ButtonModule,
     BrowserAnimationsModule
   ],

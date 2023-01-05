@@ -23,7 +23,7 @@ export class UserService {
   attendanceUrl = this.baseUrl + '/attendance';
   groupsUrl = this.baseUrl + '/groups';
   scheduleUrl = this.baseUrl + '/schedule';
-  subjectUrl = this.baseUrl + '/subject';
+  subjectUrl = this.baseUrl + '/subjects';
   questionUrl = this.baseUrl + '/question';
   suggestionUrl = this.baseUrl + '/suggestion';
 
@@ -44,7 +44,7 @@ export class UserService {
     return this.http.put<Istudents>(this.studentsUrl+'/'+students.roll,students);
   }
 
-  removeStudent(roll:number): Observable<Istudents> {
+  removeStudent(roll:string): Observable<Istudents> {
     return this.http.delete<Istudents>(this.studentsUrl+'/'+roll);
   }
 
@@ -65,7 +65,7 @@ export class UserService {
     return this.http.put<Ifaculties>(this.facultiesUrl+'/'+faculties.fID,faculties);
   }
 
-  removeFaculty(fID:number):Observable<Ifaculties>{
+  removeFaculty(fID:string):Observable<Ifaculties>{
     return this.http.delete<Ifaculties>(this.facultiesUrl+'/'+fID);
   }
 
@@ -86,7 +86,7 @@ export class UserService {
     return this.http.put<Iattendance>(this.attendanceUrl+'/'+attendance.attID,attendance);
   }
 
-  removeAtt(attID:number):Observable<Iattendance>{
+  removeAtt(attID:string):Observable<Iattendance>{
     return this.http.delete<Iattendance>(this.attendanceUrl+'/'+attID);
   }
 
@@ -107,7 +107,7 @@ export class UserService {
  return this.http.put<Igroups>(this.groupsUrl+'/'+group.gID,group); 
   }
 
-  removeGroup(gID:number):Observable<Igroups>{
+  removeGroup(gID:string):Observable<Igroups>{
  return this.http.delete<Igroups>(this.groupsUrl+'/'+gID); 
   }
 
@@ -128,17 +128,17 @@ export class UserService {
     return this.http.put<Ischedule>(this.scheduleUrl+'/'+schedules.scID,schedules);
   }
 
-  removeSchedule(scID:number):Observable<Ischedule>{
+  removeSchedule(scID:string):Observable<Ischedule>{
     return this.http.delete<Ischedule>(this.scheduleUrl+'/'+scID);
   }
 
   //subjects
-  addSubject(subjects:Isubject):Observable<Isubject[]>{
-    return this.http.post<Isubject[]>(this.subjectUrl,subjects);
+  addSubject(subjects:Isubject):Observable<Isubject>{
+    return this.http.post<Isubject>(this.subjectUrl,subjects);
   }
 
-  findAllSubjects():Observable<Isubject>{
-    return this.http.get<Isubject>(this.subjectUrl);
+  findAllSubjects():Observable<Isubject[]>{
+    return this.http.get<Isubject[]>(this.subjectUrl);
   }
 
   findSubject(subjects:Isubject):Observable<Isubject>{
@@ -149,7 +149,7 @@ export class UserService {
     return this.http.put<Isubject>(this.subjectUrl+'/'+subjects.subID,subjects);
   }
 
-  removeSubject(subID:number):Observable<Isubject>{
+  removeSubject(subID:string):Observable<Isubject>{
     return this.http.delete<Isubject>(this.subjectUrl+'/'+subID);
   }
 
@@ -171,7 +171,7 @@ export class UserService {
     return this.http.put<Iquestion>(this.questionUrl+'/'+questions.qID,questions);
   }
 
-  removeQuestion(qID:number):Observable<Iquestion>{
+  removeQuestion(qID:string):Observable<Iquestion>{
     return this.http.delete<Iquestion>(this.questionUrl+'/'+qID);
   }
 
@@ -192,7 +192,7 @@ export class UserService {
     return this.http.put<Isuggestion>(this.suggestionUrl+'/'+suggestions.sugID,suggestions);
   }
 
-  removeSuggestion(sugID:number):Observable<Isuggestion>{
+  removeSuggestion(sugID:string):Observable<Isuggestion>{
     return this.http.delete<Isuggestion>(this.suggestionUrl+'/'+sugID);
   }
 
