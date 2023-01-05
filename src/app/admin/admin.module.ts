@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import {ButtonModule} from 'primeng/button';
 import {DropdownModule} from 'primeng/dropdown';
+import {CalendarModule} from 'primeng/calendar';
 import {SidebarModule} from 'primeng/sidebar';
 import { InputTextModule } from "primeng/inputtext";
 import { AdminRoutingModule } from './admin-routing.module';
@@ -30,7 +31,9 @@ import { ChatbotComponent } from './pages/chatbot/chatbot.component';
     AdminRoutingModule,
     ButtonModule,
     InputTextModule,
-    FormsModule
+    FormsModule,
+    DropdownModule,
+    CalendarModule
   ]
 })
 export class AdminModule { }
