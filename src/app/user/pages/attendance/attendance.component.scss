@@ -37,3 +37,8 @@ table {
     color: white;
   }
 }
+.mainTable{
+  max-width: 70rem;
+  overflow-x: scroll;
+  border: 5px solid black;
+}
