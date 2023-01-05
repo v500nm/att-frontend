@@ -1,1 +1,55 @@
 <app-header></app-header>
+
+
+<div class="container">
+    <div class="student">
+        <p-dropdown [options]="cities" [(ngModel)]="dob" placeholder="Batch" optionLabel="name"
+            [showClear]="true"></p-dropdown>
+    </div>
+
+    <div class="student">
+        <p-dropdown [options]="Lecture" [(ngModel)]="dob" placeholder="Lecture-name" optionLabel="name"
+            [showClear]="true"></p-dropdown>
+    </div>
+
+
+    <div class="student">
+        <p-dropdown [options]="Month" [(ngModel)]="dob" placeholder="Month" optionLabel="name"
+            [showClear]="true"></p-dropdown>
+    </div>
+
+    <div class="student">
+        <p-dropdown [options]="Room" [(ngModel)]="dob" placeholder="Class-Room" optionLabel="name"
+            [showClear]="true"></p-dropdown>
+    </div>
+
+    <div class="student">
+        <p-dropdown [options]="Days" [(ngModel)]="dob" placeholder="Days" optionLabel="name"
+            [showClear]="true"></p-dropdown>
+    </div>
+</div>
+
+<div class="schedule">
+
+    <div class="left">
+        <label for="timeonly">From</label>
+        <p-calendar [(ngModel)]="dob" [timeOnly]="true" hourFormat="12" inputId="time" placeholder="Time" optionLabel="name"></p-calendar>
+    </div>
+
+
+    <div class="left">
+        <label for="timeonly">To</label>
+        <p-calendar [(ngModel)]="dob" [timeOnly]="true" hourFormat="12" inputId="timeonly" placeholder="Time" color="red" optionLabel="name"></p-calendar>
+    </div>
+
+    <div class="left">
+        <label for="timeonly">Message</label>
+        <input type="text" pInputText />
+    </div>
+
+    <div class="left">
+        <button pButton type="button" label="Submit"></button>
+    </div>
+</div>
+
+

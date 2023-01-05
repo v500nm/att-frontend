@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import {ButtonModule} from 'primeng/button';
+import {DropdownModule} from 'primeng/dropdown';
 import {SidebarModule} from 'primeng/sidebar';
 import { InputTextModule } from "primeng/inputtext";
 import { AdminRoutingModule } from './admin-routing.module';
