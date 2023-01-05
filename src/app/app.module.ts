@@ -15,6 +15,12 @@ import { SubjectComponent } from './user/pages/subject/subject.component';
 import { ChatComponent } from './user/pages/chat/chat.component';
 import { ScheduleComponent } from './user/pages/schedule/schedule.component';
 
+import {CalendarModule} from 'primeng/calendar';
+import {DropdownModule} from 'primeng/dropdown';
+import {InputTextModule} from 'primeng/inputtext';
+import {AccordionModule} from 'primeng/accordion';  
+
+
 
 @NgModule({
   declarations: [
@@ -34,9 +40,15 @@ import { ScheduleComponent } from './user/pages/schedule/schedule.component';
     SidebarModule,
     HttpClientModule,
     ButtonModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    CalendarModule,
+    InputTextModule,
+    DropdownModule,
+    AccordionModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  
+
 })
 export class AppModule { }
