@@ -1,62 +1,64 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { AdminService } from '../../service/admin.service';
+import { Igroups, Ischedule } from '../../service/admin.interface';
 
 @Component({
   selector: 'app-schedules',
   templateUrl: './schedules.component.html',
-  styleUrls: ['./schedules.component.scss']
+  styleUrls: ['./schedules.component.scss'],
 })
-export class SchedulesComponent {
-  dob: any;
+export class SchedulesComponent implements OnInit {
+  display: boolean = false;
+  showDialog() {
+    this.display = true;
+  }
 
-  cities = [
-    { name: "First Year" },
-    { name: "Second Year" },
-    { name: "Third Year" }
-  ]
+  formValue!: FormGroup;
+  scheduleData: Ischedule[] = [];
+  constructor(
+    private adminService: AdminService,
+    private formsbuilder: FormBuilder
+  ) {}
 
-  Lecture = [
-    { name: "1" },
-    { name: "2" },
-    { name: "3" }
-  ]
+  ngOnInit(): void {
+    this.findAllSchedule();
+    this.formValue = this.formsbuilder.group({
+      scheduleName: new FormControl(''),
+      Date: new FormControl(''),
+      startTime: new FormControl(''),
+      endTime: new FormControl(''),
+      groups: this.formsbuilder.array([
+        this.formsbuilder.group({
+          gName: new FormControl(''),
+        }),
+      ]),
+      faculty: this.formsbuilder.array([
+        this.formsbuilder.group({
+          fname: new FormControl('')
+        })
+      ]),
+      subject: this.formsbuilder.array([
+        this.formsbuilder.group({
+           subjectName: new FormControl('')
+        })
+      ])
+    });
+  }
 
-  Month = [
-    { name: "Mon" },
-    { name: "Tue" },
-    { name: "Wed" },
-    { name: "Thu" },
-    { name: "Fri" },
-    { name: "Sat" },
-    { name: "Sun" }
-  ]
+  findAllSchedule() {
+    this.adminService.findAllSchedule().subscribe((Response: Ischedule[]) => {
+      this.scheduleData = Response;
+      console.log(Response,'allData');
+    });
+  }
 
-  Days = [
-    { name: "1" },
-    { name: "2" },
-    { name: "3" },
-    { name: "4" },
-    { name: "5" },
-    { name: "6" },
-    { name: "7" }
-  ]
-
-  Room = [
-    { name: "601" },
-    { name: "602" },
-    { name: "603" },
-    { name: "604" },
-    { name: "605" },
-    { name: "606" },
-    { name: "607" },
-    { name: "608" },
-    { name: "701-A" },
-    { name: "701-B" },
-    { name: "702" },
-    { name: "704" },
-    { name: "705" },
-    { name: "706" },
-    { name: "707" },
-    { name: "708" },
-
-  ]
+  postSch(){
+    this.scheduleData = this.formValue.value;
+    console.log(this.scheduleData);
+    this.adminService.createSchedule(this.formValue.value)
+    .subscribe((Response)=>{
+      console.log(Response,'post Method')
+    })
+  }
 }

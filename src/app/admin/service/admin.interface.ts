@@ -1,22 +1,21 @@
-export interface userData{
-    students:Istudents[];
-    faculties:Ifaculties[];
-    attendance:Iattendance[];
-    group:Igroups[];
-    schedule:Ischedule[];
-    subject:Isubject[];
-    question:Iquestion[];
-    suggestions:Isuggestion[];
-}
+
 export interface Istudents{
     roll:number;
     name:string;
 }
 export interface Ifaculties{
     fID:number;
-    name:string;
+    fname:string;
     department:string;
     designation:string;
+}
+export interface Isubject{
+    subID:number;
+    subjectName:string
+}
+export interface Iclassroom{
+    clID:number;
+    classroom:string;
 }
 export interface Iattendance{
     attID:number;
@@ -36,12 +35,11 @@ export interface Ischedule{
     Date:string;
     startTime:string;
     endTime:string;
-    duration:string;
+    groups:Igroups[];
+    faculty:Ifaculties[];
+    subject:Isubject[];
 }
-export interface Isubject{
-    subID:number;
-    subject:string
-}
+
 export interface Iquestion{
     qID:number;
     question:string;

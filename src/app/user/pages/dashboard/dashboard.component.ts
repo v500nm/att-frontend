@@ -18,7 +18,7 @@ export class DashboardComponent implements OnInit{
   fac:Ifaculties[]=[]
   faculty:Ifaculties={
     fID:'',
-    name:'',
+    fname:'',
     department:'',
     designation:'',
   }
@@ -34,14 +34,7 @@ export class DashboardComponent implements OnInit{
     gName: '',
   }
   sch:Ischedule[]=[]
-  schedules:Ischedule={
-    scID:'',
-    scheduleName:'',
-    Date:'',
-    startTime:'',
-    endTime:'',
-    duration:'',
-  }
+  
   sub:Isubject[]=[]
   subject:Isubject={
     subID:'',
@@ -49,7 +42,7 @@ export class DashboardComponent implements OnInit{
   ques:Iquestion[]=[]
   questions:Iquestion={
     qID:'',
-    question:'',
+    questions:'',
   }
   sug:Isuggestion[]=[]
   suggestions:Isuggestion={
@@ -107,7 +100,7 @@ export class DashboardComponent implements OnInit{
       this.getAllFaculties();
       this.faculty={
         fID:'',
-        name:'',
+        fname:'',
         department:'',
         designation:'',
       }
@@ -125,7 +118,7 @@ export class DashboardComponent implements OnInit{
       this.getAllFaculties();
       this.faculty={
         fID:'',
-        name:'',
+        fname:'',
         department:'',
         designation:'',
       }
@@ -143,20 +136,7 @@ export class DashboardComponent implements OnInit{
       this.sch=Response;
     })
    }
-   onSubmitSchedule(){
-    this.userService.createSchedule(this.schedules)
-    .subscribe(Response=>{
-      this.findAllSchedule();
-      this.schedules={
-        scID:'',
-      scheduleName:'',
-      Date:'',
-      startTime:'',
-      endTime:'',
-      duration:''
-      }
-    })
-   }
+  
    removeSchedule(scID:string){
     this.userService.removeSchedule(scID)
     .subscribe(Response=>{
@@ -167,14 +147,7 @@ export class DashboardComponent implements OnInit{
     this.userService.updateSchedule(schedules)
     .subscribe(Response=>{
       this.findAllSchedule();
-      this.schedules={
-        scID:'',
-        scheduleName:'',
-        Date:'',
-        startTime:'',
-        endTime:'',
-        duration:''
-      }
+      
     })
    }
 

@@ -10,14 +10,7 @@ import { Ischedule } from '../../service/user.interface';
 export class ScheduleComponent implements OnInit {
   title='userSchedule'
   sch:Ischedule[]=[];
-  schedules:Ischedule={
-    scID:'',
-    scheduleName:'',
-    Date:'',
-    startTime:'',
-    endTime:'',
-    duration:''
-  }
+ 
  
   constructor(private userService:UserService){}
   ngOnInit(): void {
@@ -32,20 +25,7 @@ export class ScheduleComponent implements OnInit {
     this.sch=Response;
   })
  }
- onSubmit(){
-  this.userService.createSchedule(this.schedules)
-  .subscribe(Response=>{
-    this.findAllSchedule();
-    this.schedules={
-      scID:'',
-    scheduleName:'',
-    Date:'',
-    startTime:'',
-    endTime:'',
-    duration:''
-    }
-  })
- }
+
  removeSchedule(scID:string){
   this.userService.removeSchedule(scID)
   .subscribe(Response=>{
@@ -56,14 +36,7 @@ export class ScheduleComponent implements OnInit {
   this.userService.updateSchedule(schedules)
   .subscribe(Response=>{
     this.findAllSchedule();
-    this.schedules={
-      scID:'',
-      scheduleName:'',
-      Date:'',
-      startTime:'',
-      endTime:'',
-      duration:''
-    }
+   
   })
  }
 }

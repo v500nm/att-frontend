@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { Istudents } from './admin.interface';
+import { Iclassroom, Istudents } from './admin.interface';
 import { Ifaculties } from './admin.interface';
 import { Igroups } from './admin.interface';
 import { Ischedule } from './admin.interface';
@@ -20,20 +20,22 @@ export class AdminService {
 
   //endpoints
   studentsUrl = this.baseUrl + '/students';
+  subjectUrl = this.baseUrl + '/subjects';
   facultiesUrl = this.baseUrl + '/faculties';
+  classroomUrl = this.baseUrl + '/classroom';
   attendanceUrl = this.baseUrl + '/attendance';
-  groupsUrl = this.baseUrl + '/groups';
   scheduleUrl = this.baseUrl + '/schedule';
-  subjectUrl = this.baseUrl + '/subject';
+  groupsUrl = this.baseUrl + '/groups';
   questionUrl = this.baseUrl + '/question';
   suggestionUrl = this.baseUrl + '/suggestion';
+  
 
   //students
   registerStudent(students: Istudents): Observable<Istudents> {
     return this.http.post<Istudents>(this.studentsUrl, students);
   }
 
-  findAllStudents(): Observable<Istudents[]> {
+  findAllStudents():Observable<Istudents[]>{
     return this.http.get<Istudents[]>(this.studentsUrl);
   }
 
@@ -70,6 +72,42 @@ export class AdminService {
     return this.http.delete<Ifaculties>(this.facultiesUrl+'/'+fID);
   }
 
+  //subjects
+  addSubject(subjects:Isubject):Observable<Isubject>{
+    return this.http.post<Isubject>(this.subjectUrl,subjects);
+  }
+ 
+  findAllSubjects():Observable<Isubject[]>{
+    return this.http.get<Isubject[]>(this.subjectUrl);
+  }
+ 
+  findSubject(subjects:Isubject):Observable<Isubject>{
+    return this.http.get<Isubject>(this.subjectUrl+'/'+subjects.subID);
+  }
+ 
+  updateSubject(subjects:Isubject):Observable<Isubject>{
+    return this.http.put<Isubject>(this.subjectUrl+'/'+subjects.subID,subjects);
+  }
+ 
+  removeSubject(subID:number):Observable<Isubject>{
+    return this.http.delete<Isubject>(this.subjectUrl+'/'+subID);
+  }
+  //classroom
+  addClass(classroom:Iclassroom):Observable<Iclassroom>{
+    return this.http.post<Iclassroom>(this.classroomUrl,classroom);
+  }
+  findAllClass():Observable<Iclassroom[]>{
+    return this.http.get<Iclassroom[]>(this.classroomUrl);
+  }
+  findOneClass(classroom:Iclassroom):Observable<Iclassroom>{
+    return this.http.get<Iclassroom>(this.classroomUrl+'/'+classroom.clID);
+  }
+  updateClass(classroom:Iclassroom):Observable<Iclassroom>{
+    return this.http.put<Iclassroom>(this.classroomUrl+'/'+classroom.clID,classroom);
+  }
+  removeClass(clID:number):Observable<Iclassroom>{
+    return this.http.delete<Iclassroom>(this.classroomUrl+'/'+clID);
+  }
   //attendance
   postAtt(attendance:Iattendance):Observable<Iattendance>{
     return this.http.post<Iattendance>(this.attendanceUrl,attendance);
@@ -133,26 +171,6 @@ export class AdminService {
     return this.http.delete<Ischedule>(this.scheduleUrl+'/'+scID);
   }
 
-  //subjects
-  addSubject(subjects:Isubject):Observable<Isubject[]>{
-    return this.http.post<Isubject[]>(this.subjectUrl,subjects);
-  }
-
-  findAllSubjects():Observable<Isubject>{
-    return this.http.get<Isubject>(this.subjectUrl);
-  }
-
-  findSubject(subjects:Isubject):Observable<Isubject>{
-    return this.http.get<Isubject>(this.subjectUrl+'/'+subjects.subID);
-  }
-
-  updateSubject(subjects:Isubject):Observable<Isubject>{
-    return this.http.put<Isubject>(this.subjectUrl+'/'+subjects.subID,subjects);
-  }
-
-  removeSubject(subID:number):Observable<Isubject>{
-    return this.http.delete<Isubject>(this.subjectUrl+'/'+subID);
-  }
 
 
   //question

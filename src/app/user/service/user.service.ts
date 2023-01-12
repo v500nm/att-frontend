@@ -9,6 +9,7 @@ import { Isubject } from './user.interface';
 import { Iattendance } from './user.interface';
 import { Iquestion } from './user.interface';
 import { Isuggestion } from './user.interface';
+import { demo } from './user.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -18,6 +19,7 @@ export class UserService {
   baseUrl = 'http://localhost:3000';
 
   //endpoints
+  demoUrl = this.baseUrl + '/demo';
   studentsUrl = this.baseUrl + '/students';
   facultiesUrl = this.baseUrl + '/faculties';
   attendanceUrl = this.baseUrl + '/attendance';
@@ -26,6 +28,20 @@ export class UserService {
   subjectUrl = this.baseUrl + '/subjects';
   questionUrl = this.baseUrl + '/question';
   suggestionUrl = this.baseUrl + '/suggestion';
+
+  //demo
+  postOutput(demo:demo):Observable<demo>{
+    return this.http.post<demo>(this.demoUrl,demo);
+  }
+  getOut():Observable<demo[]>{
+    return this.http.get<demo[]>(this.demoUrl);
+  }
+  autoRes(question:string):Observable<demo>{ 
+    return this.http.get<demo>(this.demoUrl+'/res');
+  }
+  getOneOut(id:string):Observable<demo>{
+    return this.http.get<demo>(this.demoUrl+'/'+id);
+  }
 
   //students
   registerStudent(students: Istudents): Observable<Istudents> {

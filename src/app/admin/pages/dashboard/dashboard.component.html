@@ -1,1 +1,115 @@
 <app-header></app-header>
+<div class="adDash">
+    <div class="top">
+        <h1>Admin Dashboard</h1>
+    </div>
+    <p-tabView>
+        <p-tabPanel header="Students">
+            <section class="students">
+                <div class="title">
+                    <h1>Students</h1>
+                </div>
+                <div class="Add">
+                    <p-dialog header="Add Students" [(visible)]="display">
+                        <form>
+                            <div class="sub">
+                                <span class="p-float-label">
+                                    <input type="text" id="inputtext" pInputText >
+                                    <label for="inputtext">Students Name</label>
+                                </span>
+                            </div>
+                            <div class="sub">
+                                <span class="p-float-label">
+                                    <input type="text" id="inputtext" pInputText>
+                                    <label for="inputtext">Roll no</label>
+                                </span>
+                            </div>
+                            <div class="sub">
+                                <button pButton type="button" label="Submit"></button>
+                            </div>
+                        </form>
+                    </p-dialog>
+                    <button pButton type="button" label="Add Students" (click)="showDialog()"></button>
+                </div>
+            </section>
+        </p-tabPanel>
+        <p-tabPanel header="Faculty">
+            <section class="faculty">
+                <div class="title">
+                    <h1>Faculty</h1>
+                </div>
+                <div class="Add">
+                    <p-dialog header="Add Faculty" [(visible)]="display">
+                        <form [formGroup]="facValue">
+                            <div class="sub">
+                                <ng-container>
+                                    <span class="p-float-label">
+                                        <input type="text" id="inputtext" pInputText formControlName="fName">
+                                        <label for="inputtext" >Faculty Name</label>
+                                    </span>
+                                </ng-container>
+                            </div>
+                            <div class="sub">
+                                <button pButton type="button" label="Submit" (click)="postFac()"></button>
+                            </div>
+                        </form>
+                    </p-dialog>
+                    <button pButton type="button" label="Add Faculty" (click)="showDialog()"></button>
+                </div>
+            </section>
+        </p-tabPanel>
+        <p-tabPanel header="Subjects">
+            <section class="subjects">
+                <div class="title">
+                    <h1>Subjects</h1>
+                </div>
+                <div class="Add">
+                    <p-dialog header="Add Subjects" [(visible)]="display">
+                        <form [formGroup]="subValue">
+                            <div class="sub">
+                                <ng-container>
+                                    <span class="p-float-label">
+                                        <input type="text" id="inputtext" pInputText formControlName="subName">
+                                        <label for="inputtext" >Subject Name</label>
+                                    </span>
+                                </ng-container>
+                            </div>
+                            <div class="sub">
+                                <button pButton type="button" label="Submit" (click)="postSub()"></button>
+                            </div>
+                        </form>
+                    </p-dialog>
+                    <button pButton type="button" label="Add Subject" (click)="showDialog()"></button>
+                </div>
+                <div class="view">
+
+                </div>
+            </section>
+        </p-tabPanel>
+        <p-tabPanel header="Classroom">
+            <section class="classroom">
+                <div class="title">
+                    <h1>Classroom</h1>
+                </div>
+                <div class="Add">
+                    <p-dialog header="Add Classroom" [(visible)]="display">
+                        <form [formGroup]="classValue">
+                            <div class="sub">
+                                <ng-container>
+                                    <span class="p-float-label">
+                                        <input type="text" id="inputtext" pInputText formGroupName="classroom">
+                                        <label for="inputtext">Classroom Name</label>
+                                    </span>
+                                </ng-container>
+                            </div>
+                            <div class="sub">
+                                <button pButton type="button" label="Submit" (click)="postClass()"></button>
+                            </div>
+                        </form>
+                    </p-dialog>
+                    <button pButton type="button" label="Add Classroom" (click)="showDialog()"></button>
+                </div>
+            </section>
+        </p-tabPanel>
+    </p-tabView>
+</div>

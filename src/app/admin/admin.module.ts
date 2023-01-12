@@ -1,9 +1,8 @@
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import {ButtonModule} from 'primeng/button';
+import {DialogModule} from 'primeng/dialog';
 import {DropdownModule} from 'primeng/dropdown';
-import {CalendarModule} from 'primeng/calendar';
 import {SidebarModule} from 'primeng/sidebar';
 import { InputTextModule } from "primeng/inputtext";
 import { AdminRoutingModule } from './admin-routing.module';
@@ -12,8 +11,12 @@ import { HeaderComponent } from './components/header/header.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { StudentsComponent } from './pages/students/students.component';
-import { SchedulesComponent } from './pages/schedules/schedules.component';
 import { ChatbotComponent } from './pages/chatbot/chatbot.component';
+import { SchedulesComponent } from './pages/schedules/schedules.component';
+import { ButtonModule } from 'primeng/button';
+import { ReactiveFormsModule } from '@angular/forms';
+import {TabViewModule} from 'primeng/tabview';
+import {TableModule} from 'primeng/table';
 
 @NgModule({
   declarations: [
@@ -22,18 +25,21 @@ import { ChatbotComponent } from './pages/chatbot/chatbot.component';
        SidebarComponent,
        FooterComponent,
        StudentsComponent,
-       SchedulesComponent,
-       ChatbotComponent
+       ChatbotComponent,
+       SchedulesComponent
   ],
   imports: [
     SidebarModule,
     CommonModule,
     AdminRoutingModule,
-    ButtonModule,
     InputTextModule,
     FormsModule,
     DropdownModule,
-    CalendarModule
+    DialogModule,
+    ButtonModule,
+    ReactiveFormsModule,
+    TabViewModule,
+    TableModule
   ]
 })
 export class AdminModule { }

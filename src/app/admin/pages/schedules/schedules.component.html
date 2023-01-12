@@ -1,55 +1,40 @@
 <app-header></app-header>
-
-
 <div class="container">
-    <div class="student">
-        <p-dropdown [options]="cities" [(ngModel)]="dob" placeholder="Batch" optionLabel="name"
-            [showClear]="true"></p-dropdown>
+    <div class="top">
+        <div class="title">
+            <h1>Schedule</h1>
+        </div>
+        <div class="addSchedule">
+            <p-dialog header="Add Schedule" [(visible)]="display">
+                <form action="" [formGroup]="formValue">
+                    <div class="form">
+                        <div class="section" formGroupName="groups" *ngFor="let drop1 of scheduleData">
+                            <ng-container formArrayName="0" >
+                                <select >
+                                    <option value="">--select--</option>
+                                    <option value=""*ngFor="let subDrop1 of drop1.groups">{{subDrop1|json}}</option>
+                                </select>
+                            </ng-container>
+                        </div>
+                        <div class="section">
+                            <ng-container>
+                                <label for="Schedule">Schedule</label>
+                                <input type="text" name="Schedule" placeholder="enter Schedule name" formControlName="scheduleName">
+                            </ng-container>
+                        </div>
+                    </div>
+                    <div class="section">
+                        <button type="submit" (click)="postSch()">submit</button>
+                    </div>
+                </form>
+            </p-dialog>
+            <button type="button" (click)="showDialog()" icon="pi pi-info-circle" label="Show">Add Schedule</button>
+        </div>
     </div>
-
-    <div class="student">
-        <p-dropdown [options]="Lecture" [(ngModel)]="dob" placeholder="Lecture-name" optionLabel="name"
-            [showClear]="true"></p-dropdown>
-    </div>
-
-
-    <div class="student">
-        <p-dropdown [options]="Month" [(ngModel)]="dob" placeholder="Month" optionLabel="name"
-            [showClear]="true"></p-dropdown>
-    </div>
-
-    <div class="student">
-        <p-dropdown [options]="Room" [(ngModel)]="dob" placeholder="Class-Room" optionLabel="name"
-            [showClear]="true"></p-dropdown>
-    </div>
-
-    <div class="student">
-        <p-dropdown [options]="Days" [(ngModel)]="dob" placeholder="Days" optionLabel="name"
-            [showClear]="true"></p-dropdown>
-    </div>
-</div>
-
-<div class="schedule">
-
-    <div class="left">
-        <label for="timeonly">From</label>
-        <p-calendar [(ngModel)]="dob" [timeOnly]="true" hourFormat="12" inputId="time" placeholder="Time" optionLabel="name"></p-calendar>
-    </div>
-
-
-    <div class="left">
-        <label for="timeonly">To</label>
-        <p-calendar [(ngModel)]="dob" [timeOnly]="true" hourFormat="12" inputId="timeonly" placeholder="Time" color="red" optionLabel="name"></p-calendar>
-    </div>
-
-    <div class="left">
-        <label for="timeonly">Message</label>
-        <input type="text" pInputText />
-    </div>
-
-    <div class="left">
-        <button pButton type="button" label="Submit"></button>
+    <hr>
+    <div class="data">
+        <div class="showSchedule">
+             
+        </div>
     </div>
 </div>
-
-

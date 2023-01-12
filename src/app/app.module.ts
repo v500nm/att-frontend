@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import {ButtonModule} from 'primeng/button';
@@ -15,7 +16,6 @@ import { SubjectComponent } from './user/pages/subject/subject.component';
 import { ChatComponent } from './user/pages/chat/chat.component';
 import { ScheduleComponent } from './user/pages/schedule/schedule.component';
 
-import {CalendarModule} from 'primeng/calendar';
 import {DropdownModule} from 'primeng/dropdown';
 import {InputTextModule} from 'primeng/inputtext';
 import {AccordionModule} from 'primeng/accordion';  
@@ -41,10 +41,10 @@ import {AccordionModule} from 'primeng/accordion';
     HttpClientModule,
     ButtonModule,
     BrowserAnimationsModule,
-    CalendarModule,
     InputTextModule,
     DropdownModule,
-    AccordionModule
+    AccordionModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent],

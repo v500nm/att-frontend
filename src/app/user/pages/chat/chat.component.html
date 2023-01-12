@@ -4,22 +4,25 @@
     <h1>chat bot</h1>
   </div>
   <div class="chatMain">
-    <div class="chatRoom">
-      <div class="server">
-        <h5>-server\ </h5>
+    <div class="chatRoom" >
+      <div class="server" *ngFor="let data of chatDemo">
+        <h5>{{data.output}}</h5>
         <span class="chips"></span>
       </div>
-      <div class="user">
-        <h5> /user- </h5>
+      <div class="user" *ngFor="let ques of chatDemo">
+        <h5>{{ques.questions.question|json}}</h5>
       </div>
     </div>
   </div>
+
   <div class="inputs">
+    <form #form="ngForm" (ngSubmit)="onSubmit()">
     <div class="input">
-      <input type="text" placeholder="enter your message...">
+      <input type="text" placeholder="enter your message..." [(ngModel)]="demoCH.questions.question">
     </div>
     <div class="btn">
       <button>send</button>
     </div>
+    </form>
   </div>
 </div>
