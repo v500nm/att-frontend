@@ -69,3 +69,29 @@
 
     }
 }
+@media  (max-width: 500px) {
+  .lecture {
+    flex-direction: column; 
+   }
+   .lectureContainer
+   {
+    display: list-item;
+   }
+
+  .lecture .lecture-left {
+    padding: 0;
+    border-radius: 8px 8px 0 0;
+  }
+
+  .lecture .lecture-left .lecture-date .date,
+  .lecture .lecture-left .lecture-date .month {
+    display: inline-block;
+    font-size: 24px;
+    
+  }
+
+  .lecture .lecture-left .lecture-date {
+    padding: 10px 0;
+
+  }
+}
