@@ -11,26 +11,31 @@
                 </div>
                 <div class="Add">
                     <p-dialog header="Add Students" [(visible)]="display">
-                        <form>
+                        <form [formGroup]="stuValue">
                             <div class="sub">
-                                <span class="p-float-label">
-                                    <input type="text" id="inputtext" pInputText >
-                                    <label for="inputtext">Students Name</label>
-                                </span>
+                                <ng-container>
+                                    <span class="p-float-label">
+                                        <input type="text" formControlName="name" id="inputtext" pInputText>
+                                        <label for="inputtext">Students Name</label>
+                                    </span>
+                                </ng-container>
                             </div>
                             <div class="sub">
-                                <span class="p-float-label">
-                                    <input type="text" id="inputtext" pInputText>
-                                    <label for="inputtext">Roll no</label>
-                                </span>
+                                <ng-container>
+                                    <span class="p-float-label">
+                                        <input type="text" formControlName="roll" id="inputtext" pInputText>
+                                        <label for="inputtext">Roll no</label>
+                                    </span>
+                                </ng-container>
                             </div>
                             <div class="sub">
-                                <button pButton type="button" label="Submit"></button>
+                                <button pButton type="button" label="Submit" (click)="regStudents()"></button>
                             </div>
                         </form>
                     </p-dialog>
                     <button pButton type="button" label="Add Students" (click)="showDialog()"></button>
                 </div>
+               
             </section>
         </p-tabPanel>
         <p-tabPanel header="Faculty">
@@ -44,8 +49,8 @@
                             <div class="sub">
                                 <ng-container>
                                     <span class="p-float-label">
-                                        <input type="text" id="inputtext" pInputText formControlName="fName">
-                                        <label for="inputtext" >Faculty Name</label>
+                                        <input type="text" id="inputtext" pInputText formControlName="fname">
+                                        <label for="inputtext">Faculty Name</label>
                                     </span>
                                 </ng-container>
                             </div>
@@ -55,6 +60,46 @@
                         </form>
                     </p-dialog>
                     <button pButton type="button" label="Add Faculty" (click)="showDialog()"></button>
+                </div>
+                <div class="view">
+                    <p-table #dt1 [value]="facData" dataKey="id" [rows]="2" [showCurrentPageReport]="true"
+                        [rowsPerPageOptions]="[10,20,30]" [loading]="loading"
+                        styleClass="p-datatable-customers p-datatable-gridlines" [paginator]="true"
+                        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                        [globalFilterFields]="['name','country.name']">
+
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th>
+                                    <div class="p-d-flex p-jc-between p-ai-center">
+                                        Name
+                                        <p-columnFilter type="text" field="name" display="menu"></p-columnFilter>
+                                    </div>
+                                </th>
+                                <th>
+                                    <div class="p-d-flex p-jc-between p-ai-center">
+                                        Options
+
+                                    </div>
+                                </th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-facData>
+                            <tr>
+                                <td>
+                                    {{facData.fname}}
+                                </td>
+                                <td>
+                                    <span class="image-text"></span>
+                                </td>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="emptymessage">
+                            <tr>
+                                <td colspan="7">No customers found.</td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
                 </div>
             </section>
         </p-tabPanel>
@@ -69,8 +114,8 @@
                             <div class="sub">
                                 <ng-container>
                                     <span class="p-float-label">
-                                        <input type="text" id="inputtext" pInputText formControlName="subName">
-                                        <label for="inputtext" >Subject Name</label>
+                                        <input type="text" id="inputtext" pInputText formControlName="subject">
+                                        <label for="inputtext">Subjects Name</label>
                                     </span>
                                 </ng-container>
                             </div>
@@ -79,10 +124,7 @@
                             </div>
                         </form>
                     </p-dialog>
-                    <button pButton type="button" label="Add Subject" (click)="showDialog()"></button>
-                </div>
-                <div class="view">
-
+                    <button pButton type="button" label="Add Subjects" (click)="showDialog()"></button>
                 </div>
             </section>
         </p-tabPanel>
@@ -97,7 +139,7 @@
                             <div class="sub">
                                 <ng-container>
                                     <span class="p-float-label">
-                                        <input type="text" id="inputtext" pInputText formGroupName="classroom">
+                                        <input type="text" id="inputtext" pInputText formControlName="classroom">
                                         <label for="inputtext">Classroom Name</label>
                                     </span>
                                 </ng-container>

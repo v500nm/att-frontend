@@ -20,9 +20,11 @@ export class DashboardComponent implements OnInit {
   ) {}
 
   display: boolean = false;
+  loading: boolean = true;
   showDialog() {
     this.display = true;
   }
+ 
   value1: any;
   stuValue!: FormGroup;
   facValue!: FormGroup;
@@ -34,25 +36,45 @@ export class DashboardComponent implements OnInit {
   classData: Iclassroom[] = [];
 
   ngOnInit(): void {
+    // this.findAllStudents();
     this.getAllFaculties();
     this.findAllSubjects();
     this.findAllClass();
+    this.stuValue=this.formsbuilder.group({
+      roll: new FormControl(''),
+      name: new FormControl('')
+    })
     this.facValue = this.formsbuilder.group({
-      fName: new FormControl(''),
+      fname: new FormControl(''),
     }),
     this.subValue = this.formsbuilder.group({
-        subName: new FormControl(''),
-      }),
+      subject: new FormControl(''),
+    })
+  ,
     this.classValue = this.formsbuilder.group({
       classroom: new FormControl(''),
     });
+
+
+    this.adminService.getAllFaculties().subscribe((res) => {
+      this.facData = res;
+      this.loading = false;
+    });
   }
-  //   finAllStudent() {
-  //     this.adminService.findAllStudents()
-  //     .subscribe((res:Istudents[])=>{
-  // this.stuData=res;
-  //     })
-  //   }
+
+  //students
+  // findAllStudents(){
+  //   this.adminService.findAllStudents().subscribe((res: Istudents[])=>{
+  //     this.stuData=res;
+  //     console.log(res, 'students get');
+  //   })
+  // }
+  regStudents(){
+    this.stuData=this.stuValue.value;
+    this.adminService.registerStudent(this.stuValue.value).subscribe((res)=>{
+      console.log(res,'students post');
+    })
+  }
 
   //faculties
   getAllFaculties() {
@@ -77,7 +99,7 @@ export class DashboardComponent implements OnInit {
     });
   }
   postSub() {
-    this.subData = this.subValue.value;
+     this.subData = this.subValue.value;
     console.log(this.subData);
     this.adminService.addSubject(this.subValue.value).subscribe((res) => {
       console.log(res, 'subject post');

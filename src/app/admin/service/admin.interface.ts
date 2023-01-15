@@ -11,7 +11,7 @@ export interface Ifaculties{
 }
 export interface Isubject{
     subID:number;
-    subjectName:string
+    subject:string
 }
 export interface Iclassroom{
     clID:number;
