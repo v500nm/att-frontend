@@ -10,13 +10,13 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { HeaderComponent } from './components/header/header.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { FooterComponent } from './components/footer/footer.component';
-import { StudentsComponent } from './pages/students/students.component';
 import { ChatbotComponent } from './pages/chatbot/chatbot.component';
 import { SchedulesComponent } from './pages/schedules/schedules.component';
 import { ButtonModule } from 'primeng/button';
 import { ReactiveFormsModule } from '@angular/forms';
 import {TabViewModule} from 'primeng/tabview';
 import {TableModule} from 'primeng/table';
+import { SplitButtonModule } from 'primeng/splitbutton';
 
 @NgModule({
   declarations: [
@@ -24,7 +24,6 @@ import {TableModule} from 'primeng/table';
        HeaderComponent,
        SidebarComponent,
        FooterComponent,
-       StudentsComponent,
        ChatbotComponent,
        SchedulesComponent
   ],
@@ -39,7 +38,8 @@ import {TableModule} from 'primeng/table';
     ButtonModule,
     ReactiveFormsModule,
     TabViewModule,
-    TableModule
+    TableModule,
+    SplitButtonModule
   ]
 })
 export class AdminModule { }
