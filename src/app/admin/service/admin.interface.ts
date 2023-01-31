@@ -26,8 +26,10 @@ export enum AttStatus{
     absent = "A"
 }
 export interface Igroups{
+    _id:string;
     gID: number;
     gName: string;
+    students:Istudents[];
 }
 export interface Ischedule{
     scID:number;
@@ -38,6 +40,7 @@ export interface Ischedule{
     groups:Igroups[];
     faculty:Ifaculties[];
     subject:Isubject[];
+    classroom:Iclassroom[];
 }
 
 export interface Iquestion{

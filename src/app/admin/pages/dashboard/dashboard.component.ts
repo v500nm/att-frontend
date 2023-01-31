@@ -4,6 +4,7 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import {
   Iclassroom,
   Ifaculties,
+  Igroups,
   Ischedule,
   Istudents,
   Isubject,
@@ -32,12 +33,14 @@ export class DashboardComponent implements OnInit {
   subValue!: FormGroup;
   classValue!: FormGroup;
   schValue!: FormGroup;
+  grpValue!: FormGroup;
 
   stuData: Istudents[] = [];
   facData: Ifaculties[] = [];
   subData: Isubject[] = [];
   classData: Iclassroom[] = [];
   schData: Ischedule[] = [];
+  grpData: Igroups[] = [];
 
   ngOnInit(): void {
     //forms
@@ -46,6 +49,7 @@ export class DashboardComponent implements OnInit {
     this.findAllSubjects();
     this.findAllClass();
     this.findAllSchedule();
+    this.findAllGroup();
 
     this.stuValue = this.formsbuilder.group({
       roll: new FormControl(''),
@@ -64,28 +68,33 @@ export class DashboardComponent implements OnInit {
         classroom: new FormControl(''),
       }));
 
-      this.schValue = this.formsbuilder.group({
-        scheduleName: new FormControl(''),
-        Date: new FormControl(''),
-        startTime: new FormControl(''),
-        endTime: new FormControl(''),
-        groups: this.formsbuilder.array([
-          this.formsbuilder.group({
-            gName: new FormControl(''),
-          }),
-        ]),
-        faculty: this.formsbuilder.array([
-          this.formsbuilder.group({
-            fname: new FormControl('')
-          })
-        ]),
-        subject: this.formsbuilder.array([
-          this.formsbuilder.group({
-             subjectName: new FormControl('')
-          })
-        ])
-      });
-      
+    this.schValue = this.formsbuilder.group({
+      scheduleName: new FormControl(''),
+      Date: new FormControl(''),
+      startTime: new FormControl(''),
+      endTime: new FormControl(''),
+      groups: this.formsbuilder.array([
+        this.formsbuilder.group({
+          gName: new FormControl(''),
+        }),
+      ]),
+      faculty: this.formsbuilder.array([
+        this.formsbuilder.group({
+          fname: new FormControl(''),
+        }),
+      ]),
+      subject: this.formsbuilder.array([
+        this.formsbuilder.group({
+          subjectName: new FormControl(''),
+        }),
+      ]),
+      classroom: this.formsbuilder.array([
+        this.formsbuilder.group({
+          classroom: new FormControl(''),
+        }),
+      ]),
+    });
+    console.log(this.schValue.get('groups')?.value, 'id checking');
     //table
     this.adminService.findAllStudents().subscribe((res) => {
       this.stuData = res;
@@ -105,6 +114,21 @@ export class DashboardComponent implements OnInit {
     });
 
     //crud buttons
+  }
+
+  //groups
+  findAllGroup() {
+    this.adminService.findAllGroup().subscribe((res: Igroups[]) => {
+      this.grpData = res;
+      console.log(res, 'groups get');
+    });
+  }
+  createGroup() {
+    this.grpData = this.grpValue.value;
+    this.adminService.createGroup(this.grpValue.value).subscribe((res) => {
+      console.log(res, 'group Post');
+      this.grpValue.reset();
+    });
   }
 
   //students
@@ -162,14 +186,6 @@ export class DashboardComponent implements OnInit {
       console.log(res, 'classroom get');
     });
   }
-  postClass() {
-    this.classData = this.classValue.value;
-    console.log(this.classData);
-    this.adminService.addClass(this.classValue.value).subscribe((res) => {
-      console.log(res, 'class post');
-      this.classValue.reset();
-    });
-  }
   deleteClass(clID: number) {
     this.adminService.removeClass(clID).subscribe((res) => {
       this.findAllClass();
@@ -179,6 +195,14 @@ export class DashboardComponent implements OnInit {
     this.classData = this.classValue.value;
     this.adminService.updateClass(this.classValue.value).subscribe((res) => {
       console.log(res, 'update class');
+    });
+  }
+  postClass() {
+    this.classData = this.classValue.value;
+    console.log(this.classData);
+    this.adminService.addClass(this.classValue.value).subscribe((res) => {
+      console.log(res, 'class post');
+      this.classValue.reset();
     });
   }
   //schedule

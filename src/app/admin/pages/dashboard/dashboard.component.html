@@ -363,22 +363,67 @@
                 <div class="Add">
                     <p-dialog header="Add Schedule" [(visible)]="display">
                         <form [formGroup]="schValue">
-                            <div class="sub" formGroupName="groups"  *ngFor="let item1 of schData" >
+                            <div class="sub">
+                                <ng-container>
+                                    <span class="p-float-label">
+                                        <input type="text" id="inputtext" pInputText
+                                            formControlName="scheduleName">
+                                        <label for="inputtext">Schedule Name</label>
+                                    </span>
+                                </ng-container>
+                            </div>
+                            <div class="sub">
+                                <ng-container>
+                                    <span class="p-float-label">
+                                        <input type="date" id="inputtext" pInputText
+                                            formControlName="Date">
+                                        <label for="inputtext">Date</label>
+                                    </span>
+                                </ng-container>
+                            </div>
+                            <div class="sub" formGroupName="groups">
                                 <ng-container formArrayName="0">
-                                    <select>
+                                    <label for="group">Group</label>
+                                    <select name="group">
                                         <option value="">--select--</option>
-                                        <option value="" *ngFor="let grpDrop of item1.groups ">{{grpDrop|json}}</option>
+                                        <option value="" *ngFor="let grpDrop of grpData">{{grpDrop.gName}}</option>
                                     </select>
                                 </ng-container>
                             </div>
-                            
+                            <div class="sub" formGroupName="classroom">
+                                <ng-container formArrayName="0">
+                                    <label for="classroom">Classroom</label>
+                                    <select name="classroom">
+                                        <option value="">--select--</option>
+                                        <option value="" *ngFor="let classDrop of classData">{{classDrop.classroom}}</option>
+                                    </select>
+                                </ng-container>
+                            </div>
+                            <div class="sub" formGroupName="faculty">
+                                <ng-container formArrayName="0">
+                                    <label for="faculty">Faculty</label>
+                                    <select name="faculty">
+                                        <option value="">--select--</option>
+                                        <option value="" *ngFor="let facDrop of facData">{{facDrop.fname}}</option>
+                                    </select>
+                                </ng-container>
+                            </div>
+                            <div class="sub" formGroupName="subject">
+                                <ng-container formArrayName="0">
+                                    <label for="subject">Subject</label>
+                                    <select name="subject">
+                                        <option value="">--select--</option>
+                                        <option value="" *ngFor="let subDrop of subData">{{subDrop.subject}}</option>
+                                    </select>
+                                </ng-container>
+                            </div>
                             <div class="sub">
                                 <button pButton type="button" label="Submit" (click)="postSch()"></button>
                             </div>
                         </form>
                     </p-dialog>
                     <button pButton type="button" label="Add Schedule" (click)="showDialog()"></button>
-                </div>
+                </div>  
                 <!-- <div class="view">
                     <p-table #dt1 [value]="schData" dataKey="id" [rows]="2" [showCurrentPageReport]="true"
                         [rowsPerPageOptions]="[2,4,6,8,10]" [loading]="loading"

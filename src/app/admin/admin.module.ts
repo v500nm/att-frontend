@@ -11,7 +11,6 @@ import { HeaderComponent } from './components/header/header.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { ChatbotComponent } from './pages/chatbot/chatbot.component';
-import { SchedulesComponent } from './pages/schedules/schedules.component';
 import { ButtonModule } from 'primeng/button';
 import { ReactiveFormsModule } from '@angular/forms';
 import {TabViewModule} from 'primeng/tabview';
@@ -24,8 +23,7 @@ import { SplitButtonModule } from 'primeng/splitbutton';
        HeaderComponent,
        SidebarComponent,
        FooterComponent,
-       ChatbotComponent,
-       SchedulesComponent
+       ChatbotComponent
   ],
   imports: [
     SidebarModule,
