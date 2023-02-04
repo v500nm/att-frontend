@@ -21,6 +21,9 @@ export class DashboardComponent implements OnInit {
     private formsbuilder: FormBuilder
   ) {}
 
+  //edit switches
+  stuSwitch: boolean = true;
+
   display: boolean = false;
   loading: boolean = true;
   showDialog() {
@@ -73,26 +76,10 @@ export class DashboardComponent implements OnInit {
       Date: new FormControl(''),
       startTime: new FormControl(''),
       endTime: new FormControl(''),
-      groups: this.formsbuilder.array([
-        this.formsbuilder.group({
-          gName: new FormControl(''),
-        }),
-      ]),
-      faculty: this.formsbuilder.array([
-        this.formsbuilder.group({
-          fname: new FormControl(''),
-        }),
-      ]),
-      subject: this.formsbuilder.array([
-        this.formsbuilder.group({
-          subjectName: new FormControl(''),
-        }),
-      ]),
-      classroom: this.formsbuilder.array([
-        this.formsbuilder.group({
-          classroom: new FormControl(''),
-        }),
-      ]),
+      groups: new FormControl(''),
+      faculties: new FormControl(''),
+      subjects: new FormControl(''),
+      classrooms: new FormControl(''),
     });
     console.log(this.schValue.get('groups')?.value, 'id checking');
     //table
@@ -146,6 +133,18 @@ export class DashboardComponent implements OnInit {
       this.stuValue.reset();
     });
   }
+  removeStudent(id: string) {
+    this.adminService.removeStudent(id).subscribe((res) => {
+      console.log(res, 'delete works');
+    });
+  }
+  // updateStudents(stuData: Istudents, id: string) {
+  //   this.adminService.updateStudent(stuData, id).subscribe((res) => {
+  //     this.findAllStudents();
+  //     this.stuValue.value;
+  //     this.stuSwitch = false;
+  //   });
+  // }
 
   //faculties
   getAllFaculties() {
@@ -186,8 +185,8 @@ export class DashboardComponent implements OnInit {
       console.log(res, 'classroom get');
     });
   }
-  deleteClass(clID: number) {
-    this.adminService.removeClass(clID).subscribe((res) => {
+  deleteClass(id: string) {
+    this.adminService.removeClass(id).subscribe((res) => {
       this.findAllClass();
     });
   }

@@ -30,6 +30,7 @@
                             </div>
                             <div class="sub">
                                 <button pButton type="button" label="Submit" (click)="regStudents()"></button>
+                                <!-- <button pButton type="button" label="Edit" *ngIf="!stuSwitch" (click)="updateStudents(stuData)"></button> -->
                             </div>
                         </form>
                     </p-dialog>
@@ -74,10 +75,10 @@
                                 <td>
                                     <div class="editGrp">
                                         <div class="edit">
-                                            <button>Edit</button>
+                                            <button pButton type="button" label="Edit" (click)="showDialog()"></button>
                                         </div>
                                         <div class="delete">
-                                            <button>Delete</button>
+                                            <button (click)="removeStudent(stuData.id)">Delete</button>
                                         </div>
                                     </div>
                                 </td>
@@ -381,39 +382,39 @@
                                     </span>
                                 </ng-container>
                             </div>
-                            <div class="sub" formGroupName="groups">
-                                <ng-container formArrayName="0">
+                            <div class="sub">
+                                <ng-container>
                                     <label for="group">Group</label>
-                                    <select name="group">
+                                    <select name="group" formControlName="groups">
                                         <option value="">--select--</option>
-                                        <option value="" *ngFor="let grpDrop of grpData">{{grpDrop.gName}}</option>
+                                        <option [value]="grpDrop._id" *ngFor="let grpDrop of grpData">{{grpDrop.gName}}</option>
                                     </select>
                                 </ng-container>
                             </div>
-                            <div class="sub" formGroupName="classroom">
-                                <ng-container formArrayName="0">
+                            <div class="sub" >
+                                <ng-container >
                                     <label for="classroom">Classroom</label>
-                                    <select name="classroom">
+                                    <select name="classroom" formControlName="classrooms">
                                         <option value="">--select--</option>
-                                        <option value="" *ngFor="let classDrop of classData">{{classDrop.classroom}}</option>
+                                        <option [value]="classDrop._id" *ngFor="let classDrop of classData">{{classDrop.classroom}}</option>
                                     </select>
                                 </ng-container>
                             </div>
-                            <div class="sub" formGroupName="faculty">
-                                <ng-container formArrayName="0">
+                            <div class="sub" >
+                                <ng-container >
                                     <label for="faculty">Faculty</label>
-                                    <select name="faculty">
+                                    <select name="faculty" formControlName="faculties">
                                         <option value="">--select--</option>
-                                        <option value="" *ngFor="let facDrop of facData">{{facDrop.fname}}</option>
+                                        <option [value]="facDrop._id" *ngFor="let facDrop of facData">{{facDrop.fname}}</option>
                                     </select>
                                 </ng-container>
                             </div>
-                            <div class="sub" formGroupName="subject">
-                                <ng-container formArrayName="0">
+                            <div class="sub">
+                                <ng-container >
                                     <label for="subject">Subject</label>
-                                    <select name="subject">
+                                    <select name="subject" formControlName="subjects">
                                         <option value="">--select--</option>
-                                        <option value="" *ngFor="let subDrop of subData">{{subDrop.subject}}</option>
+                                        <option [value]="subDrop._id" *ngFor="let subDrop of subData">{{subDrop.subject}}</option>
                                     </select>
                                 </ng-container>
                             </div>
@@ -424,69 +425,7 @@
                     </p-dialog>
                     <button pButton type="button" label="Add Schedule" (click)="showDialog()"></button>
                 </div>  
-                <!-- <div class="view">
-                    <p-table #dt1 [value]="schData" dataKey="id" [rows]="2" [showCurrentPageReport]="true"
-                        [rowsPerPageOptions]="[2,4,6,8,10]" [loading]="loading"
-                        styleClass="p-datatable-customers p-datatable-gridlines" [paginator]="true"
-                        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-                        [globalFilterFields]="['name','country.name']">
-
-                        <ng-template pTemplate="header">
-                            <tr>
-                                <th>
-                                    <div class="p-d-flex p-jc-between p-ai-center">
-                                        Classroom
-                                        <p-columnFilter type="text" field="name" display="menu"></p-columnFilter>
-                                    </div>
-                                </th>
-                                <th>
-                                    <div class="p-d-flex p-jc-between p-ai-center">
-                                        Options
-                                    </div>
-                                </th>
-                            </tr>
-                        </ng-template>
-                        <ng-template pTemplate="body" let-classData>
-                            <tr>
-                                <td>
-                                    {{classData.classroom}}
-                                </td>
-                                <td>
-                                    <div class="editGrp">
-                                        <div class="edit">
-                                            <p-dialog header="Edit Classroom" [(visible)]="display">
-                                                <form [formGroup]="classValue">
-                                                    <div class="sub">
-                                                        <ng-container>
-                                                            <span class="p-float-label">
-                                                                <input type="text" id="inputtext" pInputText
-                                                                    formControlName="classroom">
-                                                                <label for="inputtext">Enter Text</label>
-                                                            </span>
-                                                        </ng-container>
-                                                    </div>
-                                                    <div class="sub">
-                                                        <button pButton type="button" label="Submit"
-                                                            (click)="postClass()"></button>
-                                                    </div>
-                                                </form>
-                                            </p-dialog>
-                                            <button pButton type="button" label="Edit" (click)="showDialog()"></button>
-                                        </div>
-                                        <div class="delete">
-                                            <button (click)="deleteClass(classData.clID)">Delete</button>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                        </ng-template>
-                        <ng-template pTemplate="emptymessage">
-                            <tr>
-                                <td colspan="7">No customers found.</td>
-                            </tr>
-                        </ng-template>
-                    </p-table>
-                </div> -->
+                
             </section>
         </p-tabPanel>
     </p-tabView>

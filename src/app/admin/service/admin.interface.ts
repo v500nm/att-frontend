@@ -1,24 +1,25 @@
 
 export interface Istudents{
+    _id:string;
     roll:number;
     name:string;
 }
 export interface Ifaculties{
-    fID:number;
+    _id:string;
     fname:string;
     department:string;
     designation:string;
 }
 export interface Isubject{
-    subID:number;
+    _id:string;
     subject:string
 }
 export interface Iclassroom{
-    clID:number;
+    _id:string;
     classroom:string;
 }
 export interface Iattendance{
-    attID:number;
+    attID:string;
     stats:AttStatus;
 }
 export enum AttStatus{
@@ -27,12 +28,11 @@ export enum AttStatus{
 }
 export interface Igroups{
     _id:string;
-    gID: number;
     gName: string;
     students:Istudents[];
 }
 export interface Ischedule{
-    scID:number;
+    _id:string;
     scheduleName:string;
     Date:string;
     startTime:string;
