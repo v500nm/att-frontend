@@ -57,25 +57,28 @@ export class DashboardComponent implements OnInit {
     this.stuValue = this.formsbuilder.group({
       roll: new FormControl(''),
       name: new FormControl(''),
-    });
+    }),
 
-    (this.facValue = this.formsbuilder.group({
+    this.facValue = this.formsbuilder.group({
       fname: new FormControl(''),
       department: new FormControl(''),
       designation: new FormControl(''),
-    })),
-      (this.subValue = this.formsbuilder.group({
+    }),
+      this.subValue = this.formsbuilder.group({
         subject: new FormControl(''),
-      })),
-      (this.classValue = this.formsbuilder.group({
-        classroom: new FormControl(''),
-      }));
-
+      }),
+      this.classValue = this.formsbuilder.group({
+        class: new FormControl(''),
+      }),
+this.grpValue=this.formsbuilder.group({
+  gName: new FormControl(''),
+  students: new FormControl('')
+})
     this.schValue = this.formsbuilder.group({
       scheduleName: new FormControl(''),
       Date: new FormControl(''),
-      startTime: new FormControl(''),
-      endTime: new FormControl(''),
+      timing: new FormControl(''),
+      duration: new FormControl(''),
       groups: new FormControl(''),
       faculties: new FormControl(''),
       subjects: new FormControl(''),
@@ -99,6 +102,14 @@ export class DashboardComponent implements OnInit {
       this.classData = res;
       this.loading = false;
     });
+    this.adminService.findAllSchedule().subscribe((res)=>{
+      this.schData = res;
+      this.loading = false;
+    })
+    this.adminService.findAllGroup().subscribe((res)=>{
+      this.grpData = res;
+      this.loading = false;
+    })
 
     //crud buttons
   }
@@ -133,9 +144,10 @@ export class DashboardComponent implements OnInit {
       this.stuValue.reset();
     });
   }
-  removeStudent(id: string) {
-    this.adminService.removeStudent(id).subscribe((res) => {
+  removeStudent(_id: string) {
+    this.adminService.removeStudent(_id).subscribe((res) => {
       console.log(res, 'delete works');
+      this.findAllStudents();
     });
   }
   // updateStudents(stuData: Istudents, id: string) {
@@ -161,6 +173,12 @@ export class DashboardComponent implements OnInit {
       this.facValue.reset();
     });
   }
+  removeFaculty(_id:string){
+    this.adminService.removeFaculty(_id).subscribe((res)=>{
+      console.log(res,'delete works');
+      this.getAllFaculties();
+    })
+  }
 
   //subjects
   findAllSubjects() {
@@ -175,9 +193,15 @@ export class DashboardComponent implements OnInit {
     this.adminService.addSubject(this.subValue.value).subscribe((res) => {
       console.log(res, 'subject post');
       this.subValue.reset();
+      this.adminService.findAllSubjects();
     });
   }
-
+  removeSubject(_id:string){
+    this.adminService.removeSubject(_id).subscribe((res)=>{
+      this.findAllSubjects();
+      console.log(res,'delete works');
+    })
+  }
   //classroom
   findAllClass() {
     this.adminService.findAllClass().subscribe((res: Iclassroom[]) => {
@@ -185,8 +209,8 @@ export class DashboardComponent implements OnInit {
       console.log(res, 'classroom get');
     });
   }
-  deleteClass(id: string) {
-    this.adminService.removeClass(id).subscribe((res) => {
+  deleteClass(_id: string) {
+    this.adminService.removeClass(_id).subscribe((res) => {
       this.findAllClass();
     });
   }
@@ -220,5 +244,10 @@ export class DashboardComponent implements OnInit {
       .subscribe((Response) => {
         console.log(Response, 'post Method');
       });
+  }
+  removeSch(_id:string){
+    this.adminService.removeSchedule(_id).subscribe((res)=>{
+      this.findAllSchedule();
+    })
   }
 }

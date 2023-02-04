@@ -16,7 +16,7 @@ export interface Isubject{
 }
 export interface Iclassroom{
     _id:string;
-    classroom:string;
+    class:string;
 }
 export interface Iattendance{
     attID:string;
@@ -35,8 +35,8 @@ export interface Ischedule{
     _id:string;
     scheduleName:string;
     Date:string;
-    startTime:string;
-    endTime:string;
+    timing:string;
+    duration:string;
     groups:Igroups[];
     faculty:Ifaculties[];
     subject:Isubject[];
