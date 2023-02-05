@@ -1,103 +1,25 @@
 <app-header></app-header>
 <div class="lectureContainer">
-    <div class="lecture" *ngFor="let schList of sch">
+    <div class="lecture" *ngFor="let schList of schData">
       <div class="lecture-left">
         <div class="lecture-date">
-          <div class="date">2</div>
-          <div class="month">Jan</div>
+          <div class="Batch">{{schList}}</div>
         </div>
       </div>
       <div class="lecture-right">
-        <h3 class="lecture-title">Enterprise Networking</h3>
+        <h3 class="lecture-title">{{schList.scheduleName}}</h3>
+        <h4 class="lecture-Faculty">{{schList}}</h4>
         <div class="lecture-description">
           Important Message
         </div>
-        <div class="lecture-timing">
-          7:30 am to 9:10 am
+        <div class="dates">
+          <div class="lecture-timing">
+            {{schList.Date}}
+          </div>
+          <div class="lecture-timing">
+            {{schList.timing}}
+          </div>
         </div>
       </div>
     </div>
-    <div class="lecture">
-      <div class="lecture-left">
-        <div class="lecture-date">
-          <div class="date">2</div>
-          <div class="month">Jan</div>
-        </div>
-      </div>
-  
-      <div class="lecture-right">
-        <h3 class="lecture-title">Security in Computing</h3>
-  
-        <div class="lecture-description">
-          Important Message
-        </div>
-  
-        <div class="lecture-timing">
-          9:30 am to 11:10am
-        </div>
-      </div>
-    </div>
-  
-    <div class="lecture">
-      <div class="lecture-left">
-        <div class="lecture-date">
-          <div class="date">3</div>
-          <div class="month">Jan</div>
-        </div>
-      </div>
-  
-      <div class="lecture-right">
-        <h3 class="lecture-title">Software Quality Assurance</h3>
-        <div class="lecture-description">
-          Important Message
-        </div>
-  
-        <div class="lecture-timing">
-          7:30 am to 9:10 am
-        </div>
-      </div>
-    </div>
-  
-    <div class="lecture">
-      <div class="lecture-left">
-        <div class="lecture-date">
-          <div class="date">3</div>
-          <div class="month">Jan</div>
-        </div>
-      </div>
-  
-      <div class="lecture-right">
-        <h3 class="lecture-title">Business Intelligence</h3>
-  
-        <div class="lecture-description">
-          Important Message
-        </div>
-  
-        <div class="lecture-timing">
-          9:30 am to 11:10am
-        </div>
-      </div>
-    </div>
-  
-    <div class="lecture">
-      <div class="lecture-left">
-        <div class="eventlecture-date">
-          <div class="date">3</div>
-          <div class="month">Jan</div>
-        </div>
-      </div>
-  
-      <div class="lecture-right">
-        <h3 class="lecture-title">Cyber Laws</h3>
-  
-        <div class="lecture-description">
-          Important Message
-        </div>
-  
-        <div class="lecture-timing">
-           11:00 am to 1:10pm
-        </div>
-      </div>
-    </div>
-  
   </div>

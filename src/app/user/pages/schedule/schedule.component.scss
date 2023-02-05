@@ -31,28 +31,32 @@
       text-align: center;
       border-radius: 8px ;
 
-      .date {
-        font-size: 56px;
+      .Batch {
+        font-size: 22px;
       }
-
-      .month {
-        font-size: 19px;
-        font-weight: normal;
-      }
+      
     }
+.dates{
+  display: flex;
+  justify-content: space-evenly;
 
+}
     .lecture-right {
       background-color: white;
       width: 100%;
       display: flex;
       flex-direction: column;
       justify-content: center;
-      padding: 0 24px;
+      padding: 0 20px;
       border-radius: 8px;
 
       h3.lecture-title {
         font-size: 24px;
-        margin: 24px 0 10px 0;
+        color: #0a384e;
+        text-transform: uppercase;
+      }
+      h4.lecture-Faculty{
+        font-size: 20px;
         color: #0a384e;
         text-transform: uppercase;
       }
@@ -69,7 +73,7 @@
         width: 200px;
         padding: 8px;
         border-radius: 16px;
-        margin: 24px 0;
+        margin: 12px 0;
 
       }
     }

@@ -1,29 +1,22 @@
-export interface userData{
-    students:Istudents[];
-    faculties:Ifaculties[];
-    attendance:Iattendance[];
-    group:Igroups[];
-    schedule:Ischedule[];
-    subject:Isubject[];
-    question:Iquestion[];
-    suggestions:Isuggestion[];
-}
-export interface demo{
-    id:string;
-    output:string;
-    questions:{
-        question:string;
-    }
-}
+
 export interface Istudents{
-    roll:string;
+    _id:string;
+    roll:number;
     name:string;
 }
 export interface Ifaculties{
-    fID:string;
+    _id:string;
     fname:string;
     department:string;
     designation:string;
+}
+export interface Isubject{
+    _id:string;
+    subject:string
+}
+export interface Iclassroom{
+    _id:string;
+    class:string;
 }
 export interface Iattendance{
     attID:string;
@@ -34,28 +27,27 @@ export enum AttStatus{
     absent = "A"
 }
 export interface Igroups{
-    gID: string;
+    _id:string;
     gName: string;
+    students:Istudents[];
 }
 export interface Ischedule{
-    scID:string;
+    _id:string;
     scheduleName:string;
     Date:string;
-    startTime:string;
-    endTime:string;
+    timing:string;
+    duration:string;
     groups:Igroups[];
     faculty:Ifaculties[];
     subject:Isubject[];
+    classroom:Iclassroom[];
 }
-export interface Isubject{
-    subID:string;
-    subject:string
-}
+
 export interface Iquestion{
-    qID:string;
-    questions:string;
+    qID:number;
+    question:string;
 }
 export interface Isuggestion{
-    sugID:string;
+    sugID:number;
     suggestions:string;
 }

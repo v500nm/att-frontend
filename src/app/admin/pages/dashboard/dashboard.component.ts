@@ -23,7 +23,7 @@ export class DashboardComponent implements OnInit {
 
   //edit switches
   stuSwitch: boolean = true;
-
+  
   display: boolean = false;
   loading: boolean = true;
   showDialog() {
@@ -150,13 +150,18 @@ this.grpValue=this.formsbuilder.group({
       this.findAllStudents();
     });
   }
-  // updateStudents(stuData: Istudents, id: string) {
-  //   this.adminService.updateStudent(stuData, id).subscribe((res) => {
-  //     this.findAllStudents();
-  //     this.stuValue.value;
-  //     this.stuSwitch = false;
-  //   });
-  // }
+  recoverStudent(stuData:Istudents){
+
+    
+    this.stuData=this.stuValue.value;
+  }
+  updateStudents(stuData: Istudents, id: string) {
+    this.adminService.updateStudent(stuData, id).subscribe((res) => {
+      this.findAllStudents();
+      this.stuValue.value;
+      this.stuSwitch = false;
+    });
+  }
 
   //faculties
   getAllFaculties() {

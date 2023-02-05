@@ -9,25 +9,25 @@ import { Ischedule } from '../../service/user.interface';
 })
 export class ScheduleComponent implements OnInit {
   title='userSchedule'
-  sch:Ischedule[]=[];
+  schData:Ischedule[]=[];
  
  
   constructor(private userService:UserService){}
   ngOnInit(): void {
    this.userService.findAllSchedule()
    .subscribe(Response=>{
-    this.sch = Response;
+    this.schData = Response;
    })
  }
  findAllSchedule(){
   this.userService.findAllSchedule()
   .subscribe(Response=>{
-    this.sch=Response;
+    this.schData = Response;
   })
  }
 
- removeSchedule(scID:string){
-  this.userService.removeSchedule(scID)
+ removeSchedule(_id:string){
+  this.userService.removeSchedule(_id)
   .subscribe(Response=>{
     this.findAllSchedule();
   })

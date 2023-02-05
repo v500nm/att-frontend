@@ -37,16 +37,16 @@ export class AdminService {
     return this.http.get<Istudents[]>(this.studentsUrl);
   }
 
-  getStudent(id: string): Observable<Istudents> {
-    return this.http.get<Istudents>(`${this.studentsUrl}/${id}`);
+  getStudent(_id: string): Observable<Istudents> {
+    return this.http.get<Istudents>(this.studentsUrl+'/'+_id);
   }
 
-  updateStudent(students: Istudents, id: string): Observable<Istudents> {
-    return this.http.put<Istudents>(`${this.studentsUrl}/${id}`, students);
+  updateStudent(students: Istudents, _id: string): Observable<Istudents> {
+    return this.http.put<Istudents>(this.studentsUrl+'/'+_id, students);
   }
 
-  removeStudent(id: string): Observable<Istudents> {
-    return this.http.delete<Istudents>(`${this.studentsUrl}/${id}`);
+  removeStudent(_id: string): Observable<Istudents> {
+    return this.http.delete<Istudents>(this.studentsUrl+'/'+_id);
   }
 
   //faculties
@@ -69,8 +69,8 @@ export class AdminService {
     );
   }
 
-  removeFaculty(id: string): Observable<Ifaculties> {
-    return this.http.delete<Ifaculties>(this.facultiesUrl + '/' + id);
+  removeFaculty(_id: string): Observable<Ifaculties> {
+    return this.http.delete<Ifaculties>(this.facultiesUrl + '/' + _id);
   }
 
   //subjects

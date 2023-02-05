@@ -16,6 +16,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import {TabViewModule} from 'primeng/tabview';
 import {TableModule} from 'primeng/table';
 import { SplitButtonModule } from 'primeng/splitbutton';
+import { AttmarkComponent } from './pages/attmark/attmark.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { SplitButtonModule } from 'primeng/splitbutton';
        HeaderComponent,
        SidebarComponent,
        FooterComponent,
-       ChatbotComponent
+       ChatbotComponent,
+       AttmarkComponent
   ],
   imports: [
     SidebarModule,
