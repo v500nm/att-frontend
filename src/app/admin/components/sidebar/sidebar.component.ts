@@ -15,18 +15,13 @@ export class SidebarComponent {
     this.activeTab = 'admin/';
     this.router.navigate(['admin/']);
   }
-
-  attendance(){
-    this.activeTab = 'admin/attendance';
-    this.router.navigate(['admin/attendance']);
-  }
   chatbot(){
     this.activeTab = 'admin/chatbot';
     this.router.navigate(['admin/chatbot']);   
   }
-  schedules(){
-    this.activeTab = 'admin/schedules';
-    this.router.navigate(['admin/schedules']);
+  attMark(){
+    this.activeTab = 'admin/attendance';
+    this.router.navigate(['admin/attendance']);
   }
 
   logout(){

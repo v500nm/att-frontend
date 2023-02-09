@@ -16,6 +16,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import {TabViewModule} from 'primeng/tabview';
 import {TableModule} from 'primeng/table';
 import { SplitButtonModule } from 'primeng/splitbutton';
+import {ListboxModule} from 'primeng/listbox';
 import { AttmarkComponent } from './pages/attmark/attmark.component';
 
 @NgModule({
@@ -39,7 +40,8 @@ import { AttmarkComponent } from './pages/attmark/attmark.component';
     ReactiveFormsModule,
     TabViewModule,
     TableModule,
-    SplitButtonModule
+    SplitButtonModule,
+    ListboxModule
   ]
 })
 export class AdminModule { }
