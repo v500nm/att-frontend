@@ -3,6 +3,7 @@ export interface Istudents{
     _id:string;
     roll:number;
     name:string;
+    classGrp:string;
 }
 export interface Ifaculties{
     _id:string;

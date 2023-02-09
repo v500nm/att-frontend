@@ -29,6 +29,14 @@
                                 </ng-container>
                             </div>
                             <div class="sub">
+                                <ng-container>
+                                    <span class="p-float-label">
+                                        <input type="text" formControlName="classGrp" id="inputtext" pInputText>
+                                        <label for="inputtext">Class</label>
+                                    </span>
+                                </ng-container>
+                            </div>
+                            <div class="sub">
                                 <button pButton type="button" label="Submit" (click)="regStudents()"></button>
                                 <!-- <button pButton type="button" label="Edit" *ngIf="!stuSwitch" (click)="updateStudents(stuData)"></button> -->
                             </div>
@@ -56,6 +64,11 @@
                                 </th>
                                 <th>
                                     <div class="p-d-flex p-jc-between p-ai-center">
+                                        Class
+                                    </div>
+                                </th>
+                                <th>
+                                    <div class="p-d-flex p-jc-between p-ai-center">
                                         Options
                                     </div>
                                 </th>
@@ -68,6 +81,9 @@
                                 </td>
                                 <td>
                                     {{stuData.name}}
+                                </td>
+                                <td>
+                                    {{stuData.classGrp}}
                                 </td>
                                 <td>
                                     <div class="editGrp">
@@ -354,13 +370,13 @@
                                     {{schData.groups.gName}}
                                 </td>
                                 <td>
-                                    
+
                                 </td>
                                 <td>
-                                    
+
                                 </td>
                                 <td>
-                                    
+
                                 </td>
                                 <td>
                                     <div class="editGrp">
@@ -454,7 +470,6 @@
                 </div>
             </section>
         </p-tabPanel>
-        
         <p-tabPanel header="Classroom">
             <section class="classroom">
                 <div class="title">
@@ -482,8 +497,7 @@
                     <p-table #dt1 [value]="classData" dataKey="id" [rows]="5" [showCurrentPageReport]="true"
                         [rowsPerPageOptions]="[5,10,15]" [loading]="loading"
                         styleClass="p-datatable-customers p-datatable-gridlines" [paginator]="true"
-                        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-                        >
+                        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
 
                         <ng-template pTemplate="header">
                             <tr>
@@ -559,13 +573,25 @@
                                 </ng-container>
                             </div>
                             <div class="sub">
+                                <h5>Advanced with Templating, Filtering and Multiple Selection</h5>
+                                <p-listbox [options]="grpData" [(ngModel)]="grpData" [metaKeySelection]="false" [checkbox]="true"
+                                    [filter]="true" [multiple]="true" optionLabel="name"
+                                    [listStyle]="{'max-height':'250px'}" [style]="{'width':'15rem'}">
+                                    <ng-template let-grpData pTemplate="item">
+                                        <div class="country-item">
+                                            <div>{{grpData.gName}}</div>
+                                        </div>
+                                    </ng-template>
+                                </p-listbox>
+                            </div>
+                            <div class="sub">
                                 <button pButton type="button" label="Submit" (click)="postClass()"></button>
                             </div>
                         </form>
                     </p-dialog>
                     <button pButton type="button" label="Add Groups" (click)="showDialog()"></button>
                 </div>
-                
+
             </section>
         </p-tabPanel>
     </p-tabView>

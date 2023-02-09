@@ -57,6 +57,7 @@ export class DashboardComponent implements OnInit {
     this.stuValue = this.formsbuilder.group({
       roll: new FormControl(''),
       name: new FormControl(''),
+      classGrp:new FormControl(''),
     }),
 
     this.facValue = this.formsbuilder.group({
