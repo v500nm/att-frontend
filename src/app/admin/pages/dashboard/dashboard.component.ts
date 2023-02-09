@@ -143,6 +143,7 @@ this.grpValue=this.formsbuilder.group({
     this.adminService.registerStudent(this.stuValue.value).subscribe((res) => {
       console.log(res, 'students post');
       this.stuValue.reset();
+      this.findAllStudents();
     });
   }
   removeStudent(_id: string) {
@@ -177,6 +178,7 @@ this.grpValue=this.formsbuilder.group({
     this.adminService.addFaculty(this.facValue.value).subscribe((res) => {
       console.log(res, 'faculty post');
       this.facValue.reset();
+      this.getAllFaculties();
     });
   }
   removeFaculty(_id:string){
@@ -199,7 +201,7 @@ this.grpValue=this.formsbuilder.group({
     this.adminService.addSubject(this.subValue.value).subscribe((res) => {
       console.log(res, 'subject post');
       this.subValue.reset();
-      this.adminService.findAllSubjects();
+      this.findAllSubjects();
     });
   }
   removeSubject(_id:string){
@@ -232,6 +234,7 @@ this.grpValue=this.formsbuilder.group({
     this.adminService.addClass(this.classValue.value).subscribe((res) => {
       console.log(res, 'class post');
       this.classValue.reset();
+      this.findAllClass();
     });
   }
   //schedule
@@ -250,6 +253,7 @@ this.grpValue=this.formsbuilder.group({
       .subscribe((Response) => {
         console.log(Response, 'post Method');
       });
+      this.findAllSchedule();
   }
   removeSch(_id:string){
     this.adminService.removeSchedule(_id).subscribe((res)=>{
