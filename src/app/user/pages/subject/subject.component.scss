@@ -52,3 +52,21 @@ h4{
       }
     }
 }
+
+@media (max-width: 500px) {
+   
+  .charts{
+   display: list-item;
+   padding: 10px 0;
+  }
+
+  .chart{
+    flex-direction: column;
+    
+  }
+
+  table{
+    display: inline-block;
+    font-size: 16px;
+  }
+}
