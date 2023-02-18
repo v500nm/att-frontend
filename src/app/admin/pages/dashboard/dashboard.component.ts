@@ -9,6 +9,7 @@ import {
   Istudents,
   Isubject,
 } from '../../service/admin.interface';
+import { JsonPipe } from '@angular/common';
 
 @Component({
   selector: 'app-dashboard',
@@ -27,9 +28,13 @@ export class DashboardComponent implements OnInit {
   stuSwitch: boolean = true;
 
   display: boolean = false;
+  displayEdit:boolean=false;
   loading: boolean = true;
   showDialog() {
     this.display = true;
+  }
+  showEditDialog(){
+    this.displayEdit=true;
   }
 
   stuValue!: FormGroup;
@@ -139,12 +144,13 @@ export class DashboardComponent implements OnInit {
     });
   }
   regStudents() {
-    this.stuData = this.stuValue.value;
-    this.adminService.registerStudent(this.stuValue.value).subscribe((res) => {
-      console.log(res, 'students post');
-      this.stuValue.reset();
-      this.findAllStudents();
-    });
+      this.stuData = this.stuValue.value;
+      this.adminService.registerStudent(this.stuValue.value).subscribe((res) => {
+        console.log(res, 'students post');
+        this.stuValue.reset();
+        this.findAllStudents();
+      });
+    
   }
   removeStudent(_id: string) {
     this.adminService.removeStudent(_id).subscribe((res) => {
@@ -152,14 +158,24 @@ export class DashboardComponent implements OnInit {
       this.findAllStudents();
     });
   }
-  recoverStudent(stuData: Istudents) {
-    this.stuData = this.stuValue.value;
+
+  recoverStudent(stuData:Istudents) {
+    for(let data in stuData){
+      console.log(stuData.name)
+    }
+      this.stuValue.patchValue({
+        roll:333,
+        name:"Adnan",
+        classGrp:"TYIT"
+      }) 
+      this.stuSwitch=false;
+      console.log(this.stuData)
   }
-  updateStudents(stuData: Istudents, id: string) {
-    this.adminService.updateStudent(stuData, id).subscribe((res) => {
+  updateStudents(stuData: Istudents) {
+    this.adminService.updateStudent(stuData).subscribe((res) => {
       this.findAllStudents();
       this.stuValue.value;
-      this.stuSwitch = false;
+      this.stuSwitch = true;
     });
   }
 

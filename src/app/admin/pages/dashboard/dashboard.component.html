@@ -10,7 +10,6 @@
                     <h1>Students</h1>
                 </div>
                 <div class="Add">
-                    <p-dialog header="Add Students" [(visible)]="display">
                         <form [formGroup]="stuValue">
                             <div class="sub">
                                 <ng-container>
@@ -37,19 +36,21 @@
                                 </ng-container>
                             </div>
                             <div class="sub">
-                                <button pButton type="button" label="Submit" (click)="regStudents()"></button>
-                                <!-- <button pButton type="button" label="Edit" *ngIf="!stuSwitch" (click)="updateStudents(stuData)"></button> -->
+                                <button pButton type="button"  label="Add" (click)="regStudents()"></button>
+                                <!-- <button pButton type="button" *ngIf="!stuSwitch" label="Edit"></button> -->
                             </div>
                         </form>
-                    </p-dialog>
-                    <button pButton type="button" label="Add Students" (click)="showDialog()"></button>
+                        <hr>
                 </div>
                 <div class="view">
-                    <p-table #dt1 [value]="stuData" dataKey="id" [rows]="5" [showCurrentPageReport]="true"
+                    <p-table responsiveLayout="stack" #dt1 [value]="stuData" dataKey="id" [rows]="5" [showCurrentPageReport]="true"
                         [rowsPerPageOptions]="[5,10,15]" [loading]="loading"
                         styleClass="p-datatable-customers p-datatable-gridlines" [paginator]="true"
                         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-                        [globalFilterFields]="['name','country.name']">
+                        [globalFilterFields]="['roll','stuData.roll']">
+                        <ng-template pTemplate="caption">
+                            Students List
+                        </ng-template>
                         <ng-template pTemplate="header">
                             <tr>
                                 <th>
@@ -76,19 +77,19 @@
                         </ng-template>
                         <ng-template pTemplate="body" let-stuData>
                             <tr>
-                                <td>
+                                <td><span class="p-column-title">Roll</span>
                                     {{stuData.roll}}
                                 </td>
-                                <td>
+                                <td><span class="p-column-title">Name</span>
                                     {{stuData.name}}
                                 </td>
-                                <td>
+                                <td><span class="p-column-title">Class</span>
                                     {{stuData.classGrp}}
                                 </td>
-                                <td>
+                                <td><span class="p-column-title">Options</span>
                                     <div class="editGrp">
                                         <div class="edit">
-                                            <button>Edit</button>
+                                        <button (click)="recoverStudent(stuData)">Edit</button>    
                                         </div>
                                         <div class="delete">
                                             <button (click)="removeStudent(stuData._id)">Delete</button>
