@@ -1,4 +1,78 @@
 <app-header></app-header>
 <div class="container">
-    
+    <div class="top">
+        <h1>Attendance</h1>
+    </div>
+    <p-tabView>
+        <p-tabPanel header="Mark Attendance">
+            <section>
+                <form [formGroup]="attValue">
+                    <div class="section">
+                        <!-- [options]="cities" [(ngModel)]="selectedCity1" -->
+                        <p-dropdown [options]="schData"  placeholder="Select Schedule"
+                            optionLabel="scheduleName" formControlName="scheduleName" [showClear]="true"></p-dropdown>
+                    </div>
+                    <div class="section">
+                        <!-- [value]="" [loading]="loading" -->
+                        <p-table #dt1 [value]="schData" dataKey="id" [rows]="5" [showCurrentPageReport]="true"
+                            [rowsPerPageOptions]="[5,10,15]" styleClass="p-datatable-customers p-datatable-gridlines"
+                            [paginator]="true"
+                            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th>
+                                        <div class="p-d-flex p-jc-between p-ai-center">
+                                            Class
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <div class="p-d-flex p-jc-between p-ai-center">
+                                            Roll
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <div class="p-d-flex p-jc-between p-ai-center">
+                                            Att Status
+                                        </div>
+                                    </th>
+                                </tr>
+                            </ng-template>
+
+                            <ng-template pTemplate="body" let-grpData let-schData>
+                                <tr>
+                                    <td>
+                                        {{schData.groups.gName}}
+                                    </td>
+                                    <td>
+                                        {{schData.groups.students|json}}
+                                    </td>
+                                    <td>
+                                        <select name="" id="">
+                                            <option value="">--select--</option>
+                                            <option value="">P</option>
+                                            <option value="">A</option>
+                                            <option value="">NA</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="emptymessage">
+                                <tr>
+                                    <td colspan="7">No customers found.</td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
+                    </div>
+                </form>
+            </section>
+
+        </p-tabPanel>
+        <p-tabPanel header="View Attendance">
+
+        </p-tabPanel>
+        <p-tabPanel header="Defaulters">
+
+        </p-tabPanel>
+    </p-tabView>
+
 </div>

@@ -3,7 +3,7 @@
     <div class="top">
         <h1>Admin Dashboard</h1>
     </div>
-    <p-tabView>
+    <p-tabView  [(activeIndex)]="activeIndex" [scrollable]="true">
         <p-tabPanel header="Students">
             <section class="students">
                 <div class="title">
@@ -573,19 +573,20 @@
                                 </ng-container>
                             </div>
                             <div class="sub">
-                                <h5>Advanced with Templating, Filtering and Multiple Selection</h5>
-                                <p-listbox [options]="grpData" [(ngModel)]="grpData" [metaKeySelection]="false" [checkbox]="true"
-                                    [filter]="true" [multiple]="true" optionLabel="name"
-                                    [listStyle]="{'max-height':'250px'}" [style]="{'width':'15rem'}">
-                                    <ng-template let-grpData pTemplate="item">
-                                        <div class="country-item">
-                                            <div>{{grpData.gName}}</div>
-                                        </div>
-                                    </ng-template>
-                                </p-listbox>
+                                <ng-container>
+                                    <h3>Select Students</h3>
+                                    <p-listbox formControlName="students" [options]="stuData" [metaKeySelection]="false"
+                                        [checkbox]="true" [filter]="true" [multiple]="true" optionLabel="roll">
+                                        <ng-template let-stuData pTemplate="item">
+                                            <div class="country-item">
+                                                <span>{{stuData.roll}}</span>
+                                            </div>
+                                        </ng-template>
+                                    </p-listbox>
+                                </ng-container>
                             </div>
                             <div class="sub">
-                                <button pButton type="button" label="Submit" (click)="postClass()"></button>
+                                <button pButton type="button" label="Submit" (click)="createGroup()"></button>
                             </div>
                         </form>
                     </p-dialog>

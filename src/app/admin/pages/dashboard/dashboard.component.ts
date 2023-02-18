@@ -21,16 +21,17 @@ export class DashboardComponent implements OnInit {
     private formsbuilder: FormBuilder
   ) {}
 
-  //edit switches
+  // scrollTabs
+  activeIndex: number = 0;
+   //edit switches
   stuSwitch: boolean = true;
-  
+
   display: boolean = false;
   loading: boolean = true;
   showDialog() {
     this.display = true;
   }
 
-  value1: any;
   stuValue!: FormGroup;
   facValue!: FormGroup;
   subValue!: FormGroup;
@@ -54,27 +55,26 @@ export class DashboardComponent implements OnInit {
     this.findAllSchedule();
     this.findAllGroup();
 
-    this.stuValue = this.formsbuilder.group({
+    (this.stuValue = this.formsbuilder.group({
       roll: new FormControl(''),
       name: new FormControl(''),
-      classGrp:new FormControl(''),
-    }),
-
-    this.facValue = this.formsbuilder.group({
-      fname: new FormControl(''),
-      department: new FormControl(''),
-      designation: new FormControl(''),
-    }),
-      this.subValue = this.formsbuilder.group({
+      classGrp: new FormControl(''),
+    })),
+      (this.facValue = this.formsbuilder.group({
+        fname: new FormControl(''),
+        department: new FormControl(''),
+        designation: new FormControl(''),
+      })),
+      (this.subValue = this.formsbuilder.group({
         subject: new FormControl(''),
-      }),
-      this.classValue = this.formsbuilder.group({
+      })),
+      (this.classValue = this.formsbuilder.group({
         class: new FormControl(''),
-      }),
-this.grpValue=this.formsbuilder.group({
-  gName: new FormControl(''),
-  students: new FormControl('')
-})
+      })),
+      (this.grpValue = this.formsbuilder.group({
+        gName: new FormControl(''),
+        students: new FormControl(''),
+      }));
     this.schValue = this.formsbuilder.group({
       scheduleName: new FormControl(''),
       Date: new FormControl(''),
@@ -103,14 +103,14 @@ this.grpValue=this.formsbuilder.group({
       this.classData = res;
       this.loading = false;
     });
-    this.adminService.findAllSchedule().subscribe((res)=>{
+    this.adminService.findAllSchedule().subscribe((res) => {
       this.schData = res;
       this.loading = false;
-    })
-    this.adminService.findAllGroup().subscribe((res)=>{
+    });
+    this.adminService.findAllGroup().subscribe((res) => {
       this.grpData = res;
       this.loading = false;
-    })
+    });
 
     //crud buttons
   }
@@ -152,10 +152,8 @@ this.grpValue=this.formsbuilder.group({
       this.findAllStudents();
     });
   }
-  recoverStudent(stuData:Istudents){
-
-    
-    this.stuData=this.stuValue.value;
+  recoverStudent(stuData: Istudents) {
+    this.stuData = this.stuValue.value;
   }
   updateStudents(stuData: Istudents, id: string) {
     this.adminService.updateStudent(stuData, id).subscribe((res) => {
@@ -181,11 +179,11 @@ this.grpValue=this.formsbuilder.group({
       this.getAllFaculties();
     });
   }
-  removeFaculty(_id:string){
-    this.adminService.removeFaculty(_id).subscribe((res)=>{
-      console.log(res,'delete works');
+  removeFaculty(_id: string) {
+    this.adminService.removeFaculty(_id).subscribe((res) => {
+      console.log(res, 'delete works');
       this.getAllFaculties();
-    })
+    });
   }
 
   //subjects
@@ -204,11 +202,11 @@ this.grpValue=this.formsbuilder.group({
       this.findAllSubjects();
     });
   }
-  removeSubject(_id:string){
-    this.adminService.removeSubject(_id).subscribe((res)=>{
+  removeSubject(_id: string) {
+    this.adminService.removeSubject(_id).subscribe((res) => {
       this.findAllSubjects();
-      console.log(res,'delete works');
-    })
+      console.log(res, 'delete works');
+    });
   }
   //classroom
   findAllClass() {
@@ -244,7 +242,6 @@ this.grpValue=this.formsbuilder.group({
       console.log(Response, 'allData');
     });
   }
-
   postSch() {
     this.schData = this.schValue.value;
     console.log(this.schData);
@@ -253,11 +250,11 @@ this.grpValue=this.formsbuilder.group({
       .subscribe((Response) => {
         console.log(Response, 'post Method');
       });
-      this.findAllSchedule();
+    this.findAllSchedule();
   }
-  removeSch(_id:string){
-    this.adminService.removeSchedule(_id).subscribe((res)=>{
+  removeSch(_id: string) {
+    this.adminService.removeSchedule(_id).subscribe((res) => {
       this.findAllSchedule();
-    })
+    });
   }
 }
