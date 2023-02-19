@@ -9,7 +9,12 @@ import { Iattendance, Ifaculties, Igroups, Iquestion, Ischedule, Istudents, Isub
 })
 export class DashboardComponent implements OnInit{
   title='userDashboard'
-
+  
+  value1: number = 99;
+  value2: number = 95;
+  value3: number = 75;
+  value4: number = 99;
+  
  ngOnInit(): void {
    
  }
