@@ -41,8 +41,8 @@ export class AdminService {
     return this.http.get<Istudents>(this.studentsUrl+'/'+_id);
   }
 
-  updateStudent(students: Istudents, _id: string): Observable<Istudents> {
-    return this.http.put<Istudents>(this.studentsUrl+'/'+_id, students);
+  updateStudent(students: Istudents): Observable<Istudents> {
+    return this.http.put<Istudents>(this.studentsUrl+'/'+students._id, students);
   }
 
   removeStudent(_id: string): Observable<Istudents> {

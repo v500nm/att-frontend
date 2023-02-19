@@ -39,9 +39,9 @@ export interface Ischedule{
     timing:string;
     duration:string;
     groups:Igroups[];
-    faculty:Ifaculties[];
-    subject:Isubject[];
-    classroom:Iclassroom[];
+    faculties:Ifaculties[];
+    subjects:Isubject[];
+    classrooms:Iclassroom[];
 }
 
 export interface Iquestion{
