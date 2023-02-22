@@ -31,211 +31,211 @@ export class UserService {
   classroomUrl = this.baseUrl + '/classroom';
 
 
-  //students
-  registerStudent(students: Istudents): Observable<Istudents> {
-    return this.http.post<Istudents>(this.studentsUrl, students);
-  }
+//students
+registerStudent(students: Istudents): Observable<Istudents> {
+  return this.http.post<Istudents>(this.studentsUrl, students);
+}
 
-  findAllStudents(): Observable<Istudents[]> {
-    return this.http.get<Istudents[]>(this.studentsUrl);
-  }
+findAllStudents(): Observable<Istudents[]> {
+  return this.http.get<Istudents[]>(this.studentsUrl);
+}
 
-  getStudent(_id: string): Observable<Istudents> {
-    return this.http.get<Istudents>(this.studentsUrl+'/'+_id);
-  }
+getStudent(_id: string): Observable<Istudents> {
+  return this.http.get<Istudents>(this.studentsUrl + '/' + _id);
+}
 
-  updateStudent(students: Istudents, _id: string): Observable<Istudents> {
-    return this.http.put<Istudents>(this.studentsUrl+'/'+_id, students);
-  }
+updateStudent(_id: string, students: Istudents): Observable<Istudents> {
+  return this.http.put<Istudents>(this.studentsUrl + '/' + _id, students);
+}
 
-  removeStudent(_id: string): Observable<Istudents> {
-    return this.http.delete<Istudents>(this.studentsUrl+'/'+_id);
-  }
+removeStudent(_id: string): Observable<Istudents> {
+  return this.http.delete<Istudents>(this.studentsUrl + '/' + _id);
+}
 
-  //faculties
-  addFaculty(faculties: Ifaculties): Observable<Ifaculties> {
-    return this.http.post<Ifaculties>(this.facultiesUrl, faculties);
-  }
+//faculties
+addFaculty(faculties: Ifaculties): Observable<Ifaculties> {
+  return this.http.post<Ifaculties>(this.facultiesUrl, faculties);
+}
 
-  getAllFaculties(): Observable<Ifaculties[]> {
-    return this.http.get<Ifaculties[]>(this.facultiesUrl);
-  }
+getAllFaculties(): Observable<Ifaculties[]> {
+  return this.http.get<Ifaculties[]>(this.facultiesUrl);
+}
 
-  getFaculty(faculties: Ifaculties): Observable<Ifaculties> {
-    return this.http.get<Ifaculties>(this.facultiesUrl + '/' + faculties._id);
-  }
+getFaculty(faculties: Ifaculties): Observable<Ifaculties> {
+  return this.http.get<Ifaculties>(this.facultiesUrl + '/' + faculties._id);
+}
 
-  updateFaculty(faculties: Ifaculties): Observable<Ifaculties> {
-    return this.http.put<Ifaculties>(
-      this.facultiesUrl + '/' + faculties._id,
-      faculties
-    );
-  }
+updateFaculty(_id: string, faculties: Ifaculties): Observable<Ifaculties> {
+  return this.http.put<Ifaculties>(
+    this.facultiesUrl + '/' + faculties._id,
+    faculties
+  );
+}
 
-  removeFaculty(_id: string): Observable<Ifaculties> {
-    return this.http.delete<Ifaculties>(this.facultiesUrl + '/' + _id);
-  }
+removeFaculty(_id: string): Observable<Ifaculties> {
+  return this.http.delete<Ifaculties>(this.facultiesUrl + '/' + _id);
+}
 
-  //subjects
-  addSubject(subjects: Isubject): Observable<Isubject> {
-    return this.http.post<Isubject>(this.subjectUrl, subjects);
-  }
+//subjects
+addSubject(subjects: Isubject): Observable<Isubject> {
+  return this.http.post<Isubject>(this.subjectUrl, subjects);
+}
 
-  findAllSubjects(): Observable<Isubject[]> {
-    return this.http.get<Isubject[]>(this.subjectUrl);
-  }
+findAllSubjects(): Observable<Isubject[]> {
+  return this.http.get<Isubject[]>(this.subjectUrl);
+}
 
-  findSubject(subjects: Isubject): Observable<Isubject> {
-    return this.http.get<Isubject>(this.subjectUrl + '/' + subjects._id);
-  }
+findSubject(subjects: Isubject): Observable<Isubject> {
+  return this.http.get<Isubject>(this.subjectUrl + '/' + subjects._id);
+}
 
-  updateSubject(subjects: Isubject): Observable<Isubject> {
-    return this.http.put<Isubject>(
-      this.subjectUrl + '/' + subjects._id,
-      subjects
-    );
-  }
+updateSubject(_id:string, subjects: Isubject): Observable<Isubject> {
+  return this.http.put<Isubject>(
+    this.subjectUrl + '/' + subjects._id,
+    subjects
+  );
+}
 
-  removeSubject(_id: string): Observable<Isubject> {
-    return this.http.delete<Isubject>(this.subjectUrl + '/' + _id);
-  }
-  //classroom
-  addClass(classroom: Iclassroom): Observable<Iclassroom> {
-    return this.http.post<Iclassroom>(this.classroomUrl, classroom);
-  }
-  findAllClass(): Observable<Iclassroom[]> {
-    return this.http.get<Iclassroom[]>(this.classroomUrl);
-  }
-  findOneClass(classroom: Iclassroom): Observable<Iclassroom> {
-    return this.http.get<Iclassroom>(this.classroomUrl + '/' + classroom._id);
-  }
-  updateClass(classroom: Iclassroom): Observable<Iclassroom> {
-    return this.http.put<Iclassroom>(
-      this.classroomUrl + '/' + classroom._id,
-      classroom
-    );
-  }
-  removeClass(_id: string): Observable<Iclassroom> {
-    return this.http.delete<Iclassroom>(this.classroomUrl + '/' + _id);
-  }
-  //attendance
-  postAtt(attendance: Iattendance): Observable<Iattendance> {
-    return this.http.post<Iattendance>(this.attendanceUrl, attendance);
-  }
+removeSubject(_id: string): Observable<Isubject> {
+  return this.http.delete<Isubject>(this.subjectUrl + '/' + _id);
+}
+//classroom
+addClass(classroom: Iclassroom): Observable<Iclassroom> {
+  return this.http.post<Iclassroom>(this.classroomUrl, classroom);
+}
+findAllClass(): Observable<Iclassroom[]> {
+  return this.http.get<Iclassroom[]>(this.classroomUrl);
+}
+findOneClass(classroom: Iclassroom): Observable<Iclassroom> {
+  return this.http.get<Iclassroom>(this.classroomUrl + '/' + classroom._id);
+}
+updateClass(_id:string, classroom: Iclassroom): Observable<Iclassroom> {
+  return this.http.put<Iclassroom>(
+    this.classroomUrl + '/' + classroom._id,
+    classroom
+  );
+}
+removeClass(_id: string): Observable<Iclassroom> {
+  return this.http.delete<Iclassroom>(this.classroomUrl + '/' + _id);
+}
+//attendance
+postAtt(attendance: Iattendance): Observable<Iattendance> {
+  return this.http.post<Iattendance>(this.attendanceUrl, attendance);
+}
 
-  findAllAtt(): Observable<Iattendance[]> {
-    return this.http.get<Iattendance[]>(this.attendanceUrl);
-  }
+findAllAtt(): Observable<Iattendance[]> {
+  return this.http.get<Iattendance[]>(this.attendanceUrl);
+}
 
-  findOneAtt(attendance: Iattendance): Observable<Iattendance> {
-    return this.http.get<Iattendance>(
-      this.attendanceUrl + '/' + attendance.attID
-    );
-  }
+findOneAtt(attendance: Iattendance): Observable<Iattendance> {
+  return this.http.get<Iattendance>(
+    this.attendanceUrl + '/' + attendance.attID
+  );
+}
 
-  updateAtt(attendance: Iattendance): Observable<Iattendance> {
-    return this.http.put<Iattendance>(
-      this.attendanceUrl + '/' + attendance.attID,
-      attendance
-    );
-  }
+updateAtt(_id:string, attendance: Iattendance): Observable<Iattendance> {
+  return this.http.put<Iattendance>(
+    this.attendanceUrl + '/' + attendance.attID,
+    attendance
+  );
+}
 
-  removeAtt(attID: string): Observable<Iattendance> {
-    return this.http.delete<Iattendance>(this.attendanceUrl + '/' + attID);
-  }
+removeAtt(attID: string): Observable<Iattendance> {
+  return this.http.delete<Iattendance>(this.attendanceUrl + '/' + attID);
+}
 
-  //groups
-  createGroup(group: Igroups): Observable<Igroups> {
-    return this.http.post<Igroups>(this.groupsUrl, group);
-  }
+//groups
+createGroup(group: Igroups): Observable<Igroups> {
+  return this.http.post<Igroups>(this.groupsUrl, group);
+}
 
-  findAllGroup(): Observable<Igroups[]> {
-    return this.http.get<Igroups[]>(this.groupsUrl);
-  }
+findAllGroup(): Observable<Igroups[]> {
+  return this.http.get<Igroups[]>(this.groupsUrl);
+}
 
-  findOneGroup(group: Igroups): Observable<Igroups> {
-    return this.http.get<Igroups>(this.groupsUrl + '/' + group._id);
-  }
+findOneGroup(group: Igroups): Observable<Igroups> {
+  return this.http.get<Igroups>(this.groupsUrl + '/' + group._id);
+}
 
-  updateGroup(group: Igroups): Observable<Igroups> {
-    return this.http.put<Igroups>(this.groupsUrl + '/' + group._id, group);
-  }
+updateGroup(_id:string, group: Igroups): Observable<Igroups> {
+  return this.http.put<Igroups>(this.groupsUrl + '/' + group._id, group);
+}
 
-  removeGroup(_id: string): Observable<Igroups> {
-    return this.http.delete<Igroups>(this.groupsUrl + '/' + _id);
-  }
+removeGroup(_id: string): Observable<Igroups> {
+  return this.http.delete<Igroups>(this.groupsUrl + '/' + _id);
+}
 
-  //schedule
-  createSchedule(schedules: Ischedule): Observable<Ischedule> {
-    return this.http.post<Ischedule>(this.scheduleUrl, schedules);
-  }
+//schedule
+createSchedule(schedules: Ischedule): Observable<Ischedule> {
+  return this.http.post<Ischedule>(this.scheduleUrl, schedules);
+}
 
-  findAllSchedule(): Observable<Ischedule[]> {
-    return this.http.get<Ischedule[]>(this.scheduleUrl);
-  }
+findAllSchedule(): Observable<Ischedule[]> {
+  return this.http.get<Ischedule[]>(this.scheduleUrl);
+}
 
-  findOneSchedule(schedules: Ischedule): Observable<Ischedule> {
-    return this.http.get<Ischedule>(this.scheduleUrl + '/' + schedules._id);
-  }
+findOneSchedule(schedules: Ischedule): Observable<Ischedule> {
+  return this.http.get<Ischedule>(this.scheduleUrl + '/' + schedules._id);
+}
 
-  updateSchedule(schedules: Ischedule): Observable<Ischedule> {
-    return this.http.put<Ischedule>(
-      this.scheduleUrl + '/' + schedules._id,
-      schedules
-    );
-  }
+updateSchedule(_id:string, schedules: Ischedule): Observable<Ischedule> {
+  return this.http.put<Ischedule>(
+    this.scheduleUrl + '/' + schedules._id,
+    schedules
+  );
+}
 
-  removeSchedule(_id: string): Observable<Ischedule> {
-    return this.http.delete<Ischedule>(this.scheduleUrl + '/' + _id);
-  }
+removeSchedule(_id: string): Observable<Ischedule> {
+  return this.http.delete<Ischedule>(this.scheduleUrl + '/' + _id);
+}
 
-  //question
-  createQuestion(questions: Iquestion): Observable<Iquestion> {
-    return this.http.post<Iquestion>(this.questionUrl, questions);
-  }
+//question
+createQuestion(questions: Iquestion): Observable<Iquestion> {
+  return this.http.post<Iquestion>(this.questionUrl, questions);
+}
 
-  findAllQuestion(): Observable<Iquestion[]> {
-    return this.http.get<Iquestion[]>(this.questionUrl);
-  }
+findAllQuestion(): Observable<Iquestion[]> {
+  return this.http.get<Iquestion[]>(this.questionUrl);
+}
 
-  findOneQuestion(questions: Iquestion): Observable<Iquestion> {
-    return this.http.get<Iquestion>(this.questionUrl + '/' + questions.qID);
-  }
+findOneQuestion(questions: Iquestion): Observable<Iquestion> {
+  return this.http.get<Iquestion>(this.questionUrl + '/' + questions.qID);
+}
 
-  updateQuestion(questions: Iquestion): Observable<Iquestion> {
-    return this.http.put<Iquestion>(
-      this.questionUrl + '/' + questions.qID,
-      questions
-    );
-  }
+updateQuestion(_id:string, questions: Iquestion): Observable<Iquestion> {
+  return this.http.put<Iquestion>(
+    this.questionUrl + '/' + questions.qID,
+    questions
+  );
+}
 
-  removeQuestion(qID: string): Observable<Iquestion> {
-    return this.http.delete<Iquestion>(this.questionUrl + '/' + qID);
-  }
+removeQuestion(qID: string): Observable<Iquestion> {
+  return this.http.delete<Iquestion>(this.questionUrl + '/' + qID);
+}
 
-  //suggestion
-  createSuggestion(suggestions: Isuggestion): Observable<Isuggestion> {
-    return this.http.post<Isuggestion>(this.suggestionUrl, suggestions);
-  }
+//suggestion
+createSuggestion(suggestions: Isuggestion): Observable<Isuggestion> {
+  return this.http.post<Isuggestion>(this.suggestionUrl, suggestions);
+}
 
-  findAllSuggestion(): Observable<Isuggestion[]> {
-    return this.http.get<Isuggestion[]>(this.suggestionUrl);
-  }
+findAllSuggestion(): Observable<Isuggestion[]> {
+  return this.http.get<Isuggestion[]>(this.suggestionUrl);
+}
 
-  findOneSuggestion(suggestions: Isuggestion): Observable<Isuggestion> {
-    return this.http.get<Isuggestion>(
-      this.suggestionUrl + '/' + suggestions.sugID
-    );
-  }
+findOneSuggestion(suggestions: Isuggestion): Observable<Isuggestion> {
+  return this.http.get<Isuggestion>(
+    this.suggestionUrl + '/' + suggestions.sugID
+  );
+}
 
-  updateSuggestion(suggestions: Isuggestion): Observable<Isuggestion> {
-    return this.http.put<Isuggestion>(
-      this.suggestionUrl + '/' + suggestions.sugID,
-      suggestions
-    );
-  }
+updateSuggestion(_id:string, suggestions: Isuggestion): Observable<Isuggestion> {
+  return this.http.put<Isuggestion>(
+    this.suggestionUrl + '/' + suggestions.sugID,
+    suggestions
+  );
+}
 
-  removeSuggestion(sugID: string): Observable<Isuggestion> {
-    return this.http.delete<Isuggestion>(this.suggestionUrl + '/' + sugID);
-  }
+removeSuggestion(sugID: string): Observable<Isuggestion> {
+  return this.http.delete<Isuggestion>(this.suggestionUrl + '/' + sugID);
+}
 }

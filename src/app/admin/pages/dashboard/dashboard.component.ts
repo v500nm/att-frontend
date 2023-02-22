@@ -24,17 +24,14 @@ export class DashboardComponent implements OnInit {
 
   // scrollTabs
   activeIndex: number = 0;
-   //edit switches
+  //edit switches
   stuSwitch: boolean = true;
 
   display: boolean = false;
-  displayEdit:boolean=false;
+  displayEdit: boolean = false;
   loading: boolean = true;
   showDialog() {
     this.display = true;
-  }
-  showEditDialog(){
-    this.displayEdit=true;
   }
 
   stuValue!: FormGroup;
@@ -134,9 +131,22 @@ export class DashboardComponent implements OnInit {
       this.grpValue.reset();
     });
   }
+  removeGrp(_id: string) {
+    this.adminService.removeGroup(_id).subscribe((res) => {
+      console.log(res, 'delete works');
+      this.findAllGroup();
+    });
+  }
+  recoverGrp(grpData: any) {
+    delete grpData.__v;
+    this.grpValue.addControl('_id', new FormControl(''));
+    this.grpValue.setValue(grpData);
+    this.stuSwitch = false;
+    this.showDialog();
+    console.log(this.grpData, 'grp coming');
+  }
 
   //students
-
   findAllStudents() {
     this.adminService.findAllStudents().subscribe((res: Istudents[]) => {
       this.stuData = res;
@@ -144,13 +154,12 @@ export class DashboardComponent implements OnInit {
     });
   }
   regStudents() {
-      this.stuData = this.stuValue.value;
-      this.adminService.registerStudent(this.stuValue.value).subscribe((res) => {
-        console.log(res, 'students post');
-        this.stuValue.reset();
-        this.findAllStudents();
-      });
-    
+    this.stuData = this.stuValue.value;
+    this.adminService.registerStudent(this.stuValue.value).subscribe((res) => {
+      console.log(res, 'students post');
+      this.stuValue.reset();
+      this.findAllStudents();
+    });
   }
   removeStudent(_id: string) {
     this.adminService.removeStudent(_id).subscribe((res) => {
@@ -158,25 +167,22 @@ export class DashboardComponent implements OnInit {
       this.findAllStudents();
     });
   }
-
-  recoverStudent(stuData:Istudents) {
-    for(let data in stuData){
-      console.log(stuData.name)
-    }
-      this.stuValue.patchValue({
-        roll:333,
-        name:"Adnan",
-        classGrp:"TYIT"
-      }) 
-      this.stuSwitch=false;
-      console.log(this.stuData)
+  recoverStudent(stuData: any) {
+    delete stuData.__v;
+    this.stuValue.addControl('_id', new FormControl(''));
+    this.stuValue.setValue(stuData);
+    this.stuSwitch = false;
+    this.showDialog();
+    console.log(this.stuData, 'stu coming');
   }
-  updateStudents(stuData: Istudents) {
-    this.adminService.updateStudent(stuData).subscribe((res) => {
-      this.findAllStudents();
-      this.stuValue.value;
+  updateStudents() {
+    const id = this.stuValue.value._id;
+    this.adminService.updateStudent(id, this.stuValue.value).subscribe((res:any) => {
+      this.stuData = res;
       this.stuSwitch = true;
+      this.findAllStudents();
     });
+    this.stuValue.reset();
   }
 
   //faculties
@@ -201,6 +207,14 @@ export class DashboardComponent implements OnInit {
       this.getAllFaculties();
     });
   }
+  recoverFaculty(facData: any) {
+    delete facData.__v;
+    this.facValue.addControl('_id', new FormControl(''));
+    this.facValue.setValue(facData);
+    this.stuSwitch = false;
+    this.showDialog();
+    console.log(this.facData, 'fac coming');
+  }
 
   //subjects
   findAllSubjects() {
@@ -224,6 +238,14 @@ export class DashboardComponent implements OnInit {
       console.log(res, 'delete works');
     });
   }
+  recoverSubject(subData: any) {
+    delete subData.__v;
+    this.subValue.addControl('_id', new FormControl(''));
+    this.subValue.setValue(subData);
+    this.stuSwitch = false;
+    this.showDialog();
+    console.log(this.subData, 'sub coming');
+  }
   //classroom
   findAllClass() {
     this.adminService.findAllClass().subscribe((res: Iclassroom[]) => {
@@ -236,11 +258,13 @@ export class DashboardComponent implements OnInit {
       this.findAllClass();
     });
   }
-  editClass() {
-    this.classData = this.classValue.value;
-    this.adminService.updateClass(this.classValue.value).subscribe((res) => {
-      console.log(res, 'update class');
-    });
+  recoverClass(classData: any) {
+    delete classData.__v;
+    this.classValue.addControl('_id', new FormControl(''));
+    this.classValue.setValue(classData);
+    this.stuSwitch = false;
+    this.showDialog();
+    console.log(this.classData, 'class coming');
   }
   postClass() {
     this.classData = this.classValue.value;
@@ -272,5 +296,13 @@ export class DashboardComponent implements OnInit {
     this.adminService.removeSchedule(_id).subscribe((res) => {
       this.findAllSchedule();
     });
+  }
+  recoverSch(schData: any) {
+    delete schData.__v;
+    this.schValue.addControl('_id', new FormControl(''));
+    this.schValue.setValue(schData);
+    this.stuSwitch = false;
+    this.showDialog();
+    console.log(this.schData, 'sch coming');
   }
 }

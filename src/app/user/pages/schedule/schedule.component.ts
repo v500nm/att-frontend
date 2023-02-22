@@ -32,11 +32,5 @@ export class ScheduleComponent implements OnInit {
     this.findAllSchedule();
   })
  }
- updateSchedule(schedules:Ischedule){
-  this.userService.updateSchedule(schedules)
-  .subscribe(Response=>{
-    this.findAllSchedule();
-   
-  })
- }
+
 }

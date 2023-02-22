@@ -10,6 +10,7 @@
                     <h1>Students</h1>
                 </div>
                 <div class="Add">
+                    <p-dialog header="Add Faculty" [(visible)]="display">
                         <form [formGroup]="stuValue">
                             <div class="sub">
                                 <ng-container>
@@ -36,12 +37,13 @@
                                 </ng-container>
                             </div>
                             <div class="sub">
-                                <button pButton type="button"  label="Add" (click)="regStudents()"></button>
-                                <!-- <button pButton type="button" *ngIf="!stuSwitch" label="Edit"></button> -->
+                                <button pButton type="button" *ngIf="stuSwitch" label="Add" (click)="regStudents()"></button>
+                                <button pButton type="button" *ngIf="!stuSwitch" label="Edit" (click)="updateStudents()"> </button>
                             </div>
                         </form>
-                        <hr>
-                </div>
+                    </p-dialog>
+                    <button pButton type="button" label="Add Faculty" (click)="showDialog()"></button>
+                </div><hr>
                 <div class="view">
                     <p-table responsiveLayout="stack" #dt1 [value]="stuData" dataKey="id" [rows]="5" [showCurrentPageReport]="true"
                         [rowsPerPageOptions]="[5,10,15]" [loading]="loading"
