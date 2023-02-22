@@ -18,6 +18,9 @@ import { ScheduleComponent } from './user/pages/schedule/schedule.component';
 import { DropdownModule } from 'primeng/dropdown';
 import { InputTextModule } from 'primeng/inputtext';
 import { AccordionModule } from 'primeng/accordion';  
+import {SplitterModule} from 'primeng/splitter';
+import { KnobModule } from "primeng/knob";
+
 
 
 
@@ -43,7 +46,9 @@ import { AccordionModule } from 'primeng/accordion';
     InputTextModule,
     DropdownModule,
     AccordionModule,
-    FormsModule
+    FormsModule,
+    SplitterModule,
+    KnobModule
   ],
   providers: [],
   bootstrap: [AppComponent],

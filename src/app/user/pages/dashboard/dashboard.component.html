@@ -39,40 +39,45 @@
           </div>
         </div>
       </div>
-      <div class="charts">
-      <div class="chart">
-        <h3>Montly Attendance</h3>
-        <h2>Total Lecture Conducted</h2>
-        <div>
-            <canvas id="lineChart"></canvas>
-        </div>
-    </div>
     
-     
-      <div class="chart doughnut-chart">
-        <h3>Montly Attendance</h3>
-        <h2>Total Miss Lecture </h2>
-        <div>
-          <canvas id="doughnut"></canvas>
-        </div>
+
+      <div class="card">
+        <h5></h5>
+        <p-splitter [style]="{'height': '300px'}" >
+          <ng-template pTemplate>
+            <h5>Boys Attendance</h5>
+            <div class="">
+              <p-knob [(ngModel)]="value1" [size]="200"></p-knob>
+            </div>
+          </ng-template>
+          <ng-template pTemplate>
+            <h5>Girls Attendance</h5>
+            <div class="">
+              <p-knob [(ngModel)]="value2" [size]="200"></p-knob>
+            </div>
+          </ng-template>
+        </p-splitter>
       </div>
-    </div>
   
-    <div class="charts">
-      <div class="chart">
-        <h2>Total Percent Per Subject </h2>
-        <div>
-            <canvas id="lineChart"></canvas>
-        </div>
-    </div>
-    
-     
-      <div class="chart doughnut-chart">
-        <h2>Student with highest Attendance</h2>
-        <div>
-          <canvas id="doughnut"></canvas>
-        </div>
+
+      
+<div class="card">
+	<h5></h5>
+	<p-splitter [style]="{'height': '500px'}"  layout="vertical">
+		<ng-template pTemplate>
+      <h5>Todays Attendance</h5>
+			<div class="">
+        <p-knob [(ngModel)]="value3" [size]="200"></p-knob>
       </div>
-    </div>
+		</ng-template>
+		<ng-template pTemplate>
+      <h5>? Attendance</h5>
+			<div class="">
+        <p-knob [(ngModel)]="value4" [size]="200"></p-knob>
+			</div>
+		</ng-template>
+	</p-splitter>
+</div>
+
   
   </div>
