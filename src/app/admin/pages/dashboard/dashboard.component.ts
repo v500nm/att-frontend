@@ -145,6 +145,15 @@ export class DashboardComponent implements OnInit {
     this.showDialog();
     console.log(this.grpData, 'grp coming');
   }
+  updateGrp() {
+    const id = this.grpValue.value._id;
+    this.adminService.updateGroup(id, this.grpValue.value).subscribe((res:any) => {
+      this.grpData = res;
+      this.stuSwitch = true;
+      this.findAllGroup();
+    });
+    this.grpValue.reset();
+  }
 
   //students
   findAllStudents() {
@@ -215,6 +224,15 @@ export class DashboardComponent implements OnInit {
     this.showDialog();
     console.log(this.facData, 'fac coming');
   }
+  updateFac() {
+    const id = this.facValue.value._id;
+    this.adminService.updateFaculty(id, this.facValue.value).subscribe((res:any) => {
+      this.facData = res;
+      this.stuSwitch = true;
+      this.getAllFaculties();
+    });
+    this.facValue.reset();
+  }
 
   //subjects
   findAllSubjects() {
@@ -246,11 +264,29 @@ export class DashboardComponent implements OnInit {
     this.showDialog();
     console.log(this.subData, 'sub coming');
   }
+  updateSubject() {
+    const id = this.subValue.value._id;
+    this.adminService.updateSubject(id, this.subValue.value).subscribe((res:any) => {
+      this.subData = res;
+      this.stuSwitch = true;
+      this.findAllSubjects();
+    });
+    this.subValue.reset();
+  }
   //classroom
   findAllClass() {
     this.adminService.findAllClass().subscribe((res: Iclassroom[]) => {
       this.classData = res;
       console.log(res, 'classroom get');
+    });
+  }
+  postClass() {
+    this.classData = this.classValue.value;
+    console.log(this.classData);
+    this.adminService.addClass(this.classValue.value).subscribe((res) => {
+      console.log(res, 'class post');
+      this.classValue.reset();
+      this.findAllClass();
     });
   }
   deleteClass(_id: string) {
@@ -266,14 +302,14 @@ export class DashboardComponent implements OnInit {
     this.showDialog();
     console.log(this.classData, 'class coming');
   }
-  postClass() {
-    this.classData = this.classValue.value;
-    console.log(this.classData);
-    this.adminService.addClass(this.classValue.value).subscribe((res) => {
-      console.log(res, 'class post');
-      this.classValue.reset();
+  updateClass() {
+    const id = this.classValue.value._id;
+    this.adminService.updateClass(id, this.classValue.value).subscribe((res:any) => {
+      this.classData = res;
+      this.stuSwitch = true;
       this.findAllClass();
     });
+    this.classValue.reset();
   }
   //schedule
   findAllSchedule() {
@@ -291,6 +327,7 @@ export class DashboardComponent implements OnInit {
         console.log(Response, 'post Method');
       });
     this.findAllSchedule();
+    this.schValue.reset();
   }
   removeSch(_id: string) {
     this.adminService.removeSchedule(_id).subscribe((res) => {
@@ -304,5 +341,14 @@ export class DashboardComponent implements OnInit {
     this.stuSwitch = false;
     this.showDialog();
     console.log(this.schData, 'sch coming');
+  }
+  updateSch() {
+    const id = this.schValue.value._id;
+    this.adminService.updateSchedule(id, this.schValue.value).subscribe((res:any) => {
+      this.schData = res;
+      this.stuSwitch = true;
+      this.findAllSchedule();
+    });
+    this.schValue.reset();
   }
 }

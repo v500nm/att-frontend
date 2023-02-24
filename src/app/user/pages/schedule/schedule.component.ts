@@ -32,5 +32,4 @@ export class ScheduleComponent implements OnInit {
     this.findAllSchedule();
   })
  }
-
 }
