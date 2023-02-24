@@ -3,7 +3,7 @@
     <div class="top">
         <h1>Admin Dashboard</h1>
     </div>
-    <p-tabView  [(activeIndex)]="activeIndex" [scrollable]="true">
+    <p-tabView [(activeIndex)]="activeIndex" [scrollable]="true">
         <p-tabPanel header="Students">
             <section class="students">
                 <div class="title">
@@ -37,16 +37,19 @@
                                 </ng-container>
                             </div>
                             <div class="sub">
-                                <button pButton type="button" *ngIf="stuSwitch" label="Add" (click)="regStudents()"></button>
-                                <button pButton type="button" *ngIf="!stuSwitch" label="Edit" (click)="updateStudents()"> </button>
+                                <button pButton type="button" *ngIf="stuSwitch" label="Add"
+                                    (click)="regStudents()"></button>
+                                <button pButton type="button" *ngIf="!stuSwitch" label="Edit"
+                                    (click)="updateStudents()"> </button>
                             </div>
                         </form>
                     </p-dialog>
                     <button pButton type="button" label="Add Students" (click)="showDialog()"></button>
-                </div><hr>
+                </div>
+                <hr>
                 <div class="view">
-                    <p-table responsiveLayout="stack" #dt1 [value]="stuData" dataKey="id" [rows]="5" [showCurrentPageReport]="true"
-                        [rowsPerPageOptions]="[5,10,15]" [loading]="loading"
+                    <p-table responsiveLayout="stack" #studentTable [value]="stuData" dataKey="id" [rows]="5"
+                        [showCurrentPageReport]="true" [rowsPerPageOptions]="[5,10,15]" [loading]="loading"
                         styleClass="p-datatable-customers p-datatable-gridlines" [paginator]="true"
                         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
                         <ng-template pTemplate="caption">
@@ -57,16 +60,19 @@
                                 <th>
                                     <div class="p-d-flex p-jc-between p-ai-center">
                                         Roll Number
+                                        <p-columnFilter type="text" field="roll" display="menu"></p-columnFilter>
                                     </div>
                                 </th>
                                 <th>
                                     <div class="p-d-flex p-jc-between p-ai-center">
                                         Students Name
+                                        <p-columnFilter type="text" field="name" display="menu"></p-columnFilter>
                                     </div>
                                 </th>
                                 <th>
                                     <div class="p-d-flex p-jc-between p-ai-center">
                                         Class
+                                        <p-columnFilter type="text" field="classGrp" display="menu"></p-columnFilter>
                                     </div>
                                 </th>
                                 <th>
@@ -90,7 +96,7 @@
                                 <td><span class="p-column-title">Options</span>
                                     <div class="editGrp">
                                         <div class="edit">
-                                        <button (click)="recoverStudent(stuData)">Edit</button>    
+                                            <button (click)="recoverStudent(stuData)">Edit</button>
                                         </div>
                                         <div class="delete">
                                             <button (click)="removeStudent(stuData._id)">Delete</button>
@@ -141,16 +147,19 @@
                                 </ng-container>
                             </div>
                             <div class="sub">
-                                <button pButton type="button" *ngIf="stuSwitch" label="Submit" (click)="postFac()"></button>
-                                <button pButton type="button" *ngIf="!stuSwitch" label="Edit" (click)="updateFac()"> </button>
+                                <button pButton type="button" *ngIf="stuSwitch" label="Submit"
+                                    (click)="postFac()"></button>
+                                <button pButton type="button" *ngIf="!stuSwitch" label="Edit" (click)="updateFac()">
+                                </button>
                             </div>
                         </form>
                     </p-dialog>
                     <button pButton type="button" label="Add Faculty" (click)="showDialog()"></button>
-                </div><hr>
+                </div>
+                <hr>
                 <div class="view">
-                    <p-table #dt1 responsiveLayout="stack" [value]="facData" dataKey="id" [rows]="5" [showCurrentPageReport]="true"
-                        [rowsPerPageOptions]="[5,10,15]" [loading]="loading"
+                    <p-table #dt1 responsiveLayout="stack" [value]="facData" dataKey="id" [rows]="5"
+                        [showCurrentPageReport]="true" [rowsPerPageOptions]="[5,10,15]" [loading]="loading"
                         styleClass="p-datatable-customers p-datatable-gridlines" [paginator]="true"
                         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
                         <ng-template pTemplate="caption">
@@ -294,16 +303,19 @@
                                 </ng-container>
                             </div>
                             <div class="sub">
-                                <button pButton type="button" *ngIf="stuSwitch" label="Add" (click)="postSch()"></button>
-                                <button pButton type="button" *ngIf="!stuSwitch" label="Edit" (click)="updateSch()"> </button>
+                                <button pButton type="button" *ngIf="stuSwitch" label="Add"
+                                    (click)="postSch()"></button>
+                                <button pButton type="button" *ngIf="!stuSwitch" label="Edit" (click)="updateSch()">
+                                </button>
                             </div>
                         </form>
                     </p-dialog>
                     <button pButton type="button" label="Add Schedule" (click)="showDialog()"></button>
-                </div><hr>
+                </div>
+                <hr>
                 <div class="view">
-                    <p-table #dt1 responsiveLayout="stack" [value]="schData" dataKey="id" [rows]="5" [showCurrentPageReport]="true"
-                        [rowsPerPageOptions]="[5,10,15]" [loading]="loading"
+                    <p-table #dt1 responsiveLayout="stack" [value]="schData" dataKey="id" [rows]="5"
+                        [showCurrentPageReport]="true" [rowsPerPageOptions]="[5,10,15]" [loading]="loading"
                         styleClass="p-datatable-customers p-datatable-gridlines" [paginator]="true"
                         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
                         <ng-template pTemplate="caption">
@@ -376,13 +388,13 @@
                                     {{schData.groups.gName}}
                                 </td>
                                 <td><span class="p-column-title">Subject</span>
-                                    {{schData.subjects|json}}
+                                    {{schData.subjects.subject}}
                                 </td>
                                 <td><span class="p-column-title">Faculty</span>
-                                    {{schData.faculties|json}}
+                                    {{schData.faculties.fname}}
                                 </td>
                                 <td><span class="p-column-title">Classroom</span>
-                                    {{schData.classrooms|json}}
+                                    {{schData.classrooms.class}}
                                 </td>
                                 <td><span class="p-column-title">Options</span>
                                     <div class="editGrp">
@@ -422,16 +434,19 @@
                                 </ng-container>
                             </div>
                             <div class="sub">
-                                <button pButton type="button" *ngIf="stuSwitch" label="Add" (click)="postSub()"></button>
-                                <button pButton type="button" *ngIf="!stuSwitch" label="Edit" (click)="updateSubject()"></button>
+                                <button pButton type="button" *ngIf="stuSwitch" label="Add"
+                                    (click)="postSub()"></button>
+                                <button pButton type="button" *ngIf="!stuSwitch" label="Edit"
+                                    (click)="updateSubject()"></button>
                             </div>
                         </form>
                     </p-dialog>
                     <button pButton type="button" label="Add Subjects" (click)="showDialog()"></button>
-                </div><hr>
+                </div>
+                <hr>
                 <div class="view">
-                    <p-table #dt1 responsiveLayout="stack" [value]="subData" dataKey="id" [rows]="5" [showCurrentPageReport]="true"
-                        [rowsPerPageOptions]="[5,10,15]" [loading]="loading"
+                    <p-table #dt1 responsiveLayout="stack" [value]="subData" dataKey="id" [rows]="5"
+                        [showCurrentPageReport]="true" [rowsPerPageOptions]="[5,10,15]" [loading]="loading"
                         styleClass="p-datatable-customers p-datatable-gridlines" [paginator]="true"
                         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
                         <ng-template pTemplate="caption">
@@ -494,16 +509,19 @@
                                 </ng-container>
                             </div>
                             <div class="sub">
-                                <button pButton type="button" *ngIf="stuSwitch" label="Add" (click)="postClass()"></button>
-                                <button pButton type="button" *ngIf="!stuSwitch" label="Edit" (click)="updateClass()"></button>
+                                <button pButton type="button" *ngIf="stuSwitch" label="Add"
+                                    (click)="postClass()"></button>
+                                <button pButton type="button" *ngIf="!stuSwitch" label="Edit"
+                                    (click)="updateClass()"></button>
                             </div>
                         </form>
                     </p-dialog>
                     <button pButton type="button" label="Add Classroom" (click)="showDialog()"></button>
-                </div><hr>
+                </div>
+                <hr>
                 <div class="view">
-                    <p-table #dt1 responsiveLayout="stack" [value]="classData" dataKey="id" [rows]="5" [showCurrentPageReport]="true"
-                        [rowsPerPageOptions]="[5,10,15]" [loading]="loading"
+                    <p-table #dt1 responsiveLayout="stack" [value]="classData" dataKey="id" [rows]="5"
+                        [showCurrentPageReport]="true" [rowsPerPageOptions]="[5,10,15]" [loading]="loading"
                         styleClass="p-datatable-customers p-datatable-gridlines" [paginator]="true"
                         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
                         <ng-template pTemplate="caption">
