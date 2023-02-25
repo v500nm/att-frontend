@@ -9,7 +9,8 @@ import {
   Istudents,
   Isubject,
 } from '../../service/admin.interface';
-import { JsonPipe } from '@angular/common';
+import * as FileSaver from 'file-saver';
+import * as XLSX from 'xlsx';
 
 @Component({
   selector: 'app-dashboard',
@@ -28,10 +29,14 @@ export class DashboardComponent implements OnInit {
   stuSwitch: boolean = true;
 
   display: boolean = false;
+  uploadDialog: boolean = false;
   displayEdit: boolean = false;
   loading: boolean = true;
   showDialog() {
     this.display = true;
+  }
+  importDialog() {
+    this.uploadDialog = true;
   }
 
   stuValue!: FormGroup;
@@ -47,6 +52,8 @@ export class DashboardComponent implements OnInit {
   classData: Iclassroom[] = [];
   schData: Ischedule[] = [];
   grpData: Igroups[] = [];
+
+  stuExcelData: any[] = [];
 
   ngOnInit(): void {
     //forms
@@ -147,11 +154,13 @@ export class DashboardComponent implements OnInit {
   }
   updateGrp() {
     const id = this.grpValue.value._id;
-    this.adminService.updateGroup(id, this.grpValue.value).subscribe((res:any) => {
-      this.grpData = res;
-      this.stuSwitch = true;
-      this.findAllGroup();
-    });
+    this.adminService
+      .updateGroup(id, this.grpValue.value)
+      .subscribe((res: any) => {
+        this.grpData = res;
+        this.stuSwitch = true;
+        this.findAllGroup();
+      });
     this.grpValue.reset();
   }
 
@@ -170,6 +179,23 @@ export class DashboardComponent implements OnInit {
       this.findAllStudents();
     });
   }
+
+  importStuExcel(event: any) {
+    let file = event.target.files[0];
+    let fileReader = new FileReader();
+    fileReader.readAsBinaryString(file);
+    fileReader.onload = (e) => {
+      var workBook = XLSX.read(fileReader.result, { type: 'binary' });
+      var sheetNames = workBook.SheetNames;
+      this.stuExcelData = XLSX.utils.sheet_to_json(
+        workBook.Sheets[sheetNames[0]]
+      );
+      console.log(this.stuExcelData, 'uploaded');
+    };
+  }
+  importPreview(stuExcelData: any) {
+    this.stuValue.setValue(stuExcelData);
+  }
   removeStudent(_id: string) {
     this.adminService.removeStudent(_id).subscribe((res) => {
       console.log(res, 'delete works');
@@ -186,14 +212,38 @@ export class DashboardComponent implements OnInit {
   }
   updateStudents() {
     const id = this.stuValue.value._id;
-    this.adminService.updateStudent(id, this.stuValue.value).subscribe((res:any) => {
-      this.stuData = res;
-      this.stuSwitch = true;
-      this.findAllStudents();
-    });
+    this.adminService
+      .updateStudent(id, this.stuValue.value)
+      .subscribe((res: any) => {
+        this.stuData = res;
+        this.stuSwitch = true;
+        this.findAllStudents();
+      });
     this.stuValue.reset();
   }
-
+  exportStuExcel() {
+    import('xlsx').then((xlsx) => {
+      const worksheet = xlsx.utils.json_to_sheet(this.stuData);
+      const workbook = { Sheets: { data: worksheet }, SheetNames: ['data'] };
+      const excelBuffer: any = xlsx.write(workbook, {
+        bookType: 'xlsx',
+        type: 'array',
+      });
+      this.saveAsStuExcelFile(excelBuffer, 'Students List');
+    });
+  }
+  saveAsStuExcelFile(buffer: any, fileName: string): void {
+    let EXCEL_TYPE =
+      'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
+    let EXCEL_EXTENSION = '.xlsx';
+    const data: Blob = new Blob([buffer], {
+      type: EXCEL_TYPE,
+    });
+    FileSaver.saveAs(
+      data,
+      fileName + '_export_' + new Date().getTime() + EXCEL_EXTENSION
+    );
+  }
   //faculties
   getAllFaculties() {
     this.adminService.getAllFaculties().subscribe((res: Ifaculties[]) => {
@@ -226,11 +276,13 @@ export class DashboardComponent implements OnInit {
   }
   updateFac() {
     const id = this.facValue.value._id;
-    this.adminService.updateFaculty(id, this.facValue.value).subscribe((res:any) => {
-      this.facData = res;
-      this.stuSwitch = true;
-      this.getAllFaculties();
-    });
+    this.adminService
+      .updateFaculty(id, this.facValue.value)
+      .subscribe((res: any) => {
+        this.facData = res;
+        this.stuSwitch = true;
+        this.getAllFaculties();
+      });
     this.facValue.reset();
   }
 
@@ -266,11 +318,13 @@ export class DashboardComponent implements OnInit {
   }
   updateSubject() {
     const id = this.subValue.value._id;
-    this.adminService.updateSubject(id, this.subValue.value).subscribe((res:any) => {
-      this.subData = res;
-      this.stuSwitch = true;
-      this.findAllSubjects();
-    });
+    this.adminService
+      .updateSubject(id, this.subValue.value)
+      .subscribe((res: any) => {
+        this.subData = res;
+        this.stuSwitch = true;
+        this.findAllSubjects();
+      });
     this.subValue.reset();
   }
   //classroom
@@ -304,11 +358,13 @@ export class DashboardComponent implements OnInit {
   }
   updateClass() {
     const id = this.classValue.value._id;
-    this.adminService.updateClass(id, this.classValue.value).subscribe((res:any) => {
-      this.classData = res;
-      this.stuSwitch = true;
-      this.findAllClass();
-    });
+    this.adminService
+      .updateClass(id, this.classValue.value)
+      .subscribe((res: any) => {
+        this.classData = res;
+        this.stuSwitch = true;
+        this.findAllClass();
+      });
     this.classValue.reset();
   }
   //schedule
@@ -344,11 +400,13 @@ export class DashboardComponent implements OnInit {
   }
   updateSch() {
     const id = this.schValue.value._id;
-    this.adminService.updateSchedule(id, this.schValue.value).subscribe((res:any) => {
-      this.schData = res;
-      this.stuSwitch = true;
-      this.findAllSchedule();
-    });
+    this.adminService
+      .updateSchedule(id, this.schValue.value)
+      .subscribe((res: any) => {
+        this.schData = res;
+        this.stuSwitch = true;
+        this.findAllSchedule();
+      });
     this.schValue.reset();
   }
 }

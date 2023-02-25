@@ -1,0 +1,11 @@
+.container {
+  margin: 2rem;
+  background-color: white;
+  padding: 2rem;
+  border-radius: 8px;
+}
+.container section {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}/*# sourceMappingURL=attmark.component.css.map */

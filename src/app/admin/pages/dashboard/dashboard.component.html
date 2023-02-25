@@ -44,7 +44,67 @@
                             </div>
                         </form>
                     </p-dialog>
-                    <button pButton type="button" label="Add Students" (click)="showDialog()"></button>
+                    <div class="adminOptions">
+                        <div class="adOpt">
+                            <button pButton type="button" icon="pi pi-plus" label="Add" (click)="showDialog()"></button>
+                        </div>
+                        <div class="adOpt">
+                            <p-dialog header="upload Students" [(visible)]="uploadDialog">
+                                <form [formGroup]="stuValue">
+                                    <h4>upload excel data</h4>
+                                    <input type="file" (change)="importStuExcel($event)">
+                                    <hr>
+                                    <section>
+                                        <p-table [value]="stuExcelData">
+                                            <ng-template pTemplate="header">
+                                                <tr>
+                                                    <th>Roll</th>
+                                                    <th>Name</th>
+                                                    <th>class</th>
+                                                </tr>
+                                            </ng-template>
+                                            <ng-template pTemplate="body" let-stuExcelData>
+                                                <tr>
+                                                    <td>
+                                                        <ng-container>
+                                                            <input type="text" formControlName="roll" id="inputtext"
+                                                                [value]="stuExcelData.roll" pInputText
+                                                                placeholder="{{stuExcelData.roll}}">
+                                                        </ng-container>
+                                                    </td>
+                                                    <td>
+                                                        <ng-container>
+                                                            <input type="text" formControlName="name" id="inputtext"
+                                                                pInputText placeholder="{{stuExcelData.name}}"
+                                                                [value]="stuExcelData.name">
+                                                        </ng-container>
+                                                    </td>
+                                                    <td>
+                                                        <ng-container>
+                                                            <input type="text" formControlName="classGrp" id="inputtext"
+                                                                pInputText placeholder="{{stuExcelData.classGrp}}"
+                                                                [value]="stuExcelData.classGrp">
+                                                        </ng-container>
+                                                    </td>
+                                                </tr>
+                                            </ng-template>
+                                        </p-table>
+                                        <button pButton type="button" label="Add" (click)="regStudents()"></button>
+                                    </section>
+                                </form>
+                            </p-dialog>
+                            <button pButton type="button" label="Import" icon="pi pi-file-import"
+                                (click)="importDialog()"></button>
+                        </div>
+                        <div class="adOpt">
+
+                        </div>
+                        <div class="adOpt">
+                            <button type="button" pButton pRipple icon="pi pi-file-excel" label="Export"
+                                (click)="exportStuExcel()" class="p-button-success mr-2" pTooltip="XLS"
+                                tooltipPosition="bottom"></button>
+                        </div>
+                    </div>
                 </div>
                 <hr>
                 <div class="view">
@@ -170,22 +230,24 @@
                                 <th>
                                     <div class="p-d-flex p-jc-between p-ai-center">
                                         Faculty Name
+                                        <p-columnFilter type="text" field="fname" display="menu"></p-columnFilter>
                                     </div>
                                 </th>
                                 <th>
                                     <div class="p-d-flex p-jc-between p-ai-center">
                                         Department
+                                        <p-columnFilter type="text" field="department" display="menu"></p-columnFilter>
                                     </div>
                                 </th>
                                 <th>
                                     <div class="p-d-flex p-jc-between p-ai-center">
                                         Designation
+                                        <p-columnFilter type="text" field="designation" display="menu"></p-columnFilter>
                                     </div>
                                 </th>
                                 <th>
                                     <div class="p-d-flex p-jc-between p-ai-center">
                                         Options
-
                                     </div>
                                 </th>
                             </tr>
@@ -326,11 +388,14 @@
                                 <th>
                                     <div class="p-d-flex p-jc-between p-ai-center">
                                         Schedule Name
+                                        <p-columnFilter type="text" field="scheduleName"
+                                            display="menu"></p-columnFilter>
                                     </div>
                                 </th>
                                 <th>
                                     <div class="p-d-flex p-jc-between p-ai-center">
                                         Date
+                                        <p-columnFilter type="date" field="Date" display="menu"></p-columnFilter>
                                     </div>
                                 </th>
                                 <th>
@@ -457,6 +522,7 @@
                                 <th>
                                     <div class="p-d-flex p-jc-between p-ai-center">
                                         Subject Name
+                                        <p-columnFilter type="text" field="subject" display="menu"></p-columnFilter>
                                     </div>
                                 </th>
                                 <th>
@@ -532,6 +598,7 @@
                                 <th>
                                     <div class="p-d-flex p-jc-between p-ai-center">
                                         Classroom
+                                        <p-columnFilter type="text" field="class" display="menu"></p-columnFilter>
                                     </div>
                                 </th>
                                 <th>

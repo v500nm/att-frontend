@@ -1,0 +1,31 @@
+.adDash {
+  margin: 1rem;
+  padding: 2rem;
+  background-color: white;
+}
+.adDash .top h1 {
+  text-align: center;
+}
+.adDash .sub {
+  margin: 2rem;
+}
+
+.editGrp {
+  display: flex;
+  gap: 0.5rem;
+}
+
+button {
+  padding: 15px;
+  border: none;
+  background-color: #3B82F6;
+  color: white;
+  font-weight: 600;
+  border-radius: 10px;
+}
+
+.adminOptions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}/*# sourceMappingURL=dashboard.component.css.map */

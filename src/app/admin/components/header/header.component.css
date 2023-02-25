@@ -1,0 +1,8 @@
+header .main {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  padding: 0.4rem;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  background-color: white;
+}/*# sourceMappingURL=header.component.css.map */

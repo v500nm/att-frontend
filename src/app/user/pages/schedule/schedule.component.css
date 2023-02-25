@@ -1,0 +1,92 @@
+.lectureContainer {
+  font-family: "Roboto", sans-serif;
+  max-width: 80rem;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 20px;
+}
+.lectureContainer h3.year {
+  font-size: 40px;
+  text-align: center;
+  border-bottom: 1px solid #b1b1b1;
+}
+.lectureContainer .lecture {
+  box-shadow: 0 4px 16px -8px rgba(0, 0, 0, 0.4);
+  display: flex;
+  border-radius: 8px;
+  margin: 32px 0;
+}
+.lectureContainer .lecture .lecture-left {
+  background: rgb(14, 171, 243);
+  min-width: 82px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #eee;
+  padding: 8px 48px;
+  font-weight: bold;
+  text-align: center;
+  border-radius: 8px;
+}
+.lectureContainer .lecture .lecture-left .Batch {
+  font-size: 22px;
+}
+.lectureContainer .lecture .dates {
+  display: flex;
+  justify-content: space-evenly;
+}
+.lectureContainer .lecture .lecture-right {
+  background-color: white;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 20px;
+  border-radius: 8px;
+}
+.lectureContainer .lecture .lecture-right h3.lecture-title {
+  font-size: 24px;
+  color: #0a384e;
+  text-transform: uppercase;
+}
+.lectureContainer .lecture .lecture-right h4.lecture-Faculty {
+  font-size: 20px;
+  color: #0a384e;
+  text-transform: uppercase;
+}
+.lectureContainer .lecture .lecture-right .lecture-description {
+  color: red;
+}
+.lectureContainer .lecture .lecture-right .lecture-timing {
+  background: #baebff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 200px;
+  padding: 8px;
+  border-radius: 16px;
+  margin: 12px 0;
+}
+
+@media (max-width: 500px) {
+  .lecture {
+    flex-direction: column;
+  }
+  .lectureContainer {
+    display: list-item;
+    padding: 10px;
+  }
+  .lecture .lecture-left {
+    padding: 0;
+    border-radius: 8px;
+  }
+  .lecture .lecture-left .lecture-date .date,
+  .lecture .lecture-left .lecture-date .month {
+    display: inline-block;
+    font-size: 24px;
+  }
+  .lecture .lecture-left .lecture-date {
+    padding: 10px 0;
+  }
+}/*# sourceMappingURL=schedule.component.css.map */

@@ -18,6 +18,7 @@ import {TableModule} from 'primeng/table';
 import { SplitButtonModule } from 'primeng/splitbutton';
 import {ListboxModule} from 'primeng/listbox';
 import { AttmarkComponent } from './pages/attmark/attmark.component';
+import {FileUploadModule} from 'primeng/fileupload';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { AttmarkComponent } from './pages/attmark/attmark.component';
     TabViewModule,
     TableModule,
     SplitButtonModule,
-    ListboxModule
+    ListboxModule,
+    FileUploadModule
   ]
 })
 export class AdminModule { }
