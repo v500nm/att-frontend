@@ -4,7 +4,6 @@ export interface Istudents{
     roll:number;
     name:string;
     classGrp:string;
-    stuExcel:File;
 }
 export interface Ifaculties{
     _id:string;

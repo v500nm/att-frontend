@@ -50,59 +50,29 @@
                         </div>
                         <div class="adOpt">
                             <p-dialog header="upload Students" [(visible)]="uploadDialog">
-                                <form [formGroup]="stuValue">
+                                <!-- <form [formGroup]="stuValue">
                                     <h4>upload excel data</h4>
-                                    <input type="file" (change)="importStuExcel($event)">
-                                    <hr>
-                                    <section>
-                                        <p-table [value]="stuExcelData">
-                                            <ng-template pTemplate="header">
-                                                <tr>
-                                                    <th>Roll</th>
-                                                    <th>Name</th>
-                                                    <th>class</th>
-                                                </tr>
-                                            </ng-template>
-                                            <ng-template pTemplate="body" let-stuExcelData>
-                                                <tr>
-                                                    <td>
-                                                        <ng-container>
-                                                            <input type="text" formControlName="roll" id="inputtext"
-                                                                [value]="stuExcelData.roll" pInputText
-                                                                placeholder="{{stuExcelData.roll}}">
-                                                        </ng-container>
-                                                    </td>
-                                                    <td>
-                                                        <ng-container>
-                                                            <input type="text" formControlName="name" id="inputtext"
-                                                                pInputText placeholder="{{stuExcelData.name}}"
-                                                                [value]="stuExcelData.name">
-                                                        </ng-container>
-                                                    </td>
-                                                    <td>
-                                                        <ng-container>
-                                                            <input type="text" formControlName="classGrp" id="inputtext"
-                                                                pInputText placeholder="{{stuExcelData.classGrp}}"
-                                                                [value]="stuExcelData.classGrp">
-                                                        </ng-container>
-                                                    </td>
-                                                </tr>
-                                            </ng-template>
-                                        </p-table>
-                                        <button pButton type="button" label="Add" (click)="regStudents()"></button>
-                                    </section>
-                                </form>
+                                        <p-fileUpload (onUpload)="onUpload($event)" accept=".xlsx">
+                                        <ng-template pTemplate="content">
+                                            <ul *ngIf="uploadedFiles.length">
+                                                <li *ngFor="let file of uploadedFiles">
+                                                    {{file.name}} - {{file.size}} bytes
+                                                </li>
+                                            </ul>
+                                        </ng-template>
+                                    </p-fileUpload>
+                                    <input  accept=".xlsx,.csv" type="file" (change)="importStuExcel($event)">
+                                </form> -->
                             </p-dialog>
-                            <button pButton type="button" label="Import" icon="pi pi-file-import"
-                                (click)="importDialog()"></button>
+                            <button pButton type="button" pRipple label="Import" icon="pi pi-file-import"
+                                (click)="importDialog()" class="p-button-help mr-2"></button>
                         </div>
                         <div class="adOpt">
 
                         </div>
                         <div class="adOpt">
                             <button type="button" pButton pRipple icon="pi pi-file-excel" label="Export"
-                                (click)="exportStuExcel()" class="p-button-success mr-2" pTooltip="XLS"
-                                tooltipPosition="bottom"></button>
+                                (click)="exportStuExcel()" class="p-button-success mr-2"></button>
                         </div>
                     </div>
                 </div>
@@ -284,204 +254,6 @@
                 </div>
             </section>
         </p-tabPanel>
-        <p-tabPanel header="Schedule">
-            <section class="schedule">
-                <div class="title">
-                    <h1>Schedule</h1>
-                </div>
-                <div class="Add">
-                    <p-dialog header="Add Schedule" [(visible)]="display">
-                        <form [formGroup]="schValue">
-                            <div class="sub">
-                                <ng-container>
-                                    <span class="p-float-label">
-                                        <input type="text" id="inputtext" pInputText formControlName="scheduleName">
-                                        <label for="inputtext">Schedule Name</label>
-                                    </span>
-                                </ng-container>
-                            </div>
-                            <div class="sub">
-                                <ng-container>
-                                    <span class="p-float-label">
-                                        <input type="date" id="inputtext" pInputText formControlName="Date">
-                                        <label for="inputtext">Date</label>
-                                    </span>
-                                </ng-container>
-                            </div>
-                            <div class="sub">
-                                <ng-container>
-                                    <span class="p-float-label">
-                                        <input type="text" id="inputtext" pInputText formControlName="timing">
-                                        <label for="inputtext">Timings</label>
-                                    </span>
-                                </ng-container>
-                            </div>
-                            <div class="sub">
-                                <ng-container>
-                                    <span class="p-float-label">
-                                        <input type="text" id="inputtext" pInputText formControlName="duration">
-                                        <label for="inputtext">Duration (in mins.)</label>
-                                    </span>
-                                </ng-container>
-                            </div>
-                            <div class="sub">
-                                <ng-container>
-                                    <label for="group">Group</label>
-                                    <select name="group" formControlName="groups">
-                                        <option value="">--select--</option>
-                                        <option [value]="grpDrop._id" *ngFor="let grpDrop of grpData">{{grpDrop.gName}}
-                                        </option>
-                                    </select>
-                                </ng-container>
-                            </div>
-                            <div class="sub">
-                                <ng-container>
-                                    <label for="classroom">Classroom</label>
-                                    <select name="classroom" formControlName="classrooms">
-                                        <option value="">--select--</option>
-                                        <option [value]="classDrop._id" *ngFor="let classDrop of classData">
-                                            {{classDrop.class}}</option>
-                                    </select>
-                                </ng-container>
-                            </div>
-                            <div class="sub">
-                                <ng-container>
-                                    <label for="faculty">Faculty</label>
-                                    <select name="faculty" formControlName="faculties">
-                                        <option value="">--select--</option>
-                                        <option [value]="facDrop._id" *ngFor="let facDrop of facData">{{facDrop.fname}}
-                                        </option>
-                                    </select>
-                                </ng-container>
-                            </div>
-                            <div class="sub">
-                                <ng-container>
-                                    <label for="subject">Subject</label>
-                                    <select name="subject" formControlName="subjects">
-                                        <option value="">--select--</option>
-                                        <option [value]="subDrop._id" *ngFor="let subDrop of subData">
-                                            {{subDrop.subject}}</option>
-                                    </select>
-                                </ng-container>
-                            </div>
-                            <div class="sub">
-                                <button pButton type="button" *ngIf="stuSwitch" label="Add"
-                                    (click)="postSch()"></button>
-                                <button pButton type="button" *ngIf="!stuSwitch" label="Edit" (click)="updateSch()">
-                                </button>
-                            </div>
-                        </form>
-                    </p-dialog>
-                    <button pButton type="button" label="Add Schedule" (click)="showDialog()"></button>
-                </div>
-                <hr>
-                <div class="view">
-                    <p-table #dt1 responsiveLayout="stack" [value]="schData" dataKey="id" [rows]="5"
-                        [showCurrentPageReport]="true" [rowsPerPageOptions]="[5,10,15]" [loading]="loading"
-                        styleClass="p-datatable-customers p-datatable-gridlines" [paginator]="true"
-                        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
-                        <ng-template pTemplate="caption">
-                            Schedules
-                        </ng-template>
-                        <ng-template pTemplate="header">
-                            <tr>
-                                <th>
-                                    <div class="p-d-flex p-jc-between p-ai-center">
-                                        Schedule Name
-                                        <p-columnFilter type="text" field="scheduleName"
-                                            display="menu"></p-columnFilter>
-                                    </div>
-                                </th>
-                                <th>
-                                    <div class="p-d-flex p-jc-between p-ai-center">
-                                        Date
-                                        <p-columnFilter type="date" field="Date" display="menu"></p-columnFilter>
-                                    </div>
-                                </th>
-                                <th>
-                                    <div class="p-d-flex p-jc-between p-ai-center">
-                                        Timing
-                                    </div>
-                                </th>
-                                <th>
-                                    <div class="p-d-flex p-jc-between p-ai-center">
-                                        Duration
-                                    </div>
-                                </th>
-                                <th>
-                                    <div class="p-d-flex p-jc-between p-ai-center">
-                                        Group
-                                    </div>
-                                </th>
-                                <th>
-                                    <div class="p-d-flex p-jc-between p-ai-center">
-                                        Subject
-                                    </div>
-                                </th>
-                                <th>
-                                    <div class="p-d-flex p-jc-between p-ai-center">
-                                        Faculty
-                                    </div>
-                                </th>
-                                <th>
-                                    <div class="p-d-flex p-jc-between p-ai-center">
-                                        Classroom
-                                    </div>
-                                </th>
-                                <th>
-                                    <div class="p-d-flex p-jc-between p-ai-center">
-                                        Options
-                                    </div>
-                                </th>
-                            </tr>
-                        </ng-template>
-                        <ng-template pTemplate="body" let-schData>
-                            <tr>
-                                <td><span class="p-column-title">Schedule Name</span>
-                                    {{schData.scheduleName}}
-                                </td>
-                                <td><span class="p-column-title">Date</span>
-                                    {{schData.Date}}
-                                </td>
-                                <td><span class="p-column-title">Timing</span>
-                                    {{schData.timing}}
-                                </td>
-                                <td><span class="p-column-title">Duration</span>
-                                    {{schData.duration}}
-                                </td>
-                                <td><span class="p-column-title">Group</span>
-                                    {{schData.groups.gName}}
-                                </td>
-                                <td><span class="p-column-title">Subject</span>
-                                    {{schData.subjects.subject}}
-                                </td>
-                                <td><span class="p-column-title">Faculty</span>
-                                    {{schData.faculties.fname}}
-                                </td>
-                                <td><span class="p-column-title">Classroom</span>
-                                    {{schData.classrooms.class}}
-                                </td>
-                                <td><span class="p-column-title">Options</span>
-                                    <div class="editGrp">
-                                        <div class="edit">
-                                            <button (click)="recoverSch(schData)">Edit</button>
-                                        </div>
-                                        <div class="delete">
-                                            <button (click)="removeSch(schData._id)">Delete</button>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                        </ng-template>
-                        <ng-template pTemplate="emptymessage">
-                            <tr>
-                                <td colspan="7">No customers found.</td>
-                            </tr>
-                        </ng-template>
-                    </p-table>
-                </div>
-            </section>
-        </p-tabPanel>
         <p-tabPanel header="Subjects">
             <section class="subjects">
                 <div class="title">
@@ -540,7 +312,7 @@
                                 <td><span class="p-column-title">Options</span>
                                     <div class="editGrp">
                                         <div class="edit">
-                                            <button (click)="recoverSubject(schData)">Edit</button>
+                                            <button (click)="recoverSubject(subData)">Edit</button>
                                         </div>
                                         <div class="delete">
                                             <button (click)="removeSubject(subData._id)">Delete</button>

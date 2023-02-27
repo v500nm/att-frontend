@@ -1,15 +1,5 @@
 import { Component } from '@angular/core';
 import { UserService } from '../../service/user.service';
-import {
- 
-  Iattendance,
-  Ifaculties,
-  Igroups,
-  Ischedule,
-  Istudents,
-  Isubject,
-  AttStatus,
-} from '../../service/user.interface';
 
 @Component({
   selector: 'app-chat',

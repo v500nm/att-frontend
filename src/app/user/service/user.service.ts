@@ -17,15 +17,12 @@ export class UserService {
   baseUrl = 'http://localhost:3000';
 
   //endpoints
-  demoUrl = this.baseUrl + '/demo';
   studentsUrl = this.baseUrl + '/students';
   facultiesUrl = this.baseUrl + '/faculties';
   attendanceUrl = this.baseUrl + '/attendance';
   groupsUrl = this.baseUrl + '/groups';
   scheduleUrl = this.baseUrl + '/schedule';
   subjectUrl = this.baseUrl + '/subjects';
-  questionUrl = this.baseUrl + '/question';
-  suggestionUrl = this.baseUrl + '/suggestion';
   classroomUrl = this.baseUrl + '/classroom';
 
 

@@ -23,9 +23,6 @@ import { KnobModule } from "primeng/knob";
 import { UserloginComponent } from './auth/userlogin/userlogin.component';
 import { AdminloginComponent } from './auth/adminlogin/adminlogin.component';
 
-
-
-
 @NgModule({
   declarations: [
     AppComponent,
