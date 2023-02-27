@@ -20,6 +20,8 @@ import { InputTextModule } from 'primeng/inputtext';
 import { AccordionModule } from 'primeng/accordion';  
 import {SplitterModule} from 'primeng/splitter';
 import { KnobModule } from "primeng/knob";
+import { UserloginComponent } from './auth/userlogin/userlogin.component';
+import { AdminloginComponent } from './auth/adminlogin/adminlogin.component';
 
 
 
@@ -35,6 +37,8 @@ import { KnobModule } from "primeng/knob";
     SubjectComponent,
     ChatComponent,
     ScheduleComponent,
+    UserloginComponent,
+    AdminloginComponent,
   ],
   imports: [
     BrowserModule,

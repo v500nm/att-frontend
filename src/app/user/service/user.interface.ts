@@ -1,4 +1,3 @@
-
 export interface Istudents{
     _id:string;
     roll:number;
@@ -44,11 +43,3 @@ export interface Ischedule{
     classrooms:Iclassroom[];
 }
 
-export interface Iquestion{
-    qID:number;
-    question:string;
-}
-export interface Isuggestion{
-    sugID:number;
-    suggestions:string;
-}

@@ -5,11 +5,9 @@ import {
   Iattendance,
   Ifaculties,
   Igroups,
-  Iquestion,
   Ischedule,
   Istudents,
   Isubject,
-  Isuggestion,
   AttStatus,
 } from '../../service/user.interface';
 

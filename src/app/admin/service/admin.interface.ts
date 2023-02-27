@@ -4,6 +4,7 @@ export interface Istudents{
     roll:number;
     name:string;
     classGrp:string;
+    stuExcel:File;
 }
 export interface Ifaculties{
     _id:string;
@@ -42,13 +43,4 @@ export interface Ischedule{
     faculties:Ifaculties[];
     subjects:Isubject[];
     classrooms:Iclassroom[];
-}
-
-export interface Iquestion{
-    qID:number;
-    question:string;
-}
-export interface Isuggestion{
-    sugID:number;
-    suggestions:string;
 }

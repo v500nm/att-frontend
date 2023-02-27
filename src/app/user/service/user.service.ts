@@ -7,8 +7,6 @@ import { Igroups } from './user.interface';
 import { Ischedule } from './user.interface';
 import { Isubject } from './user.interface';
 import { Iattendance } from './user.interface';
-import { Iquestion } from './user.interface';
-import { Isuggestion } from './user.interface';
 import { Iclassroom } from './user.interface';
 
 @Injectable({
@@ -189,53 +187,4 @@ removeSchedule(_id: string): Observable<Ischedule> {
   return this.http.delete<Ischedule>(this.scheduleUrl + '/' + _id);
 }
 
-//question
-createQuestion(questions: Iquestion): Observable<Iquestion> {
-  return this.http.post<Iquestion>(this.questionUrl, questions);
-}
-
-findAllQuestion(): Observable<Iquestion[]> {
-  return this.http.get<Iquestion[]>(this.questionUrl);
-}
-
-findOneQuestion(questions: Iquestion): Observable<Iquestion> {
-  return this.http.get<Iquestion>(this.questionUrl + '/' + questions.qID);
-}
-
-updateQuestion(_id:string, questions: Iquestion): Observable<Iquestion> {
-  return this.http.put<Iquestion>(
-    this.questionUrl + '/' + questions.qID,
-    questions
-  );
-}
-
-removeQuestion(qID: string): Observable<Iquestion> {
-  return this.http.delete<Iquestion>(this.questionUrl + '/' + qID);
-}
-
-//suggestion
-createSuggestion(suggestions: Isuggestion): Observable<Isuggestion> {
-  return this.http.post<Isuggestion>(this.suggestionUrl, suggestions);
-}
-
-findAllSuggestion(): Observable<Isuggestion[]> {
-  return this.http.get<Isuggestion[]>(this.suggestionUrl);
-}
-
-findOneSuggestion(suggestions: Isuggestion): Observable<Isuggestion> {
-  return this.http.get<Isuggestion>(
-    this.suggestionUrl + '/' + suggestions.sugID
-  );
-}
-
-updateSuggestion(_id:string, suggestions: Isuggestion): Observable<Isuggestion> {
-  return this.http.put<Isuggestion>(
-    this.suggestionUrl + '/' + suggestions.sugID,
-    suggestions
-  );
-}
-
-removeSuggestion(sugID: string): Observable<Isuggestion> {
-  return this.http.delete<Isuggestion>(this.suggestionUrl + '/' + sugID);
-}
 }
