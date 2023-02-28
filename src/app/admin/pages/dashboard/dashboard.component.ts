@@ -159,32 +159,7 @@ export class DashboardComponent implements OnInit {
       this.findAllStudents();
     });
   }
-  // uploadedFiles: any[] = [];
-  // onUpload(event: any) {
-  //   const file = event.target.files[0];
-  //   this.stuValue.patchValue({ stuExcel: file });
-  //   this.adminService.uploadStu(this.stuValue.value).subscribe((res)=>{
-  //     console.log(res,'uploaded')
-  //   })
-  //   for (let file of event.files) {
-  //     this.uploadedFiles.push(file);
-  //   }
-  // }
-
-  importStuExcel(event: any) {
-    let file = event.target.files[0];
-    let fileReader = new FileReader();
-    fileReader.readAsBinaryString(file);
-    fileReader.onload = (e) => {
-      var workBook = XLSX.read(fileReader.result, { type: 'binary' });
-      var sheetNames = workBook.SheetNames;
-      this.stuExcelData = XLSX.utils.sheet_to_json(
-        workBook.Sheets[sheetNames[0]]
-      );
-      console.log(this.stuExcelData, 'uploaded');
-    };
-    console.log(this.stuExcelData, 'test excel');
-  }
+ 
 
   removeStudent(_id: string) {
     this.adminService.removeStudent(_id).subscribe((res) => {
@@ -211,6 +186,32 @@ export class DashboardComponent implements OnInit {
       });
     this.stuValue.reset();
   }
+  uploadedFiles: any[] = [];
+  // onUpload(event: any) {
+  //   const file = event.target.files[0];
+  //   this.stuValue.patchValue({ stuExcel: file });
+  //   this.adminService.uploadStu(this.stuValue.value).subscribe((res)=>{
+  //     console.log(res,'uploaded')
+  //   })
+  //   for (let file of event.files) {
+  //     this.uploadedFiles.push(file);
+  //   }
+  // }
+
+  importStuExcel(event: any) {
+    let file = event.target.files[0];
+    let fileReader = new FileReader();
+    fileReader.readAsBinaryString(file);
+    fileReader.onload = (e) => {
+      var workBook = XLSX.read(fileReader.result, { type: 'binary' });
+      var sheetNames = workBook.SheetNames;
+      this.stuExcelData = XLSX.utils.sheet_to_json(
+        workBook.Sheets[sheetNames[0]]
+      );
+      console.log(this.stuExcelData, 'uploaded');
+    };
+    console.log(this.stuExcelData, 'test excel');
+  }
   exportStuExcel() {
     import('xlsx').then((xlsx) => {
       const worksheet = xlsx.utils.json_to_sheet(this.stuData);
@@ -234,6 +235,7 @@ export class DashboardComponent implements OnInit {
       fileName + '_export_' + new Date().getTime() + EXCEL_EXTENSION
     );
   }
+  
   //faculties
   getAllFaculties() {
     this.adminService.getAllFaculties().subscribe((res: Ifaculties[]) => {

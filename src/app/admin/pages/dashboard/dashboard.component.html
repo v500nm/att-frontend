@@ -50,9 +50,9 @@
                         </div>
                         <div class="adOpt">
                             <p-dialog header="upload Students" [(visible)]="uploadDialog">
-                                <!-- <form [formGroup]="stuValue">
+                                <form [formGroup]="stuValue">
                                     <h4>upload excel data</h4>
-                                        <p-fileUpload (onUpload)="onUpload($event)" accept=".xlsx">
+                                        <p-fileUpload  accept=".xlsx">
                                         <ng-template pTemplate="content">
                                             <ul *ngIf="uploadedFiles.length">
                                                 <li *ngFor="let file of uploadedFiles">
@@ -62,7 +62,7 @@
                                         </ng-template>
                                     </p-fileUpload>
                                     <input  accept=".xlsx,.csv" type="file" (change)="importStuExcel($event)">
-                                </form> -->
+                                </form>
                             </p-dialog>
                             <button pButton type="button" pRipple label="Import" icon="pi pi-file-import"
                                 (click)="importDialog()" class="p-button-help mr-2"></button>

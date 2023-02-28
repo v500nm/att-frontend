@@ -20,6 +20,8 @@ import { InputTextModule } from 'primeng/inputtext';
 import { AccordionModule } from 'primeng/accordion';  
 import {SplitterModule} from 'primeng/splitter';
 import { KnobModule } from "primeng/knob";
+import { AdminloginComponent } from './auth/adminlogin/adminlogin.component';
+import { UserloginComponent } from './auth/userlogin/userlogin.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,9 @@ import { KnobModule } from "primeng/knob";
     DefaulterComponent,
     SubjectComponent,
     ChatComponent,
-    ScheduleComponent
+    ScheduleComponent,
+    AdminloginComponent,
+    UserloginComponent
   ],
   imports: [
     BrowserModule,
