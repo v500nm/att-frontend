@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class ChatbotComponent{
   inputLabel:any;
   
-  submitChat(){
+  // submitChat(){
 
-  }
+  // }
 }

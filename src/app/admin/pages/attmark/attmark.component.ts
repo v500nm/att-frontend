@@ -17,9 +17,6 @@ import {
   styleUrls: ['./attmark.component.scss'],
 })
 export class AttmarkComponent implements OnInit {
-  // countries: any[];
-  // selectedCountries: any[];
-
   constructor(
     private adminService: AdminService,
     private formsbuilder: FormBuilder
@@ -50,6 +47,11 @@ export class AttmarkComponent implements OnInit {
 
   ngOnInit() {
     //forms
+    this.adminService.findAllSchedule().subscribe((res) => {
+      this.schData = res;
+      this.loading = false;
+    });
+ 
     this.findAllStudents();
     this.getAllFaculties();
     this.findAllSubjects();
@@ -88,13 +90,6 @@ export class AttmarkComponent implements OnInit {
       subjects: new FormControl(''),
       classrooms: new FormControl(''),
     });
-
-  
-    this.adminService.findAllSchedule().subscribe((res) => {
-      this.schData = res;
-      this.loading = false;
-    });
- 
   }
 
   //att

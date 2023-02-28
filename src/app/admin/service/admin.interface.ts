@@ -1,4 +1,3 @@
-
 export interface Istudents{
     _id:string;
     roll:number;

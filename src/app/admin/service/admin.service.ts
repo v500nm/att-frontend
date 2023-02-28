@@ -44,9 +44,6 @@ export class AdminService {
   removeStudent(_id: string): Observable<Istudents> {
     return this.http.delete<Istudents>(this.studentsUrl + '/' + _id);
   }
-  // uploadStu(students:Istudents):Observable<Istudents>{
-  //   return this.http.post<Istudents>(this.studentsUrl+'/stuUpload',students)
-  // }
 
   //faculties
   addFaculty(faculties: Ifaculties): Observable<Ifaculties> {
