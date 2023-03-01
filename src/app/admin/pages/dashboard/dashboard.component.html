@@ -50,19 +50,25 @@
                         </div>
                         <div class="adOpt">
                             <p-dialog header="upload Students" [(visible)]="uploadDialog">
-                                <form [formGroup]="stuValue">
-                                    <h4>upload excel data</h4>
-                                        <p-fileUpload  accept=".xlsx">
-                                        <ng-template pTemplate="content">
-                                            <ul *ngIf="uploadedFiles.length">
-                                                <li *ngFor="let file of uploadedFiles">
-                                                    {{file.name}} - {{file.size}} bytes
-                                                </li>
-                                            </ul>
-                                        </ng-template>
-                                    </p-fileUpload>
-                                    <input  accept=".xlsx,.csv" type="file" (change)="importStuExcel($event)">
-                                </form>
+                                <form [formGroup]="stuUploadValue" (ngSubmit)="onStuSubmit()" enctype="multipart/form-data">
+                                    <div class="p-field">
+                                      <p-fileUpload 
+                                        name="file" 
+                                        url="#" 
+                                        chooseLabel="Choose File"
+                                        accept=".xls,.xlsx,.csv"
+                                        [showUploadButton]="false"
+                                        [showCancelButton]="false"
+                                        (onSelect)="onFileChange($event)">
+                                      </p-fileUpload>
+                                    </div>
+                                    <button 
+                                      pButton 
+                                      type="submit" 
+                                      [disabled]="!stuUploadValue.valid" 
+                                      label="Upload">
+                                    </button>
+                                  </form>
                             </p-dialog>
                             <button pButton type="button" pRipple label="Import" icon="pi pi-file-import"
                                 (click)="importDialog()" class="p-button-help mr-2"></button>
@@ -79,7 +85,7 @@
                 <hr>
                 <div class="view">
                     <p-table responsiveLayout="stack" #studentTable [value]="stuData" dataKey="id" [rows]="5"
-                        [showCurrentPageReport]="true" [rowsPerPageOptions]="[5,10,15]" [loading]="loading"
+                        [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,20,30,40,50,60,70,80]" [loading]="loading"
                         styleClass="p-datatable-customers p-datatable-gridlines" [paginator]="true"
                         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
                         <ng-template pTemplate="caption">
