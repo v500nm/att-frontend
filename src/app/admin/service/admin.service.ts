@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable, map } from 'rxjs';
+import { HttpClient, HttpEventType, HttpHeaders } from '@angular/common/http';
 import { Iclassroom, Istudents } from './admin.interface';
 import { Ifaculties } from './admin.interface';
 import { Igroups } from './admin.interface';
@@ -47,8 +47,9 @@ export class AdminService {
   uploadStu(fileData: FormData): Observable<Istudents[]> {
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'multipart/form-data');
-    return this.http.post<Istudents[]>(`${this.studentsUrl}/upload`, fileData, { headers });
-  }
+    return this.http
+      .post<Istudents[]>(`${this.studentsUrl}/upload`, fileData, { headers });      
+  }  
 
   //faculties
   addFaculty(faculties: Ifaculties): Observable<Ifaculties> {
@@ -87,7 +88,7 @@ export class AdminService {
     return this.http.get<Isubject>(this.subjectUrl + '/' + subjects._id);
   }
 
-  updateSubject(_id:string, subjects: Isubject): Observable<Isubject> {
+  updateSubject(_id: string, subjects: Isubject): Observable<Isubject> {
     return this.http.put<Isubject>(
       this.subjectUrl + '/' + subjects._id,
       subjects
@@ -107,7 +108,7 @@ export class AdminService {
   findOneClass(classroom: Iclassroom): Observable<Iclassroom> {
     return this.http.get<Iclassroom>(this.classroomUrl + '/' + classroom._id);
   }
-  updateClass(_id:string, classroom: Iclassroom): Observable<Iclassroom> {
+  updateClass(_id: string, classroom: Iclassroom): Observable<Iclassroom> {
     return this.http.put<Iclassroom>(
       this.classroomUrl + '/' + classroom._id,
       classroom
@@ -131,7 +132,7 @@ export class AdminService {
     );
   }
 
-  updateAtt(_id:string, attendance: Iattendance): Observable<Iattendance> {
+  updateAtt(_id: string, attendance: Iattendance): Observable<Iattendance> {
     return this.http.put<Iattendance>(
       this.attendanceUrl + '/' + attendance.attID,
       attendance
@@ -155,7 +156,7 @@ export class AdminService {
     return this.http.get<Igroups>(this.groupsUrl + '/' + group._id);
   }
 
-  updateGroup(_id:string, group: Igroups): Observable<Igroups> {
+  updateGroup(_id: string, group: Igroups): Observable<Igroups> {
     return this.http.put<Igroups>(this.groupsUrl + '/' + group._id, group);
   }
 
@@ -176,7 +177,7 @@ export class AdminService {
     return this.http.get<Ischedule>(this.scheduleUrl + '/' + schedules._id);
   }
 
-  updateSchedule(_id:string, schedules: Ischedule): Observable<Ischedule> {
+  updateSchedule(_id: string, schedules: Ischedule): Observable<Ischedule> {
     return this.http.put<Ischedule>(
       this.scheduleUrl + '/' + schedules._id,
       schedules
@@ -186,5 +187,4 @@ export class AdminService {
   removeSchedule(_id: string): Observable<Ischedule> {
     return this.http.delete<Ischedule>(this.scheduleUrl + '/' + _id);
   }
-
 }
