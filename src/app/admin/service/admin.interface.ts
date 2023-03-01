@@ -1,6 +1,6 @@
 export interface Istudents{
     _id:string;
-    roll:number;
+    roll:string;
     name:string;
     classGrp:string;
 }

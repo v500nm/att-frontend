@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Iclassroom, Istudents } from './admin.interface';
 import { Ifaculties } from './admin.interface';
 import { Igroups } from './admin.interface';
@@ -43,6 +43,11 @@ export class AdminService {
 
   removeStudent(_id: string): Observable<Istudents> {
     return this.http.delete<Istudents>(this.studentsUrl + '/' + _id);
+  }
+  uploadStu(fileData: FormData): Observable<Istudents[]> {
+    const headers = new HttpHeaders();
+    headers.append('Content-Type', 'multipart/form-data');
+    return this.http.post<Istudents[]>(`${this.studentsUrl}/upload`, fileData, { headers });
   }
 
   //faculties
