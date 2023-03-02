@@ -120,6 +120,7 @@ export class AttmarkComponent implements OnInit {
     this.adminService.createGroup(this.grpValue.value).subscribe((res) => {
       console.log(res, 'group Post');
       this.grpValue.reset();
+      this.findAllGroup();
     });
   }
   removeGrp(_id: string) {

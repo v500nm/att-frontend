@@ -74,6 +74,12 @@ export class AdminService {
   removeFaculty(_id: string): Observable<Ifaculties> {
     return this.http.delete<Ifaculties>(this.facultiesUrl + '/' + _id);
   }
+  uploadFac(fileData: FormData): Observable<Ifaculties[]> {
+    const headers = new HttpHeaders();
+    headers.append('Content-Type', 'multipart/form-data');
+    return this.http
+      .post<Ifaculties[]>(`${this.facultiesUrl}/upload`, fileData, { headers });      
+  }
 
   //subjects
   addSubject(subjects: Isubject): Observable<Isubject> {
@@ -93,6 +99,12 @@ export class AdminService {
       this.subjectUrl + '/' + subjects._id,
       subjects
     );
+  }
+  uploadSub(fileData: FormData): Observable<Isubject[]> {
+    const headers = new HttpHeaders();
+    headers.append('Content-Type', 'multipart/form-data');
+    return this.http
+      .post<Isubject[]>(`${this.subjectUrl}/upload`, fileData, { headers });      
   }
 
   removeSubject(_id: string): Observable<Isubject> {
@@ -116,6 +128,12 @@ export class AdminService {
   }
   removeClass(_id: string): Observable<Iclassroom> {
     return this.http.delete<Iclassroom>(this.classroomUrl + '/' + _id);
+  }
+  uploadClass(fileData: FormData): Observable<Iclassroom[]> {
+    const headers = new HttpHeaders();
+    headers.append('Content-Type', 'multipart/form-data');
+    return this.http
+      .post<Iclassroom[]>(`${this.classroomUrl}/upload`, fileData, { headers });      
   }
   //attendance
   postAtt(attendance: Iattendance): Observable<Iattendance> {
@@ -142,6 +160,12 @@ export class AdminService {
   removeAtt(attID: string): Observable<Iattendance> {
     return this.http.delete<Iattendance>(this.attendanceUrl + '/' + attID);
   }
+  uploadAtt(fileData: FormData): Observable<Iattendance[]> {
+    const headers = new HttpHeaders();
+    headers.append('Content-Type', 'multipart/form-data');
+    return this.http
+      .post<Iattendance[]>(`${this.attendanceUrl}/upload`, fileData, { headers });      
+  }
 
   //groups
   createGroup(group: Igroups): Observable<Igroups> {
@@ -163,6 +187,12 @@ export class AdminService {
   removeGroup(_id: string): Observable<Igroups> {
     return this.http.delete<Igroups>(this.groupsUrl + '/' + _id);
   }
+  uploadGrp(fileData: FormData): Observable<Igroups[]> {
+    const headers = new HttpHeaders();
+    headers.append('Content-Type', 'multipart/form-data');
+    return this.http
+      .post<Igroups[]>(`${this.groupsUrl}/upload`, fileData, { headers });      
+  }
 
   //schedule
   createSchedule(schedules: Ischedule): Observable<Ischedule> {
@@ -183,7 +213,12 @@ export class AdminService {
       schedules
     );
   }
-
+  uploadSch(fileData: FormData): Observable<Ischedule[]> {
+    const headers = new HttpHeaders();
+    headers.append('Content-Type', 'multipart/form-data');
+    return this.http
+      .post<Ischedule[]>(`${this.scheduleUrl}/upload`, fileData, { headers });      
+  }
   removeSchedule(_id: string): Observable<Ischedule> {
     return this.http.delete<Ischedule>(this.scheduleUrl + '/' + _id);
   }

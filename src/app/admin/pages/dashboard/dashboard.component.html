@@ -55,24 +55,16 @@
                                     <div class="p-field">
                                         <p-fileUpload name="file" url="#" chooseLabel="Choose File"
                                             accept=".xls,.xlsx,.csv" [showUploadButton]="false"
-                                            [showCancelButton]="false" (onSelect)="onFileChange($event)">
-                                            <!-- <ng-template pTemplate="content">
-                                                <ul *ngIf="uploadedFiles.length">
-                                                    <li *ngFor="let file of uploadedFiles">{{file.name}} - {{file.size}} bytes</li>
-                                                </ul>
-                                            </ng-template> -->
+                                            [showCancelButton]="false" (onSelect)="onStuFileChange($event)">
                                         </p-fileUpload>
                                     </div>
                                     <button pButton type="submit" [disabled]="!stuUploadValue.valid" label="Upload">
                                     </button>
                                 </form>
-                               
+
                             </p-dialog>
                             <button pButton type="button" pRipple label="Import" icon="pi pi-file-import"
                                 (click)="importDialog()" class="p-button-help mr-2"></button>
-                        </div>
-                        <div class="adOpt">
-
                         </div>
                         <div class="adOpt">
                             <button type="button" pButton pRipple icon="pi pi-file-excel" label="Export"
@@ -189,7 +181,33 @@
                             </div>
                         </form>
                     </p-dialog>
-                    <button pButton type="button" label="Add Faculty" (click)="showDialog()"></button>
+                    <div class="adminOptions">
+                        <div class="adOpt">
+                            <button pButton type="button" icon="pi pi-plus" label="Add" (click)="showDialog()"></button>
+                        </div>
+                        <div class="adOpt">
+                            <p-dialog header="upload Students" [(visible)]="uploadDialog">
+                                <form [formGroup]="facUploadValue" (ngSubmit)="onFacSubmit()"
+                                    enctype="multipart/form-data">
+                                    <div class="p-field">
+                                        <p-fileUpload name="file" url="#" chooseLabel="Choose File"
+                                            accept=".xls,.xlsx,.csv" [showUploadButton]="false"
+                                            [showCancelButton]="false" (onSelect)="onFacFileChange($event)">
+                                        </p-fileUpload>
+                                    </div>
+                                    <button pButton type="submit" [disabled]="!facUploadValue.valid" label="Upload">
+                                    </button>
+                                </form>
+
+                            </p-dialog>
+                            <button pButton type="button" pRipple label="Import" icon="pi pi-file-import"
+                                (click)="importDialog()" class="p-button-help mr-2"></button>
+                        </div>
+                        <div class="adOpt">
+                            <button type="button" pButton pRipple icon="pi pi-file-excel" label="Export"
+                                (click)="exportFacExcel()" class="p-button-success mr-2"></button>
+                        </div>
+                    </div>
                 </div>
                 <hr>
                 <div class="view">
@@ -283,7 +301,33 @@
                             </div>
                         </form>
                     </p-dialog>
-                    <button pButton type="button" label="Add Subjects" (click)="showDialog()"></button>
+                    <div class="adminOptions">
+                        <div class="adOpt">
+                            <button pButton type="button" icon="pi pi-plus" label="Add" (click)="showDialog()"></button>
+                        </div>
+                        <div class="adOpt">
+                            <p-dialog header="upload Students" [(visible)]="uploadDialog">
+                                <form [formGroup]="subUploadValue" (ngSubmit)="onSubSubmit()"
+                                    enctype="multipart/form-data">
+                                    <div class="p-field">
+                                        <p-fileUpload name="file" url="#" chooseLabel="Choose File"
+                                            accept=".xls,.xlsx,.csv" [showUploadButton]="false"
+                                            [showCancelButton]="false" (onSelect)="onSubFileChange($event)">
+                                        </p-fileUpload>
+                                    </div>
+                                    <button pButton type="submit" [disabled]="!subUploadValue.valid" label="Upload">
+                                    </button>
+                                </form>
+
+                            </p-dialog>
+                            <button pButton type="button" pRipple label="Import" icon="pi pi-file-import"
+                                (click)="importDialog()" class="p-button-help mr-2"></button>
+                        </div>
+                        <div class="adOpt">
+                            <button type="button" pButton pRipple icon="pi pi-file-excel" label="Export"
+                                (click)="exportSubExcel()" class="p-button-success mr-2"></button>
+                        </div>
+                    </div>
                 </div>
                 <hr>
                 <div class="view">
@@ -359,7 +403,33 @@
                             </div>
                         </form>
                     </p-dialog>
-                    <button pButton type="button" label="Add Classroom" (click)="showDialog()"></button>
+                    <div class="adminOptions">
+                        <div class="adOpt">
+                            <button pButton type="button" icon="pi pi-plus" label="Add" (click)="showDialog()"></button>
+                        </div>
+                        <div class="adOpt">
+                            <p-dialog header="upload Students" [(visible)]="uploadDialog">
+                                <form [formGroup]="classUploadValue" (ngSubmit)="onClassSubmit()"
+                                    enctype="multipart/form-data">
+                                    <div class="p-field">
+                                        <p-fileUpload name="file" url="#" chooseLabel="Choose File"
+                                            accept=".xls,.xlsx,.csv" [showUploadButton]="false"
+                                            [showCancelButton]="false" (onSelect)="onClassFileChange($event)">
+                                        </p-fileUpload>
+                                    </div>
+                                    <button pButton type="submit" [disabled]="!classUploadValue.valid" label="Upload">
+                                    </button>
+                                </form>
+
+                            </p-dialog>
+                            <button pButton type="button" pRipple label="Import" icon="pi pi-file-import"
+                                (click)="importDialog()" class="p-button-help mr-2"></button>
+                        </div>
+                        <div class="adOpt">
+                            <button type="button" pButton pRipple icon="pi pi-file-excel" label="Export"
+                                (click)="exportClassExcel()" class="p-button-success mr-2"></button>
+                        </div>
+                    </div>
                 </div>
                 <hr>
                 <div class="view">
@@ -431,7 +501,8 @@
                                 <ng-container>
                                     <h3>Select Students</h3>
                                     <p-listbox formControlName="students" [options]="stuData" [metaKeySelection]="false"
-                                        [checkbox]="true" [filter]="true" [listStyle]="{'max-height':'20    0px'}" [multiple]="true" optionLabel="roll">
+                                        [checkbox]="true" [filter]="true" [listStyle]="{'max-height':'200px'}"
+                                        [multiple]="true" optionLabel="roll">
                                         <ng-template let-stuData pTemplate="item">
                                             <div class="country-item">
                                                 <span>{{stuData.roll}}</span>
@@ -441,11 +512,40 @@
                                 </ng-container>
                             </div>
                             <div class="sub">
-                                <button pButton type="button" label="Submit" (click)="createGroup()"></button>
+                                <button pButton type="button" *ngIf="stuSwitch" label="Add"
+                                    (click)="createGroup()"></button>
+                                <button pButton type="button" *ngIf="!stuSwitch" label="Edit"
+                                    (click)="updateGrp()"></button>
                             </div>
                         </form>
                     </p-dialog>
-                    <button pButton type="button" label="Add Groups" (click)="showDialog()"></button>
+                    <div class="adminOptions">
+                        <div class="adOpt">
+                            <button pButton type="button" icon="pi pi-plus" label="Add" (click)="showDialog()"></button>
+                        </div>
+                        <div class="adOpt">
+                            <p-dialog header="upload Students" [(visible)]="uploadDialog">
+                                <form [formGroup]="grpUploadValue" (ngSubmit)="onGrpSubmit()"
+                                    enctype="multipart/form-data">
+                                    <div class="p-field">
+                                        <p-fileUpload name="file" url="#" chooseLabel="Choose File"
+                                            accept=".xls,.xlsx,.csv" [showUploadButton]="false"
+                                            [showCancelButton]="false" (onSelect)="onGrpFileChange($event)">
+                                        </p-fileUpload>
+                                    </div>
+                                    <button pButton type="submit" [disabled]="!grpUploadValue.valid" label="Upload">
+                                    </button>
+                                </form>
+
+                            </p-dialog>
+                            <button pButton type="button" pRipple label="Import" icon="pi pi-file-import"
+                                (click)="importDialog()" class="p-button-help mr-2"></button>
+                        </div>
+                        <div class="adOpt">
+                            <button type="button" pButton pRipple icon="pi pi-file-excel" label="Export"
+                                (click)="exportGrpExcel()" class="p-button-success mr-2"></button>
+                        </div>
+                    </div>
                 </div>
 
             </section>

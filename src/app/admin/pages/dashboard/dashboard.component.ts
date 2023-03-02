@@ -1,6 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { AdminService } from '../../service/admin.service';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  Form,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import {
   Iclassroom,
   Ifaculties,
@@ -39,12 +45,19 @@ export class DashboardComponent implements OnInit {
     this.uploadDialog = true;
   }
   stuValue!: FormGroup;
-  stuUploadValue!:FormGroup;
+  stuUploadValue!: FormGroup;
 
   facValue!: FormGroup;
+  facUploadValue!: FormGroup;
+
   subValue!: FormGroup;
+  subUploadValue!: FormGroup;
+
   classValue!: FormGroup;
+  classUploadValue!: FormGroup;
+
   grpValue!: FormGroup;
+  grpUploadValue!: FormGroup;
 
   stuData: Istudents[] = [];
   facData: Ifaculties[] = [];
@@ -87,26 +100,37 @@ export class DashboardComponent implements OnInit {
     (this.stuValue = this.formsbuilder.group({
       roll: new FormControl(''),
       name: new FormControl(''),
-      classGrp: new FormControl('')
+      classGrp: new FormControl(''),
     })),
-    this.stuUploadValue=this.formsbuilder.group({
-      file:['',Validators.required]
-    })
-    ,
+      (this.stuUploadValue = this.formsbuilder.group({
+        file: ['', Validators.required],
+      })),
       (this.facValue = this.formsbuilder.group({
         fname: new FormControl(''),
         department: new FormControl(''),
         designation: new FormControl(''),
       })),
+      (this.facUploadValue = this.formsbuilder.group({
+        file: ['', Validators.required],
+      })),
       (this.subValue = this.formsbuilder.group({
         subject: new FormControl(''),
+      })),
+      (this.subUploadValue = this.formsbuilder.group({
+        file: ['', Validators.required],
       })),
       (this.classValue = this.formsbuilder.group({
         class: new FormControl(''),
       })),
+      (this.classUploadValue = this.formsbuilder.group({
+        file: ['', Validators.required],
+      })),
       (this.grpValue = this.formsbuilder.group({
         gName: new FormControl(''),
         students: new FormControl(''),
+      })),
+      (this.grpUploadValue = this.formsbuilder.group({
+        file: ['', Validators.required],
       }));
     //crud buttons
   }
@@ -150,6 +174,45 @@ export class DashboardComponent implements OnInit {
       });
     this.grpValue.reset();
   }
+  onGrpFileChange(event: any) {
+    if (event && event.files && event.files.length > 0) {
+      const file = event.files[0];
+      this.grpUploadValue.get('file')?.setValue(file);
+    }
+  }
+  onGrpSubmit(): void {
+    const grpExcelData = new FormData();
+    grpExcelData.append('file', this.grpUploadValue.get('file')?.value);
+
+    this.adminService.uploadGrp(grpExcelData).subscribe((data: any) => {
+      this.grpData = data;
+      console.log(this.grpData);
+    });
+  }
+
+  exportGrpExcel() {
+    import('xlsx').then((xlsx) => {
+      const worksheet = xlsx.utils.json_to_sheet(this.grpData);
+      const workbook = { Sheets: { data: worksheet }, SheetNames: ['data'] };
+      const excelBuffer: any = xlsx.write(workbook, {
+        bookType: 'xlsx',
+        type: 'array',
+      });
+      this.saveAsGrpExcelFile(excelBuffer, 'groups List');
+    });
+  }
+  saveAsGrpExcelFile(buffer: any, fileName: string): void {
+    let EXCEL_TYPE =
+      'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
+    let EXCEL_EXTENSION = '.xlsx';
+    const data: Blob = new Blob([buffer], {
+      type: EXCEL_TYPE,
+    });
+    FileSaver.saveAs(
+      data,
+      fileName + '_export_' + new Date().getTime() + EXCEL_EXTENSION
+    );
+  }
 
   //students
   findAllStudents() {
@@ -166,7 +229,6 @@ export class DashboardComponent implements OnInit {
       this.findAllStudents();
     });
   }
- 
 
   removeStudent(_id: string) {
     this.adminService.removeStudent(_id).subscribe((res) => {
@@ -193,29 +255,22 @@ export class DashboardComponent implements OnInit {
       });
     this.stuValue.reset();
   }
-  uploadedFiles: any[] = [];
-  onFileChange(event: any) {
+  onStuFileChange(event: any) {
     if (event && event.files && event.files.length > 0) {
       const file = event.files[0];
       this.stuUploadValue.get('file')?.setValue(file);
     }
-  //   for(let file of event.files) {
-  //     this.uploadedFiles.push(file);
-  // }
   }
   onStuSubmit(): void {
-    const formData = new FormData();
-    formData.append('file', this.stuUploadValue.get('file')?.value);
+    const stuExcelData = new FormData();
+    stuExcelData.append('file', this.stuUploadValue.get('file')?.value);
 
-    this.adminService.uploadStu(formData).subscribe(
-      (data: any) => {
-        this.stuData = data;
-        console.log(this.stuData);
-      }
-    );
+    this.adminService.uploadStu(stuExcelData).subscribe((data: any) => {
+      this.stuData = data;
+      console.log(this.stuData);
+    });
   }
-  
-  
+
   exportStuExcel() {
     import('xlsx').then((xlsx) => {
       const worksheet = xlsx.utils.json_to_sheet(this.stuData);
@@ -239,7 +294,7 @@ export class DashboardComponent implements OnInit {
       fileName + '_export_' + new Date().getTime() + EXCEL_EXTENSION
     );
   }
-  
+
   //faculties
   getAllFaculties() {
     this.adminService.getAllFaculties().subscribe((res: Ifaculties[]) => {
@@ -281,7 +336,44 @@ export class DashboardComponent implements OnInit {
       });
     this.facValue.reset();
   }
+  onFacFileChange(event: any) {
+    if (event && event.files && event.files.length > 0) {
+      const file = event.files[0];
+      this.facUploadValue.get('file')?.setValue(file);
+    }
+  }
+  onFacSubmit(): void {
+    const facExcelData = new FormData();
+    facExcelData.append('file', this.facUploadValue.get('file')?.value);
+    this.adminService.uploadFac(facExcelData).subscribe((data: any) => {
+      this.facData = data;
+      console.log(this.facData);
+    });
+  }
 
+  exportFacExcel() {
+    import('xlsx').then((xlsx) => {
+      const worksheet = xlsx.utils.json_to_sheet(this.facData);
+      const workbook = { Sheets: { data: worksheet }, SheetNames: ['data'] };
+      const excelBuffer: any = xlsx.write(workbook, {
+        bookType: 'xlsx',
+        type: 'array',
+      });
+      this.saveAsFacExcelFile(excelBuffer, 'Students List');
+    });
+  }
+  saveAsFacExcelFile(buffer: any, fileName: string): void {
+    let EXCEL_TYPE =
+      'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
+    let EXCEL_EXTENSION = '.xlsx';
+    const data: Blob = new Blob([buffer], {
+      type: EXCEL_TYPE,
+    });
+    FileSaver.saveAs(
+      data,
+      fileName + '_export_' + new Date().getTime() + EXCEL_EXTENSION
+    );
+  }
   //subjects
   findAllSubjects() {
     this.adminService.findAllSubjects().subscribe((res: Isubject[]) => {
@@ -323,6 +415,44 @@ export class DashboardComponent implements OnInit {
       });
     this.subValue.reset();
   }
+  onSubFileChange(event: any) {
+    if (event && event.files && event.files.length > 0) {
+      const file = event.files[0];
+      this.subUploadValue.get('file')?.setValue(file);
+    }
+  }
+  onSubSubmit(): void {
+    const subExcelData = new FormData();
+    subExcelData.append('file', this.subUploadValue.get('file')?.value);
+    this.adminService.uploadSub(subExcelData).subscribe((data: any) => {
+      this.subData = data;
+      console.log(this.subData);
+    });
+  }
+
+  exportSubExcel() {
+    import('xlsx').then((xlsx) => {
+      const worksheet = xlsx.utils.json_to_sheet(this.subData);
+      const workbook = { Sheets: { data: worksheet }, SheetNames: ['data'] };
+      const excelBuffer: any = xlsx.write(workbook, {
+        bookType: 'xlsx',
+        type: 'array',
+      });
+      this.saveAsSubExcelFile(excelBuffer, 'Students List');
+    });
+  }
+  saveAsSubExcelFile(buffer: any, fileName: string): void {
+    let EXCEL_TYPE =
+      'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
+    let EXCEL_EXTENSION = '.xlsx';
+    const data: Blob = new Blob([buffer], {
+      type: EXCEL_TYPE,
+    });
+    FileSaver.saveAs(
+      data,
+      fileName + '_export_' + new Date().getTime() + EXCEL_EXTENSION
+    );
+  }
   //classroom
   findAllClass() {
     this.adminService.findAllClass().subscribe((res: Iclassroom[]) => {
@@ -362,5 +492,44 @@ export class DashboardComponent implements OnInit {
         this.findAllClass();
       });
     this.classValue.reset();
+  }
+  onClassFileChange(event: any) {
+    if (event && event.files && event.files.length > 0) {
+      const file = event.files[0];
+      this.classUploadValue.get('file')?.setValue(file);
+    }
+  }
+  onClassSubmit(): void {
+    const classExcelData = new FormData();
+    classExcelData.append('file', this.classUploadValue.get('file')?.value);
+
+    this.adminService.uploadClass(classExcelData).subscribe((data: any) => {
+      this.classData = data;
+      console.log(this.classData);
+    });
+  }
+
+  exportClassExcel() {
+    import('xlsx').then((xlsx) => {
+      const worksheet = xlsx.utils.json_to_sheet(this.classData);
+      const workbook = { Sheets: { data: worksheet }, SheetNames: ['data'] };
+      const excelBuffer: any = xlsx.write(workbook, {
+        bookType: 'xlsx',
+        type: 'array',
+      });
+      this.saveAsClassExcelFile(excelBuffer, 'Students List');
+    });
+  }
+  saveAsClassExcelFile(buffer: any, fileName: string): void {
+    let EXCEL_TYPE =
+      'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
+    let EXCEL_EXTENSION = '.xlsx';
+    const data: Blob = new Blob([buffer], {
+      type: EXCEL_TYPE,
+    });
+    FileSaver.saveAs(
+      data,
+      fileName + '_export_' + new Date().getTime() + EXCEL_EXTENSION
+    );
   }
 }
