@@ -20,6 +20,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { AccordionModule } from 'primeng/accordion';  
 import {SplitterModule} from 'primeng/splitter';
 import { KnobModule } from "primeng/knob";
+import {TableModule} from 'primeng/table';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { KnobModule } from "primeng/knob";
     AccordionModule,
     FormsModule,
     SplitterModule,
-    KnobModule
+    KnobModule,
+    TableModule
   ],
   providers: [],
   bootstrap: [AppComponent],

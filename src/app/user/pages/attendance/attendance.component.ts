@@ -59,4 +59,29 @@ export class AttendanceComponent {
 
 
   }
+
+  products=[
+		{
+			"id": "1000",
+			"code": "333",
+			"name": "Adhan",
+			"category": "P",
+			"quantity": "A",
+		},
+		{
+			"id": "1001",
+			"code": "370",
+			"name": "Rohan Walke",
+			"category": "A",
+			"quantity": "p",
+		},
+		{
+			"id": "1002",
+			"code": "317",
+			"name": "Shivam",
+			"category": "P",
+			"quantity": "p",
+		},
+		
+	]
 }

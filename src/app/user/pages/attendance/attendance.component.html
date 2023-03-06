@@ -1,164 +1,89 @@
 <app-header></app-header>
-<div class="charts">
-    <div class="chart">
-        <h1>Attendance Of TyBSc-IT Students</h1>
-        
+<p-table [value]="products" styleClass="p-datatable-gridlines" [tableStyle]="{'min-width': '50rem'}">
+    <ng-template pTemplate="caption">
+
         <p-dropdown [options]="cities" (ngModel)="selectedCity1" placeholder="Month" optionLabel="name"
-	[showClear]="true"></p-dropdown>
-       
-    <p-dropdown [options]="Years" (ngModel)="selectedCity2" placeholder="Year" optionLabel="name"
-	[showClear]="true"></p-dropdown>
-       
-        <table id="Students">
-            <div class="mainTable">
-            <tr>
-                <th>Name</th>
-                <th>Roll No</th>
-                <th>1</th>
-                <th>2</th>
-                <th>3</th>
-                <th>4</th>
-                <th>5</th>
-                <th>6</th>
-                <th>7</th>
-                <th>8</th>
-                <th>9</th>
-                <th>10</th>
-                <th>11</th>
-                <th>12</th>
-                <th>13</th>
-                <th>14</th>
-                <th>15</th>
-                <th>16</th>
-                <th>17</th>
-                <th>18</th>
-                <th>19</th>
-                <th>20</th>
-                <th>21</th>
-                <th>22</th>
-                <th>23</th>
-                <th>24</th>
-                <th>25</th>
-                <th>26</th>
-                <th>27</th>
-                <th>28</th>
-                <th>29</th>
-                <th>30</th>
-                <th>31</th>
-            </tr>
-
-            <tr>
-                <td>Rahul kumar</td>
-                <td>301</td>
-                <td>P</td>
-                <td><span style="color: red">A</span></td>
-                <td>P</td>
-                <td><span style="color: red">A</span></td>
-                <td>P</td>
-                <td><span style="color: red">A</span></td>
-                <td>P</td>
-                <td><span style="color: red">A</span></td>
-                <td>P</td>
-                <td><span style="color: red">A</span></td>
-                <td>P</td>
-                <td><span style="color: red">A</span></td>
-                <td>P</td>
-                <td>P</td>
-                <td>P</td>
-                <td><span style="color: red">A</span></td>
-                <td>P</td>
-                <td>P</td>
-                <td>P</td>
-                <td><span style="color: red">A</span></td>
-                <td>P</td>
-                <td>P</td>
-                <td><span style="color: red">A</span></td>
-                <td><span style="color: red">A</span></td>
-                <td><span style="color: red">A</span></td>
-                <td><span style="color: red">A</span></td>
-                <td>P</td>
-                <td>P</td>
-                <td>P</td>
-                <td><span style="color: red">A</span></td>
-                <td><span style="color: red">A</span></td>
-
-            </tr>
-
-            <tr>
-                <td>Pratik Pal</td>
-                <td>302</td>
-                <td>P</td>
-                <td><span style="color: red">A</span></td>
-                <td>P</td>
-                <td><span style="color: red">A</span></td>
-                <td>P</td>
-                <td><span style="color: red">A</span></td>
-                <td>P</td>
-                <td><span style="color: red">A</span></td>
-                <td>P</td>
-                <td><span style="color: red">A</span></td>
-                <td>P</td>
-                <td><span style="color: red">A</span></td>
-                <td>P</td>
-                <td>P</td>
-                <td>P</td>
-                <td><span style="color: red">A</span></td>
-                <td>P</td>
-                <td>P</td>
-                <td>P</td>
-                <td><span style="color: red">A</span></td>
-                <td>P</td>
-                <td>P</td>
-                <td><span style="color: red">A</span></td>
-                <td><span style="color: red">A</span></td>
-                <td><span style="color: red">A</span></td>
-                <td><span style="color: red">A</span></td>
-                <td>P</td>
-                <td>P</td>
-                <td>P</td>
-                <td><span style="color: red">A</span></td>
-                <td><span style="color: red">A</span></td>
-
-            </tr>
-
-            <tr>
-                <td>Rohit kumar</td>
-                <td>303</td>
-                <td>P</td>
-                <td><span style="color: red">A</span></td>
-                <td>P</td>
-                <td><span style="color: red">A</span></td>
-                <td>P</td>
-                <td><span style="color: red">A</span></td>
-                <td>P</td>
-                <td>P</td>
-                <td><span style="color: red">A</span></td>
-                <td><span style="color: red">A</span></td>
-                <td><span style="color: red">A</span></td>
-                <td><span style="color: red">A</span></td>
-                <td>P</td>
-                <td>P</td>
-                <td>P</td>
-                <td><span style="color: red">A</span></td>
-                <td><span style="color: red">A</span></td>
-                <td><span style="color: red">A</span></td>
-                <td>P</td>
-                <td><span style="color: red">A</span></td>
-                <td>P</td>
-                <td><span style="color: red">A</span></td>
-                <td>P</td>
-                <td><span style="color: red">A</span></td>
-                <td>P</td>
-                <td>P</td>
-                <td>P</td>
-                <td><span style="color: red">A</span></td>
-                <td>P</td>
-                <td><span style="color: red">A</span></td>
-                <td>P</td>
-
-            </tr>
-        </div>
-            </table>
+        [showClear]="true"></p-dropdown>
+           
+        <p-dropdown [options]="Years" (ngModel)="selectedCity2" placeholder="Year" optionLabel="name"
+        [showClear]="true"></p-dropdown>
         
-    </div>
-</div>
+    </ng-template>
+    <ng-template pTemplate="header">
+        <tr>
+            <th>Roll No</th>
+            <th>Name</th>
+            <th>1</th>
+            <th>2</th>
+            <th>3</th>
+            <th>4</th>
+            <th>5</th>
+            <th>6</th>
+            <th>7</th>
+            <th>8</th>
+            <th>9</th>
+            <th>10</th>
+            <th>11</th>
+            <th>12</th>
+            <th>13</th>
+            <th>14</th>
+            <th>15</th>
+            <th>16</th>
+            <th>17</th>
+            <th>18</th>
+            <th>19</th>
+            <th>20</th>
+            <th>21</th>
+            <th>22</th>
+            <th>23</th>
+            <th>24</th>
+            <th>25</th>
+            <th>26</th>
+            <th>27</th>
+            <th>28</th>
+            <th>29</th>
+            <th>30</th>
+            <th>31</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-product>
+        <tr>
+            <td>{{product.code}}</td>
+            <td>{{product.name}}</td>
+            <td>{{product.category}}</td>
+            <td>{{product.quantity}}</td>
+            <td>{{product.quantity}}</td>
+            <td>{{product.category}}</td>
+            <td>{{product.category}}</td>
+            <td>{{product.quantity}}</td>
+            <td>{{product.quantity}}</td>
+            <td>{{product.category}}</td>
+            <td>{{product.quantity}}</td>
+            <td>{{product.category}}</td>
+            <td>{{product.category}}</td>
+            <td>{{product.category}}</td>
+            <td>{{product.quantity}}</td>
+            <td>{{product.quantity}}</td>
+            <td>{{product.quantity}}</td>
+            <td>{{product.quantity}}</td>
+            <td>{{product.category}}</td>
+            <td>{{product.quantity}}</td>
+            <td>{{product.category}}</td>
+            <td>{{product.quantity}}</td>
+            <td>{{product.category}}</td>
+            <td>{{product.category}}</td>
+            <td>{{product.category}}</td>         
+            <td>{{product.category}}</td>
+            <td>{{product.category}}</td>
+            <td>{{product.quantity}}</td>
+            <td>{{product.category}}</td>
+            <td>{{product.quantity}}</td>
+            <td>{{product.category}}</td>
+            <td>{{product.category}}</td>
+            <td>{{product.quantity}}</td>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="summary">
+     <h4> Attendance Sheet Of TyBsc-It </h4>
+    </ng-template>
+</p-table>
