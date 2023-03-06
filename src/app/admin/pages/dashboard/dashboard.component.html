@@ -547,7 +547,45 @@
                         </div>
                     </div>
                 </div>
-
+                <hr>
+                <div class="view grpView">
+                    <div class="grpCards" *ngFor="let grpData of grpData">
+                        <div class="grpTitle">
+                            <h2>{{grpData.gName}}</h2>
+                        </div>
+                        <div class="grpDetails">
+                            <p-button (click)="showMaximizableDialog()" icon="pi pi-external-link"
+                                label="Students List"></p-button>
+                            <p-dialog header="{{grpData.gName}}" [(visible)]="displayMaximizable" [modal]="true"
+                                [style]="{ width: '50vw',height:'50vh' }" [maximizable]="true" [baseZIndex]="10000"
+                                [draggable]="false" [resizable]="false">
+                                <div class="grpList">
+                                    <ul>
+                                        <li>
+                                            <div class="grpListRoll">Roll</div><hr>
+                                            <div class="grpListName">Name</div>
+                                        </li><hr>
+                                        <li *ngFor="let grpData of grpData.students">
+                                            <div class="grpListRoll">{{grpData.roll}}</div>
+                                            <div class="grpListName">{{grpData.name}}</div>
+                                        </li>
+                                    </ul>    
+                                </div>
+                                
+                            </p-dialog>
+                            
+                        </div>
+                        <hr>
+                        <div class="grpTitleOpt">
+                            <div class="grpSub">
+                                <button (click)="recoverGrp(grpData)">Edit</button>
+                            </div>
+                            <div class="grpSub">
+                                <button (click)="removeGrp(grpData._id)">Delete</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </section>
         </p-tabPanel>
     </p-tabView>

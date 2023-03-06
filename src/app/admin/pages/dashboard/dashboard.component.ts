@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AdminService } from '../../service/admin.service';
 import {
-  Form,
   FormBuilder,
   FormControl,
   FormGroup,
@@ -15,8 +14,6 @@ import {
   Isubject,
 } from '../../service/admin.interface';
 import * as FileSaver from 'file-saver';
-import * as XLSX from 'xlsx';
-import { HttpEventType } from '@angular/common/http';
 
 @Component({
   selector: 'app-dashboard',
@@ -37,6 +34,7 @@ export class DashboardComponent implements OnInit {
   display: boolean = false;
   uploadDialog: boolean = false;
   displayEdit: boolean = false;
+  displayMaximizable: boolean = false;
   loading: boolean = true;
   showDialog() {
     this.display = true;
@@ -44,6 +42,10 @@ export class DashboardComponent implements OnInit {
   importDialog() {
     this.uploadDialog = true;
   }
+  showMaximizableDialog() {
+    this.displayMaximizable = true;
+  }
+
   stuValue!: FormGroup;
   stuUploadValue!: FormGroup;
 
@@ -90,6 +92,7 @@ export class DashboardComponent implements OnInit {
       this.grpData = res;
       this.loading = false;
     });
+
     //forms
     this.findAllStudents();
     this.getAllFaculties();
@@ -221,6 +224,7 @@ export class DashboardComponent implements OnInit {
       console.log(res, 'students get');
     });
   }
+
   regStudents() {
     this.stuData = this.stuValue.value;
     this.adminService.registerStudent(this.stuValue.value).subscribe((res) => {

@@ -30,11 +30,62 @@ button{
     align-items: center;
     gap: 0.5rem;
 }
-
+.view{
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+.grpView{
+ display: flex;
+ box-shadow: none;
+ gap: 2rem;
+    .grpCards{
+        padding: 3rem;
+        border-radius: 12px;
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+        h2{
+            font-size: 32px;
+        }
+        .grpTitleOpt{
+            display: flex;
+            flex-direction: row;
+            gap: 1rem;
+        }
+        .grpList{
+            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+            padding: 2rem;
+            margin: 1rem;
+            li{
+                list-style: none;
+                display: flex;
+                justify-content: space-between;
+                gap: 1rem;
+                text-align: center;
+                border: 1px solid black;
+                margin: 5px;
+                padding: 10px;
+                border-radius: 12px;
+                box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 5px;
+            }
+        }
+    }
+}
 
 
 @media screen and (max-width:1000px) {
     .adminOptions{
         overflow-x: scroll;
+    }
+    .view{
+        overflow-y: scroll;
+        max-height: 20rem;
+    }
+    .grpView{
+        display: flex;
+        flex-direction: column;
+        overflow-y: scroll;
+        max-height: 20rem;
+        .grpCards{
+            margin: 0.5rem;
+            padding: 2rem;
+        }
     }
 }
