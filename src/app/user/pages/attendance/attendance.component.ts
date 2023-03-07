@@ -71,17 +71,23 @@ export class AttendanceComponent {
 		{
 			"id": "1001",
 			"code": "370",
-			"name": "Rohan Walke",
+			"name": "Rohan ",
 			"category": "A",
-			"quantity": "p",
+			"quantity": "P",
 		},
 		{
 			"id": "1002",
 			"code": "317",
 			"name": "Shivam",
 			"category": "P",
-			"quantity": "p",
+			"quantity": "P",
 		},
-		
+    {
+			"id": "1003",
+			"code": "369",
+			"name": "Pankaj",
+			"category": "A",
+			"quantity": "A",
+		},
 	]
 }
