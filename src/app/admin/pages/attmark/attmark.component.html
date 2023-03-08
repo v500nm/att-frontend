@@ -92,11 +92,12 @@
                             </div>
                         </form>
                     </p-dialog>
-                    <button pButton type="button" label="Add Schedule" (click)="showDialog()"></button>
+                    <button pButton type="button" label="Add Schedule" (click)="showDialog()"
+                        icon="pi pi-plus"></button>
                 </div>
                 <hr>
                 <div class="view">
-                    <p-table #dt1 responsiveLayout="stack" [value]="schData" dataKey="id" [rows]="5"
+                    <p-table #sch responsiveLayout="stack" [value]="schData" dataKey="id" [rows]="5"
                         [showCurrentPageReport]="true" [rowsPerPageOptions]="[5,10,15]" [loading]="loading"
                         styleClass="p-datatable-customers p-datatable-gridlines" [paginator]="true"
                         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
@@ -203,65 +204,127 @@
             </section>
         </p-tabPanel>
         <p-tabPanel header="Mark Attendance">
-            <section>
-                <form [formGroup]="attValue">
-                    <div class="section">
-                        <!-- [options]="cities" [(ngModel)]="selectedCity1" -->
-                        <p-dropdown [options]="schData"  placeholder="Select Schedule"
-                            optionLabel="scheduleName" formControlName="scheduleName" [showClear]="true"></p-dropdown>
-                    </div>
-                    <div class="section">
-                        <!-- [value]="" [loading]="loading" -->
-                        <p-table #dt1 [value]="schData" dataKey="id" [rows]="5" [showCurrentPageReport]="true"
-                            [rowsPerPageOptions]="[5,10,15]" styleClass="p-datatable-customers p-datatable-gridlines"
-                            [paginator]="true"
-                            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
-                            <ng-template pTemplate="header">
-                                <tr>
-                                    <th>
-                                        <div class="p-d-flex p-jc-between p-ai-center">
-                                            Class
-                                        </div>
-                                    </th>
-                                    <th>
-                                        <div class="p-d-flex p-jc-between p-ai-center">
-                                            Roll
-                                        </div>
-                                    </th>
-                                    <th>
-                                        <div class="p-d-flex p-jc-between p-ai-center">
-                                            Att Status
-                                        </div>
-                                    </th>
-                                </tr>
-                            </ng-template>
+            <section class="Attendance">
+                <div class="title">
+                    <h1>Mark Attendance</h1>
+                </div>
+                <div class="Add markAdd">
+                    <p-table #attAdd responsiveLayout="stack" [value]="schData" dataKey="id" [rows]="5"
+                        [showCurrentPageReport]="true" [rowsPerPageOptions]="[5,10,15]" [loading]="loading"
+                        styleClass="p-datatable-customers p-datatable-gridlines" [paginator]="true"
+                        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
+                        <ng-template pTemplate="caption">
+                            Schedules
+                        </ng-template>
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th>
+                                    <div class="p-d-flex p-jc-between p-ai-center">
+                                        Schedule Name
+                                        <p-columnFilter type="text" field="scheduleName"
+                                            display="menu"></p-columnFilter>
+                                    </div>
+                                </th>
+                                <th>
+                                    <div class="p-d-flex p-jc-between p-ai-center">
+                                        Date
+                                        <p-columnFilter type="date" field="Date" display="menu"></p-columnFilter>
+                                    </div>
+                                </th>
+                                <th>
+                                    <div class="p-d-flex p-jc-between p-ai-center">
+                                        Timing
+                                    </div>
+                                </th>
+                                <th>
+                                    <div class="p-d-flex p-jc-between p-ai-center">
+                                        Duration
+                                    </div>
+                                </th>
+                                <th>
+                                    <div class="p-d-flex p-jc-between p-ai-center">
+                                        Group
+                                    </div>
+                                </th>
+                                <th>
+                                    <div class="p-d-flex p-jc-between p-ai-center">
+                                        Subject
+                                    </div>
+                                </th>
+                                <th>
+                                    <div class="p-d-flex p-jc-between p-ai-center">
+                                        Faculty
+                                    </div>
+                                </th>
+                                <th>
+                                    <div class="p-d-flex p-jc-between p-ai-center">
+                                        Classroom
+                                    </div>
+                                </th>
+                                <th>
+                                    <div class="p-d-flex p-jc-between p-ai-center">
+                                        Mark Attendance
+                                    </div>
+                                </th>
 
-                            <ng-template pTemplate="body" let-grpData let-schData>
-                                <tr>
-                                    <td>
-                                        {{schData.groups.gName}}
-                                    </td>
-                                    <td>
-                                        {{schData.groups.students}}
-                                    </td>
-                                    <td>
-                                        <select name="" id="">
-                                            <option value="">--select--</option>
-                                            <option value="">P</option>
-                                            <option value="">A</option>
-                                            <option value="">NA</option>
-                                        </select>
-                                    </td>
-                                </tr>
-                            </ng-template>
-                            <ng-template pTemplate="emptymessage">
-                                <tr>
-                                    <td colspan="7">No customers found.</td>
-                                </tr>
-                            </ng-template>
-                        </p-table>
-                    </div>
-                </form>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-schData>
+                            <tr>
+                                <td><span class="p-column-title">Schedule Name</span>
+                                    {{schData.scheduleName}}
+                                </td>
+                                <td><span class="p-column-title">Date</span>
+                                    {{schData.Date}}
+                                </td>
+                                <td><span class="p-column-title">Timing</span>
+                                    {{schData.timing}}
+                                </td>
+                                <td><span class="p-column-title">Duration</span>
+                                    {{schData.duration}}
+                                </td>
+                                <td><span class="p-column-title">Group</span>
+                                    {{schData.groups.gName}}
+                                </td>
+                                <td><span class="p-column-title">Subject</span>
+                                    {{schData.subjects.subject}}
+                                </td>
+                                <td><span class="p-column-title">Faculty</span>
+                                    {{schData.faculties.fname}}
+                                </td>
+                                <td><span class="p-column-title">Classroom</span>
+                                    {{schData.classrooms.class}}
+                                </td>
+                                <td><span class="p-column-title">Attendance</span>
+                                    <button pButton type="button" label="mark" icon="pi pi-user-edit"
+                                        (click)="markAttDisplay()"></button>
+                                    <p-dialog header="{{schData.scheduleName}}" [(visible)]="AttDisplay" [modal]="true"
+                                        [style]="{ width: '60vw',height:'50vh' }" [maximizable]="true"
+                                        [baseZIndex]="10000" [draggable]="false" [resizable]="false">
+                                          <section class="add">
+                                            <table>
+                                                <tr>
+                                                  <th>Month</th>
+                                                  <th>Savings</th>
+                                                </tr>   
+                                                <tr>
+                                                  <td>{{schData.groups.students}}</td>
+                                                  <td>$100</td>
+                                                </tr>
+                                              </table>
+                                          </section>
+                                    </p-dialog>
+                                </td>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="emptymessage">
+                            <tr>
+                                <td colspan="7">No customers found.</td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+
+                </div>
             </section>
 
         </p-tabPanel>

@@ -20,6 +20,7 @@ export interface Iclassroom{
 }
 export interface Iattendance{
     attID:string;
+    schedule:Ischedule[];
     stats:AttStatus;
 }
 export enum AttStatus{

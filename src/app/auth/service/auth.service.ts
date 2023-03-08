@@ -7,7 +7,7 @@ import { Iloginuser, Iregistration } from './auth.interface';
 })
 export class AuthService {
   constructor(private http:HttpClient) { }
-  adminUrl = "http://localhost:3000/adminlogin/"
+  adminUrl = "http://localhost:3000/auth/"
 
   postlogin(data: Iloginuser): Observable<Iloginuser> {
     return this.http.post<Iloginuser>(`${this.adminUrl}login`,data);
