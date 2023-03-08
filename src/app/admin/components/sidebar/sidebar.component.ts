@@ -23,7 +23,10 @@ export class SidebarComponent {
     this.activeTab = 'admin/attendance';
     this.router.navigate(['admin/attendance']);
   }
-
+  assign(){
+    this.activeTab='admin/assign';
+    this.router.navigate(['admin/assign']);
+  }
   logout(){
     this.activeTab = '';
     this.router.navigate(['']);

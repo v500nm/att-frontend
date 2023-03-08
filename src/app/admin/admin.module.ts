@@ -19,6 +19,7 @@ import { SplitButtonModule } from 'primeng/splitbutton';
 import {ListboxModule} from 'primeng/listbox';
 import { AttmarkComponent } from './pages/attmark/attmark.component';
 import {FileUploadModule} from 'primeng/fileupload';
+import { AssignComponent } from './pages/assign/assign.component';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import {FileUploadModule} from 'primeng/fileupload';
        SidebarComponent,
        FooterComponent,
        ChatbotComponent,
-       AttmarkComponent
+       AttmarkComponent,
+       AssignComponent
   ],
   imports: [
     SidebarModule,

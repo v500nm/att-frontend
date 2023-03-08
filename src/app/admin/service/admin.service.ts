@@ -146,19 +146,19 @@ export class AdminService {
 
   findOneAtt(attendance: Iattendance): Observable<Iattendance> {
     return this.http.get<Iattendance>(
-      this.attendanceUrl + '/' + attendance.attID
+      this.attendanceUrl + '/' + attendance._id
     );
   }
 
   updateAtt(_id: string, attendance: Iattendance): Observable<Iattendance> {
     return this.http.put<Iattendance>(
-      this.attendanceUrl + '/' + attendance.attID,
+      this.attendanceUrl + '/' + attendance._id,
       attendance
     );
   }
 
-  removeAtt(attID: string): Observable<Iattendance> {
-    return this.http.delete<Iattendance>(this.attendanceUrl + '/' + attID);
+  removeAtt(_id: string): Observable<Iattendance> {
+    return this.http.delete<Iattendance>(this.attendanceUrl + '/' + _id);
   }
   uploadAtt(fileData: FormData): Observable<Iattendance[]> {
     const headers = new HttpHeaders();

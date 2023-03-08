@@ -4,6 +4,9 @@ export interface Istudents{
     name:string;
     classGrp:string;
 }
+export interface Icr{
+    
+}
 export interface Ifaculties{
     _id:string;
     fname:string;
@@ -19,7 +22,7 @@ export interface Iclassroom{
     class:string;
 }
 export interface Iattendance{
-    attID:string;
+    _id:string;
     schedule:Ischedule[];
     stats:AttStatus;
 }

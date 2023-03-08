@@ -1,0 +1,33 @@
+.container {
+  border-radius: 8px;
+  margin: 1rem;
+  padding: 2rem;
+  background-color: white;
+  .top {
+    h1 {
+      text-align: center;
+    }
+  }
+  .sub {
+    margin: 2rem;
+  }
+  .view {
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  }
+  .editGrp {
+    display: flex;
+    gap: 0.5rem;
+  }
+  .adminOptions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+}
+button {
+  background-color: #3b82f6;
+  color: white;
+  padding: 15px;
+  border: none;
+  border-radius: 10px;
+}

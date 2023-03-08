@@ -49,9 +49,6 @@ export class DashboardComponent implements OnInit {
   stuValue!: FormGroup;
   stuUploadValue!: FormGroup;
 
-  facValue!: FormGroup;
-  facUploadValue!: FormGroup;
-
   subValue!: FormGroup;
   subUploadValue!: FormGroup;
 
@@ -62,8 +59,7 @@ export class DashboardComponent implements OnInit {
   grpUploadValue!: FormGroup;
 
   stuData: Istudents[] = [];
-  facData: Ifaculties[] = [];
-  subData: Isubject[] = [];
+ subData: Isubject[] = [];
   classData: Iclassroom[] = [];
   grpData: Igroups[] = [];
 
@@ -73,10 +69,6 @@ export class DashboardComponent implements OnInit {
     //table
     this.adminService.findAllStudents().subscribe((res) => {
       this.stuData = res;
-      this.loading = false;
-    });
-    this.adminService.getAllFaculties().subscribe((res) => {
-      this.facData = res;
       this.loading = false;
     });
     this.adminService.findAllSubjects().subscribe((res) => {
@@ -95,7 +87,6 @@ export class DashboardComponent implements OnInit {
 
     //forms
     this.findAllStudents();
-    this.getAllFaculties();
     this.findAllSubjects();
     this.findAllClass();
     this.findAllGroup();
@@ -106,14 +97,6 @@ export class DashboardComponent implements OnInit {
       classGrp: new FormControl(''),
     })),
       (this.stuUploadValue = this.formsbuilder.group({
-        file: ['', Validators.required],
-      })),
-      (this.facValue = this.formsbuilder.group({
-        fname: new FormControl(''),
-        department: new FormControl(''),
-        designation: new FormControl(''),
-      })),
-      (this.facUploadValue = this.formsbuilder.group({
         file: ['', Validators.required],
       })),
       (this.subValue = this.formsbuilder.group({
@@ -150,6 +133,7 @@ export class DashboardComponent implements OnInit {
     this.adminService.createGroup(this.grpValue.value).subscribe((res) => {
       console.log(res, 'group Post');
       this.grpValue.reset();
+      this.findAllGroup();
     });
   }
   removeGrp(_id: string) {
@@ -299,85 +283,6 @@ export class DashboardComponent implements OnInit {
     );
   }
 
-  //faculties
-  getAllFaculties() {
-    this.adminService.getAllFaculties().subscribe((res: Ifaculties[]) => {
-      this.facData = res;
-      console.log(res, 'faculty get');
-    });
-  }
-  postFac() {
-    this.facData = this.facValue.value;
-    console.log(this.facData);
-    this.adminService.addFaculty(this.facValue.value).subscribe((res) => {
-      console.log(res, 'faculty post');
-      this.facValue.reset();
-      this.getAllFaculties();
-    });
-  }
-  removeFaculty(_id: string) {
-    this.adminService.removeFaculty(_id).subscribe((res) => {
-      console.log(res, 'delete works');
-      this.getAllFaculties();
-    });
-  }
-  recoverFaculty(facData: any) {
-    delete facData.__v;
-    this.facValue.addControl('_id', new FormControl(''));
-    this.facValue.setValue(facData);
-    this.stuSwitch = false;
-    this.showDialog();
-    console.log(this.facData, 'fac coming');
-  }
-  updateFac() {
-    const id = this.facValue.value._id;
-    this.adminService
-      .updateFaculty(id, this.facValue.value)
-      .subscribe((res: any) => {
-        this.facData = res;
-        this.stuSwitch = true;
-        this.getAllFaculties();
-      });
-    this.facValue.reset();
-  }
-  onFacFileChange(event: any) {
-    if (event && event.files && event.files.length > 0) {
-      const file = event.files[0];
-      this.facUploadValue.get('file')?.setValue(file);
-    }
-  }
-  onFacSubmit(): void {
-    const facExcelData = new FormData();
-    facExcelData.append('file', this.facUploadValue.get('file')?.value);
-    this.adminService.uploadFac(facExcelData).subscribe((data: any) => {
-      this.facData = data;
-      console.log(this.facData);
-    });
-  }
-
-  exportFacExcel() {
-    import('xlsx').then((xlsx) => {
-      const worksheet = xlsx.utils.json_to_sheet(this.facData);
-      const workbook = { Sheets: { data: worksheet }, SheetNames: ['data'] };
-      const excelBuffer: any = xlsx.write(workbook, {
-        bookType: 'xlsx',
-        type: 'array',
-      });
-      this.saveAsFacExcelFile(excelBuffer, 'Students List');
-    });
-  }
-  saveAsFacExcelFile(buffer: any, fileName: string): void {
-    let EXCEL_TYPE =
-      'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
-    let EXCEL_EXTENSION = '.xlsx';
-    const data: Blob = new Blob([buffer], {
-      type: EXCEL_TYPE,
-    });
-    FileSaver.saveAs(
-      data,
-      fileName + '_export_' + new Date().getTime() + EXCEL_EXTENSION
-    );
-  }
   //subjects
   findAllSubjects() {
     this.adminService.findAllSubjects().subscribe((res: Isubject[]) => {
