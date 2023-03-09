@@ -49,10 +49,8 @@ export class DashboardComponent implements OnInit {
 
   stuValue!: FormGroup;
   stuUploadValue!: FormGroup;
-
   subValue!: FormGroup;
   subUploadValue!: FormGroup;
-
   classValue!: FormGroup;
   classUploadValue!: FormGroup;
   

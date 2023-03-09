@@ -10,7 +10,9 @@ import {
   Istudents,
   Isubject,
 } from '../../service/admin.interface';
-
+enum stats{
+  
+}
 @Component({
   selector: 'app-attmark',
   templateUrl: './attmark.component.html',

@@ -3,6 +3,12 @@ export interface Istudents{
     roll:string;
     name:string;
     classGrp:string;
+    role:roles
+}
+export enum roles{
+    cr='CR',
+    di='DI',
+    none='NONE'
 }
 export interface Ifaculties{
     _id:string;
@@ -19,7 +25,8 @@ export interface Iclassroom{
     class:string;
 }
 export interface Iattendance{
-    attID:string;
+    _id:string;
+    schedule:Ischedule[];
     stats:AttStatus;
 }
 export enum AttStatus{
@@ -42,4 +49,3 @@ export interface Ischedule{
     subjects:Isubject[];
     classrooms:Iclassroom[];
 }
-

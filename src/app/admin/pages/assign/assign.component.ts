@@ -8,7 +8,6 @@ import {
 } from '@angular/forms';
 import {
   Iclassroom,
-  Icr,
   Ifaculties,
   Igroups,
   Istudents,
@@ -56,6 +55,7 @@ export class AssignComponent implements OnInit {
   subData: Isubject[] = [];
   classData: Iclassroom[] = [];
   grpData: Igroups[] = [];
+  
 
   ngOnInit(): void {
     this.adminService.getAllFaculties().subscribe((res) => {

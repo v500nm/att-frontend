@@ -10,9 +10,6 @@ export enum roles{
     di='DI',
     none='NONE'
 }
-export interface Icr{
-    
-}
 export interface Ifaculties{
     _id:string;
     fname:string;
