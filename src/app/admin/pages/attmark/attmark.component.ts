@@ -97,10 +97,14 @@ export class AttmarkComponent implements OnInit {
       subjects: new FormControl(''),
       classrooms: new FormControl(''),
     });
-    this.attValue = this.formsbuilder.group({});
+    this.attValue = this.formsbuilder.group({
+      schedule:new FormControl(''),
+      stats:new FormControl('')
+    });
   }
 
   //att
+ 
   findAllAtt() {
     this.adminService.findAllAtt().subscribe((res: Iattendance[]) => {
       this.attData = res;
@@ -115,6 +119,15 @@ export class AttmarkComponent implements OnInit {
     });
     this.findAllAtt();
     this.attValue.reset();
+  }
+  removeAtt(_id:string){
+
+  }
+  recoverAtt(attData:any){
+
+  }
+  updateAtt(){
+
   }
 
   //schedule

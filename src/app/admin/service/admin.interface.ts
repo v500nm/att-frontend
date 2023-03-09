@@ -3,6 +3,12 @@ export interface Istudents{
     roll:string;
     name:string;
     classGrp:string;
+    role:roles
+}
+export enum roles{
+    cr='CR',
+    di='DI',
+    none='NONE'
 }
 export interface Icr{
     

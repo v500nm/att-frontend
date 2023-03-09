@@ -15,13 +15,12 @@ import {
   Isubject,
 } from '../../service/admin.interface';
 import * as FileSaver from 'file-saver';
-
 @Component({
   selector: 'app-assign',
   templateUrl: './assign.component.html',
-  styleUrls: ['./assign.component.scss']
+  styleUrls: ['./assign.component.scss'],
 })
-export class AssignComponent implements OnInit{
+export class AssignComponent implements OnInit {
   constructor(
     private adminService: AdminService,
     private formsbuilder: FormBuilder
@@ -48,52 +47,40 @@ export class AssignComponent implements OnInit{
   facUploadValue!: FormGroup;
   facData: Ifaculties[] = [];
 
-  crValue!:FormGroup;
-  crData:Icr[]=[];
+  stuValue!: FormGroup;
+  subValue!: FormGroup;
+  classValue!: FormGroup;
+  grpValue!: FormGroup;
+
+  stuData: Istudents[] = [];
+  subData: Isubject[] = [];
+  classData: Iclassroom[] = [];
+  grpData: Igroups[] = [];
 
   ngOnInit(): void {
     this.adminService.getAllFaculties().subscribe((res) => {
       this.facData = res;
       this.loading = false;
     });
-    this.adminService.getAllFaculties().subscribe((res) => {
-      this.crData = res;
+    this.adminService.findAllGroup().subscribe((res) => {
+      this.grpData = res;
       this.loading = false;
     });
 
     this.getAllFaculties();
-    this.getCrData();
+    this.findAllGroup();
+    this.findAllStudents();
 
-    this.facValue = this.formsbuilder.group({
+    (this.facValue = this.formsbuilder.group({
       fname: new FormControl(''),
       department: new FormControl(''),
       designation: new FormControl(''),
-    }),
-    this.facUploadValue = this.formsbuilder.group({
-      file: ['', Validators.required],
-    }),
-    this.crValue=this.formsbuilder.group({
-
-    })
-
+    })),
+      (this.facUploadValue = this.formsbuilder.group({
+        file: ['', Validators.required],
+      }))
   }
 
-  //CR&Di
-  getCrData(){
-
-  }
-  assignCr(){
-
-  }
-  recoverCr(){
-
-  }
-  editCr(){
-    
-  }
-  removeCr(){
-
-  }
   //faculties
   getAllFaculties() {
     this.adminService.getAllFaculties().subscribe((res: Ifaculties[]) => {
@@ -173,5 +160,65 @@ export class AssignComponent implements OnInit{
       fileName + '_export_' + new Date().getTime() + EXCEL_EXTENSION
     );
   }
-
+  //groups
+  findAllGroup() {
+    this.adminService.findAllGroup().subscribe((res: Igroups[]) => {
+      this.grpData = res;
+      console.log(res, 'groups get');
+    });
+  }
+  createGroup() {
+    this.grpData = this.grpValue.value;
+    this.adminService.createGroup(this.grpValue.value).subscribe((res) => {
+      console.log(res, 'group Post');
+      this.grpValue.reset();
+      this.findAllGroup();
+    });
+  }
+  removeGrp(_id: string) {
+    this.adminService.removeGroup(_id).subscribe((res) => {
+      console.log(res, 'delete works');
+      this.findAllGroup();
+    });
+  }
+  recoverGrp(grpData: any) {
+    delete grpData.__v;
+    this.grpValue.addControl('_id', new FormControl(''));
+    this.grpValue.setValue(grpData);
+    this.stuSwitch = false;
+    this.showDialog();
+    console.log(this.grpData, 'grp coming');
+  }
+  updateGrp() {
+    const id = this.grpValue.value._id;
+    this.adminService
+      .updateGroup(id, this.grpValue.value)
+      .subscribe((res: any) => {
+        this.grpData = res;
+        this.stuSwitch = true;
+        this.findAllGroup();
+      });
+    this.grpValue.reset();
+  }
+  //students
+  findAllStudents() {
+    this.adminService.findAllStudents().subscribe((res: Istudents[]) => {
+      this.stuData = res;
+      console.log(res, 'students get');
+    });
+  }
+  //subjects
+  findAllSubjects() {
+    this.adminService.findAllSubjects().subscribe((res: Isubject[]) => {
+      this.subData = res;
+      console.log(res, 'subject get');
+    });
+  }
+  //classroom
+  findAllClass() {
+    this.adminService.findAllClass().subscribe((res: Iclassroom[]) => {
+      this.classData = res;
+      console.log(res, 'classroom get');
+    });
+  }
 }

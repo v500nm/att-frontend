@@ -299,20 +299,27 @@
                                     <button pButton type="button" label="mark" icon="pi pi-user-edit"
                                         (click)="markAttDisplay()"></button>
                                     <p-dialog header="{{schData.scheduleName}}" [(visible)]="AttDisplay" [modal]="true"
-                                        [style]="{ width: '60vw',height:'50vh' }" [maximizable]="true"
+                                        [style]="{ width: '80vw',height:'50vh' }" [maximizable]="true"
                                         [baseZIndex]="10000" [draggable]="false" [resizable]="false">
-                                          <section class="add">
-                                            <table>
+
+                                        <form [formGroup]="attValue">
+                                            <table class="attList">
                                                 <tr>
-                                                  <th>Month</th>
-                                                  <th>Savings</th>
-                                                </tr>   
-                                                <tr>
-                                                  <td>{{schData.groups.students}}</td>
-                                                  <td>$100</td>
+                                                    <th>Roll</th>
+                                                    <th>Name</th>
+                                                    <th>Attendance</th>
                                                 </tr>
-                                              </table>
-                                          </section>
+                                                <tr *ngFor="let stu of schData.groups.students">
+                                                    <td>{{stu.roll}}</td>
+                                                    <td>{{stu.name}}</td>
+                                                    <td>
+                                                        <label>Present
+                                                            <input type="checkbox">
+                                                        </label>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </form>
                                     </p-dialog>
                                 </td>
                             </tr>

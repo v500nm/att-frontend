@@ -1,9 +1,12 @@
+
 .sideNav{
     display: flex;
     gap: 1rem;
     flex-direction: column;
     .subNav{
         display: flex;
+        padding: 0.5rem;
+        align-items: center;
         justify-content: space-between;
         cursor: pointer;
         a{
@@ -11,5 +14,11 @@
             color: black;
             font-size: x-large;
         }
+    }
+    .subNav:hover{
+        background-color: #6fa6ff;
+        padding: 0.5rem;
+        border-radius: 8px;
+        transition: 1.2s;
     }
 }

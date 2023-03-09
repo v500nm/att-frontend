@@ -12,6 +12,7 @@ import {
   Igroups,
   Istudents,
   Isubject,
+  roles
 } from '../../service/admin.interface';
 import * as FileSaver from 'file-saver';
 
@@ -54,10 +55,8 @@ export class DashboardComponent implements OnInit {
 
   classValue!: FormGroup;
   classUploadValue!: FormGroup;
-
-  grpValue!: FormGroup;
-  grpUploadValue!: FormGroup;
-
+  
+  stuRole=roles;
   stuData: Istudents[] = [];
  subData: Isubject[] = [];
   classData: Iclassroom[] = [];
@@ -80,21 +79,16 @@ export class DashboardComponent implements OnInit {
       this.loading = false;
     });
 
-    this.adminService.findAllGroup().subscribe((res) => {
-      this.grpData = res;
-      this.loading = false;
-    });
-
     //forms
     this.findAllStudents();
     this.findAllSubjects();
     this.findAllClass();
-    this.findAllGroup();
 
     (this.stuValue = this.formsbuilder.group({
       roll: new FormControl(''),
       name: new FormControl(''),
       classGrp: new FormControl(''),
+      role:new FormControl('')
     })),
       (this.stuUploadValue = this.formsbuilder.group({
         file: ['', Validators.required],
@@ -110,95 +104,8 @@ export class DashboardComponent implements OnInit {
       })),
       (this.classUploadValue = this.formsbuilder.group({
         file: ['', Validators.required],
-      })),
-      (this.grpValue = this.formsbuilder.group({
-        gName: new FormControl(''),
-        students: new FormControl(''),
-      })),
-      (this.grpUploadValue = this.formsbuilder.group({
-        file: ['', Validators.required],
-      }));
+      }))
     //crud buttons
-  }
-
-  //groups
-  findAllGroup() {
-    this.adminService.findAllGroup().subscribe((res: Igroups[]) => {
-      this.grpData = res;
-      console.log(res, 'groups get');
-    });
-  }
-  createGroup() {
-    this.grpData = this.grpValue.value;
-    this.adminService.createGroup(this.grpValue.value).subscribe((res) => {
-      console.log(res, 'group Post');
-      this.grpValue.reset();
-      this.findAllGroup();
-    });
-  }
-  removeGrp(_id: string) {
-    this.adminService.removeGroup(_id).subscribe((res) => {
-      console.log(res, 'delete works');
-      this.findAllGroup();
-    });
-  }
-  recoverGrp(grpData: any) {
-    delete grpData.__v;
-    this.grpValue.addControl('_id', new FormControl(''));
-    this.grpValue.setValue(grpData);
-    this.stuSwitch = false;
-    this.showDialog();
-    console.log(this.grpData, 'grp coming');
-  }
-  updateGrp() {
-    const id = this.grpValue.value._id;
-    this.adminService
-      .updateGroup(id, this.grpValue.value)
-      .subscribe((res: any) => {
-        this.grpData = res;
-        this.stuSwitch = true;
-        this.findAllGroup();
-      });
-    this.grpValue.reset();
-  }
-  onGrpFileChange(event: any) {
-    if (event && event.files && event.files.length > 0) {
-      const file = event.files[0];
-      this.grpUploadValue.get('file')?.setValue(file);
-    }
-  }
-  onGrpSubmit(): void {
-    const grpExcelData = new FormData();
-    grpExcelData.append('file', this.grpUploadValue.get('file')?.value);
-
-    this.adminService.uploadGrp(grpExcelData).subscribe((data: any) => {
-      this.grpData = data;
-      console.log(this.grpData);
-    });
-  }
-
-  exportGrpExcel() {
-    import('xlsx').then((xlsx) => {
-      const worksheet = xlsx.utils.json_to_sheet(this.grpData);
-      const workbook = { Sheets: { data: worksheet }, SheetNames: ['data'] };
-      const excelBuffer: any = xlsx.write(workbook, {
-        bookType: 'xlsx',
-        type: 'array',
-      });
-      this.saveAsGrpExcelFile(excelBuffer, 'groups List');
-    });
-  }
-  saveAsGrpExcelFile(buffer: any, fileName: string): void {
-    let EXCEL_TYPE =
-      'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
-    let EXCEL_EXTENSION = '.xlsx';
-    const data: Blob = new Blob([buffer], {
-      type: EXCEL_TYPE,
-    });
-    FileSaver.saveAs(
-      data,
-      fileName + '_export_' + new Date().getTime() + EXCEL_EXTENSION
-    );
   }
 
   //students

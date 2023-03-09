@@ -43,5 +43,13 @@ button {
   .container {
     margin: 1rem;
     padding: 1.5rem;
+    .attList {
+      td {
+        max-width: 100px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+    }
   }
 }
