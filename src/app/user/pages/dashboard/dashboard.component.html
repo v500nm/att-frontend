@@ -4,8 +4,8 @@
     <div class="cards">
       <div class="card">
         <div class="card-content">
-          <div class="number">
-            <p>370</p>
+          <div class="number stuLength">
+            {{stuData.length}}
           </div>
           <div class="card-name">Students</div>
         </div>
@@ -15,7 +15,9 @@
       </div>
       <div class="card">
         <div class="card-content">
-          <div class="number">5</div>
+          <div class="number facLength" ng-repeat="fac in facData">
+            {{facData.length}}
+          </div>
           <div class="card-name">Teachers</div>
         </div>
         <div class="icon-box">
@@ -24,8 +26,10 @@
       </div>
       <div class="card">
         <div class="card-content">
-          <div class="number">60</div>
-          <div class="card-name">Total Lecture</div>
+          <div class="number schlength">
+            {{schData.length}}
+          </div>
+          <div class="card-name">Total Schedules</div>
         </div>
         <div class="icon-box">
           <i class="fas fa-thin fa-books"></i>
@@ -33,8 +37,10 @@
       </div>
       <div class="card">
         <div class="card-content">
-          <div class="number">3</div>
-          <div class="card-name">Schedule</div>
+          <div class="number courseLength">
+            {{classData.length}}
+          </div>
+          <div class="card-name">classrooms</div>
         </div>
         <div class="icon-box">
           <i class="fas fa-thin fa-clipboard-list"></i>
