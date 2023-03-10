@@ -8,17 +8,17 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { debounceTime, Observable, tap } from 'rxjs';
-import { AuthService } from '../service/auth.service';
-import { Iregistration } from '../service/auth.interface';
+import { AuthService } from '../../shared/auth.service';
+import { IstuRegistration } from '../../shared/auth.interface';
 
 @Component({
-  selector: 'app-registration',
-  templateUrl: './registration.component.html',
-  styleUrls: ['./registration.component.scss'],
+  selector: 'app-sturegister',
+  templateUrl: './sturegister.component.html',
+  styleUrls: ['./sturegister.component.scss']
 })
-export class RegistrationComponent {
-  registerDatas: Iregistration[] = [];
-  registerForm: any = FormGroup;
+export class SturegisterComponent implements OnInit {
+  sturegisterDatas: IstuRegistration[] = [];
+  stuRegisterForm: any = FormGroup;
   submitted = false;
 
   constructor(
@@ -29,7 +29,7 @@ export class RegistrationComponent {
   ) {}
 
   ngOnInit() {
-    this.registerForm = this.fb.group({
+    this.stuRegisterForm = this.fb.group({
       firstName: ['', Validators.required],
       email: [
         '',
@@ -44,12 +44,12 @@ export class RegistrationComponent {
   }
 
   get f() {
-    return this.registerForm.controls;
+    return this.stuRegisterForm.controls;
   }
 
   registerProcess() {
     this.submitted = true;
-    if (this.registerForm.invalid) {
+    if (this.stuRegisterForm.invalid) {
       return;
     }
 
@@ -57,11 +57,11 @@ export class RegistrationComponent {
   }
 
   getRegister() {
-    this.registerDatas = this.registerForm.value;
+    this.sturegisterDatas = this.stuRegisterForm.value;
     const inputElement = document.getElementById('email') as HTMLInputElement;
     const inputValue = inputElement.value;
 
-    this.auth.getregister().subscribe((res) => {
+    this.auth.getStuRegister().subscribe((res) => {
       const data = res;
 
       const final = data.find((data: { _id: number }) => data._id == data._id);
@@ -69,27 +69,27 @@ export class RegistrationComponent {
         this.postData();
       } else if (final.email == inputValue) {
         alert('email is already exists');
-        this.registerForm.reset();
+        this.stuRegisterForm.reset();
       } else {
         this.auth
-          .postregister(this.registerForm.value)
+          .postStuRegister(this.stuRegisterForm.value)
           .subscribe((result: any) => {
             alert('Data Register Successfull');
-            this.registerForm.reset();
-            this.router.navigate(['/login/']);
+            this.stuRegisterForm.reset();
+            this.router.navigate(['/studentlogin/']);
           });
-        console.log(this.registerDatas);
+        console.log(this.sturegisterDatas);
       }
     });
   }
 
   postData() {
-    this.auth.postregister(this.registerForm.value).subscribe((result: any) => {
+    this.auth.postStuRegister(this.stuRegisterForm.value).subscribe((result: any) => {
       alert('Data Register Successfull');
       const data = result;
-      this.registerForm.reset();
+      this.stuRegisterForm.reset();
       this.router.navigate(['/']);
     });
-    console.log(this.registerDatas);
+    console.log(this.sturegisterDatas);
   }
 }

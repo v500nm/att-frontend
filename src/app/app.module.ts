@@ -21,6 +21,8 @@ import { AccordionModule } from 'primeng/accordion';
 import {SplitterModule} from 'primeng/splitter';
 import { KnobModule } from "primeng/knob";
 import {TableModule} from 'primeng/table';
+import { AuthService } from './shared/auth.service';
+import { AuthGuard } from './shared/auth.guard';
 
 @NgModule({
   declarations: [
@@ -49,7 +51,7 @@ import {TableModule} from 'primeng/table';
     KnobModule,
     TableModule
   ],
-  providers: [],
+  providers: [AuthService,AuthGuard],
   bootstrap: [AppComponent],
   
 

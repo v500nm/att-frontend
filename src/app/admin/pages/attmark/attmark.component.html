@@ -303,7 +303,21 @@
                                         [baseZIndex]="10000" [draggable]="false" [resizable]="false">
 
                                         <form [formGroup]="attValue">
-                                            <table class="attList">
+                                            <ng-container>
+                                                <h3>Select Students</h3>
+                                                <p-listbox formControlName="markStudents" [options]="stuData" [metaKeySelection]="false"
+                                                    [checkbox]="true" [filter]="true" [listStyle]="{'max-height':'200px'}"
+                                                    [multiple]="true" optionLabel="classGrp">
+                                                    <ng-template let-stuData pTemplate="item">
+                                                        <div class="country-item">
+                                                            <span>{{stuData.classGrp}}-{{stuData.roll}}</span>
+                                                        </div>
+                                                    </ng-template>
+                                                </p-listbox>
+                                            </ng-container>
+                                            <button pButton type="button" label="Add"
+                                    (click)="markAtt()"></button>
+                                            <!-- <table class="attList">
                                                 <tr>
                                                     <th>Roll</th>
                                                     <th>Name</th>
@@ -318,7 +332,7 @@
                                                         </label>
                                                     </td>
                                                 </tr>
-                                            </table>
+                                            </table> -->
                                         </form>
                                     </p-dialog>
                                 </td>

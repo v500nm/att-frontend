@@ -28,6 +28,7 @@ export interface Iattendance{
     _id:string;
     schedule:Ischedule[];
     stats:AttStatus;
+    markStudents:string[];
 }
 export enum AttStatus{
     present = "P",

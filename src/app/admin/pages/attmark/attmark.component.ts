@@ -101,7 +101,8 @@ export class AttmarkComponent implements OnInit {
     });
     this.attValue = this.formsbuilder.group({
       schedule:new FormControl(''),
-      stats:new FormControl('')
+      stats:new FormControl(''),
+      markStudents:new FormControl('')
     });
   }
 

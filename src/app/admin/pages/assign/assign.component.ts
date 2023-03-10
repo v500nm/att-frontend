@@ -78,7 +78,11 @@ export class AssignComponent implements OnInit {
     })),
       (this.facUploadValue = this.formsbuilder.group({
         file: ['', Validators.required],
-      }))
+      })),
+      this.grpValue = this.formsbuilder.group({
+        gName: new FormControl(''),
+        students: new FormControl(''),
+      })
   }
 
   //faculties
