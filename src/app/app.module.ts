@@ -21,6 +21,8 @@ import { AccordionModule } from 'primeng/accordion';
 import {SplitterModule} from 'primeng/splitter';
 import { KnobModule } from "primeng/knob";
 import {TableModule} from 'primeng/table';
+import {CardModule} from 'primeng/card';
+import {ChartModule} from 'primeng/chart';
 
 @NgModule({
   declarations: [
@@ -47,7 +49,9 @@ import {TableModule} from 'primeng/table';
     FormsModule,
     SplitterModule,
     KnobModule,
-    TableModule
+    TableModule,
+    CardModule,
+    ChartModule
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -28,6 +28,7 @@ export class DashboardComponent implements OnInit {
   attData: Iattendance[] = [];
   facData: Ifaculties[] = [];
   schData: Ischedule[] = [];
+  chartOptions: any;
 
   ngOnInit(): void {
     this.findAllStudents();
@@ -88,4 +89,27 @@ export class DashboardComponent implements OnInit {
       console.log(res, 'classroom get');
     });
   }
-}
+
+
+
+
+ data = {
+      labels: ['Total Lecture', 'Present', 'Absent'],
+      datasets: [
+        {
+          data: [40, 30, 10],
+          backgroundColor: [
+            "#42A5F5",
+            "#66BB6A",
+            "#FFA726"
+          ],
+          hoverBackgroundColor: [
+            "#64B5F6",
+            "#81C784",
+            "#FFB74D"
+          ]
+        }
+      ]
+    };
+  }
+
