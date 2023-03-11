@@ -6,8 +6,10 @@ import { DeploginComponent } from './deplogin/deplogin.component';
 import { DepregisterComponent } from './depregister/depregister.component';
 import { StuloginComponent } from './stulogin/stulogin.component';
 import { SturegisterComponent } from './sturegister/sturegister.component';
+import { StartComponent } from './start/start.component';
 
 const routes: Routes = [
+  { path: '', component: StartComponent },
   { path: 'adminlogin', component: AdloginComponent },
   { path: 'adminregister', component: AdregisterComponent },
   { path: 'departmentlogin', component: DeploginComponent },

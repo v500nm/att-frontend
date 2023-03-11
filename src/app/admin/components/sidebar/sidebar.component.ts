@@ -9,7 +9,7 @@ import { AuthService } from 'src/app/shared/auth.service';
 })
 export class SidebarComponent {
   visibleSidebar:any;
-  activeTab ='user';
+  activeTab ='admin';
   constructor ( private router:Router,private authService:AuthService){}
 
   onLogout() {
