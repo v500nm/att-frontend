@@ -33,7 +33,7 @@
     }
   
     button {
-      background-color: blue;
+      background-color: #3b82f6;
       outline: none;
       border: none;
       border-radius: 100px;
@@ -43,6 +43,7 @@
     }
     .btn:hover {
       background-color: black;
+      transition: 1s;
     }
   
     p {
@@ -51,7 +52,7 @@
   
       a {
         cursor: pointer;
-        color: blue;
+        color: #3b82f6;
       }
     }
     .pass {
