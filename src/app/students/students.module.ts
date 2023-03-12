@@ -7,7 +7,6 @@ import { HeaderComponent } from './components/header/header.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { AttendanceComponent } from './pages/attendance/attendance.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
-import { ChatComponent } from './pages/chat/chat.component';
 import { DefaulterComponent } from './pages/defaulter/defaulter.component';
 import { ScheduleComponent } from './pages/schedule/schedule.component';
 import { SubjectComponent } from './pages/subject/subject.component';
@@ -24,7 +23,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     HeaderComponent,
     SidebarComponent,
     AttendanceComponent,
-    DashboardComponent,ChatComponent,
+    DashboardComponent,
     DefaulterComponent,
     ScheduleComponent,
     SubjectComponent

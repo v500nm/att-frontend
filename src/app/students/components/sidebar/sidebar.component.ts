@@ -27,10 +27,6 @@ export class SidebarComponent {
     this.activeTab = 'student/defaulter';
     this.router.navigate(['student/defaulter']);  
   }
-  chat(){
-    this.activeTab = 'student/chat';
-    this.router.navigate(['student/chat']);   
-  }
   schedule(){
     this.activeTab = 'student/schedule';
     this.router.navigate(['student/schedule']);
