@@ -10,7 +10,6 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { HeaderComponent } from './components/header/header.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { FooterComponent } from './components/footer/footer.component';
-import { ChatbotComponent } from './pages/chatbot/chatbot.component';
 import { ButtonModule } from 'primeng/button';
 import { ReactiveFormsModule } from '@angular/forms';
 import {TabViewModule} from 'primeng/tabview';
@@ -28,7 +27,6 @@ import { AssignComponent } from './pages/assign/assign.component';
        HeaderComponent,
        SidebarComponent,
        FooterComponent,
-       ChatbotComponent,
        AttmarkComponent,
        AssignComponent
   ],

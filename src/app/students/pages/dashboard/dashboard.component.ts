@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from '../../service/user.service';
+import { UserService } from '../../../shared/services/user.service';
 import {
   Iattendance,
   Ifaculties,
@@ -10,7 +10,7 @@ import {
   AttStatus,
   roles,
   Iclassroom,
-} from '../../service/user.interface';
+} from '../../../shared/interfaces/user.interface';
 
 @Component({
   selector: 'app-dashboard',

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from '../../service/user.service';
-import { Isubject } from '../../service/user.interface';
+import { UserService } from '../../../shared/services/user.service';
+import { Isubject } from '../../../shared/interfaces/user.interface';
 
 @Component({
   selector: 'app-subject',
