@@ -6,8 +6,8 @@ import {
   FormBuilder,
 } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService } from '../../shared/auth.service';
-import { AuthGuard } from 'src/app/shared/auth.guard';
+import { AuthService } from '../../shared/services/auth.service';
+import { AuthGuard } from 'src/app/shared/guards/auth.guard';
 
 @Component({
   selector: 'app-adlogin',

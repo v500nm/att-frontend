@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AdminService } from '../../service/admin.service';
+import { AdminService } from '../../../shared/services/admin.service';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import {
   Iattendance,
@@ -9,7 +9,7 @@ import {
   Ischedule,
   Istudents,
   Isubject,
-} from '../../service/admin.interface';
+} from '../../../shared/interfaces/admin.interface';
 enum stats{
   
 }

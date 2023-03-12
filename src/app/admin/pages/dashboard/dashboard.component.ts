@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AdminService } from '../../service/admin.service';
+import { AdminService } from '../../../shared/services/admin.service';
 import {
   FormBuilder,
   FormControl,
@@ -13,7 +13,7 @@ import {
   Istudents,
   Isubject,
   roles
-} from '../../service/admin.interface';
+} from '../../../shared/interfaces/admin.interface';
 import * as FileSaver from 'file-saver';
 
 @Component({

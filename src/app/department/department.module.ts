@@ -6,6 +6,12 @@ import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { ItComponent } from './pages/it/it.component';
+import { BmsComponent } from './pages/bms/bms.component';
+import { BafComponent } from './pages/baf/baf.component';
+import { BammcComponent } from './pages/bammc/bammc.component';
+import { WorkshopsComponent } from './pages/workshops/workshops.component';
+import { SeminarsComponent } from './pages/seminars/seminars.component';
 
 
 @NgModule({
@@ -13,7 +19,13 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
     FooterComponent,
     HeaderComponent,
     SidebarComponent,
-    DashboardComponent
+    DashboardComponent,
+    ItComponent,
+    BmsComponent,
+    BafComponent,
+    BammcComponent,
+    WorkshopsComponent,
+    SeminarsComponent
   ],
   imports: [
     CommonModule,

@@ -13,8 +13,12 @@ import { AccordionModule } from 'primeng/accordion';
 import {SplitterModule} from 'primeng/splitter';
 import { KnobModule } from "primeng/knob";
 import {TableModule} from 'primeng/table';
-import { AuthService } from './shared/auth.service';
-import { AuthGuard } from './shared/auth.guard';
+import { AuthGuard } from './shared/guards/auth.guard';
+import { DepartmentGuard } from './shared/guards/department.guard';
+import { StudentGuard } from './shared/guards/student.guard';
+import { AuthService } from './shared/services/auth.service';
+import { AdminService } from './shared/services/admin.service';
+import { UserService } from './shared/services/user.service';
 
 @NgModule({
   declarations: [
@@ -35,7 +39,7 @@ import { AuthGuard } from './shared/auth.guard';
     KnobModule,
     TableModule,
   ],
-  providers: [AuthService,AuthGuard],
+  providers: [AuthGuard,DepartmentGuard,StudentGuard,AuthService,AdminService,UserService],
   bootstrap: [AppComponent],
   
 

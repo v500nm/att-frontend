@@ -8,8 +8,8 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { debounceTime, Observable, tap } from 'rxjs';
-import { AuthService } from '../../shared/auth.service';
-import { IstuRegistration } from '../../shared/auth.interface';
+import { AuthService } from '../../shared/services/auth.service';
+import { IstuRegistration } from '../../shared/interfaces/auth.interface';
 
 @Component({
   selector: 'app-sturegister',

@@ -6,7 +6,7 @@ import {
   FormBuilder,
 } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService } from '../../shared/auth.service';
+import { AuthService } from '../../shared/services/auth.service';
 
 @Component({
   selector: 'app-stulogin',
@@ -42,7 +42,7 @@ export class StuloginComponent implements OnInit{
   Submitlogin() {
     this.auth.postStuLogin(this.stuloginForm.value).subscribe(
       (res: any) => {
-        localStorage.setItem('Token', res.Token);
+        localStorage.setItem('token', res.Token);
         alert('Login successful');
         this.stuloginForm.reset();
         this.router.navigate(['/student']);
