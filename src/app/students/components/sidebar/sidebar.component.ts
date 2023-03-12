@@ -8,32 +8,32 @@ import { Router } from '@angular/router';
 })
 export class SidebarComponent {
   visibleSidebar1:any;
-  activeTab ='user';
+  activeTab ='student';
   constructor ( private router:Router){}
   
   userDash(){
-    this.activeTab = 'user/';
-    this.router.navigate(['user/']);
+    this.activeTab = 'student/';
+    this.router.navigate(['student/']);
   }
   attendance(){
-    this.activeTab = 'user/attendance';
-    this.router.navigate(['user/attendance']);
+    this.activeTab = 'student/attendance';
+    this.router.navigate(['student/attendance']);
   }
   subject(){
-    this.activeTab = 'user/subject';
-    this.router.navigate(['user/subject']);  
+    this.activeTab = 'student/subject';
+    this.router.navigate(['student/subject']);  
   }
   defaulter(){
-    this.activeTab = 'user/defaulter';
-    this.router.navigate(['user/defaulter']);  
+    this.activeTab = 'student/defaulter';
+    this.router.navigate(['student/defaulter']);  
   }
   chat(){
-    this.activeTab = 'user/chat';
-    this.router.navigate(['user/chat']);   
+    this.activeTab = 'student/chat';
+    this.router.navigate(['student/chat']);   
   }
   schedule(){
-    this.activeTab = 'user/schedule';
-    this.router.navigate(['user/schedule']);
+    this.activeTab = 'student/schedule';
+    this.router.navigate(['student/schedule']);
   }
   logout(){
     this.activeTab = '';

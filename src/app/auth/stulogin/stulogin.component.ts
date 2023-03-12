@@ -45,7 +45,7 @@ export class StuloginComponent implements OnInit{
         localStorage.setItem('Token', res.Token);
         alert('Login successful');
         this.stuloginForm.reset();
-        this.router.navigate(['/admin']);
+        this.router.navigate(['/student']);
       },
       (error: any) => {
         alert('** Please check email or password is correct!');
