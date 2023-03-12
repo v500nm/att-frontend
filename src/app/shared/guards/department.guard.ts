@@ -1,13 +1,17 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot, UrlTree } from '@angular/router';
-import { Observable } from 'rxjs';
+import { CanActivate, Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DepartmentGuard implements CanActivate {
-  canActivate() {
-    return true;
+  constructor(private router:Router){}
+  canActivate():boolean {
+    if(!!localStorage.getItem('token')){
+      return true
+    }
+    this.router.navigate(['/departmentlogin'])
+    return false
   }
   
 }
