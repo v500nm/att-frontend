@@ -1,6 +1,7 @@
 .container {
   margin: 4rem;
-  background-color: white;
+  background-color: #003b99;
+  color: white;
   border-radius: 10px;
   padding: 2rem;
   display: flex;
@@ -11,7 +12,9 @@
     .card {
       margin: 1rem;
       padding: 2.5rem;
-      box-shadow: rgba(0, 0, 0, 0.35) 2px 2px 2px 5px;
+      box-shadow: rgba(255, 255, 255, 0.499) 5px 5px 2px 5px;
+      background-color: white;
+      color: black;;
       border-radius: 10px;
       display: flex;
       flex-direction: column;
