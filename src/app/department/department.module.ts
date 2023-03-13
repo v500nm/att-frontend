@@ -9,8 +9,6 @@ import { ItComponent } from './pages/it/it.component';
 import { BmsComponent } from './pages/bms/bms.component';
 import { BafComponent } from './pages/baf/baf.component';
 import { BammcComponent } from './pages/bammc/bammc.component';
-import { WorkshopsComponent } from './pages/workshops/workshops.component';
-import { SeminarsComponent } from './pages/seminars/seminars.component';
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 import { DropdownModule } from 'primeng/dropdown';
@@ -23,6 +21,7 @@ import { SplitButtonModule } from 'primeng/splitbutton';
 import { ListboxModule } from 'primeng/listbox';
 import { FileUploadModule } from 'primeng/fileupload';
 import {AccordionModule} from 'primeng/accordion';
+import { OthersComponent } from './pages/others/others.component';
 
 @NgModule({
   declarations: [
@@ -34,8 +33,7 @@ import {AccordionModule} from 'primeng/accordion';
     BmsComponent,
     BafComponent,
     BammcComponent,
-    WorkshopsComponent,
-    SeminarsComponent,
+    OthersComponent
   ],
   imports: [CommonModule, DepartmentRoutingModule,SidebarModule,
     InputTextModule,

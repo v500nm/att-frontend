@@ -1,28 +1,15 @@
 import { Component } from '@angular/core';
-import { AdminService } from '../../../shared/services/admin.service';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
-import {
-  Iattendance,
-  Iclassroom,
-  Ifaculties,
-  Igroups,
-  Ischedule,
-  Istudents,
-  Isubject,
-  roles
-} from '../../../shared/interfaces/admin.interface';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import * as FileSaver from 'file-saver';
+import { Iattendance, Iclassroom, Ifaculties, Igroups, Ischedule, Istudents, Isubject, roles } from 'src/app/shared/interfaces/admin.interface';
+import { AdminService } from 'src/app/shared/services/admin.service';
+
 @Component({
-  selector: 'app-seminars',
-  templateUrl: './seminars.component.html',
-  styleUrls: ['./seminars.component.scss']
+  selector: 'app-others',
+  templateUrl: './others.component.html',
+  styleUrls: ['./others.component.scss']
 })
-export class SeminarsComponent {
+export class OthersComponent {
   constructor(
     private adminService: AdminService,
     private formsbuilder: FormBuilder
