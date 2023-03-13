@@ -1,1 +1,1021 @@
-<p>it works!</p>
+<app-header></app-header>
+<div class="container">
+    <section class="title">
+        <h2>BSc-IT</h2>
+        <hr>
+    </section>
+    <p-accordion>
+        <p-accordionTab header="ADD">
+            <p-tabView [(activeIndex)]="activeIndex">
+                <p-tabPanel header="Students">
+                    <section class="students">
+                        <div class="title">
+                            <h1>Students</h1>
+                        </div>
+                        <div class="Add">
+                            <p-dialog header="Add Students" [(visible)]="display">
+                                <form [formGroup]="stuValue">
+                                    <div class="sub">
+                                        <ng-container>
+                                            <span class="p-float-label">
+                                                <input type="text" formControlName="roll" id="inputtext" pInputText>
+                                                <label for="inputtext">Roll no</label>
+                                            </span>
+                                        </ng-container>
+                                    </div>
+                                    <div class="sub">
+                                        <ng-container>
+                                            <span class="p-float-label">
+                                                <input type="text" formControlName="name" id="inputtext" pInputText>
+                                                <label for="inputtext">Students Name</label>
+                                            </span>
+                                        </ng-container>
+                                    </div>
+                                    <div class="sub">
+                                        <ng-container>
+                                            <label for="role">Role</label>
+                                            <select name="role" formControlName="role">
+                                                <option [value]="stuDrop.value"
+                                                    *ngFor="let stuDrop of stuRole|keyvalue">
+                                                    {{stuDrop.key}}</option>
+                                            </select>
+                                        </ng-container>
+                                    </div>
+                                    <div class="sub">
+                                        <ng-container>
+                                            <span class="p-float-label">
+                                                <input type="text" formControlName="classGrp" id="inputtext" pInputText>
+                                                <label for="inputtext">Class</label>
+                                            </span>
+                                        </ng-container>
+                                    </div>
+                                    <div class="sub">
+                                        <button pButton type="button" *ngIf="stuSwitch" label="Add"
+                                            (click)="regStudents()"></button>
+                                        <button pButton type="button" *ngIf="!stuSwitch" label="Edit"
+                                            (click)="updateStudents()"> </button>
+                                    </div>
+                                </form>
+                            </p-dialog>
+                            <div class="adminOptions">
+                                <div class="adOpt">
+                                    <button pButton type="button" icon="pi pi-plus" label="Add"
+                                        (click)="showDialog()"></button>
+                                </div>
+                                <div class="adOpt">
+                                    <p-dialog header="upload Students" [(visible)]="uploadDialog">
+                                        <form [formGroup]="stuUploadValue" (ngSubmit)="onStuSubmit()"
+                                            enctype="multipart/form-data">
+                                            <div class="p-field">
+                                                <p-fileUpload name="file" url="#" chooseLabel="Choose File"
+                                                    accept=".xls,.xlsx,.csv" [showUploadButton]="false"
+                                                    [showCancelButton]="false" (onSelect)="onStuFileChange($event)">
+                                                </p-fileUpload>
+                                            </div>
+                                            <button pButton type="submit" [disabled]="!stuUploadValue.valid"
+                                                label="Upload">
+                                            </button>
+                                        </form>
+
+                                    </p-dialog>
+                                    <button pButton type="button" pRipple label="Import" icon="pi pi-file-import"
+                                        (click)="importDialog()" class="p-button-help mr-2"></button>
+                                </div>
+                                <div class="adOpt">
+                                    <button type="button" pButton pRipple icon="pi pi-file-excel" label="Export"
+                                        (click)="exportStuExcel()" class="p-button-success mr-2"></button>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="view">
+                            <p-table responsiveLayout="stack" #studentTable [value]="stuData" dataKey="id" [rows]="5"
+                                [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,20,30,40,50,60,70,80]"
+                                [loading]="loading" styleClass="p-datatable-customers p-datatable-gridlines"
+                                [paginator]="true"
+                                currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                                [globalFilterFields]="[
+                                'stuData.name',
+                                'stuData.roll',
+                                'stuData.classGrp'
+                              ]">
+                                <ng-template pTemplate="caption">
+                                    Students List
+
+                                </ng-template>
+                                <ng-template pTemplate="header">
+                                    <tr>
+                                        <th pSortableColumn="roll">
+                                            <div class="p-d-flex p-jc-between p-ai-center">
+                                                <p-sortIcon field="roll"></p-sortIcon>
+                                                Roll Number
+                                                <p-columnFilter type="text" field="roll"
+                                                    display="menu"></p-columnFilter>
+                                            </div>
+                                        </th>
+                                        <th>
+                                            <div class="p-d-flex p-jc-between p-ai-center">
+                                                Students Name
+                                                <p-columnFilter type="text" field="name"
+                                                    display="menu"></p-columnFilter>
+                                            </div>
+                                        </th>
+                                        <th>
+                                            <div class="p-d-flex p-jc-between p-ai-center">
+                                                role
+                                                <p-columnFilter type="text" field="role"
+                                                    display="menu"></p-columnFilter>
+                                            </div>
+                                        </th>
+                                        <th>
+                                            <div class="p-d-flex p-jc-between p-ai-center">
+                                                Class
+                                                <p-columnFilter type="text" field="classGrp"
+                                                    display="menu"></p-columnFilter>
+                                            </div>
+                                        </th>
+                                        <th>
+                                            <div class="p-d-flex p-jc-between p-ai-center">
+                                                Options
+                                            </div>
+                                        </th>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="body" let-stuData>
+                                    <tr>
+                                        <td><span class="p-column-title">Roll</span>
+                                            {{stuData.roll}}
+                                        </td>
+                                        <td><span class="p-column-title">Name</span>
+                                            {{stuData.name}}
+                                        </td>
+                                        <td><span class="p-column-title">Name</span>
+                                            {{stuData.role}}
+                                        </td>
+                                        <td><span class="p-column-title">Class</span>
+                                            {{stuData.classGrp}}
+                                        </td>
+                                        <td><span class="p-column-title">Options</span>
+                                            <div class="editGrp">
+                                                <div class="edit">
+                                                    <button (click)="recoverStudent(stuData)">Edit</button>
+                                                </div>
+                                                <div class="delete">
+                                                    <button (click)="removeStudent(stuData._id)">Delete</button>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="emptymessage">
+                                    <tr>
+                                        <td colspan="7">No customers found.</td>
+                                    </tr>
+                                </ng-template>
+                            </p-table>
+                        </div>
+                    </section>
+                </p-tabPanel>
+                <p-tabPanel header="Subjects">
+                    <section class="subjects">
+                        <div class="title">
+                            <h1>Subjects</h1>
+                        </div>
+                        <div class="Add">
+                            <p-dialog header="Add Subjects" [(visible)]="display">
+                                <form [formGroup]="subValue">
+                                    <div class="sub">
+                                        <ng-container>
+                                            <span class="p-float-label">
+                                                <input type="text" id="inputtext" pInputText formControlName="subject">
+                                                <label for="inputtext">Subjects Name</label>
+                                            </span>
+                                        </ng-container>
+                                    </div>
+                                    <div class="sub">
+                                        <button pButton type="button" *ngIf="stuSwitch" label="Add"
+                                            (click)="postSub()"></button>
+                                        <button pButton type="button" *ngIf="!stuSwitch" label="Edit"
+                                            (click)="updateSubject()"></button>
+                                    </div>
+                                </form>
+                            </p-dialog>
+                            <div class="adminOptions">
+                                <div class="adOpt">
+                                    <button pButton type="button" icon="pi pi-plus" label="Add"
+                                        (click)="showDialog()"></button>
+                                </div>
+                                <div class="adOpt">
+                                    <p-dialog header="upload Students" [(visible)]="uploadDialog">
+                                        <form [formGroup]="subUploadValue" (ngSubmit)="onSubSubmit()"
+                                            enctype="multipart/form-data">
+                                            <div class="p-field">
+                                                <p-fileUpload name="file" url="#" chooseLabel="Choose File"
+                                                    accept=".xls,.xlsx,.csv" [showUploadButton]="false"
+                                                    [showCancelButton]="false" (onSelect)="onSubFileChange($event)">
+                                                </p-fileUpload>
+                                            </div>
+                                            <button pButton type="submit" [disabled]="!subUploadValue.valid"
+                                                label="Upload">
+                                            </button>
+                                        </form>
+
+                                    </p-dialog>
+                                    <button pButton type="button" pRipple label="Import" icon="pi pi-file-import"
+                                        (click)="importDialog()" class="p-button-help mr-2"></button>
+                                </div>
+                                <div class="adOpt">
+                                    <button type="button" pButton pRipple icon="pi pi-file-excel" label="Export"
+                                        (click)="exportSubExcel()" class="p-button-success mr-2"></button>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="view">
+                            <p-table #dt1 responsiveLayout="stack" [value]="subData" dataKey="id" [rows]="5"
+                                [showCurrentPageReport]="true" [rowsPerPageOptions]="[5,10,15]" [loading]="loading"
+                                styleClass="p-datatable-customers p-datatable-gridlines" [paginator]="true"
+                                currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
+                                <ng-template pTemplate="caption">
+                                    Subjects List
+                                </ng-template>
+                                <ng-template pTemplate="header">
+                                    <tr>
+                                        <th>
+                                            <div class="p-d-flex p-jc-between p-ai-center">
+                                                Subject Name
+                                                <p-columnFilter type="text" field="subject"
+                                                    display="menu"></p-columnFilter>
+                                            </div>
+                                        </th>
+                                        <th>
+                                            <div class="p-d-flex p-jc-between p-ai-center">
+                                                Options
+                                            </div>
+                                        </th>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="body" let-subData>
+                                    <tr>
+                                        <td><span class="p-column-title">Subject</span>
+                                            {{subData.subject}}
+                                        </td>
+                                        <td><span class="p-column-title">Options</span>
+                                            <div class="editGrp">
+                                                <div class="edit">
+                                                    <button (click)="recoverSubject(subData)">Edit</button>
+                                                </div>
+                                                <div class="delete">
+                                                    <button (click)="removeSubject(subData._id)">Delete</button>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="emptymessage">
+                                    <tr>
+                                        <td colspan="7">No customers found.</td>
+                                    </tr>
+                                </ng-template>
+                            </p-table>
+                        </div>
+                    </section>
+                </p-tabPanel>
+            </p-tabView>
+        </p-accordionTab>
+        <p-accordionTab header="Assign">
+            <p-tabView [(activeIndex)]="activeIndex">
+                <p-tabPanel header="Groups">
+                    <section class="groups">
+                        <div class="title">
+                            <h1>Groups</h1>
+                        </div>
+                        <div class="Add">
+                            <p-dialog header="Add Groups" [(visible)]="display">
+                                <form [formGroup]="grpValue">
+                                    <div class="sub">
+                                        <ng-container>
+                                            <span class="p-float-label">
+                                                <input type="text" id="inputtext" pInputText formControlName="gName">
+                                                <label for="inputtext">Group Name</label>
+                                            </span>
+                                        </ng-container>
+                                    </div>
+                                    <div class="sub">
+                                        <ng-container>
+                                            <h3>Select Students</h3>
+                                            <p-listbox formControlName="students" [options]="stuData"
+                                                [metaKeySelection]="false" [checkbox]="true" [filter]="true"
+                                                [listStyle]="{'max-height':'200px'}" [multiple]="true"
+                                                optionLabel="classGrp">
+                                                <ng-template let-stuData pTemplate="item">
+                                                    <div class="country-item">
+                                                        <span>{{stuData.classGrp}}-{{stuData.roll}}</span>
+                                                    </div>
+                                                </ng-template>
+                                            </p-listbox>
+                                        </ng-container>
+                                    </div>
+                                    <div class="sub">
+                                        <button pButton type="button" *ngIf="stuSwitch" label="Add"
+                                            (click)="createGroup()"></button>
+                                        <button pButton type="button" *ngIf="!stuSwitch" label="Edit"
+                                            (click)="updateGrp()"></button>
+                                    </div>
+                                </form>
+                            </p-dialog>
+                            <div class="adminOptions">
+                                <div class="adOpt">
+                                    <button pButton type="button" icon="pi pi-plus" label="Add"
+                                        (click)="showDialog()"></button>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="view grpView">
+                            <div class="grpCards" *ngFor="let grpData of grpData">
+                                <div class="grpTitle">
+                                    <h2>{{grpData.gName}}</h2>
+                                </div>
+                                <div class="grpDetails">
+                                    <p-button (click)="showMaximizableDialog()" icon="pi pi-external-link"
+                                        label="Students List"></p-button>
+                                    <p-dialog header="{{grpData.gName}}" [(visible)]="displayMaximizable" [modal]="true"
+                                        [style]="{ width: '80vw',height:'80vh' }" [maximizable]="true"
+                                        [baseZIndex]="10000" [draggable]="false" [resizable]="false">
+                                        <div class="grpList">
+                                            <table>
+                                                <tr>
+                                                    <th>ROll</th>
+                                                    <th>NAME</th>
+
+                                                </tr>
+                                                <tr *ngFor="let grpData of grpData.students">
+                                                    <td>{{grpData.roll}}</td>
+                                                    <td>{{grpData.name}}</td>
+                                                </tr>
+                                            </table>
+                                        </div>
+
+                                    </p-dialog>
+
+                                </div>
+                                <hr>
+                                <div class="grpTitleOpt">
+                                    <div class="grpSub">
+                                        <button (click)="recoverGrp(grpData)">Edit</button>
+                                    </div>
+                                    <div class="grpSub">
+                                        <button (click)="removeGrp(grpData._id)">Delete</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </p-tabPanel>
+                <p-tabPanel header="Faculty">
+                    <section class="faculty">
+                        <div class="title">
+                            <h1>Assign Faculty</h1>
+                        </div>
+                        <div class="Add">
+                            <p-dialog header="Assign Faculty" [(visible)]="display">
+                                <form [formGroup]="facValue">
+                                    <div class="sub">
+                                        <ng-container>
+                                            <span class="p-float-label">
+                                                <input type="text" id="inputtext" pInputText formControlName="fname">
+                                                <label for="inputtext">Faculty Name</label>
+                                            </span>
+                                        </ng-container>
+                                    </div>
+                                    <div class="sub">
+                                        <ng-container>
+                                            <span class="p-float-label">
+                                                <input type="text" id="inputtext" pInputText
+                                                    formControlName="department">
+                                                <label for="inputtext">Department</label>
+                                            </span>
+                                        </ng-container>
+                                    </div>
+                                    <div class="sub">
+                                        <ng-container>
+                                            <span class="p-float-label">
+                                                <input type="text" id="inputtext" pInputText
+                                                    formControlName="designation">
+                                                <label for="inputtext">Designation</label>
+                                            </span>
+                                        </ng-container>
+                                    </div>
+                                    <div class="sub">
+                                        <button pButton type="button" *ngIf="stuSwitch" label="Submit"
+                                            (click)="postFac()"></button>
+                                        <button pButton type="button" *ngIf="!stuSwitch" label="Edit"
+                                            (click)="updateFac()">
+                                        </button>
+                                    </div>
+                                </form>
+                            </p-dialog>
+                            <div class="adminOptions">
+                                <div class="adOpt">
+                                    <button pButton type="button" icon="pi pi-plus" label="Add"
+                                        (click)="showDialog()"></button>
+                                </div>
+                                <div class="adOpt">
+                                    <p-dialog header="upload Students" [(visible)]="uploadDialog">
+                                        <form [formGroup]="facUploadValue" (ngSubmit)="onFacSubmit()"
+                                            enctype="multipart/form-data">
+                                            <div class="p-field">
+                                                <p-fileUpload name="file" url="#" chooseLabel="Choose File"
+                                                    accept=".xls,.xlsx,.csv" [showUploadButton]="false"
+                                                    [showCancelButton]="false" (onSelect)="onFacFileChange($event)">
+                                                </p-fileUpload>
+                                            </div>
+                                            <button pButton type="submit" [disabled]="!facUploadValue.valid"
+                                                label="Upload">
+                                            </button>
+                                        </form>
+
+                                    </p-dialog>
+                                    <button pButton type="button" pRipple label="Import" icon="pi pi-file-import"
+                                        (click)="importDialog()" class="p-button-help mr-2"></button>
+                                </div>
+                                <div class="adOpt">
+                                    <button type="button" pButton pRipple icon="pi pi-file-excel" label="Export"
+                                        (click)="exportFacExcel()" class="p-button-success mr-2"></button>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="view">
+                            <p-table #dt1 responsiveLayout="stack" [value]="facData" dataKey="id" [rows]="5"
+                                [showCurrentPageReport]="true" [rowsPerPageOptions]="[5,10,15]" [loading]="loading"
+                                styleClass="p-datatable-customers p-datatable-gridlines" [paginator]="true"
+                                currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
+                                <ng-template pTemplate="caption">
+                                    Faculty List
+                                </ng-template>
+                                <ng-template pTemplate="header">
+                                    <tr>
+                                        <th>
+                                            <div class="p-d-flex p-jc-between p-ai-center">
+                                                Faculty Name
+                                                <p-columnFilter type="text" field="fname"
+                                                    display="menu"></p-columnFilter>
+                                            </div>
+                                        </th>
+                                        <th>
+                                            <div class="p-d-flex p-jc-between p-ai-center">
+                                                Department
+                                                <p-columnFilter type="text" field="department"
+                                                    display="menu"></p-columnFilter>
+                                            </div>
+                                        </th>
+                                        <th>
+                                            <div class="p-d-flex p-jc-between p-ai-center">
+                                                Designation
+                                                <p-columnFilter type="text" field="designation"
+                                                    display="menu"></p-columnFilter>
+                                            </div>
+                                        </th>
+                                        <th>
+                                            <div class="p-d-flex p-jc-between p-ai-center">
+                                                Options
+                                            </div>
+                                        </th>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="body" let-facData>
+                                    <tr>
+                                        <td><span class="p-column-title">Faculty Name</span>
+                                            {{facData.fname}}
+                                        </td>
+                                        <td><span class="p-column-title">Department</span>
+                                            {{facData.department}}
+                                        </td>
+                                        <td><span class="p-column-title">Designation</span>
+                                            {{facData.designation}}
+                                        </td>
+                                        <td><span class="p-column-title">Options</span>
+                                            <div class="editGrp">
+                                                <div class="edit">
+                                                    <button (click)="recoverFaculty(facData)">Edit</button>
+                                                </div>
+                                                <div class="delete">
+                                                    <button (click)="removeFaculty(facData._id)">Delete</button>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="emptymessage">
+                                    <tr>
+                                        <td colspan="7">No customers found.</td>
+                                    </tr>
+                                </ng-template>
+                            </p-table>
+                        </div>
+                    </section>
+                </p-tabPanel>
+                <p-tabPanel header="CR & DI">
+                    <section class="CR & DI">
+                        <div class="title">
+                            <h1>CR & DI</h1>
+                        </div>
+                        <div class="Add">
+                            <p-dialog header="Add CR & DI" [(visible)]="display">
+                                <form [formGroup]="stuValue">
+                                    <div class="sub">
+                                        <ng-container>
+                                            <span class="p-float-label">
+                                                <input type="text" formControlName="roll" id="inputtext" pInputText>
+                                                <label for="inputtext">Roll no</label>
+                                            </span>
+                                        </ng-container>
+                                    </div>
+                                    <div class="sub">
+                                        <ng-container>
+                                            <span class="p-float-label">
+                                                <input type="text" formControlName="name" id="inputtext" pInputText>
+                                                <label for="inputtext">Students Name</label>
+                                            </span>
+                                        </ng-container>
+                                    </div>
+                                    <div class="sub">
+                                        <ng-container>
+                                            <label for="role">Role</label>
+                                            <select name="role" formControlName="role">
+                                                <option [value]="stuDrop.value"
+                                                    *ngFor="let stuDrop of stuRole|keyvalue">
+                                                    {{stuDrop.key}}</option>
+                                            </select>
+                                        </ng-container>
+                                    </div>
+                                    <div class="sub">
+                                        <ng-container>
+                                            <span class="p-float-label">
+                                                <input type="text" formControlName="classGrp" id="inputtext" pInputText>
+                                                <label for="inputtext">Class</label>
+                                            </span>
+                                        </ng-container>
+                                    </div>
+                                    <div class="sub">
+                                        <button pButton type="button" *ngIf="stuSwitch" label="Add"
+                                            (click)="regStudents()"></button>
+                                        <button pButton type="button" *ngIf="!stuSwitch" label="Edit"
+                                            (click)="updateStudents()"> </button>
+                                    </div>
+                                </form>
+                            </p-dialog>
+                           
+                        </div>
+                        <hr>
+                        <div class="view">
+                            <p-table responsiveLayout="stack" #studentTable [value]="stuData" dataKey="id" [rows]="5"
+                                [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,20,30,40,50,60,70,80]"
+                                [loading]="loading" styleClass="p-datatable-customers p-datatable-gridlines"
+                                [paginator]="true"
+                                currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                                [globalFilterFields]="[
+                                'stuData.name',
+                                'stuData.roll',
+                                'stuData.classGrp'
+                              ]">
+                                <ng-template pTemplate="caption">
+                                    Students List
+
+                                </ng-template>
+                                <ng-template pTemplate="header">
+                                    <tr>
+                                        <th pSortableColumn="roll">
+                                            <div class="p-d-flex p-jc-between p-ai-center">
+                                                <p-sortIcon field="roll"></p-sortIcon>
+                                                Roll Number
+                                                <p-columnFilter type="text" field="roll"
+                                                    display="menu"></p-columnFilter>
+                                            </div>
+                                        </th>
+                                        <th>
+                                            <div class="p-d-flex p-jc-between p-ai-center">
+                                                Students Name
+                                                <p-columnFilter type="text" field="name"
+                                                    display="menu"></p-columnFilter>
+                                            </div>
+                                        </th>
+                                        <th>
+                                            <div class="p-d-flex p-jc-between p-ai-center">
+                                                role
+                                                <p-columnFilter type="text" field="role"
+                                                    display="menu"></p-columnFilter>
+                                            </div>
+                                        </th>
+                                        <th>
+                                            <div class="p-d-flex p-jc-between p-ai-center">
+                                                Class
+                                                <p-columnFilter type="text" field="classGrp"
+                                                    display="menu"></p-columnFilter>
+                                            </div>
+                                        </th>
+                                        <th>
+                                            <div class="p-d-flex p-jc-between p-ai-center">
+                                                Options
+                                            </div>
+                                        </th>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="body" let-stuData>
+                                    <tr>
+                                        <td><span class="p-column-title">Roll</span>
+                                            {{stuData.roll}}
+                                        </td>
+                                        <td><span class="p-column-title">Name</span>
+                                            {{stuData.name}}
+                                        </td>
+                                        <td><span class="p-column-title">Name</span>
+                                            {{stuData.role}}
+                                        </td>
+                                        <td><span class="p-column-title">Class</span>
+                                            {{stuData.classGrp}}
+                                        </td>
+                                        <td><span class="p-column-title">Options</span>
+                                            <div class="editGrp">
+                                                <div class="edit">
+                                                    <button (click)="recoverStudent(stuData)">Edit</button>
+                                                </div>
+                                                <div class="delete">
+                                                    <button (click)="removeStudent(stuData._id)">Delete</button>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="emptymessage">
+                                    <tr>
+                                        <td colspan="7">No customers found.</td>
+                                    </tr>
+                                </ng-template>
+                            </p-table>
+                        </div>
+                    </section>
+                </p-tabPanel>
+
+            </p-tabView>
+
+        </p-accordionTab>
+        <p-accordionTab header="Attendance">
+            <p-tabView [(activeIndex)]="activeIndex" [scrollable]="true"> 
+                <p-tabPanel header="Schedule">
+                    <section class="schedule">
+                        <div class="title">
+                            <h1>Schedule</h1>
+                        </div>
+                        <div class="Add">
+                            <p-dialog header="Add Schedule" [(visible)]="display">
+                                <form [formGroup]="schValue">
+                                    <div class="sub">
+                                        <ng-container>
+                                            <span class="p-float-label">
+                                                <input type="text" id="inputtext" pInputText formControlName="scheduleName">
+                                                <label for="inputtext">Schedule Name</label>
+                                            </span>
+                                        </ng-container>
+                                    </div>
+                                    <div class="sub">
+                                        <ng-container>
+                                            <span class="p-float-label">
+                                                <input type="date" id="inputtext" pInputText formControlName="Date">
+                                                <label for="inputtext">Date</label>
+                                            </span>
+                                        </ng-container>
+                                    </div>
+                                    <div class="sub">
+                                        <ng-container>
+                                            <span class="p-float-label">
+                                                <input type="text" id="inputtext" pInputText formControlName="timing">
+                                                <label for="inputtext">Timings</label>
+                                            </span>
+                                        </ng-container>
+                                    </div>
+                                    <div class="sub">
+                                        <ng-container>
+                                            <span class="p-float-label">
+                                                <input type="text" id="inputtext" pInputText formControlName="duration">
+                                                <label for="inputtext">Duration (in mins.)</label>
+                                            </span>
+                                        </ng-container>
+                                    </div>
+                                    <div class="sub">
+                                        <ng-container>
+                                            <label for="group">Group</label>
+                                            <select name="group" formControlName="groups">
+                                                <option value="">--select--</option>
+                                                <option [value]="grpDrop._id" *ngFor="let grpDrop of grpData">{{grpDrop.gName}}
+                                                </option>
+                                            </select>
+                                        </ng-container>
+                                    </div>
+                                    <div class="sub">
+                                        <ng-container>
+                                            <label for="classroom">Classroom</label>
+                                            <select name="classroom" formControlName="classrooms">
+                                                <option value="">--select--</option>
+                                                <option [value]="classDrop._id" *ngFor="let classDrop of classData">
+                                                    {{classDrop.class}}</option>
+                                            </select>
+                                        </ng-container>
+                                    </div>
+                                    <div class="sub">
+                                        <ng-container>
+                                            <label for="faculty">Faculty</label>
+                                            <select name="faculty" formControlName="faculties">
+                                                <option value="">--select--</option>
+                                                <option [value]="facDrop._id" *ngFor="let facDrop of facData">{{facDrop.fname}}
+                                                </option>
+                                            </select>
+                                        </ng-container>
+                                    </div>
+                                    <div class="sub">
+                                        <ng-container>
+                                            <label for="subject">Subject</label>
+                                            <select name="subject" formControlName="subjects">
+                                                <option value="">--select--</option>
+                                                <option [value]="subDrop._id" *ngFor="let subDrop of subData">
+                                                    {{subDrop.subject}}</option>
+                                            </select>
+                                        </ng-container>
+                                    </div>
+                                    <div class="sub">
+                                        <button pButton type="button" *ngIf="stuSwitch" label="Add"
+                                            (click)="postSch()"></button>
+                                        <button pButton type="button" *ngIf="!stuSwitch" label="Edit" (click)="updateSch()">
+                                        </button>
+                                    </div>
+                                </form>
+                            </p-dialog>
+                            <button pButton type="button" label="Add Schedule" (click)="showDialog()"
+                                icon="pi pi-plus"></button>
+                        </div>
+                        <hr>
+                        <div class="view">
+                            <p-table #sch responsiveLayout="stack" [value]="schData" dataKey="id" [rows]="5"
+                                [showCurrentPageReport]="true" [rowsPerPageOptions]="[5,10,15]" [loading]="loading"
+                                styleClass="p-datatable-customers p-datatable-gridlines" [paginator]="true"
+                                currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
+                                <ng-template pTemplate="caption">
+                                    Schedules
+                                </ng-template>
+                                <ng-template pTemplate="header">
+                                    <tr>
+                                        <th>
+                                            <div class="p-d-flex p-jc-between p-ai-center">
+                                                Schedule Name
+                                                <p-columnFilter type="text" field="scheduleName"
+                                                    display="menu"></p-columnFilter>
+                                            </div>
+                                        </th>
+                                        <th>
+                                            <div class="p-d-flex p-jc-between p-ai-center">
+                                                Date
+                                                <p-columnFilter type="date" field="Date" display="menu"></p-columnFilter>
+                                            </div>
+                                        </th>
+                                        <th>
+                                            <div class="p-d-flex p-jc-between p-ai-center">
+                                                Timing
+                                            </div>
+                                        </th>
+                                        <th>
+                                            <div class="p-d-flex p-jc-between p-ai-center">
+                                                Duration
+                                            </div>
+                                        </th>
+                                        <th>
+                                            <div class="p-d-flex p-jc-between p-ai-center">
+                                                Group
+                                            </div>
+                                        </th>
+                                        <th>
+                                            <div class="p-d-flex p-jc-between p-ai-center">
+                                                Subject
+                                            </div>
+                                        </th>
+                                        <th>
+                                            <div class="p-d-flex p-jc-between p-ai-center">
+                                                Faculty
+                                            </div>
+                                        </th>
+                                        <th>
+                                            <div class="p-d-flex p-jc-between p-ai-center">
+                                                Classroom
+                                            </div>
+                                        </th>
+                                        <th>
+                                            <div class="p-d-flex p-jc-between p-ai-center">
+                                                Options
+                                            </div>
+                                        </th>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="body" let-schData>
+                                    <tr>
+                                        <td><span class="p-column-title">Schedule Name</span>
+                                            {{schData.scheduleName}}
+                                        </td>
+                                        <td><span class="p-column-title">Date</span>
+                                            {{schData.Date}}
+                                        </td>
+                                        <td><span class="p-column-title">Timing</span>
+                                            {{schData.timing}}
+                                        </td>
+                                        <td><span class="p-column-title">Duration</span>
+                                            {{schData.duration}}
+                                        </td>
+                                        <td><span class="p-column-title">Group</span>
+                                            {{schData.groups.gName}}
+                                        </td>
+                                        <td><span class="p-column-title">Subject</span>
+                                            {{schData.subjects.subject}}
+                                        </td>
+                                        <td><span class="p-column-title">Faculty</span>
+                                            {{schData.faculties.fname}}
+                                        </td>
+                                        <td><span class="p-column-title">Classroom</span>
+                                            {{schData.classrooms.class}}
+                                        </td>
+                                        <td><span class="p-column-title">Options</span>
+                                            <div class="editGrp">
+                                                <div class="edit">
+                                                    <button (click)="recoverSch(schData)">Edit</button>
+                                                </div>
+                                                <div class="delete">
+                                                    <button (click)="removeSch(schData._id)">Delete</button>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="emptymessage">
+                                    <tr>
+                                        <td colspan="7">No customers found.</td>
+                                    </tr>
+                                </ng-template>
+                            </p-table>
+                        </div>
+                    </section>
+                </p-tabPanel>
+                <p-tabPanel header="Mark Attendance">
+                    <section class="Attendance">
+                        <div class="title">
+                            <h1>Mark Attendance</h1>
+                        </div>
+                        <div class="Add markAdd">
+                            <p-table #attAdd responsiveLayout="stack" [value]="schData" dataKey="id" [rows]="5"
+                                [showCurrentPageReport]="true" [rowsPerPageOptions]="[5,10,15]" [loading]="loading"
+                                styleClass="p-datatable-customers p-datatable-gridlines" [paginator]="true"
+                                currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
+                                <ng-template pTemplate="caption">
+                                    Schedules
+                                </ng-template>
+                                <ng-template pTemplate="header">
+                                    <tr>
+                                        <th>
+                                            <div class="p-d-flex p-jc-between p-ai-center">
+                                                Schedule Name
+                                                <p-columnFilter type="text" field="scheduleName"
+                                                    display="menu"></p-columnFilter>
+                                            </div>
+                                        </th>
+                                        <th>
+                                            <div class="p-d-flex p-jc-between p-ai-center">
+                                                Date
+                                                <p-columnFilter type="date" field="Date" display="menu"></p-columnFilter>
+                                            </div>
+                                        </th>
+                                        <th>
+                                            <div class="p-d-flex p-jc-between p-ai-center">
+                                                Timing
+                                            </div>
+                                        </th>
+                                        <th>
+                                            <div class="p-d-flex p-jc-between p-ai-center">
+                                                Duration
+                                            </div>
+                                        </th>
+                                        <th>
+                                            <div class="p-d-flex p-jc-between p-ai-center">
+                                                Group
+                                            </div>
+                                        </th>
+                                        <th>
+                                            <div class="p-d-flex p-jc-between p-ai-center">
+                                                Subject
+                                            </div>
+                                        </th>
+                                        <th>
+                                            <div class="p-d-flex p-jc-between p-ai-center">
+                                                Faculty
+                                            </div>
+                                        </th>
+                                        <th>
+                                            <div class="p-d-flex p-jc-between p-ai-center">
+                                                Classroom
+                                            </div>
+                                        </th>
+                                        <th>
+                                            <div class="p-d-flex p-jc-between p-ai-center">
+                                                Mark Attendance
+                                            </div>
+                                        </th>
+        
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="body" let-schData>
+                                    <tr>
+                                        <td><span class="p-column-title">Schedule Name</span>
+                                            {{schData.scheduleName}}
+                                        </td>
+                                        <td><span class="p-column-title">Date</span>
+                                            {{schData.Date}}
+                                        </td>
+                                        <td><span class="p-column-title">Timing</span>
+                                            {{schData.timing}}
+                                        </td>
+                                        <td><span class="p-column-title">Duration</span>
+                                            {{schData.duration}}
+                                        </td>
+                                        <td><span class="p-column-title">Group</span>
+                                            {{schData.groups.gName}}
+                                        </td>
+                                        <td><span class="p-column-title">Subject</span>
+                                            {{schData.subjects.subject}}
+                                        </td>
+                                        <td><span class="p-column-title">Faculty</span>
+                                            {{schData.faculties.fname}}
+                                        </td>
+                                        <td><span class="p-column-title">Classroom</span>
+                                            {{schData.classrooms.class}}
+                                        </td>
+                                        <td><span class="p-column-title">Attendance</span>
+                                            <button pButton type="button" label="mark" icon="pi pi-user-edit"
+                                                (click)="markAttDisplay()"></button>
+                                            <p-dialog header="{{schData.scheduleName}}" [(visible)]="AttDisplay" [modal]="true"
+                                                [style]="{ width: '80vw',height:'50vh' }" [maximizable]="true"
+                                                [baseZIndex]="10000" [draggable]="false" [resizable]="false">
+        
+                                                <form [formGroup]="attValue">
+                                                    <ng-container>
+                                                        <h3>Select Students</h3>
+                                                        <p-listbox formControlName="markStudents" [options]="stuData" [metaKeySelection]="false"
+                                                            [checkbox]="true" [filter]="true" [listStyle]="{'max-height':'200px'}"
+                                                            [multiple]="true" optionLabel="classGrp">
+                                                            <ng-template let-stuData pTemplate="item">
+                                                                <div class="country-item">
+                                                                    <span>{{stuData.classGrp}}-{{stuData.roll}}</span>
+                                                                </div>
+                                                            </ng-template>
+                                                        </p-listbox>
+                                                    </ng-container>
+                                                    <button pButton type="button" label="Add"
+                                            (click)="markAtt()"></button>
+                                                    <!-- <table class="attList">
+                                                        <tr>
+                                                            <th>Roll</th>
+                                                            <th>Name</th>
+                                                            <th>Attendance</th>
+                                                        </tr>
+                                                        <tr *ngFor="let stu of schData.groups.students">
+                                                            <td>{{stu.roll}}</td>
+                                                            <td>{{stu.name}}</td>
+                                                            <td>
+                                                                <label>Present
+                                                                    <input type="checkbox">
+                                                                </label>
+                                                            </td>
+                                                        </tr>
+                                                    </table> -->
+                                                </form>
+                                            </p-dialog>
+                                        </td>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="emptymessage">
+                                    <tr>
+                                        <td colspan="7">No customers found.</td>
+                                    </tr>
+                                </ng-template>
+                            </p-table>
+        
+                        </div>
+                    </section>
+        
+                </p-tabPanel>
+                <p-tabPanel header="View Attendance">
+        
+                </p-tabPanel>
+                <p-tabPanel header="Defaulters">
+        
+                </p-tabPanel>
+            </p-tabView>
+        </p-accordionTab>
+    </p-accordion>
+</div>

@@ -65,8 +65,8 @@ export class AttmarkComponent implements OnInit {
     this.getAllFaculties();
     this.findAllSubjects();
     this.findAllClass();
-    this.findAllSchedule();
     this.findAllGroup();
+    this.findAllSchedule();
     this.findAllAtt();
 
     (this.stuValue = this.formsbuilder.group({
@@ -107,7 +107,6 @@ export class AttmarkComponent implements OnInit {
   }
 
   //att
- 
   findAllAtt() {
     this.adminService.findAllAtt().subscribe((res: Iattendance[]) => {
       this.attData = res;
