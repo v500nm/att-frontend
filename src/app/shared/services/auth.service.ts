@@ -32,6 +32,7 @@ export class AuthService {
     );
   }
 
+
   //department
   postDepLogin(data: IdepLogin): Observable<IdepLogin> {
     return this.http.post<IdepLogin>(`${this.departmentUrl}login`,data);
