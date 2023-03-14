@@ -13,7 +13,7 @@
                             <h1>Schedule</h1>
                         </div>
                         <div class="Add">
-                            <p-dialog header="Add Schedule" [(visible)]="display">
+                            <p-dialog header="Add Schedule" [(visible)]="displaySch">
                                 <form [formGroup]="schValue">
                                     <div class="sub">
                                         <ng-container>
@@ -95,7 +95,7 @@
                                     </div>
                                 </form>
                             </p-dialog>
-                            <button pButton type="button" label="Add Schedule" (click)="showDialog()"
+                            <button pButton type="button" label="Add Schedule" (click)="showDialogSch()"
                                 icon="pi pi-plus"></button>
                         </div>
                         <hr>
@@ -212,7 +212,7 @@
                             <h1>Students</h1>
                         </div>
                         <div class="Add">
-                            <p-dialog header="Add Students" [(visible)]="display">
+                            <p-dialog header="Add Students" [(visible)]="displayStu">
                                 <form [formGroup]="stuValue">
                                     <div class="sub">
                                         <ng-container>
@@ -259,7 +259,7 @@
                             <div class="adminOptions">
                                 <div class="adOpt">
                                     <button pButton type="button" icon="pi pi-plus" label="Add"
-                                        (click)="showDialog()"></button>
+                                        (click)="showDialogStu()"></button>
                                 </div>
                                 <div class="adOpt">
                                     <p-dialog header="upload Students" [(visible)]="uploadDialog">
@@ -385,7 +385,7 @@
                             <h1>Groups</h1>
                         </div>
                         <div class="Add">
-                            <p-dialog header="Add Groups" [(visible)]="display">
+                            <p-dialog header="Add Groups" [(visible)]="displayGrp">
                                 <form [formGroup]="grpValue">
                                     <div class="sub">
                                         <ng-container>
@@ -421,7 +421,7 @@
                             <div class="adminOptions">
                                 <div class="adOpt">
                                     <button pButton type="button" icon="pi pi-plus" label="Add"
-                                        (click)="showDialog()"></button>
+                                        (click)="showDialogGrp()"></button>
                                 </div>
                             </div>
                         </div>
@@ -473,7 +473,7 @@
                             <h1>CR & DI</h1>
                         </div>
                         <div class="Add">
-                            <p-dialog header="Add CR & DI" [(visible)]="display">
+                            <p-dialog header="Add CR & DI">
                                 <form [formGroup]="stuValue">
                                     <div class="sub">
                                         <ng-container>

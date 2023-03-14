@@ -32,15 +32,24 @@ export class BammcComponent {
   ) {}
   activeIndex: number = 0;
   stuSwitch: boolean = true;
-  display: boolean = false;
+  displayStu: boolean = false;
+  displaySch: boolean = false;
+  displayGrp: boolean = false;
   uploadDialog: boolean = false;
   AttDisplay: boolean = false;
   displayEdit: boolean = false;
   displayMaximizable: boolean = false;
   loading: boolean = true;
-  showDialog() {
-    this.display = true;
+  showDialogStu() {
+    this.displayStu = true;
   }
+  showDialogGrp() {
+    this.displayGrp = true;
+  }
+
+  showDialogSch() {
+    this.displaySch = true;
+  } 
   markAttDisplay() {
     this.AttDisplay = true;
   }
@@ -178,7 +187,7 @@ export class BammcComponent {
     this.stuValue.addControl('_id', new FormControl(''));
     this.stuValue.setValue(stuData);
     this.stuSwitch = false;
-    this.showDialog();
+    this.showDialogStu();
     console.log(this.stuData, 'stu coming');
   }
   updateStudents() {
@@ -258,7 +267,7 @@ export class BammcComponent {
     this.grpValue.addControl('_id', new FormControl(''));
     this.grpValue.setValue(grpData);
     this.stuSwitch = false;
-    this.showDialog();
+    this.showDialogGrp();
     console.log(this.grpData, 'grp coming');
   }
   updateGrp() {
@@ -318,7 +327,7 @@ export class BammcComponent {
     this.schValue.addControl('_id', new FormControl(''));
     this.schValue.setValue(schData);
     this.stuSwitch = false;
-    this.showDialog();
+    this.showDialogSch();
     console.log(this.schData, 'sch coming');
   }
   updateSch() {
