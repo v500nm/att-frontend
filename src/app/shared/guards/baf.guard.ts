@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
-export class DepartmentGuard implements CanActivate {
+export class BafGuard implements CanActivate {
   constructor(private router:Router){}
-  canActivate():boolean {
+  canActivate():boolean{
     if(!!localStorage.getItem('token')){
       return true
     }else{
@@ -14,5 +15,4 @@ export class DepartmentGuard implements CanActivate {
       return false
     }
   }
-  
 }
