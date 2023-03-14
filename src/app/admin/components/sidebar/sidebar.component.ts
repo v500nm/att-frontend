@@ -16,16 +16,12 @@ export class SidebarComponent {
     this.authService.logoutAdmin().subscribe(() => {
       this.router.navigate(['/adminlogin']);
     });
-    
   }
   adminDash(){
     this.activeTab = 'admin/';
     this.router.navigate(['admin/']);
   }
-  chatbot(){
-    this.activeTab = 'admin/chatbot';
-    this.router.navigate(['admin/chatbot']);   
-  }
+ 
   attMark(){
     this.activeTab = 'admin/attendance';
     this.router.navigate(['admin/attendance']);
