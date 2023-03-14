@@ -38,14 +38,11 @@ export class SidebarComponent {
     this.activeTab='department/bammc';
     this.router.navigate(['department/bammc'])
   }
-  seminars(){
-    this.activeTab='department/seminars';
-    this.router.navigate(['department/seminars'])
+  others(){
+    this.activeTab='department/others';
+    this.router.navigate(['department/others'])
   }
-  workshops(){
-    this.activeTab='department/workshops';
-    this.router.navigate(['department/workshops']);
-  }
+ 
   logout(){
     this.activeTab = '';
     this.router.navigate(['']);
