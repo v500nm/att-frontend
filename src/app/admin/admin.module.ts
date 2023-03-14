@@ -6,8 +6,6 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { HeaderComponent } from './components/header/header.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { FooterComponent } from './components/footer/footer.component';
-import { AttmarkComponent } from './pages/attmark/attmark.component';
-import { AssignComponent } from './pages/assign/assign.component';
 import { InputTextModule } from "primeng/inputtext";
 import { ButtonModule } from 'primeng/button';
 import {DropdownModule} from 'primeng/dropdown';
@@ -31,8 +29,6 @@ import { AddclassComponent } from './pages/addclass/addclass.component';
        HeaderComponent,
        SidebarComponent,
        FooterComponent,
-       AttmarkComponent,
-       AssignComponent,
        AssignfacComponent,
        FacloginsComponent,
        AddsubsComponent,

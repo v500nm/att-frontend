@@ -1,13 +1,17 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
-import { AttmarkComponent } from './pages/attmark/attmark.component';
-import { AssignComponent } from './pages/assign/assign.component';
+import { AddclassComponent } from './pages/addclass/addclass.component';
+import { AddsubsComponent } from './pages/addsubs/addsubs.component';
+import { FacloginsComponent } from './pages/faclogins/faclogins.component';
+import { AssignfacComponent } from './pages/assignfac/assignfac.component';
 
 const routes: Routes = [
   {path: '', component:DashboardComponent},
-  {path: 'attendance', component:AttmarkComponent},
-  {path:'assign', component:AssignComponent}
+  {path:'addclass',component:AddclassComponent},
+  {path:'addsubs',component:AddsubsComponent},
+  {path:'assignfac',component:AssignfacComponent},
+  {path:'faclogins',component:FacloginsComponent}
 ];
 
 @NgModule({
