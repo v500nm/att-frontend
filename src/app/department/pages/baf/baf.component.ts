@@ -7,17 +7,15 @@ import {
   Validators,
 } from '@angular/forms';
 import {
-  Ibafattendance,
-  Ibaffaculties,
-  Ibafgroups,
-  Ibafschedule,
-  Ibafstudents,
-  Ibafsubject,
-  roles
-} from '../../../shared/interfaces/baf.interface';
+  Iattendance,
+  Ifaculties,
+  Igroups,
+  Ischedule,
+  Istudents,
+  Isubject,
+  roles,Iclassroom
+} from '../../../shared/interfaces/admin.interface';
 import * as FileSaver from 'file-saver';
-import { Iclassroom } from 'src/app/shared/interfaces/admin.interface';
-import { BafService } from 'src/app/shared/services/baf.service';
 
 @Component({
   selector: 'app-baf',
@@ -26,7 +24,6 @@ import { BafService } from 'src/app/shared/services/baf.service';
 })
 export class BafComponent {
   constructor(
-    private bafservice:BafService,
     private adminService: AdminService,
     private formsbuilder: FormBuilder
   ) {}
@@ -67,39 +64,39 @@ export class BafComponent {
   schValue!: FormGroup;
 
   stuRole = roles;
-  attData: Ibafattendance[] = [];
-  facData: Ibaffaculties[] = [];
-  schData: Ibafschedule[] = [];
-  stuData: Ibafstudents[] = [];
-  subData: Ibafsubject[] = [];
-  grpData: Ibafgroups[] = [];
+  attData: Iattendance[] = [];
+  facData: Ifaculties[] = [];
+  schData: Ischedule[] = [];
+  stuData: Istudents[] = [];
+  subData: Isubject[] = [];
+  grpData: Igroups[] = [];
   classData:Iclassroom[]=[];
 
-  stuExcelData: Ibafstudents[] = [];
+  stuExcelData: Istudents[] = [];
   ngOnInit(): void {
    //table
-   this.bafservice.findAllStudents().subscribe((res) => {
+   this.adminService.findAllStudents().subscribe((res) => {
     this.stuData = res;
     this.loading = false;
   });
-  this.bafservice.findAllSubjects().subscribe((res) => {
+  this.adminService.findAllSubjects().subscribe((res) => {
     this.subData = res;
     this.loading = false;
   });
-  this.bafservice.getAllFaculties().subscribe((res) => {
+  this.adminService.getAllFaculties().subscribe((res) => {
     this.facData = res;
     this.loading = false;
   });
-  this.bafservice.findAllGroup().subscribe((res) => {
+  this.adminService.findAllGroup().subscribe((res) => {
     this.grpData = res;
     this.loading = false;
   });
-  this.bafservice.findAllSchedule().subscribe((res) => {
+  this.adminService.findAllSchedule().subscribe((res) => {
     this.schData = res;
     this.loading = false;
   });
   //forms
-  this.bafservice.findAllSchedule().subscribe((res) => {
+  this.adminService.findAllSchedule().subscribe((res) => {
     this.schData = res;
     this.loading = false;
   });
@@ -148,20 +145,20 @@ export class BafComponent {
     });
   }
   findAllSubjects() {
-    this.adminService.findAllSubjects().subscribe((res: Ibafsubject[]) => {
+    this.adminService.findAllSubjects().subscribe((res: Isubject[]) => {
       this.subData = res;
       console.log(res, 'subject get');
     });
   }
   getAllFaculties() {
-    this.adminService.getAllFaculties().subscribe((res: Ibaffaculties[]) => {
+    this.adminService.getAllFaculties().subscribe((res: Ifaculties[]) => {
       this.facData = res;
       console.log(res, 'faculty get');
     });
   }
   //students
   findAllStudents() {
-    this.bafservice.findAllStudents().subscribe((res: Ibafstudents[]) => {
+    this.adminService.findAllStudents().subscribe((res: Istudents[]) => {
       this.stuData = res;
       console.log(res, 'students get');
     });
@@ -169,7 +166,7 @@ export class BafComponent {
 
   regStudents() {
     this.stuData = this.stuValue.value;
-    this.bafservice.registerStudent(this.stuValue.value).subscribe((res) => {
+    this.adminService.registerStudent(this.stuValue.value).subscribe((res) => {
       console.log(res, 'students post');
       this.stuValue.reset();
       this.findAllStudents();
@@ -177,7 +174,7 @@ export class BafComponent {
   }
 
   removeStudent(_id: string) {
-    this.bafservice.removeStudent(_id).subscribe((res) => {
+    this.adminService.removeStudent(_id).subscribe((res) => {
       console.log(res, 'delete works');
       this.findAllStudents();
     });
@@ -192,7 +189,7 @@ export class BafComponent {
   }
   updateStudents() {
     const id = this.stuValue.value._id;
-    this.bafservice
+    this.adminService
       .updateStudent(id, this.stuValue.value)
       .subscribe((res: any) => {
         this.stuData = res;
@@ -211,7 +208,7 @@ export class BafComponent {
     const stuExcelData = new FormData();
     stuExcelData.append('file', this.stuUploadValue.get('file')?.value);
 
-    this.bafservice.uploadStu(stuExcelData).subscribe((data: any) => {
+    this.adminService.uploadStu(stuExcelData).subscribe((data: any) => {
       this.stuData = data;
       console.log(this.stuData);
     });
@@ -243,21 +240,21 @@ export class BafComponent {
 
   //groups
   findAllGroup() {
-    this.bafservice.findAllGroup().subscribe((res: Ibafgroups[]) => {
+    this.adminService.findAllGroup().subscribe((res: Igroups[]) => {
       this.grpData = res;
       console.log(res, 'groups get');
     });
   }
   createGroup() {
     this.grpData = this.grpValue.value;
-    this.bafservice.createGroup(this.grpValue.value).subscribe((res) => {
+    this.adminService.createGroup(this.grpValue.value).subscribe((res) => {
       console.log(res, 'group Post');
       this.grpValue.reset();
       this.findAllGroup();
     });
   }
   removeGrp(_id: string) {
-    this.bafservice.removeGroup(_id).subscribe((res) => {
+    this.adminService.removeGroup(_id).subscribe((res) => {
       console.log(res, 'delete works');
       this.findAllGroup();
     });
@@ -272,7 +269,7 @@ export class BafComponent {
   }
   updateGrp() {
     const id = this.grpValue.value._id;
-    this.bafservice
+    this.adminService
       .updateGroup(id, this.grpValue.value)
       .subscribe((res: any) => {
         this.grpData = res;
@@ -283,7 +280,7 @@ export class BafComponent {
   }
   //att
   findAllAtt() {
-    this.bafservice.findAllAtt().subscribe((res: Ibafattendance[]) => {
+    this.adminService.findAllAtt().subscribe((res: Iattendance[]) => {
       this.attData = res;
       console.log(res, 'att get');
     });
@@ -291,7 +288,7 @@ export class BafComponent {
   markAtt() {
     this.attData = this.attValue.value;
     console.log(this.attData);
-    this.bafservice.postAtt(this.attValue.value).subscribe((res) => {
+    this.adminService.postAtt(this.attValue.value).subscribe((res) => {
       console.log(res, 'att post');
     });
     this.findAllAtt();
@@ -303,7 +300,7 @@ export class BafComponent {
 
   //schedule
   findAllSchedule() {
-    this.bafservice.findAllSchedule().subscribe((Response: Ibafschedule[]) => {
+    this.adminService.findAllSchedule().subscribe((Response: Ischedule[]) => {
       this.schData = Response;
       console.log(Response, 'allData');
     });
@@ -311,14 +308,14 @@ export class BafComponent {
   postSch() {
     this.schData = this.schValue.value;
     console.log(this.schData);
-    this.bafservice.createSchedule(this.schValue.value).subscribe((Response) => {
+    this.adminService.createSchedule(this.schValue.value).subscribe((Response) => {
       console.log(Response, 'post Method');
     });
     this.findAllSchedule();
     this.schValue.reset();
   }
   removeSch(_id: string) {
-    this.bafservice.removeSchedule(_id).subscribe((res) => {
+    this.adminService.removeSchedule(_id).subscribe((res) => {
       this.findAllSchedule();
     });
   }
@@ -332,7 +329,7 @@ export class BafComponent {
   }
   updateSch() {
     const id = this.schValue.value._id;
-    this.bafservice
+    this.adminService
       .updateSchedule(id, this.schValue.value)
       .subscribe((res: any) => {
         this.schData = res;

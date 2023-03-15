@@ -18,9 +18,9 @@ import { SplitButtonModule } from 'primeng/splitbutton';
 import {ListboxModule} from 'primeng/listbox';
 import {FileUploadModule} from 'primeng/fileupload';
 import { AssignfacComponent } from './pages/assignfac/assignfac.component';
-import { FacloginsComponent } from './pages/faclogins/faclogins.component';
 import { AddsubsComponent } from './pages/addsubs/addsubs.component';
 import { AddclassComponent } from './pages/addclass/addclass.component';
+import { ManagelogsComponent } from './pages/managelogs/managelogs.component';
 
 
 @NgModule({
@@ -30,9 +30,9 @@ import { AddclassComponent } from './pages/addclass/addclass.component';
        SidebarComponent,
        FooterComponent,
        AssignfacComponent,
-       FacloginsComponent,
        AddsubsComponent,
-       AddclassComponent
+       AddclassComponent,
+       ManagelogsComponent
   ],
   imports: [
     CommonModule,

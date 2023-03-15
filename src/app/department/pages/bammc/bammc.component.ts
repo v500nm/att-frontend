@@ -7,17 +7,16 @@ import {
   Validators,
 } from '@angular/forms';
 import {
-  Ibammcattendance,
-  Ibammcfaculties,
-  Ibammcgroups,
-  Ibammcschedule,
-  Ibammcstudents,
-  Ibammcsubject,
+  Iattendance,
+  Ifaculties,
+  Igroups,
+  Ischedule,
+  Istudents,
+  Isubject,
   roles
-} from '../../../shared/interfaces/bammc.interface';
+} from '../../../shared/interfaces/admin.interface';
 import * as FileSaver from 'file-saver';
 import { Iclassroom } from 'src/app/shared/interfaces/admin.interface';
-import { BammcService } from 'src/app/shared/services/bammc.service';
 
 @Component({
   selector: 'app-bammc',
@@ -26,7 +25,6 @@ import { BammcService } from 'src/app/shared/services/bammc.service';
 })
 export class BammcComponent {
   constructor(
-    private bammcservice:BammcService,
     private adminService: AdminService,
     private formsbuilder: FormBuilder
   ) {}
@@ -67,39 +65,39 @@ export class BammcComponent {
   schValue!: FormGroup;
 
   stuRole = roles;
-  attData: Ibammcattendance[] = [];
-  facData: Ibammcfaculties[] = [];
-  schData: Ibammcschedule[] = [];
-  stuData: Ibammcstudents[] = [];
-  subData: Ibammcsubject[] = [];
-  grpData: Ibammcgroups[] = [];
+  attData: Iattendance[] = [];
+  facData: Ifaculties[] = [];
+  schData: Ischedule[] = [];
+  stuData: Istudents[] = [];
+  subData: Isubject[] = [];
+  grpData: Igroups[] = [];
   classData:Iclassroom[]=[];
 
-  stuExcelData: Ibammcstudents[] = [];
+  stuExcelData: Istudents[] = [];
   ngOnInit(): void {
     //table
-    this.bammcservice.findAllStudents().subscribe((res) => {
+    this.adminService.findAllStudents().subscribe((res) => {
       this.stuData = res;
       this.loading = false;
     });
-    this.bammcservice.findAllSubjects().subscribe((res) => {
+    this.adminService.findAllSubjects().subscribe((res) => {
       this.subData = res;
       this.loading = false;
     });
-    this.bammcservice.getAllFaculties().subscribe((res) => {
+    this.adminService.getAllFaculties().subscribe((res) => {
       this.facData = res;
       this.loading = false;
     });
-    this.bammcservice.findAllGroup().subscribe((res) => {
+    this.adminService.findAllGroup().subscribe((res) => {
       this.grpData = res;
       this.loading = false;
     });
-    this.bammcservice.findAllSchedule().subscribe((res) => {
+    this.adminService.findAllSchedule().subscribe((res) => {
       this.schData = res;
       this.loading = false;
     });
     //forms
-    this.bammcservice.findAllSchedule().subscribe((res) => {
+    this.adminService.findAllSchedule().subscribe((res) => {
       this.schData = res;
       this.loading = false;
     });
@@ -148,20 +146,20 @@ export class BammcComponent {
     });
   }
   findAllSubjects() {
-    this.adminService.findAllSubjects().subscribe((res: Ibammcsubject[]) => {
+    this.adminService.findAllSubjects().subscribe((res: Isubject[]) => {
       this.subData = res;
       console.log(res, 'subject get');
     });
   }
   getAllFaculties() {
-    this.adminService.getAllFaculties().subscribe((res: Ibammcfaculties[]) => {
+    this.adminService.getAllFaculties().subscribe((res: Ifaculties[]) => {
       this.facData = res;
       console.log(res, 'faculty get');
     });
   }
   //students
   findAllStudents() {
-    this.bammcservice.findAllStudents().subscribe((res: Ibammcstudents[]) => {
+    this.adminService.findAllStudents().subscribe((res: Istudents[]) => {
       this.stuData = res;
       console.log(res, 'students get');
     });
@@ -169,7 +167,7 @@ export class BammcComponent {
 
   regStudents() {
     this.stuData = this.stuValue.value;
-    this.bammcservice.registerStudent(this.stuValue.value).subscribe((res) => {
+    this.adminService.registerStudent(this.stuValue.value).subscribe((res) => {
       console.log(res, 'students post');
       this.stuValue.reset();
       this.findAllStudents();
@@ -177,7 +175,7 @@ export class BammcComponent {
   }
 
   removeStudent(_id: string) {
-    this.bammcservice.removeStudent(_id).subscribe((res) => {
+    this.adminService.removeStudent(_id).subscribe((res) => {
       console.log(res, 'delete works');
       this.findAllStudents();
     });
@@ -192,7 +190,7 @@ export class BammcComponent {
   }
   updateStudents() {
     const id = this.stuValue.value._id;
-    this.bammcservice
+    this.adminService
       .updateStudent(id, this.stuValue.value)
       .subscribe((res: any) => {
         this.stuData = res;
@@ -211,7 +209,7 @@ export class BammcComponent {
     const stuExcelData = new FormData();
     stuExcelData.append('file', this.stuUploadValue.get('file')?.value);
 
-    this.bammcservice.uploadStu(stuExcelData).subscribe((data: any) => {
+    this.adminService.uploadStu(stuExcelData).subscribe((data: any) => {
       this.stuData = data;
       console.log(this.stuData);
     });
@@ -243,21 +241,21 @@ export class BammcComponent {
 
   //groups
   findAllGroup() {
-    this.bammcservice.findAllGroup().subscribe((res: Ibammcgroups[]) => {
+    this.adminService.findAllGroup().subscribe((res: Igroups[]) => {
       this.grpData = res;
       console.log(res, 'groups get');
     });
   }
   createGroup() {
     this.grpData = this.grpValue.value;
-    this.bammcservice.createGroup(this.grpValue.value).subscribe((res) => {
+    this.adminService.createGroup(this.grpValue.value).subscribe((res) => {
       console.log(res, 'group Post');
       this.grpValue.reset();
       this.findAllGroup();
     });
   }
   removeGrp(_id: string) {
-    this.bammcservice.removeGroup(_id).subscribe((res) => {
+    this.adminService.removeGroup(_id).subscribe((res) => {
       console.log(res, 'delete works');
       this.findAllGroup();
     });
@@ -272,7 +270,7 @@ export class BammcComponent {
   }
   updateGrp() {
     const id = this.grpValue.value._id;
-    this.bammcservice
+    this.adminService
       .updateGroup(id, this.grpValue.value)
       .subscribe((res: any) => {
         this.grpData = res;
@@ -283,7 +281,7 @@ export class BammcComponent {
   }
   //att
   findAllAtt() {
-    this.bammcservice.findAllAtt().subscribe((res: Ibammcattendance[]) => {
+    this.adminService.findAllAtt().subscribe((res: Iattendance[]) => {
       this.attData = res;
       console.log(res, 'att get');
     });
@@ -291,7 +289,7 @@ export class BammcComponent {
   markAtt() {
     this.attData = this.attValue.value;
     console.log(this.attData);
-    this.bammcservice.postAtt(this.attValue.value).subscribe((res) => {
+    this.adminService.postAtt(this.attValue.value).subscribe((res) => {
       console.log(res, 'att post');
     });
     this.findAllAtt();
@@ -303,7 +301,7 @@ export class BammcComponent {
 
   //schedule
   findAllSchedule() {
-    this.bammcservice.findAllSchedule().subscribe((Response: Ibammcschedule[]) => {
+    this.adminService.findAllSchedule().subscribe((Response: Ischedule[]) => {
       this.schData = Response;
       console.log(Response, 'allData');
     });
@@ -311,14 +309,14 @@ export class BammcComponent {
   postSch() {
     this.schData = this.schValue.value;
     console.log(this.schData);
-    this.bammcservice.createSchedule(this.schValue.value).subscribe((Response) => {
+    this.adminService.createSchedule(this.schValue.value).subscribe((Response) => {
       console.log(Response, 'post Method');
     });
     this.findAllSchedule();
     this.schValue.reset();
   }
   removeSch(_id: string) {
-    this.bammcservice.removeSchedule(_id).subscribe((res) => {
+    this.adminService.removeSchedule(_id).subscribe((res) => {
       this.findAllSchedule();
     });
   }
@@ -332,7 +330,7 @@ export class BammcComponent {
   }
   updateSch() {
     const id = this.schValue.value._id;
-    this.bammcservice
+    this.adminService
       .updateSchedule(id, this.schValue.value)
       .subscribe((res: any) => {
         this.schData = res;

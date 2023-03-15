@@ -33,9 +33,9 @@ export class SidebarComponent {
     this.activeTab='admin/assignfac';
     this.router.navigate(['admin/assignfac']);
   }
-  facLogins(){
-    this.activeTab='admin/faclogins';
-    this.router.navigate(['admin/faclogins']);
+  managelogs(){
+    this.activeTab='admin/managelogs';
+    this.router.navigate(['admin/managelogs']);
   }
   logout(){
     this.activeTab = '';

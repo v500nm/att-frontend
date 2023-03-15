@@ -29,11 +29,9 @@ import { OthersComponent } from './pages/others/others.component';
     HeaderComponent,
     SidebarComponent,
     DashboardComponent,
-    ItComponent,
+    OthersComponent,
     BmsComponent,
-    BafComponent,
-    BammcComponent,
-    OthersComponent
+    ItComponent,BafComponent,BammcComponent
   ],
   imports: [CommonModule, DepartmentRoutingModule,SidebarModule,
     InputTextModule,

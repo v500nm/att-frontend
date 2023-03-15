@@ -7,17 +7,16 @@ import {
   Validators,
 } from '@angular/forms';
 import {
-  Iitattendance,
-  Iitfaculties,
-  Iitgroups,
-  Iitschedule,
-  Iitstudents,
-  Iitsubject,
+  Iattendance,
+  Ifaculties,
+  Igroups,
+  Ischedule,
+  Istudents,
+  Isubject,
   roles,
-} from '../../../shared/interfaces/it.interface';
+} from '../../../shared/interfaces/admin.interface';
 import * as FileSaver from 'file-saver';
 import { Iclassroom } from 'src/app/shared/interfaces/admin.interface';
-import { ItService } from 'src/app/shared/services/it.service';
 
 @Component({
   selector: 'app-it',
@@ -27,7 +26,6 @@ import { ItService } from 'src/app/shared/services/it.service';
 export class ItComponent implements OnInit {
   constructor(
     private adminService: AdminService,
-    private itservice: ItService,
     private formsbuilder: FormBuilder
   ) {}
   activeIndex: number = 0;
@@ -67,34 +65,34 @@ export class ItComponent implements OnInit {
   schValue!: FormGroup;
 
   stuRole = roles;
-  attData: Iitattendance[] = [];
-  facData: Iitfaculties[] = [];
-  schData: Iitschedule[] = [];
-  stuData: Iitstudents[] = [];
-  subData: Iitsubject[] = [];
-  grpData: Iitgroups[] = [];
+  attData: Iattendance[] = [];
+  facData: Ifaculties[] = [];
+  schData: Ischedule[] = [];
+  stuData: Istudents[] = [];
+  subData: Isubject[] = [];
+  grpData: Igroups[] = [];
   classData:Iclassroom[]=[];
 
-  stuExcelData: Iitstudents[] = [];
+  stuExcelData: Istudents[] = [];
   ngOnInit(): void {
     //table
-    this.itservice.findAllStudents().subscribe((res) => {
+    this.adminService.findAllStudents().subscribe((res) => {
       this.stuData = res;
       this.loading = false;
     });
-    this.itservice.findAllSubjects().subscribe((res) => {
+    this.adminService.findAllSubjects().subscribe((res) => {
       this.subData = res;
       this.loading = false;
     });
-    this.itservice.getAllFaculties().subscribe((res) => {
+    this.adminService.getAllFaculties().subscribe((res) => {
       this.facData = res;
       this.loading = false;
     });
-    this.itservice.findAllGroup().subscribe((res) => {
+    this.adminService.findAllGroup().subscribe((res) => {
       this.grpData = res;
       this.loading = false;
     });
-    this.itservice.findAllSchedule().subscribe((res) => {
+    this.adminService.findAllSchedule().subscribe((res) => {
       this.schData = res;
       this.loading = false;
     });
@@ -103,7 +101,7 @@ export class ItComponent implements OnInit {
       this.loading=true;
     })
     //forms
-    this.itservice.findAllSchedule().subscribe((res) => {
+    this.adminService.findAllSchedule().subscribe((res) => {
       this.schData = res;
       this.loading = false;
     });
@@ -153,20 +151,20 @@ export class ItComponent implements OnInit {
     });
   }
   findAllSubjects() {
-    this.adminService.findAllSubjects().subscribe((res: Iitsubject[]) => {
+    this.adminService.findAllSubjects().subscribe((res: Isubject[]) => {
       this.subData = res;
       console.log(res, 'subject get');
     });
   }
   getAllFaculties() {
-    this.adminService.getAllFaculties().subscribe((res: Iitfaculties[]) => {
+    this.adminService.getAllFaculties().subscribe((res: Ifaculties[]) => {
       this.facData = res;
       console.log(res, 'faculty get');
     });
   }
   //students
   findAllStudents() {
-    this.itservice.findAllStudents().subscribe((res: Iitstudents[]) => {
+    this.adminService.findAllStudents().subscribe((res: Istudents[]) => {
       this.stuData = res;
       console.log(res, 'students get');
     });
@@ -174,7 +172,7 @@ export class ItComponent implements OnInit {
 
   regStudents() {
     this.stuData = this.stuValue.value;
-    this.itservice.registerStudent(this.stuValue.value).subscribe((res) => {
+    this.adminService.registerStudent(this.stuValue.value).subscribe((res) => {
       console.log(res, 'students post');
       this.stuValue.reset();
       this.findAllStudents();
@@ -182,7 +180,7 @@ export class ItComponent implements OnInit {
   }
 
   removeStudent(_id: string) {
-    this.itservice.removeStudent(_id).subscribe((res) => {
+    this.adminService.removeStudent(_id).subscribe((res) => {
       console.log(res, 'delete works');
       this.findAllStudents();
     });
@@ -197,7 +195,7 @@ export class ItComponent implements OnInit {
   }
   updateStudents() {
     const id = this.stuValue.value._id;
-    this.itservice
+    this.adminService
       .updateStudent(id, this.stuValue.value)
       .subscribe((res: any) => {
         this.stuData = res;
@@ -216,7 +214,7 @@ export class ItComponent implements OnInit {
     const stuExcelData = new FormData();
     stuExcelData.append('file', this.stuUploadValue.get('file')?.value);
 
-    this.itservice.uploadStu(stuExcelData).subscribe((data: any) => {
+    this.adminService.uploadStu(stuExcelData).subscribe((data: any) => {
       this.stuData = data;
       console.log(this.stuData);
     });
@@ -248,21 +246,21 @@ export class ItComponent implements OnInit {
 
   //groups
   findAllGroup() {
-    this.itservice.findAllGroup().subscribe((res: Iitgroups[]) => {
+    this.adminService.findAllGroup().subscribe((res: Igroups[]) => {
       this.grpData = res;
       console.log(res, 'groups get');
     });
   }
   createGroup() {
     this.grpData = this.grpValue.value;
-    this.itservice.createGroup(this.grpValue.value).subscribe((res) => {
+    this.adminService.createGroup(this.grpValue.value).subscribe((res) => {
       console.log(res, 'group Post');
       this.grpValue.reset();
       this.findAllGroup();
     });
   }
   removeGrp(_id: string) {
-    this.itservice.removeGroup(_id).subscribe((res) => {
+    this.adminService.removeGroup(_id).subscribe((res) => {
       console.log(res, 'delete works');
       this.findAllGroup();
     });
@@ -277,7 +275,7 @@ export class ItComponent implements OnInit {
   }
   updateGrp() {
     const id = this.grpValue.value._id;
-    this.itservice
+    this.adminService
       .updateGroup(id, this.grpValue.value)
       .subscribe((res: any) => {
         this.grpData = res;
@@ -288,7 +286,7 @@ export class ItComponent implements OnInit {
   }
   //att
   findAllAtt() {
-    this.itservice.findAllAtt().subscribe((res: Iitattendance[]) => {
+    this.adminService.findAllAtt().subscribe((res: Iattendance[]) => {
       this.attData = res;
       console.log(res, 'att get');
     });
@@ -296,7 +294,7 @@ export class ItComponent implements OnInit {
   markAtt() {
     this.attData = this.attValue.value;
     console.log(this.attData);
-    this.itservice.postAtt(this.attValue.value).subscribe((res) => {
+    this.adminService.postAtt(this.attValue.value).subscribe((res) => {
       console.log(res, 'att post');
     });
     this.findAllAtt();
@@ -308,7 +306,7 @@ export class ItComponent implements OnInit {
 
   //schedule
   findAllSchedule() {
-    this.itservice.findAllSchedule().subscribe((Response: Iitschedule[]) => {
+    this.adminService.findAllSchedule().subscribe((Response: Ischedule[]) => {
       this.schData = Response;
       console.log(Response, 'allData');
     });
@@ -316,14 +314,14 @@ export class ItComponent implements OnInit {
   postSch() {
     this.schData = this.schValue.value;
     console.log(this.schData);
-    this.itservice.createSchedule(this.schValue.value).subscribe((Response) => {
+    this.adminService.createSchedule(this.schValue.value).subscribe((Response) => {
       console.log(Response, 'post Method');
     });
     this.findAllSchedule();
     this.schValue.reset();
   }
   removeSch(_id: string) {
-    this.itservice.removeSchedule(_id).subscribe((res) => {
+    this.adminService.removeSchedule(_id).subscribe((res) => {
       this.findAllSchedule();
     });
   }
@@ -337,7 +335,7 @@ export class ItComponent implements OnInit {
   }
   updateSch() {
     const id = this.schValue.value._id;
-    this.itservice
+    this.adminService
       .updateSchedule(id, this.schValue.value)
       .subscribe((res: any) => {
         this.schData = res;
