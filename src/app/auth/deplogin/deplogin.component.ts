@@ -42,7 +42,7 @@ export class DeploginComponent implements OnInit {
   Submitlogin() {
     this.auth.postDepLogin(this.deploginForm.value).subscribe(
       (res: any) => {
-        localStorage.setItem('token', res.Token);
+        localStorage.setItem('deptoken', res.Token);
         alert('Login successful');
         this.deploginForm.reset();
         this.router.navigate(['/department']);

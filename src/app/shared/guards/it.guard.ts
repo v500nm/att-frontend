@@ -4,10 +4,10 @@ import { CanActivate, Router } from '@angular/router';
 @Injectable({
   providedIn: 'root'
 })
-export class DepartmentGuard implements CanActivate {
+export class ItGuard implements CanActivate {
   constructor(private router:Router){}
-  canActivate():boolean {
-    if(!!localStorage.getItem('deptoken')){
+  canActivate(): boolean{
+    if(!!localStorage.getItem('token')){
       return true
     }else{
       this.router.navigate(['/departmentlogin'])

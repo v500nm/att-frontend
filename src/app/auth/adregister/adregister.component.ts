@@ -30,7 +30,7 @@ export class AdregisterComponent implements OnInit{
 
   ngOnInit() {
     this.adminRegisterForm = this.fb.group({
-      firstName: ['', Validators.required],
+      name: ['', Validators.required],
       email: [
         '',
         [
@@ -58,6 +58,7 @@ export class AdregisterComponent implements OnInit{
 
   getRegister() {
     this.adregisterDatas = this.adminRegisterForm.value;
+
     const inputElement = document.getElementById('email') as HTMLInputElement;
     const inputValue = inputElement.value;
 

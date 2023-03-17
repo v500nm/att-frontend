@@ -1,6 +1,29 @@
-.container {
-    margin: 1rem;
-    padding: 2rem;
-    background-color: white;
-    border-radius: 10px;
+@use "/src/app/shared/styles/admin.scss";
+.formGrp {
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+  margin-top: 1.4rem;
+}
+.add {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+a {
+  background-color: #3b82f6;
+  color: white;
+  padding: 15px;
+  border: none;
+  border-radius: 10px;
+  text-decoration: none;
+  margin: 2rem;
+}
+@media screen and (max-width: 1000px) {
+  .add {
+    display: flex;
+    gap: 1rem;
+    flex-direction: column;
+    margin-bottom: 2rem;
   }
+}

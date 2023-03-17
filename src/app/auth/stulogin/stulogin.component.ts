@@ -42,7 +42,7 @@ export class StuloginComponent implements OnInit{
   Submitlogin() {
     this.auth.postStuLogin(this.stuloginForm.value).subscribe(
       (res: any) => {
-        localStorage.setItem('token', res.Token);
+        localStorage.setItem('stutoken', res.Token);
         alert('Login successful');
         this.stuloginForm.reset();
         this.router.navigate(['/student']);

@@ -30,7 +30,7 @@ export class DepregisterComponent implements OnInit {
 
   ngOnInit() {
     this.depRegisterForm = this.fb.group({
-      firstName: ['', Validators.required],
+      name: ['', Validators.required],
       email: [
         '',
         [

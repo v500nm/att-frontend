@@ -1,4 +1,142 @@
 <app-header></app-header>
 <div class="container">
-    
+    <div class="top">
+        <h1>Manage Logins</h1>
+    </div>
+    <p-tabView [(activeIndex)]="activeIndex">
+        <p-tabPanel header="Faculty">
+            <section class="facLogs">
+                <div class="add">
+                    <div class="title">
+                        <h1>Faculty Registeration</h1>
+                    </div>
+                    <div class="addBtn">
+                        <a routerLink="/departmentregister">Register Faculty</a>
+                    </div>
+                </div>
+                <hr>
+                <div class="view">
+                    <p-table responsiveLayout="stack" #studentTable dataKey="id" [rows]="5" [value]="depregisterDatas"
+                        [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,20,30,40,50,60,70,80]"
+                        [loading]="loading" styleClass="p-datatable-customers p-datatable-gridlines" [paginator]="true"
+                        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
+                        <ng-template pTemplate="caption">
+                            Faculty Registeration List
+                        </ng-template>
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th>
+                                    <div class="p-d-flex p-jc-between p-ai-center">
+                                        Name
+                                        <p-columnFilter type="text" field="name" display="menu"></p-columnFilter>
+                                    </div>
+                                </th>
+                                <th>
+                                    <div class="p-d-flex p-jc-between p-ai-center">
+                                        Email
+                                        <p-columnFilter type="text" field="email" display="menu"></p-columnFilter>
+                                    </div>
+                                </th>
+                                <th>
+                                    <div class="p-d-flex p-jc-between p-ai-center">
+                                        Options
+                                    </div>
+                                </th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-depregisterDatas>
+                            <tr>
+                                <td><span class="p-column-title">Roll</span>
+                                    {{depregisterDatas.name}}
+                                </td>
+                                <td><span class="p-column-title">Name</span>
+                                    {{depregisterDatas.email}}
+                                </td>
+                               
+                                <td><span class="p-column-title">Options</span>
+                                    <div class="editGrp">
+                                        <div class="delete">
+                                            <button>Delete</button>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="emptymessage">
+                            <tr>
+                                <td colspan="7">No customers found.</td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </div>
+            </section>
+        </p-tabPanel>
+        <p-tabPanel header="Admin">
+            <section class="AdLogs">
+                <div class="add">
+                    <div class="title">
+                        <h1>Admin Registeration</h1>
+                    </div>
+                    <div class="addBtn">
+                        <a routerLink="/adminregister">Register Admin</a>
+                    </div>
+                </div>
+                <div class="view">
+                    <p-table responsiveLayout="stack" #studentTable dataKey="id" [value]="adregisterDatas" [rows]="5"
+                        [showCurrentPageReport]="true" [rowsPerPageOptions]="[5,10]" [loading]="loading"
+                        styleClass="p-datatable-customers p-datatable-gridlines" [paginator]="true"
+                        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
+                        <ng-template pTemplate="caption">
+                            Admin Login List
+
+                        </ng-template>
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th>
+                                    <div class="p-d-flex p-jc-between p-ai-center">
+                                        First Name
+                                        <p-columnFilter type="text" field="name" display="menu"></p-columnFilter>
+                                    </div>
+                                </th>
+                                <th>
+                                    <div class="p-d-flex p-jc-between p-ai-center">
+                                        Email
+                                        <p-columnFilter type="text" field="email" display="menu"></p-columnFilter>
+                                    </div>
+                                </th>
+
+                                <th>
+                                    <div class="p-d-flex p-jc-between p-ai-center">
+                                        Options
+                                    </div>
+                                </th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-adregisterDatas>
+                            <tr>
+                                <td><span class="p-column-title">Roll</span>
+                                    {{adregisterDatas.name}}
+                                </td>
+                                <td><span class="p-column-title">Name</span>
+                                    {{adregisterDatas.email}}
+                                </td>
+                                <td><span class="p-column-title">Options</span>
+                                    <div class="editGrp">
+                                        <div class="delete">
+                                            <button>Delete</button>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="emptymessage">
+                            <tr>
+                                <td colspan="7">No customers found.</td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </div>
+            </section>
+        </p-tabPanel>
+    </p-tabView>
 </div>

@@ -45,7 +45,7 @@ export class AdloginComponent implements OnInit {
    
     this.auth.postAdLogin(this.adminloginForm.value).subscribe(
       (res: any) => {
-        localStorage.setItem('token', res.Token);
+        localStorage.setItem('adtoken', res.Token);
         alert('Login successful');
         this.adminloginForm.reset();
           this.router.navigate(['/admin']);

@@ -112,6 +112,7 @@ export class ItComponent implements OnInit {
     this.findAllStudents();
     this.findAllSchedule();
     this.findAllAtt();
+    this.getAllFaculties();
 
     (this.stuValue = this.formsbuilder.group({
       roll: new FormControl(''),
@@ -316,8 +317,8 @@ export class ItComponent implements OnInit {
     console.log(this.schData);
     this.adminService.createSchedule(this.schValue.value).subscribe((Response) => {
       console.log(Response, 'post Method');
+      this.findAllSchedule();
     });
-    this.findAllSchedule();
     this.schValue.reset();
   }
   removeSch(_id: string) {
