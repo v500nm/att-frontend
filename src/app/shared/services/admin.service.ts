@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
 import { HttpClient, HttpEventType, HttpHeaders } from '@angular/common/http';
-import { Iclassroom, Istudents } from '../interfaces/admin.interface';
+import { Iclassroom, Icourses, Istudents } from '../interfaces/admin.interface';
 import { Ifaculties } from '../interfaces/admin.interface';
 import { Igroups } from '../interfaces/admin.interface';
 import { Ischedule } from '../interfaces/admin.interface';
@@ -23,6 +23,7 @@ export class AdminService {
   attendanceUrl = this.baseUrl + '/attendance';
   scheduleUrl = this.baseUrl + '/schedule';
   groupsUrl = this.baseUrl + '/groups';
+  courseUrl = this.baseUrl + '/courses';
 
   //students
   registerStudent(students: Istudents): Observable<Istudents> {
@@ -47,9 +48,38 @@ export class AdminService {
   uploadStu(fileData: FormData): Observable<Istudents[]> {
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'multipart/form-data');
-    return this.http
-      .post<Istudents[]>(`${this.studentsUrl}/upload`, fileData, { headers });      
-  }  
+    return this.http.post<Istudents[]>(`${this.studentsUrl}/upload`, fileData, {
+      headers,
+    });
+  }
+
+  //courses
+  addCourse(courses: Icourses): Observable<Icourses> {
+    return this.http.post<Icourses>(this.courseUrl, courses);
+  }
+
+  getAllCourses(): Observable<Icourses[]> {
+    return this.http.get<Icourses[]>(this.courseUrl);
+  }
+
+  getCourse(_id: string): Observable<Icourses> {
+    return this.http.get<Icourses>(this.courseUrl + '/' + _id);
+  }
+
+  updateCourse(_id: string, courses: Icourses): Observable<Icourses> {
+    return this.http.put<Icourses>(this.courseUrl + '/' + _id, courses);
+  }
+
+  removeCourse(_id: string): Observable<Icourses> {
+    return this.http.delete<Icourses>(this.courseUrl + '/' + _id);
+  }
+  uploadCourse(fileData: FormData): Observable<Icourses[]> {
+    const headers = new HttpHeaders();
+    headers.append('Content-Type', 'multipart/form-data');
+    return this.http.post<Icourses[]>(`${this.courseUrl}/upload`, fileData, {
+      headers,
+    });
+  }
 
   //faculties
   addFaculty(faculties: Ifaculties): Observable<Ifaculties> {
@@ -77,8 +107,11 @@ export class AdminService {
   uploadFac(fileData: FormData): Observable<Ifaculties[]> {
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'multipart/form-data');
-    return this.http
-      .post<Ifaculties[]>(`${this.facultiesUrl}/upload`, fileData, { headers });      
+    return this.http.post<Ifaculties[]>(
+      `${this.facultiesUrl}/upload`,
+      fileData,
+      { headers }
+    );
   }
 
   //subjects
@@ -103,8 +136,9 @@ export class AdminService {
   uploadSub(fileData: FormData): Observable<Isubject[]> {
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'multipart/form-data');
-    return this.http
-      .post<Isubject[]>(`${this.subjectUrl}/upload`, fileData, { headers });      
+    return this.http.post<Isubject[]>(`${this.subjectUrl}/upload`, fileData, {
+      headers,
+    });
   }
 
   removeSubject(_id: string): Observable<Isubject> {
@@ -132,8 +166,11 @@ export class AdminService {
   uploadClass(fileData: FormData): Observable<Iclassroom[]> {
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'multipart/form-data');
-    return this.http
-      .post<Iclassroom[]>(`${this.classroomUrl}/upload`, fileData, { headers });      
+    return this.http.post<Iclassroom[]>(
+      `${this.classroomUrl}/upload`,
+      fileData,
+      { headers }
+    );
   }
   //attendance
   postAtt(attendance: Iattendance): Observable<Iattendance> {
@@ -163,8 +200,11 @@ export class AdminService {
   uploadAtt(fileData: FormData): Observable<Iattendance[]> {
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'multipart/form-data');
-    return this.http
-      .post<Iattendance[]>(`${this.attendanceUrl}/upload`, fileData, { headers });      
+    return this.http.post<Iattendance[]>(
+      `${this.attendanceUrl}/upload`,
+      fileData,
+      { headers }
+    );
   }
 
   //groups
@@ -190,8 +230,9 @@ export class AdminService {
   uploadGrp(fileData: FormData): Observable<Igroups[]> {
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'multipart/form-data');
-    return this.http
-      .post<Igroups[]>(`${this.groupsUrl}/upload`, fileData, { headers });      
+    return this.http.post<Igroups[]>(`${this.groupsUrl}/upload`, fileData, {
+      headers,
+    });
   }
 
   //schedule
@@ -216,8 +257,9 @@ export class AdminService {
   uploadSch(fileData: FormData): Observable<Ischedule[]> {
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'multipart/form-data');
-    return this.http
-      .post<Ischedule[]>(`${this.scheduleUrl}/upload`, fileData, { headers });      
+    return this.http.post<Ischedule[]>(`${this.scheduleUrl}/upload`, fileData, {
+      headers,
+    });
   }
   removeSchedule(_id: string): Observable<Ischedule> {
     return this.http.delete<Ischedule>(this.scheduleUrl + '/' + _id);

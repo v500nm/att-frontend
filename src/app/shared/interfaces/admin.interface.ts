@@ -10,15 +10,21 @@ export enum roles{
     di='DI',
     none='NONE'
 }
+export interface Icourses{
+    _id:string;
+    courses:string;
+}
 export interface Ifaculties{
     _id:string;
     fname:string;
     department:string;
     designation:string;
+    course:Icourses;
 }
 export interface Isubject{
     _id:string;
     subject:string
+    course:Icourses;
 }
 export interface Iclassroom{
     _id:string;
@@ -26,17 +32,17 @@ export interface Iclassroom{
 }
 export interface Iattendance{
     _id:string;
-    schedule:Ischedule[];
-    stats:AttStatus;
-    markStudents:string[];
+    schedule:Ischedule;
+    attStat:attStat[];
 }
-export enum AttStatus{
-    present = "P",
-    absent = "A"
+export enum attStat{
+    present="P",
+    absent="A"
 }
 export interface Igroups{
     _id:string;
     gName: string;
+    course:Icourses;
     students:Istudents[];
 }
 export interface Ischedule{

@@ -288,15 +288,15 @@
                         </div>
                         <hr>
                         <div class="view">
-                            <p-table responsiveLayout="stack" #studentTable [value]="stuData" dataKey="id" [rows]="5"
+                            <p-table responsiveLayout="stack" #studentTable [value]="filteredIT" dataKey="id" [rows]="5"
                                 [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,20,30,40,50,60,70,80]"
                                 [loading]="loading" styleClass="p-datatable-customers p-datatable-gridlines"
                                 [paginator]="true"
                                 currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
                                 [globalFilterFields]="[
-                                'stuData.name',
-                                'stuData.roll',
-                                'stuData.classGrp'
+                                'filteredIT.name',
+                                'filteredIT.roll',
+                                'filteredIT.classGrp'
                               ]">
                                 <ng-template pTemplate="caption">
                                     Students List
@@ -340,27 +340,27 @@
                                         </th>
                                     </tr>
                                 </ng-template>
-                                <ng-template pTemplate="body" let-stuData>
+                                <ng-template pTemplate="body" let-filteredIT>
                                     <tr>
                                         <td><span class="p-column-title">Roll</span>
-                                            {{stuData.roll}}
+                                            {{filteredIT.roll}}
                                         </td>
                                         <td><span class="p-column-title">Name</span>
-                                            {{stuData.name}}
+                                            {{filteredIT.name}}
                                         </td>
                                         <td><span class="p-column-title">Name</span>
-                                            {{stuData.role}}
+                                            {{filteredIT.role}}
                                         </td>
                                         <td><span class="p-column-title">Class</span>
-                                            {{stuData.classGrp}}
+                                            {{filteredIT.classGrp}}
                                         </td>
                                         <td><span class="p-column-title">Options</span>
                                             <div class="editGrp">
                                                 <div class="edit">
-                                                    <button (click)="recoverStudent(stuData)">Edit</button>
+                                                    <button (click)="recoverStudent(filteredIT)">Edit</button>
                                                 </div>
                                                 <div class="delete">
-                                                    <button (click)="removeStudent(stuData._id)">Delete</button>
+                                                    <button (click)="removeStudent(filteredIT._id)">Delete</button>
                                                 </div>
                                             </div>
                                         </td>
@@ -398,13 +398,13 @@
                                     <div class="sub">
                                         <ng-container>
                                             <h3>Select Students</h3>
-                                            <p-listbox formControlName="students" [options]="stuData"
+                                            <p-listbox formControlName="students" [options]="filteredIT"
                                                 [metaKeySelection]="false" [checkbox]="true" [filter]="true"
                                                 [listStyle]="{'max-height':'200px'}" [multiple]="true"
-                                                optionLabel="classGrp">
-                                                <ng-template let-stuData pTemplate="item">
+                                                optionLabel="courses">
+                                                <ng-template let-filteredIT pTemplate="item">
                                                     <div class="country-item">
-                                                        <span>{{stuData.classGrp}}-{{stuData.roll}}</span>
+                                                        <span>{{filteredIT.courses}}-{{filteredIT.roll}}</span>
                                                     </div>
                                                 </ng-template>
                                             </p-listbox>
@@ -505,7 +505,7 @@
                                     <div class="sub">
                                         <ng-container>
                                             <span class="p-float-label">
-                                                <input type="text" formControlName="classGrp" id="inputtext" pInputText>
+                                                <input type="text" formControlName="courses" id="inputtext" pInputText>
                                                 <label for="inputtext">Class</label>
                                             </span>
                                         </ng-container>
@@ -522,16 +522,11 @@
                         </div>
                         <hr>
                         <div class="view">
-                            <p-table responsiveLayout="stack" #studentTable [value]="stuData" dataKey="id" [rows]="5"
+                            <p-table responsiveLayout="stack" #studentTable [value]="filteredCR" dataKey="id" [rows]="5"
                                 [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,20,30,40,50,60,70,80]"
                                 [loading]="loading" styleClass="p-datatable-customers p-datatable-gridlines"
                                 [paginator]="true"
-                                currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-                                [globalFilterFields]="[
-                                'stuData.name',
-                                'stuData.roll',
-                                'stuData.classGrp'
-                              ]">
+                                currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
                                 <ng-template pTemplate="caption">
                                     Students List
 
@@ -574,28 +569,28 @@
                                         </th>
                                     </tr>
                                 </ng-template>
-                                <ng-template pTemplate="body" let-stuData>
+                                <ng-template pTemplate="body" let-filteredCR>
                                     <tr>
                                         <td><span class="p-column-title">Roll</span>
-                                            {{stuData.roll}}
+                                            {{filteredCR.roll}}
                                         </td>
                                         <td><span class="p-column-title">Name</span>
-                                            {{stuData.name}}
+                                            {{filteredCR.name}}
                                         </td>
                                         <td><span class="p-column-title">Name</span>
-                                            {{stuData.role}}
+                                            {{filteredCR.role}}
                                         </td>
                                         <td><span class="p-column-title">Class</span>
-                                            {{stuData.classGrp}}
+                                            {{filteredCR.classGrp}}
                                         </td>
                                         <td><span class="p-column-title">Options</span>
                                             <div class="editGrp">
-                                                <div class="edit">
+                                                <!-- <div class="edit">
                                                     <button (click)="recoverStudent(stuData)">Edit</button>
                                                 </div>
                                                 <div class="delete">
                                                     <button (click)="removeStudent(stuData._id)">Delete</button>
-                                                </div>
+                                                </div> -->
                                             </div>
                                         </td>
                                     </tr>
@@ -715,36 +710,36 @@
                                                 [baseZIndex]="10000" [draggable]="false" [resizable]="false">
         
                                                 <form [formGroup]="attValue">
+                                                    <div class="sub">
+                                                        <ng-container>
+                                                            <label for="schedule">schedule</label>
+                                                            <select name="schedule" formControlName="schedule">
+                                                                <option value="">--select--</option>
+                                                                <option [value]="schData._id">{{schData.scheduleName}}</option>
+                                                            </select>
+                                                        </ng-container>
+                                                    </div>
                                                     <ng-container>
-                                                        <h3>Select Students</h3>
-                                                        <p-listbox formControlName="markStudents" [options]="stuData" [metaKeySelection]="false"
-                                                            [checkbox]="true" [filter]="true" [listStyle]="{'max-height':'200px'}"
-                                                            [multiple]="true" optionLabel="classGrp">
-                                                            <ng-template let-stuData pTemplate="item">
-                                                                <div class="country-item">
-                                                                    <span>{{stuData.classGrp}}-{{stuData.roll}}</span>
-                                                                </div>
-                                                            </ng-template>
-                                                        </p-listbox>
+                                                        <h3>Select Students</h3> 
+                                                        <table class="attList">
+                                                            <tr>
+                                                                <th>Roll</th>
+                                                                <th>Name</th>
+                                                                <th>Attendance</th>
+                                                            </tr>
+                                                            <tr *ngFor="let stu of schData.groups.students">
+                                                                <td>{{stu.roll}}</td>
+                                                                <td>{{stu.name}}</td>
+                                                                <td>
+                                                                    <label>P/A
+                                                                        <input type="checkbox" formControlName="attStat">
+                                                                    </label>
+                                                                </td>
+                                                            </tr>
+                                                        </table>
                                                     </ng-container>
-                                                    <button pButton type="button" label="Add"
-                                            (click)="markAtt()"></button>
-                                                    <!-- <table class="attList">
-                                                        <tr>
-                                                            <th>Roll</th>
-                                                            <th>Name</th>
-                                                            <th>Attendance</th>
-                                                        </tr>
-                                                        <tr *ngFor="let stu of schData.groups.students">
-                                                            <td>{{stu.roll}}</td>
-                                                            <td>{{stu.name}}</td>
-                                                            <td>
-                                                                <label>Present
-                                                                    <input type="checkbox">
-                                                                </label>
-                                                            </td>
-                                                        </tr>
-                                                    </table> -->
+                                                    <button pButton type="button" label="Add" (click)="markAtt()"></button>
+                                                    
                                                 </form>
                                             </p-dialog>
                                         </td>

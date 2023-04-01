@@ -47,7 +47,7 @@ export class ItComponent implements OnInit {
 
   showDialogSch() {
     this.displaySch = true;
-  }  
+  }
   markAttDisplay() {
     this.AttDisplay = true;
   }
@@ -71,7 +71,14 @@ export class ItComponent implements OnInit {
   stuData: Istudents[] = [];
   subData: Isubject[] = [];
   grpData: Igroups[] = [];
-  classData:Iclassroom[]=[];
+  classData: Iclassroom[] = [];
+
+  //filterations
+  filteredCR: Istudents[] = [];
+  filteredIT: Istudents[] = [];
+  filteredItFac: Istudents[] = [];
+  filteredItSub: Istudents[] = [];
+  filteredItGroups: Istudents[] = [];
 
   stuExcelData: Istudents[] = [];
   ngOnInit(): void {
@@ -96,10 +103,10 @@ export class ItComponent implements OnInit {
       this.schData = res;
       this.loading = false;
     });
-    this.adminService.findAllClass().subscribe((res)=>{
-      this.classData=res;
-      this.loading=true;
-    })
+    this.adminService.findAllClass().subscribe((res) => {
+      this.classData = res;
+      this.loading = true;
+    });
     //forms
     this.adminService.findAllSchedule().subscribe((res) => {
       this.schData = res;
@@ -113,6 +120,7 @@ export class ItComponent implements OnInit {
     this.findAllSchedule();
     this.findAllAtt();
     this.getAllFaculties();
+    this.findCR();
 
     (this.stuValue = this.formsbuilder.group({
       roll: new FormControl(''),
@@ -137,11 +145,10 @@ export class ItComponent implements OnInit {
         subjects: new FormControl(''),
         classrooms: new FormControl(''),
       }));
-    (this.attValue = this.formsbuilder.group({
+    this.attValue = this.formsbuilder.group({
       schedule: new FormControl(''),
-      stats: new FormControl(''),
-      markStudents: new FormControl(''),
-    }));
+      attStat: new FormControl(''),
+    });
     //crud buttons
   }
   //get
@@ -166,8 +173,21 @@ export class ItComponent implements OnInit {
   //students
   findAllStudents() {
     this.adminService.findAllStudents().subscribe((res: Istudents[]) => {
-      this.stuData = res;
-      console.log(res, 'students get');
+      this.filteredIT = res.filter(
+        (itStu) =>
+          itStu.classGrp === 'FYIT' ||
+          itStu.classGrp === 'SYIT' ||
+          itStu.classGrp === 'TYIT'
+      );
+      console.log(this.filteredIT, 'students IT get');
+    });
+  }
+  findCR() {
+    this.adminService.findAllStudents().subscribe((res: Istudents[]) => {
+      this.filteredCR = this.filteredIT.filter(
+        (CRdata) => CRdata.role === 'CR' || CRdata.role === 'DI'
+      );
+      console.log(this.filteredCR, 'cr list');
     });
   }
 
@@ -315,10 +335,12 @@ export class ItComponent implements OnInit {
   postSch() {
     this.schData = this.schValue.value;
     console.log(this.schData);
-    this.adminService.createSchedule(this.schValue.value).subscribe((Response) => {
-      console.log(Response, 'post Method');
-      this.findAllSchedule();
-    });
+    this.adminService
+      .createSchedule(this.schValue.value)
+      .subscribe((Response) => {
+        console.log(Response, 'post Method');
+        this.findAllSchedule();
+      });
     this.schValue.reset();
   }
   removeSch(_id: string) {
