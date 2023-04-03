@@ -8,6 +8,7 @@ import {
 } from '@angular/forms';
 import {
   Iattendance,
+  Icourses,
   Ifaculties,
   Igroups,
   Ischedule,
@@ -72,13 +73,14 @@ export class ItComponent implements OnInit {
   subData: Isubject[] = [];
   grpData: Igroups[] = [];
   classData: Iclassroom[] = [];
+  courseData: Icourses[] = [];
 
   //filterations
   filteredCR: Istudents[] = [];
   filteredIT: Istudents[] = [];
   filteredItFac: Istudents[] = [];
   filteredItSub: Istudents[] = [];
-  filteredItGroups: Istudents[] = [];
+  filteredItAttStu: Istudents[] = [];
 
   stuExcelData: Istudents[] = [];
   ngOnInit(): void {
@@ -121,6 +123,7 @@ export class ItComponent implements OnInit {
     this.findAllAtt();
     this.getAllFaculties();
     this.findCR();
+    this.getAllCourses();
 
     (this.stuValue = this.formsbuilder.group({
       roll: new FormControl(''),
@@ -131,8 +134,14 @@ export class ItComponent implements OnInit {
       (this.stuUploadValue = this.formsbuilder.group({
         file: ['', Validators.required],
       })),
+      (this.attValue = this.formsbuilder.group({
+        schedules: new FormControl(''),
+        // attStat: new FormControl(''),
+        students: new FormControl(''),
+      })),
       (this.grpValue = this.formsbuilder.group({
         gName: new FormControl(''),
+        courses: new FormControl(''),
         students: new FormControl(''),
       })),
       (this.schValue = this.formsbuilder.group({
@@ -145,13 +154,20 @@ export class ItComponent implements OnInit {
         subjects: new FormControl(''),
         classrooms: new FormControl(''),
       }));
-    this.attValue = this.formsbuilder.group({
-      schedule: new FormControl(''),
-      attStat: new FormControl(''),
-    });
+
     //crud buttons
   }
   //get
+  getAllCourses() {
+    this.adminService.getAllCourses().subscribe((res: Icourses[]) => {
+      this.courseData = res.filter(
+        (itStu) =>
+          itStu.courses === 'FYIT' ||
+          itStu.courses === 'SYIT' ||
+          itStu.courses === 'TYIT'
+      );
+    });
+  }
   findAllClass() {
     this.adminService.findAllClass().subscribe((res: Iclassroom[]) => {
       this.classData = res;
@@ -170,6 +186,30 @@ export class ItComponent implements OnInit {
       console.log(res, 'faculty get');
     });
   }
+  //filtered
+  findCR() {
+    this.adminService.findAllStudents().subscribe((res: Istudents[]) => {
+      this.filteredCR = this.filteredIT.filter(
+        (CRdata) => CRdata.role === 'CR' || CRdata.role === 'DI'
+      );
+      console.log(this.filteredCR, 'cr list');
+    });
+  }
+  filteredItAttStudent() {
+    this.adminService.findAllStudents().subscribe((res: Istudents[]) => {
+      const extGrpStu = this.schData.forEach((one) => {
+        one.groups.forEach((two) => {
+          two.students.forEach((three) => {
+            this.filteredItAttStu = this.filteredIT.filter(
+              (grpStu) => grpStu.classGrp === three.classGrp
+            );
+            console.log(this.filteredItAttStu, 'dvfhvsvfwuevhecyvwefvev');
+          });
+        });
+      });
+    });
+  }
+
   //students
   findAllStudents() {
     this.adminService.findAllStudents().subscribe((res: Istudents[]) => {
@@ -180,14 +220,6 @@ export class ItComponent implements OnInit {
           itStu.classGrp === 'TYIT'
       );
       console.log(this.filteredIT, 'students IT get');
-    });
-  }
-  findCR() {
-    this.adminService.findAllStudents().subscribe((res: Istudents[]) => {
-      this.filteredCR = this.filteredIT.filter(
-        (CRdata) => CRdata.role === 'CR' || CRdata.role === 'DI'
-      );
-      console.log(this.filteredCR, 'cr list');
     });
   }
 
@@ -240,7 +272,6 @@ export class ItComponent implements OnInit {
       console.log(this.stuData);
     });
   }
-
   exportStuExcel() {
     import('xlsx').then((xlsx) => {
       const worksheet = xlsx.utils.json_to_sheet(this.stuData);
@@ -264,7 +295,6 @@ export class ItComponent implements OnInit {
       fileName + '_export_' + new Date().getTime() + EXCEL_EXTENSION
     );
   }
-
   //groups
   findAllGroup() {
     this.adminService.findAllGroup().subscribe((res: Igroups[]) => {
@@ -321,6 +351,7 @@ export class ItComponent implements OnInit {
     this.findAllAtt();
     this.attValue.reset();
   }
+
   removeAtt(_id: string) {}
   recoverAtt(attData: any) {}
   updateAtt() {}

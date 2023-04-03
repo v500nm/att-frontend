@@ -19,12 +19,12 @@ export interface Ifaculties{
     fname:string;
     department:string;
     designation:string;
-    course:Icourses;
+    courses:Icourses;
 }
 export interface Isubject{
     _id:string;
     subject:string
-    course:Icourses;
+    courses:Icourses;
 }
 export interface Iclassroom{
     _id:string;
@@ -32,8 +32,9 @@ export interface Iclassroom{
 }
 export interface Iattendance{
     _id:string;
-    schedule:Ischedule;
-    attStat:attStat[];
+    schedules:Ischedule;
+    // attStat:attStat[];
+    students:Istudents[];
 }
 export enum attStat{
     present="P",
@@ -42,7 +43,7 @@ export enum attStat{
 export interface Igroups{
     _id:string;
     gName: string;
-    course:Icourses;
+    courses:Icourses;
     students:Istudents[];
 }
 export interface Ischedule{
