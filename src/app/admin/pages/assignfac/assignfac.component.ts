@@ -31,7 +31,6 @@ export class AssignfacComponent implements OnInit{
 
   facValue!: FormGroup;
   facUploadValue!: FormGroup;
-
   facData: Ifaculties[] = [];
 
   ngOnInit(): void {
@@ -49,6 +48,7 @@ export class AssignfacComponent implements OnInit{
       file: ['', Validators.required],
     })
   }
+
   //faculties
   getAllFaculties() {
     this.adminService.getAllFaculties().subscribe((res: Ifaculties[]) => {

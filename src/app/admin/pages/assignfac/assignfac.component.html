@@ -65,277 +65,72 @@
                 </div>
             </div>
             <hr>
-            <p-tabView [(activeIndex)]="activeIndex">
-                <p-tabPanel header="BSc-IT">
-                    <div class="view">
-                        <p-table #dt1 responsiveLayout="stack" [value]="facData" dataKey="id" [rows]="5"
-                            [showCurrentPageReport]="true" [rowsPerPageOptions]="[5,10,15]" [loading]="loading"
-                            styleClass="p-datatable-customers p-datatable-gridlines" [paginator]="true"
-                            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
-                            <ng-template pTemplate="caption">
-                                BSc-IT Faculty List
-                            </ng-template>
-                            <ng-template pTemplate="header">
-                                <tr>
-                                    <th>
-                                        <div class="p-d-flex p-jc-between p-ai-center">
-                                            Faculty Name
-                                            <p-columnFilter type="text" field="fname" display="menu"></p-columnFilter>
-                                        </div>
-                                    </th>
-                                    <th>
-                                        <div class="p-d-flex p-jc-between p-ai-center">
-                                            Department
-                                            <p-columnFilter type="text" field="department" display="menu"></p-columnFilter>
-                                        </div>
-                                    </th>
-                                    <th>
-                                        <div class="p-d-flex p-jc-between p-ai-center">
-                                            Designation
-                                            <p-columnFilter type="text" field="designation" display="menu"></p-columnFilter>
-                                        </div>
-                                    </th>
-                                    <th>
-                                        <div class="p-d-flex p-jc-between p-ai-center">
-                                            Options
-                                        </div>
-                                    </th>
-                                </tr>
-                            </ng-template>
-                            <ng-template pTemplate="body" let-facData>
-                                <tr>
-                                    <td><span class="p-column-title">Faculty Name</span>
-                                        {{facData.fname}}
-                                    </td>
-                                    <td><span class="p-column-title">Department</span>
-                                        {{facData.department}}
-                                    </td>
-                                    <td><span class="p-column-title">Designation</span>
-                                        {{facData.designation}}
-                                    </td>
-                                    <td><span class="p-column-title">Options</span>
-                                        <div class="editGrp">
-                                            <div class="edit">
-                                                <button (click)="recoverFaculty(facData)">Edit</button>
-                                            </div>
-                                            <div class="delete">
-                                                <button (click)="removeFaculty(facData._id)">Delete</button>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </ng-template>
-                            <ng-template pTemplate="emptymessage">
-                                <tr>
-                                    <td colspan="7">No customers found.</td>
-                                </tr>
-                            </ng-template>
-                        </p-table>
-                    </div>
-                </p-tabPanel>
-                <p-tabPanel header="BMS">
-                    <div class="view">
-                        <p-table #dt1 responsiveLayout="stack" [value]="facData" dataKey="id" [rows]="5"
-                            [showCurrentPageReport]="true" [rowsPerPageOptions]="[5,10,15]" [loading]="loading"
-                            styleClass="p-datatable-customers p-datatable-gridlines" [paginator]="true"
-                            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
-                            <ng-template pTemplate="caption">
-                                BMS Faculty List
-                            </ng-template>
-                            <ng-template pTemplate="header">
-                                <tr>
-                                    <th>
-                                        <div class="p-d-flex p-jc-between p-ai-center">
-                                            Faculty Name
-                                            <p-columnFilter type="text" field="fname" display="menu"></p-columnFilter>
-                                        </div>
-                                    </th>
-                                    <th>
-                                        <div class="p-d-flex p-jc-between p-ai-center">
-                                            Department
-                                            <p-columnFilter type="text" field="department" display="menu"></p-columnFilter>
-                                        </div>
-                                    </th>
-                                    <th>
-                                        <div class="p-d-flex p-jc-between p-ai-center">
-                                            Designation
-                                            <p-columnFilter type="text" field="designation" display="menu"></p-columnFilter>
-                                        </div>
-                                    </th>
-                                    <th>
-                                        <div class="p-d-flex p-jc-between p-ai-center">
-                                            Options
-                                        </div>
-                                    </th>
-                                </tr>
-                            </ng-template>
-                            <ng-template pTemplate="body" let-facData>
-                                <tr>
-                                    <td><span class="p-column-title">Faculty Name</span>
-                                        {{facData.fname}}
-                                    </td>
-                                    <td><span class="p-column-title">Department</span>
-                                        {{facData.department}}
-                                    </td>
-                                    <td><span class="p-column-title">Designation</span>
-                                        {{facData.designation}}
-                                    </td>
-                                    <td><span class="p-column-title">Options</span>
-                                        <div class="editGrp">
-                                            <div class="edit">
-                                                <button (click)="recoverFaculty(facData)">Edit</button>
-                                            </div>
-                                            <div class="delete">
-                                                <button (click)="removeFaculty(facData._id)">Delete</button>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </ng-template>
-                            <ng-template pTemplate="emptymessage">
-                                <tr>
-                                    <td colspan="7">No customers found.</td>
-                                </tr>
-                            </ng-template>
-                        </p-table>
-                    </div>
-                </p-tabPanel>
-                <p-tabPanel header="BAF">
-                    <div class="view">
-                        <p-table #dt1 responsiveLayout="stack" [value]="facData" dataKey="id" [rows]="5"
-                            [showCurrentPageReport]="true" [rowsPerPageOptions]="[5,10,15]" [loading]="loading"
-                            styleClass="p-datatable-customers p-datatable-gridlines" [paginator]="true"
-                            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
-                            <ng-template pTemplate="caption">
-                                BAF Faculty List
-                            </ng-template>
-                            <ng-template pTemplate="header">
-                                <tr>
-                                    <th>
-                                        <div class="p-d-flex p-jc-between p-ai-center">
-                                            Faculty Name
-                                            <p-columnFilter type="text" field="fname" display="menu"></p-columnFilter>
-                                        </div>
-                                    </th>
-                                    <th>
-                                        <div class="p-d-flex p-jc-between p-ai-center">
-                                            Department
-                                            <p-columnFilter type="text" field="department" display="menu"></p-columnFilter>
-                                        </div>
-                                    </th>
-                                    <th>
-                                        <div class="p-d-flex p-jc-between p-ai-center">
-                                            Designation
-                                            <p-columnFilter type="text" field="designation" display="menu"></p-columnFilter>
-                                        </div>
-                                    </th>
-                                    <th>
-                                        <div class="p-d-flex p-jc-between p-ai-center">
-                                            Options
-                                        </div>
-                                    </th>
-                                </tr>
-                            </ng-template>
-                            <ng-template pTemplate="body" let-facData>
-                                <tr>
-                                    <td><span class="p-column-title">Faculty Name</span>
-                                        {{facData.fname}}
-                                    </td>
-                                    <td><span class="p-column-title">Department</span>
-                                        {{facData.department}}
-                                    </td>
-                                    <td><span class="p-column-title">Designation</span>
-                                        {{facData.designation}}
-                                    </td>
-                                    <td><span class="p-column-title">Options</span>
-                                        <div class="editGrp">
-                                            <div class="edit">
-                                                <button (click)="recoverFaculty(facData)">Edit</button>
-                                            </div>
-                                            <div class="delete">
-                                                <button (click)="removeFaculty(facData._id)">Delete</button>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </ng-template>
-                            <ng-template pTemplate="emptymessage">
-                                <tr>
-                                    <td colspan="7">No customers found.</td>
-                                </tr>
-                            </ng-template>
-                        </p-table>
-                    </div>
-                </p-tabPanel>
-                <p-tabPanel header="BAMMC">
-                    <div class="view">
-                        <p-table #dt1 responsiveLayout="stack" [value]="facData" dataKey="id" [rows]="5"
-                            [showCurrentPageReport]="true" [rowsPerPageOptions]="[5,10,15]" [loading]="loading"
-                            styleClass="p-datatable-customers p-datatable-gridlines" [paginator]="true"
-                            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
-                            <ng-template pTemplate="caption">
-                                BAMMC Faculty List
-                            </ng-template>
-                            <ng-template pTemplate="header">
-                                <tr>
-                                    <th>
-                                        <div class="p-d-flex p-jc-between p-ai-center">
-                                            Faculty Name
-                                            <p-columnFilter type="text" field="fname" display="menu"></p-columnFilter>
-                                        </div>
-                                    </th>
-                                    <th>
-                                        <div class="p-d-flex p-jc-between p-ai-center">
-                                            Department
-                                            <p-columnFilter type="text" field="department" display="menu"></p-columnFilter>
-                                        </div>
-                                    </th>
-                                    <th>
-                                        <div class="p-d-flex p-jc-between p-ai-center">
-                                            Designation
-                                            <p-columnFilter type="text" field="designation" display="menu"></p-columnFilter>
-                                        </div>
-                                    </th>
-                                    <th>
-                                        <div class="p-d-flex p-jc-between p-ai-center">
-                                            Options
-                                        </div>
-                                    </th>
-                                </tr>
-                            </ng-template>
-                            <ng-template pTemplate="body" let-facData>
-                                <tr>
-                                    <td><span class="p-column-title">Faculty Name</span>
-                                        {{facData.fname}}
-                                    </td>
-                                    <td><span class="p-column-title">Department</span>
-                                        {{facData.department}}
-                                    </td>
-                                    <td><span class="p-column-title">Designation</span>
-                                        {{facData.designation}}
-                                    </td>
-                                    <td><span class="p-column-title">Options</span>
-                                        <div class="editGrp">
-                                            <div class="edit">
-                                                <button (click)="recoverFaculty(facData)">Edit</button>
-                                            </div>
-                                            <div class="delete">
-                                                <button (click)="removeFaculty(facData._id)">Delete</button>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </ng-template>
-                            <ng-template pTemplate="emptymessage">
-                                <tr>
-                                    <td colspan="7">No customers found.</td>
-                                </tr>
-                            </ng-template>
-                        </p-table>
-                    </div>
-                </p-tabPanel>
-            </p-tabView>
-            
+
+            <div class="view">
+                <p-table #dt1 responsiveLayout="stack" [value]="facData" dataKey="id" [rows]="5"
+                    [showCurrentPageReport]="true" [rowsPerPageOptions]="[5,10,15]" [loading]="loading"
+                    styleClass="p-datatable-customers p-datatable-gridlines" [paginator]="true"
+                    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
+                    <ng-template pTemplate="caption">
+                        Faculty List
+                    </ng-template>
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th>
+                                <div class="p-d-flex p-jc-between p-ai-center">
+                                    Faculty Name
+                                    <p-columnFilter type="text" field="fname" display="menu"></p-columnFilter>
+                                </div>
+                            </th>
+                            <th>
+                                <div class="p-d-flex p-jc-between p-ai-center">
+                                    Department
+                                    <p-columnFilter type="text" field="department" display="menu"></p-columnFilter>
+                                </div>
+                            </th>
+                            <th>
+                                <div class="p-d-flex p-jc-between p-ai-center">
+                                    Designation
+                                    <p-columnFilter type="text" field="designation" display="menu"></p-columnFilter>
+                                </div>
+                            </th>
+                            <th>
+                                <div class="p-d-flex p-jc-between p-ai-center">
+                                    Options
+                                </div>
+                            </th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-facData>
+                        <tr>
+                            <td><span class="p-column-title">Faculty Name</span>
+                                {{facData.fname}}
+                            </td>
+                            <td><span class="p-column-title">Department</span>
+                                {{facData.department}}
+                            </td>
+                            <td><span class="p-column-title">Designation</span>
+                                {{facData.designation}}
+                            </td>
+                            <td><span class="p-column-title">Options</span>
+                                <div class="editGrp">
+                                    <div class="edit">
+                                        <button (click)="recoverFaculty(facData)">Edit</button>
+                                    </div>
+                                    <div class="delete">
+                                        <button (click)="removeFaculty(facData._id)">Delete</button>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="emptymessage">
+                        <tr>
+                            <td colspan="7">No customers found.</td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
         </div>
     </div>
 </div>

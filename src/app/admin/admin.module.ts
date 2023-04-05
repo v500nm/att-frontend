@@ -21,7 +21,7 @@ import { AssignfacComponent } from './pages/assignfac/assignfac.component';
 import { AddsubsComponent } from './pages/addsubs/addsubs.component';
 import { AddclassComponent } from './pages/addclass/addclass.component';
 import { ManagelogsComponent } from './pages/managelogs/managelogs.component';
-
+import { ChartModule } from 'primeng/chart';
 
 @NgModule({
   declarations: [
@@ -35,6 +35,7 @@ import { ManagelogsComponent } from './pages/managelogs/managelogs.component';
        ManagelogsComponent
   ],
   imports: [
+    ChartModule,
     CommonModule,
     AdminRoutingModule,
     SidebarModule,

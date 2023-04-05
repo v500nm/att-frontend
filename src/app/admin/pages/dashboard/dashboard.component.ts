@@ -7,13 +7,18 @@ import {
   Validators,
 } from '@angular/forms';
 import {
+  Iattendance,
   Iclassroom,
+  Icourses,
   Igroups,
   Istudents,
   Isubject,
-  roles
+  roles,
+  Ischedule,
+  Ifaculties
 } from '../../../shared/interfaces/admin.interface';
 import * as FileSaver from 'file-saver';
+
 
 @Component({
   selector: 'app-dashboard',
@@ -54,11 +59,15 @@ export class DashboardComponent implements OnInit {
   classUploadValue!: FormGroup;
   
   stuRole=roles;
-  stuData: Istudents[] = [];
- subData: Isubject[] = [];
-  classData: Iclassroom[] = [];
-  grpData: Igroups[] = [];
 
+   attData: Iattendance[] = [];
+  facData: Ifaculties[] = [];
+  schData: Ischedule[] = [];
+  stuData: Istudents[] = [];
+  subData: Isubject[] = [];
+  grpData: Igroups[] = [];
+  classData: Iclassroom[] = [];
+  courseData: Icourses[] = [];
   stuExcelData: Istudents[] = [];
 
   ngOnInit(): void {
@@ -78,8 +87,11 @@ export class DashboardComponent implements OnInit {
 
     //forms
     this.findAllStudents();
-    this.findAllSubjects();
-    this.findAllClass();
+    this.findAllGroup();
+    this.findAllStudents();
+    this.findAllSchedule();
+    this.getAllFaculties();
+    this.getAllCourses();
 
     (this.stuValue = this.formsbuilder.group({
       roll: new FormControl(''),
@@ -104,7 +116,35 @@ export class DashboardComponent implements OnInit {
       }))
     //crud buttons
   }
+  getAllCourses() {
+    this.adminService.getAllCourses().subscribe((res: Icourses[]) => {
+      this.courseData = res.filter(
+        (itStu) =>
+          itStu.courses === 'FYIT' ||
+          itStu.courses === 'SYIT' ||
+          itStu.courses === 'TYIT'
+      );
+    });
+  }
 
+  findAllSchedule() {
+    this.adminService.findAllSchedule().subscribe((Response: Ischedule[]) => {
+      this.schData = Response;
+      console.log(Response, 'allData');
+    });
+  }
+  findAllGroup() {
+    this.adminService.findAllGroup().subscribe((res: Igroups[]) => {
+      this.grpData = res;
+      console.log(res, 'groups get');
+    });
+  }
+  getAllFaculties() {
+    this.adminService.getAllFaculties().subscribe((res: Ifaculties[]) => {
+      this.facData = res;
+      console.log(res, 'faculty get');
+    });
+  }
   //students
   findAllStudents() {
     this.adminService.findAllStudents().subscribe((res: Istudents[]) => {
