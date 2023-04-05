@@ -13,7 +13,8 @@ const routes: Routes = [
   {path:'bms',component:BmsComponent},
   {path:'baf',component:BafComponent},
   {path:'bammc',component:BammcComponent},
-  {path:'others',component:OthersComponent}
+  {path:'others',component:OthersComponent},
+  {path:'**',redirectTo:''}
 ];
 
 @NgModule({

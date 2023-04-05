@@ -12,6 +12,7 @@ const routes: Routes = [
   {path:'defaulter',component:DefaulterComponent},
   {path:'schedule',component:ScheduleComponent},
   {path:'subject',component:SubjectComponent},
+  {path:'**',redirectTo:''}
 ];
 
 @NgModule({

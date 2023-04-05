@@ -11,7 +11,8 @@ const routes: Routes = [
   {path:'addclass',component:AddclassComponent},
   {path:'addsubs',component:AddsubsComponent},
   {path:'assignfac',component:AssignfacComponent},
-  {path:'managelogs',component:ManagelogsComponent}
+  {path:'managelogs',component:ManagelogsComponent},
+  {path:'**',redirectTo:''}
 ];
 
 @NgModule({
