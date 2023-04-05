@@ -8,12 +8,13 @@ import {
 } from '@angular/forms';
 import {
   Iattendance,
+  Icourses,
   Ifaculties,
   Igroups,
   Ischedule,
   Istudents,
   Isubject,
-  roles
+  roles,
 } from '../../../shared/interfaces/admin.interface';
 import * as FileSaver from 'file-saver';
 import { Iclassroom } from 'src/app/shared/interfaces/admin.interface';
@@ -21,7 +22,7 @@ import { Iclassroom } from 'src/app/shared/interfaces/admin.interface';
 @Component({
   selector: 'app-bammc',
   templateUrl: './bammc.component.html',
-  styleUrls: ['./bammc.component.scss']
+  styleUrls: ['./bammc.component.scss'],
 })
 export class BammcComponent {
   constructor(
@@ -47,7 +48,7 @@ export class BammcComponent {
 
   showDialogSch() {
     this.displaySch = true;
-  } 
+  }
   markAttDisplay() {
     this.AttDisplay = true;
   }
@@ -71,8 +72,15 @@ export class BammcComponent {
   stuData: Istudents[] = [];
   subData: Isubject[] = [];
   grpData: Igroups[] = [];
-  classData:Iclassroom[]=[];
+  classData: Iclassroom[] = [];
+  courseData: Icourses[] = [];
 
+  //filterations
+  filteredCR: Istudents[] = [];
+  filteredBAMMC: Istudents[] = [];
+  filteredBAMMCFac: Istudents[] = [];
+  filteredBAMMCSub: Istudents[] = [];
+  filteredBAMMCAttStu: Istudents[] = [];
   stuExcelData: Istudents[] = [];
   ngOnInit(): void {
     //table
@@ -96,6 +104,10 @@ export class BammcComponent {
       this.schData = res;
       this.loading = false;
     });
+    this.adminService.findAllClass().subscribe((res) => {
+      this.classData = res;
+      this.loading = true;
+    });
     //forms
     this.adminService.findAllSchedule().subscribe((res) => {
       this.schData = res;
@@ -108,6 +120,9 @@ export class BammcComponent {
     this.findAllStudents();
     this.findAllSchedule();
     this.findAllAtt();
+    this.getAllFaculties();
+    this.findCR();
+    this.getAllCourses();
 
     (this.stuValue = this.formsbuilder.group({
       roll: new FormControl(''),
@@ -118,8 +133,14 @@ export class BammcComponent {
       (this.stuUploadValue = this.formsbuilder.group({
         file: ['', Validators.required],
       })),
+      (this.attValue = this.formsbuilder.group({
+        schedules: new FormControl(''),
+        // attStat: new FormControl(''),
+        students: new FormControl(''),
+      })),
       (this.grpValue = this.formsbuilder.group({
         gName: new FormControl(''),
+        courses: new FormControl(''),
         students: new FormControl(''),
       })),
       (this.schValue = this.formsbuilder.group({
@@ -132,13 +153,18 @@ export class BammcComponent {
         subjects: new FormControl(''),
         classrooms: new FormControl(''),
       }));
-    (this.attValue = this.formsbuilder.group({
-      schedule: new FormControl(''),
-      stats: new FormControl(''),
-      markStudents: new FormControl(''),
-    }));
   }
   //get
+  getAllCourses() {
+    this.adminService.getAllCourses().subscribe((res: Icourses[]) => {
+      this.courseData = res.filter(
+        (itStu) =>
+          itStu.courses === 'FYBAMMC' ||
+          itStu.courses === 'SYBAMMC' ||
+          itStu.courses === 'TYBAMMC'
+      );
+    });
+  }
   findAllClass() {
     this.adminService.findAllClass().subscribe((res: Iclassroom[]) => {
       this.classData = res;
@@ -157,11 +183,40 @@ export class BammcComponent {
       console.log(res, 'faculty get');
     });
   }
+  //filtered
+  findCR() {
+    this.adminService.findAllStudents().subscribe((res: Istudents[]) => {
+      this.filteredCR = this.filteredBAMMC.filter(
+        (CRdata) => CRdata.role === 'CR' || CRdata.role === 'DI'
+      );
+      console.log(this.filteredCR, 'cr list');
+    });
+  }
+  filteredItAttStudent() {
+    this.adminService.findAllStudents().subscribe((res: Istudents[]) => {
+      const extGrpStu = this.schData.forEach((one) => {
+        one.groups.forEach((two) => {
+          two.students.forEach((three) => {
+            this.filteredBAMMCAttStu = this.filteredBAMMC.filter(
+              (grpStu) => grpStu.classGrp === three.classGrp
+            );
+            console.log(this.filteredBAMMCAttStu, 'dvfhvsvfwuevhecyvwefvev');
+          });
+        });
+      });
+    });
+  }
+
   //students
   findAllStudents() {
     this.adminService.findAllStudents().subscribe((res: Istudents[]) => {
-      this.stuData = res;
-      console.log(res, 'students get');
+      this.filteredBAMMC = res.filter(
+        (itStu) =>
+          itStu.classGrp === 'FYBAMMC' ||
+          itStu.classGrp === 'SYBAMMC' ||
+          itStu.classGrp === 'TYBAMMC'
+      );
+      console.log(this.filteredBAMMC, 'students IT get');
     });
   }
 
@@ -214,7 +269,6 @@ export class BammcComponent {
       console.log(this.stuData);
     });
   }
-
   exportStuExcel() {
     import('xlsx').then((xlsx) => {
       const worksheet = xlsx.utils.json_to_sheet(this.stuData);
@@ -238,7 +292,6 @@ export class BammcComponent {
       fileName + '_export_' + new Date().getTime() + EXCEL_EXTENSION
     );
   }
-
   //groups
   findAllGroup() {
     this.adminService.findAllGroup().subscribe((res: Igroups[]) => {
@@ -295,6 +348,7 @@ export class BammcComponent {
     this.findAllAtt();
     this.attValue.reset();
   }
+
   removeAtt(_id: string) {}
   recoverAtt(attData: any) {}
   updateAtt() {}
@@ -309,10 +363,12 @@ export class BammcComponent {
   postSch() {
     this.schData = this.schValue.value;
     console.log(this.schData);
-    this.adminService.createSchedule(this.schValue.value).subscribe((Response) => {
-      console.log(Response, 'post Method');
-    });
-    this.findAllSchedule();
+    this.adminService
+      .createSchedule(this.schValue.value)
+      .subscribe((Response) => {
+        console.log(Response, 'post Method');
+        this.findAllSchedule();
+      });
     this.schValue.reset();
   }
   removeSch(_id: string) {

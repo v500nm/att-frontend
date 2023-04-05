@@ -14,14 +14,15 @@ import {
   Istudents,
   Isubject,
   roles,
-  Iclassroom
+  Iclassroom,
+  Icourses,
 } from '../../../shared/interfaces/admin.interface';
-import * as FileSaver from 'file-saver'
+import * as FileSaver from 'file-saver';
 
 @Component({
   selector: 'app-bms',
   templateUrl: './bms.component.html',
-  styleUrls: ['./bms.component.scss']
+  styleUrls: ['./bms.component.scss'],
 })
 export class BmsComponent {
   constructor(
@@ -47,7 +48,7 @@ export class BmsComponent {
 
   showDialogSch() {
     this.displaySch = true;
-  } 
+  }
   markAttDisplay() {
     this.AttDisplay = true;
   }
@@ -71,7 +72,15 @@ export class BmsComponent {
   stuData: Istudents[] = [];
   subData: Isubject[] = [];
   grpData: Igroups[] = [];
-  classData:Iclassroom[]=[];
+  classData: Iclassroom[] = [];
+  courseData: Icourses[] = [];
+
+  //filterations
+  filteredCR: Istudents[] = [];
+  filteredBMS: Istudents[] = [];
+  filteredBMSFac: Istudents[] = [];
+  filteredBMSSub: Istudents[] = [];
+  filteredBMSAttStu: Istudents[] = [];
 
   stuExcelData: Istudents[] = [];
   ngOnInit(): void {
@@ -96,6 +105,10 @@ export class BmsComponent {
       this.schData = res;
       this.loading = false;
     });
+    this.adminService.findAllClass().subscribe((res) => {
+      this.classData = res;
+      this.loading = true;
+    });
     //forms
     this.adminService.findAllSchedule().subscribe((res) => {
       this.schData = res;
@@ -108,6 +121,9 @@ export class BmsComponent {
     this.findAllStudents();
     this.findAllSchedule();
     this.findAllAtt();
+    this.getAllFaculties();
+    this.findCR();
+    this.getAllCourses();
 
     (this.stuValue = this.formsbuilder.group({
       roll: new FormControl(''),
@@ -118,8 +134,14 @@ export class BmsComponent {
       (this.stuUploadValue = this.formsbuilder.group({
         file: ['', Validators.required],
       })),
+      (this.attValue = this.formsbuilder.group({
+        schedules: new FormControl(''),
+        // attStat: new FormControl(''),
+        students: new FormControl(''),
+      })),
       (this.grpValue = this.formsbuilder.group({
         gName: new FormControl(''),
+        courses: new FormControl(''),
         students: new FormControl(''),
       })),
       (this.schValue = this.formsbuilder.group({
@@ -132,13 +154,18 @@ export class BmsComponent {
         subjects: new FormControl(''),
         classrooms: new FormControl(''),
       }));
-    (this.attValue = this.formsbuilder.group({
-      schedule: new FormControl(''),
-      stats: new FormControl(''),
-      markStudents: new FormControl(''),
-    }));
   }
   //get
+  getAllCourses() {
+    this.adminService.getAllCourses().subscribe((res: Icourses[]) => {
+      this.courseData = res.filter(
+        (itStu) =>
+          itStu.courses === 'FYBMS' ||
+          itStu.courses === 'SYBMS' ||
+          itStu.courses === 'TYBMS'
+      );
+    });
+  }
   findAllClass() {
     this.adminService.findAllClass().subscribe((res: Iclassroom[]) => {
       this.classData = res;
@@ -157,11 +184,40 @@ export class BmsComponent {
       console.log(res, 'faculty get');
     });
   }
+  //filtered
+  findCR() {
+    this.adminService.findAllStudents().subscribe((res: Istudents[]) => {
+      this.filteredCR = this.filteredBMS.filter(
+        (CRdata) => CRdata.role === 'CR' || CRdata.role === 'DI'
+      );
+      console.log(this.filteredCR, 'cr list');
+    });
+  }
+  filteredItAttStudent() {
+    this.adminService.findAllStudents().subscribe((res: Istudents[]) => {
+      const extGrpStu = this.schData.forEach((one) => {
+        one.groups.forEach((two) => {
+          two.students.forEach((three) => {
+            this.filteredBMSAttStu = this.filteredBMS.filter(
+              (grpStu) => grpStu.classGrp === three.classGrp
+            );
+            console.log(this.filteredBMSAttStu, 'dvfhvsvfwuevhecyvwefvev');
+          });
+        });
+      });
+    });
+  }
+
   //students
   findAllStudents() {
     this.adminService.findAllStudents().subscribe((res: Istudents[]) => {
-      this.stuData = res;
-      console.log(res, 'students get');
+      this.filteredBMS = res.filter(
+        (itStu) =>
+          itStu.classGrp === 'FYBMS' ||
+          itStu.classGrp === 'SYBMS' ||
+          itStu.classGrp === 'TYBMS'
+      );
+      console.log(this.filteredBMS, 'students IT get');
     });
   }
 
@@ -214,7 +270,6 @@ export class BmsComponent {
       console.log(this.stuData);
     });
   }
-
   exportStuExcel() {
     import('xlsx').then((xlsx) => {
       const worksheet = xlsx.utils.json_to_sheet(this.stuData);
@@ -238,7 +293,6 @@ export class BmsComponent {
       fileName + '_export_' + new Date().getTime() + EXCEL_EXTENSION
     );
   }
-
   //groups
   findAllGroup() {
     this.adminService.findAllGroup().subscribe((res: Igroups[]) => {
@@ -295,6 +349,7 @@ export class BmsComponent {
     this.findAllAtt();
     this.attValue.reset();
   }
+
   removeAtt(_id: string) {}
   recoverAtt(attData: any) {}
   updateAtt() {}
@@ -309,10 +364,12 @@ export class BmsComponent {
   postSch() {
     this.schData = this.schValue.value;
     console.log(this.schData);
-    this.adminService.createSchedule(this.schValue.value).subscribe((Response) => {
-      console.log(Response, 'post Method');
-    });
-    this.findAllSchedule();
+    this.adminService
+      .createSchedule(this.schValue.value)
+      .subscribe((Response) => {
+        console.log(Response, 'post Method');
+        this.findAllSchedule();
+      });
     this.schValue.reset();
   }
   removeSch(_id: string) {
