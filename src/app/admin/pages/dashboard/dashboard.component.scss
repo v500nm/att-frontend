@@ -2,14 +2,11 @@
 .body {
   display: flex;
   flex-direction: column;
-
-  .cards {
-    width: 100%;
+  .cards{
     padding: 2rem;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-gap: 20px;
-
     .card {
       padding: 2rem;
       display: flex;
@@ -38,8 +35,28 @@
     }
   }
 
-  .graphs {
-  }
-  .stats {
-  }
+}
+@media screen and (max-width: 1000px) {
+    .body{
+        .cards{
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+        }
+    }
+}
+@media screen and (max-width:500px) {
+    .body{
+        .cards{
+            display: grid;
+            grid-template-columns: repeat(2,1fr);
+            .card{
+                display: flex;
+                flex-direction: column-reverse;
+                align-items: center;
+                .card-content{
+                    text-align: center;
+                }
+            }
+        }
+    }
 }
