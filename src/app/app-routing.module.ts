@@ -8,7 +8,7 @@ const routes: Routes = [
   {path:'', loadChildren:()=>import('./auth/auth.module').then(m=>m.AuthModule)},
   {path: 'admin', loadChildren:()=> import('./admin/admin.module').then(m=>m.AdminModule), canActivate:[AuthGuard]},
   {path:'student', loadChildren:()=>import('./students/students.module').then(m=>m.StudentsModule),canActivate:[StudentGuard]},
-  {path:'department',loadChildren:()=>import('./department/department.module').then(m=>m.DepartmentModule)}
+  {path:'department',loadChildren:()=>import('./department/department.module').then(m=>m.DepartmentModule),canActivate:[DepartmentGuard]}
 ];
 
 @NgModule({
