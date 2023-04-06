@@ -15,50 +15,16 @@ interface City {
 })
 export class AttendanceComponent {
    
-  cities: City[];
-  selectedCity1: City | undefined;
-  selectedCity2: City | undefined;
-
-  items: SelectItem[];
-  Years: { name: string; code: string; }[];
 
 
 
 
-  constructor() {
-    this.items = [];
-    for (let i = 0; i < 10000; i++) {
-      this.items.push({ label: 'Item ' + i, value: 'Item ' + i });
-    }
-
-    this.cities = [
-      { name: 'January', code: 'Jan' },
-      { name: 'February', code: 'Feb' },
-      { name: 'March', code: 'Mar' },
-      { name: 'April', code: 'Apr' },
-      { name: 'May', code: 'May' },
-      { name: 'June', code: 'Jun' },
-      { name: 'July', code: 'Jul' },
-      { name: 'August', code: 'Aug' },
-      { name: 'September', code: 'Sep' },
-      { name: 'October', code: 'Oct' },
-      { name: 'November', code: 'Nov' },
-      { name: 'December', code: 'Dec' },
-    ];
-    
-       this.Years = [
-      { name: '2023', code: '23' },
-      { name: '2024', code: '24' },
-      { name: '2025', code: '25' },
-      { name: '2026', code: '26' },
-      { name: '2027', code: '27' },
-      { name: '2028', code: '28' },
-      { name: '2029', code: '29' },
-
-    ];
 
 
-  }
+
+  
+
+  
 
   products=[
 		{

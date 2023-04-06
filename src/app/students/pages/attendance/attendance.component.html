@@ -1,15 +1,9 @@
 <app-header></app-header>
 <p-table [value]="products" styleClass="p-datatable-gridlines" [tableStyle]="{'min-width': '50rem'}">
     <ng-template pTemplate="caption">
-
-        <p-dropdown [options]="cities" (ngModel)="selectedCity1" placeholder="Month" optionLabel="name"
-        [showClear]="true"></p-dropdown>
-           
-        <p-dropdown [options]="Years" (ngModel)="selectedCity2" placeholder="Year" optionLabel="name"
-        [showClear]="true"></p-dropdown>
-        
+        <h2></h2>
     </ng-template>
-    <ng-template pTemplate="header">
+    <ng-template pTemplate="header"--primary-color>
         <tr>
             <th>Roll No</th>
             <th>Name</th>
@@ -84,6 +78,6 @@
         </tr>
     </ng-template>
     <ng-template pTemplate="summary">
-     <h4> Attendance Sheet Of TyBsc-It </h4>
+     <h4> Attendance Sheet Of TyBsc-IT </h4>
     </ng-template>
 </p-table>
