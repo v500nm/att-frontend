@@ -50,9 +50,15 @@
               </div>
             </div>
           </div>
-        <div class="graphs">
-
+          <div class="charts">
+            <div class="chart">
+                <h2>TyBsc-IT</h2>
+                <p-chart type="bar" [data]="data" [options]="chartOptions"></p-chart>
+            </div>
+            <div class="chart doughnut-chart">
+                <h2>Bsc-IT</h2>
+                <p-chart type="pie" [data]="datasets" [options]="basic"></p-chart>
+            </div>
         </div>
-        <div class="stats"></div>
     </section>
 </div>

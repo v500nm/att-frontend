@@ -69,6 +69,11 @@ export class DashboardComponent implements OnInit {
   classData: Iclassroom[] = [];
   courseData: Icourses[] = [];
   stuExcelData: Istudents[] = [];
+  data: any;
+  datasets: any;
+  basic:any
+  chartOptions: any;
+  options: any;
 
   ngOnInit(): void {
     //table
@@ -84,6 +89,91 @@ export class DashboardComponent implements OnInit {
       this.classData = res;
       this.loading = false;
     });
+    {
+    
+      const documentStyle = getComputedStyle(document.documentElement);
+      const textColor = documentStyle.getPropertyValue('--text-color');
+      const textColorSecondary = documentStyle.getPropertyValue('--text-color-secondary');
+      const surfaceBorder = documentStyle.getPropertyValue('--surface-border');
+  
+      this.data = {
+        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September','October','November','December'],
+        datasets: [
+          {
+            label: 'Total Attendance',
+            backgroundColor: documentStyle.getPropertyValue('--blue-500'),
+            borderColor: documentStyle.getPropertyValue('--blue-500'),
+            data: [65, 59, 80, 81, 56, 55, 40, 99, 89, 85, 90, 75]
+          },
+  
+        ]
+      };
+  
+      this.options = {
+        maintainAspectRatio: false,
+        aspectRatio: 0.8,
+        plugins: {
+          legend: {
+            labels: {
+              color: textColor
+            }
+          }
+        },
+        scales: {
+          x: {
+            ticks: {
+              color: textColorSecondary,
+              font: {
+                weight: 500
+              }
+            },
+            grid: {
+              color: surfaceBorder,
+              drawBorder: false
+            }
+          },
+          y: {
+            ticks: {
+              color: textColorSecondary
+            },
+            grid: {
+              color: surfaceBorder,
+              drawBorder: false
+            }
+          }
+  
+        }
+      };
+    
+  
+    {
+      const documentStyle = getComputedStyle(document.documentElement);
+      const textColor = documentStyle.getPropertyValue('--text-color');
+  
+      this.datasets = {
+          labels: ['Fy', 'Sy', 'Ty'],
+          datasets: [
+              {
+                  data: [540, 325, 702],
+                  backgroundColor: [documentStyle.getPropertyValue('--blue-500'), documentStyle.getPropertyValue('--yellow-500'), documentStyle.getPropertyValue('--green-500')],
+                  hoverBackgroundColor: [documentStyle.getPropertyValue('--blue-400'), documentStyle.getPropertyValue('--yellow-400'), documentStyle.getPropertyValue('--green-400')]
+              }
+          ]
+      };
+  
+      this.basic = {
+          plugins: {
+              legend: {
+                  labels: {
+                      usePointStyle: true,
+                      color: textColor
+                  }
+              }
+          }
+      };
+  }
+  
+  }
 
     //forms
     this.findAllStudents();
@@ -126,7 +216,7 @@ export class DashboardComponent implements OnInit {
       );
     });
   }
-
+ 
   findAllSchedule() {
     this.adminService.findAllSchedule().subscribe((Response: Ischedule[]) => {
       this.schData = Response;
@@ -385,4 +475,5 @@ export class DashboardComponent implements OnInit {
       fileName + '_export_' + new Date().getTime() + EXCEL_EXTENSION
     );
   }
+
 }
