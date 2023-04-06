@@ -1,50 +1,64 @@
 <app-header></app-header>
 <div class="container">
-  <div class="main">
-    <div class="cards">
-      <div class="card">
-        <div class="card-content">
-          <div class="number stuLength">
-            {{stuData.length}}
-          </div>
-          <div class="card-name">Students</div>
-        </div>
-        <div class="icon-box">
-          <i class="fas fa-user-graduate"></i>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-content">
-          <div class="number facLength" ng-repeat="fac in facData">
-            {{facData.length}}
-          </div>
-          <div class="card-name">Teachers</div>
-        </div>
-        <div class="icon-box">
-          <i class="fas fa-chalkboard-teacher"></i>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-content">
-          <div class="number schlength">
-            {{schData.length}}
-          </div>
-          <div class="card-name">Total Schedules</div>
-        </div>
-        <div class="icon-box">
-          <i class="fas fa-thin fa-books"></i>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-content">
-          <div class="number courseLength">
-            {{classData.length}}
-          </div>
-          <div class="card-name">classrooms</div>
-        </div>
-        <div class="icon-box">
-          <i class="fas fa-thin fa-clipboard-list"></i>
-        </div>
-      </div>
+    <div class="top">
+        <h1>Admin Dashboard</h1>
     </div>
-  </div>
+    <section class="body">
+        <div class="cards">
+            <div class="card">
+              <div class="card-content">
+                <div class="number stuLength">
+                  {{stuData.length}}
+                </div>
+                <div class="card-name">Students</div>
+              </div>
+              <div class="icon-box">
+                <i class="fas fa-user-graduate"></i>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-content">
+                <div class="number facLength">
+                  {{facData.length}}
+                </div>
+                <div class="card-name">Teachers</div>
+              </div>
+              <div class="icon-box">
+                <i class="fas fa-chalkboard-teacher"></i>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-content">
+                <div class="number schlength">
+                  {{subData.length}}
+                </div>
+                <div class="card-name">Subjects</div>
+              </div>
+              <div class="icon-box">
+                <i class="fas fa-thin fa-books"></i>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-content">
+                <div class="number courseLength">
+                  {{classData.length}}
+                </div>
+                <div class="card-name">Classrooms</div>
+              </div>
+              <div class="icon-box">
+                <i class="fas fa-thin fa-clipboard-list"></i>
+              </div>
+            </div>
+          </div>
+          <div class="charts">
+            <div class="chart">
+                <h2>TyBsc-IT</h2>
+                <p-chart type="bar" [data]="data" [options]="chartOptions"></p-chart>
+            </div>
+            <div class="chart doughnut-chart">
+                <h2>Lecture </h2>
+                <p-chart type="pie" [data]="datasets" [options]="basic"></p-chart>
+            </div>
+        </div>
+    </section>
+</div>

@@ -1,43 +1,86 @@
-.main {
-    width: calc(100% );
-    min-height: calc(100vh);
-    background: #f5f5f5;
+@use "/src/app/shared/styles/admin.scss";
+.body {
+  display: flex;
+  flex-direction: column;
+  .cards{
     padding: 2rem;
-    .cards {
-        width: 100%;
-        padding: 2rem;
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        grid-gap: 20px;
-        .card {
-            padding: 2rem;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            background-color: #fff;
-            border-radius: 10px;
-            box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
-            .card-content{
-                .number {
-                    font-size: 35px;
-                    font-weight: 500;
-                    color: #468edc;
-                }
-                .card-name {
-                    color: #888;
-                    font-weight: 600;
-                }
-            }
-            .icon-box{
-                i{
-                    font-size: 45px;
-                    color: #468edc;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 20px;
+    .card {
+      padding: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 2px 4px 6px 6px rgba(0, 0, 0, 0.08);
+      .card-content {
+        .number {
+          font-size: 35px;
+          font-weight: 500;
+          color: #468edc;
+        }
+        .card-name {
+          color: #888;
+          font-weight: 600;
+        }
+      }
+      .icon-box {
+        i {
+          font-size: 45px;
+          color: #468edc;
+        }
+      }
+    }
+  }
+  .charts {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-gap: 20px;
+    width: 100%;
+    padding: 20px;
+    padding-top: 0;
+    
+}
+
+.chart {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 2px 4px 6px 6px rgba(0, 0, 0, 0.08);
+    width: 100%;
+}
+
+.chart h2 {
+    margin-bottom: 5px;
+    font-size: 20px;
+    color: #666;
+    text-align: center
+}
+
+}
+@media screen and (max-width: 1000px) {
+    .body{
+        .cards{
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+        }
+    }
+}
+@media screen and (max-width:500px) {
+    .body{
+        .cards{
+            display: grid;
+            grid-template-columns: repeat(2,1fr);
+            .card{
+                display: flex;
+                flex-direction: column-reverse;
+                align-items: center;
+                .card-content{
+                    text-align: center;
                 }
             }
         }
-    }
-   
-    .circle{
-        float: right;
     }
 }
