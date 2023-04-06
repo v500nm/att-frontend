@@ -13,13 +13,13 @@ export enum roles{
 export interface Icourses{
     _id:string;
     courses:string;
+    semester:number;
 }
 export interface Ifaculties{
     _id:string;
     fname:string;
     department:string;
     designation:string;
-    courses:Icourses;
 }
 export interface Isubject{
     _id:string;

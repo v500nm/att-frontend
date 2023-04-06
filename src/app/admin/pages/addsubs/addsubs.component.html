@@ -17,6 +17,16 @@
                         </ng-container>
                     </div>
                     <div class="sub">
+                        <ng-container>
+                            <label for="class">Class</label>
+                            <select name="class" formControlName="courses">
+                                <option value="">--select--</option>
+                                <option [value]="courseDrop._id" *ngFor="let courseDrop of courseData">
+                                    {{courseDrop.courses}}-{{courseDrop.semester}}</option>
+                            </select>
+                        </ng-container>
+                    </div>
+                    <div class="sub">
                         <button pButton type="button" *ngIf="stuSwitch" label="Add" (click)="postSub()"></button>
                         <button pButton type="button" *ngIf="!stuSwitch" label="Edit"
                             (click)="updateSubject()"></button>
@@ -71,6 +81,12 @@
                                 </th>
                                 <th>
                                     <div class="p-d-flex p-jc-between p-ai-center">
+                                        Semester
+                                        <p-columnFilter type="text" field="courses" display="menu"></p-columnFilter>
+                                    </div>
+                                </th>
+                                <th>
+                                    <div class="p-d-flex p-jc-between p-ai-center">
                                         Options
                                     </div>
                                 </th>
@@ -80,6 +96,9 @@
                             <tr>
                                 <td><span class="p-column-title">Subject</span>
                                     {{subData.subject}}
+                                </td>
+                                <td><span class="p-column-title">Subject</span>
+                                    {{subData.courses.courses}}-{{subData.courses.semester}}
                                 </td>
                                 <td><span class="p-column-title">Options</span>
                                     <div class="editGrp">

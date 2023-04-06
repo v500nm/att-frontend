@@ -98,6 +98,14 @@
                                 </ng-container>
                             </div>
                             <div class="sub">
+                                <ng-container>
+                                    <span class="p-float-label">
+                                        <input type="number" id="inputtext" pInputText formControlName="semester">
+                                        <label for="inputtext">Semester</label>
+                                    </span>
+                                </ng-container>
+                            </div>
+                            <div class="sub">
                                 <button pButton type="button" *ngIf="stuSwitch" label="Add"
                                     (click)="addCourse()"></button>
                                 <button pButton type="button" *ngIf="!stuSwitch" label="Edit"
@@ -125,7 +133,13 @@
                                 <th>
                                     <div class="p-d-flex p-jc-between p-ai-center">
                                         Courses
-                                        <p-columnFilter type="text" field="class" display="menu"></p-columnFilter>
+                                        <p-columnFilter type="text" field="courses" display="menu"></p-columnFilter>
+                                    </div>
+                                </th>
+                                <th>
+                                    <div class="p-d-flex p-jc-between p-ai-center">
+                                        Semester
+                                        <p-columnFilter type="number" field="semester" display="menu"></p-columnFilter>
                                     </div>
                                 </th>
                                 <th>
@@ -139,6 +153,9 @@
                             <tr>
                                 <td><span class="p-column-title">Courses</span>
                                     {{courseData.courses}}
+                                </td>
+                                <td><span class="p-column-title">Semester</span>
+                                    {{courseData.semester}}
                                 </td>
                                 <td><span class="p-column-title">Options</span>
                                     <div class="editGrp">

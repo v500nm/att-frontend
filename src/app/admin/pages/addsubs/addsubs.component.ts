@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import * as FileSaver from 'file-saver';
-import { Isubject } from 'src/app/shared/interfaces/admin.interface';
+import { Icourses, Isubject } from 'src/app/shared/interfaces/admin.interface';
 import { AdminService } from 'src/app/shared/services/admin.service';
 
 @Component({
@@ -31,6 +31,7 @@ export class AddsubsComponent implements OnInit {
   subValue!: FormGroup;
   subUploadValue!: FormGroup;
   subData: Isubject[] = [];
+  courseData:Icourses[]=[];
 
   ngOnInit(): void {
     this.adminService.findAllSubjects().subscribe((res) => {
@@ -38,12 +39,20 @@ export class AddsubsComponent implements OnInit {
       this.loading = false;
     });   
     this.findAllSubjects();
+    this.getAllCourses();
     (this.subValue = this.formsbuilder.group({
       subject: new FormControl(''),
+      courses:new FormControl('')
     })),
     (this.subUploadValue = this.formsbuilder.group({
       file: ['', Validators.required],
     }))
+  }
+
+  getAllCourses(){
+    this.adminService.getAllCourses().subscribe((res:Icourses[])=>{
+      this.courseData=res;
+    })
   }
    //subjects
    findAllSubjects() {

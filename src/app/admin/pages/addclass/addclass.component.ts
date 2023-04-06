@@ -45,7 +45,8 @@ export class AddclassComponent implements OnInit {
     this.findAllClass();
 
     this.courseValue = this.formsbuilder.group({
-      courses: new FormControl('')
+      courses: new FormControl(''),
+      semester:new FormControl('')
     }),
     this.classValue=this.formsbuilder.group({
       class:new FormControl('')
