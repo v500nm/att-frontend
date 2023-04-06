@@ -31,6 +31,10 @@ export class AddsubsComponent implements OnInit {
   subValue!: FormGroup;
   subUploadValue!: FormGroup;
   subData: Isubject[] = [];
+  subIT:Isubject[]=[];
+  subBammc:Isubject[]=[];
+  subBaf:Isubject[]=[];
+  subBms:Isubject[]=[];
   courseData:Icourses[]=[];
 
   ngOnInit(): void {
@@ -38,8 +42,6 @@ export class AddsubsComponent implements OnInit {
       this.subData = res;
       this.loading = false;
     });   
-    this.findAllSubjects();
-    this.getAllCourses();
     (this.subValue = this.formsbuilder.group({
       subject: new FormControl(''),
       courses:new FormControl('')
@@ -47,8 +49,33 @@ export class AddsubsComponent implements OnInit {
     (this.subUploadValue = this.formsbuilder.group({
       file: ['', Validators.required],
     }))
+    this.findAllSubjects();
+    this.getAllCourses();
+    this.findBafSub();
+    this.findBammcSub();
+    this.findBmsSub();
+    this.findItSub();
   }
-
+  findItSub(){
+    this.adminService.findAllSubjects().subscribe((res:Isubject[])=>{
+      this.subIT=res.filter(itFilter=>itFilter.courses.courses==="BSc-IT")
+    })
+  }
+  findBafSub(){
+    this.adminService.findAllSubjects().subscribe((res:Isubject[])=>{
+      this.subBaf=res.filter(bafFilter=>bafFilter.courses.courses==="BAF")
+    })
+  }
+  findBammcSub(){
+    this.adminService.findAllSubjects().subscribe((res:Isubject[])=>{
+      this.subBammc=res.filter(bammcFilter=>bammcFilter.courses.courses==="BAMMC")
+    })
+  }
+  findBmsSub(){
+    this.adminService.findAllSubjects().subscribe((res:Isubject[])=>{
+      this.subBms=res.filter(bmsFilter=>bmsFilter.courses.courses==="BMS")
+    })
+  }
   getAllCourses(){
     this.adminService.getAllCourses().subscribe((res:Icourses[])=>{
       this.courseData=res;
