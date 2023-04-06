@@ -2,13 +2,15 @@
 .body {
   display: flex;
   flex-direction: column;
+  h2{text-align: center;}
   .cards{
-    padding: 2rem;
+    padding: 1.6rem;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-gap: 20px;
     .card {
-      padding: 2rem;
+      padding: 1.6rem;
+      margin: 0.4rem;
       display: flex;
       align-items: center;
       justify-content: space-between;

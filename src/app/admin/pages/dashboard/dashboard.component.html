@@ -1,64 +1,168 @@
 <app-header></app-header>
 <div class="container">
-    <div class="top">
-        <h1>Admin Dashboard</h1>
-    </div>
-    <section class="body">
-        <div class="cards">
-            <div class="card">
-              <div class="card-content">
-                <div class="number stuLength">
-                  {{stuData.length}}
+  <div class="top">
+    <h1>Admin Dashboard</h1>
+    <hr>
+  </div>
+  <section class="body">
+    <h2>Our Institute</h2>
+    <div class="cards">
+      <div class="card">
+        <div class="card-content">
+          <div class="number stuLength">
+            <p-dialog header="Course-wise Students" [(visible)]="display" [style]="{ width: '30vw',height:'60vh' }">
+              <section class="dialogList">
+                <div class="card">
+                  <div class="card-content">
+                    <div class="card-name">FYIT</div>
+                  </div>
+                  <div class="icon-box">
+                    {{FYITStu.length}}
+                  </div>
                 </div>
-                <div class="card-name">Students</div>
-              </div>
-              <div class="icon-box">
-                <i class="fas fa-user-graduate"></i>
-              </div>
-            </div>
-            <div class="card">
-              <div class="card-content">
-                <div class="number facLength">
-                  {{facData.length}}
+                <div class="card">
+                  <div class="card-content">
+                    <div class="card-name">SYIT</div>
+                  </div>
+                  <div class="icon-box">
+                    {{SYITStu.length}}
+                  </div>
                 </div>
-                <div class="card-name">Teachers</div>
-              </div>
-              <div class="icon-box">
-                <i class="fas fa-chalkboard-teacher"></i>
-              </div>
-            </div>
-            <div class="card">
-              <div class="card-content">
-                <div class="number schlength">
-                  {{subData.length}}
+                <div class="card">
+                  <div class="card-content">
+                    <div class="card-name">TYIT</div>
+                  </div>
+                  <div class="icon-box">
+                    {{TYITStu.length}}
+                  </div>
                 </div>
-                <div class="card-name">Subjects</div>
-              </div>
-              <div class="icon-box">
-                <i class="fas fa-thin fa-books"></i>
-              </div>
-            </div>
-            <div class="card">
-              <div class="card-content">
-                <div class="number courseLength">
-                  {{classData.length}}
+                <div class="card">
+                  <div class="card-content">
+                    <div class="card-name">FYBMS</div>
+                  </div>
+                  <div class="icon-box">
+                 {{FYBmsStu.length}}
+                  </div>
                 </div>
-                <div class="card-name">Classrooms</div>
-              </div>
-              <div class="icon-box">
-                <i class="fas fa-thin fa-clipboard-list"></i>
-              </div>
-            </div>
+                <div class="card">
+                  <div class="card-content">
+                    <div class="card-name">SYBMS</div>
+                  </div>
+                  <div class="icon-box">
+                 {{SYBmsStu.length}}
+                  </div>
+                </div>
+                <div class="card">
+                  <div class="card-content">
+                    <div class="card-name">TYBMS</div>
+                  </div>
+                  <div class="icon-box">
+                 {{TYBmsStu.length}}
+                  </div>
+                </div>
+                <div class="card">
+                  <div class="card-content">
+                    <div class="card-name">FYBAMMC</div>
+                  </div>
+                  <div class="icon-box">
+                 {{FYBammcStu.length}}
+                  </div>
+                </div>
+                <div class="card">
+                  <div class="card-content">
+                    <div class="card-name">SYBAMMC</div>
+                  </div>
+                  <div class="icon-box">
+                 {{SYBammcStu.length}}
+                  </div>
+                </div>
+                <div class="card">
+                  <div class="card-content">
+                    <div class="card-name">TYBAMMC</div>
+                  </div>
+                  <div class="icon-box">
+                 {{TYBammcStu.length}}
+                  </div>
+                </div>
+                <div class="card">
+                  <div class="card-content">
+                    <div class="card-name">FYBAF</div>
+                  </div>
+                  <div class="icon-box">
+                 {{FYBafStu.length}}
+                  </div>
+                </div>
+                <div class="card">
+                  <div class="card-content">
+                    <div class="card-name">SYBAF</div>
+                  </div>
+                  <div class="icon-box">
+                 {{SYBafStu.length}}
+                  </div>
+                </div>
+                <div class="card">
+                  <div class="card-content">
+                    <div class="card-name">TYBAF</div>
+                  </div>
+                  <div class="icon-box">
+                 {{TYBafStu.length}}
+                  </div>
+                </div>
+              </section>
+            </p-dialog>
+            <button pButton type="button" label="Show" (click)="showDialog()" icon="pi pi-info-circle"></button>
           </div>
-          <div class="charts">
-            <div class="chart">
-                <h2>Attendance Overview</h2>
-                <p-chart type="bar" [data]="data" [options]="chartOptions"></p-chart>
-            </div>
-            <div class="chart doughnut-chart">
-                <h2>Students</h2>
-                <p-chart type="pie" [data]="datasets" [options]="basic"></p-chart>
-            </div>
+          <div class="card-name">Course-wise Students</div>
         </div>
-    </section>
+        <div class="icon-box">
+          <i class="fas fa-user-graduate"></i>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-content">
+          <div class="number facLength">
+            {{facData.length}}
+          </div>
+          <div class="card-name">Teachers</div>
+        </div>
+        <div class="icon-box">
+          <i class="fas fa-chalkboard-teacher"></i>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-content">
+          <div class="number schlength">
+            {{subData.length}}
+          </div>
+          <div class="card-name">Subjects</div>
+        </div>
+        <div class="icon-box">
+          <i class="fas fa-thin fa-books"></i>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-content">
+          <div class="number courseLength">
+            {{classData.length}}
+          </div>
+          <div class="card-name">Classrooms</div>
+        </div>
+        <div class="icon-box">
+          <i class="fas fa-thin fa-clipboard-list"></i>
+        </div>
+      </div>
+    </div>
+    <h2>Statistics</h2>
+    <hr>
+    <div class="charts">
+      <div class="chart">
+        <h2>Attendance Overview</h2>
+        <p-chart type="bar" [data]="data" [options]="chartOptions"></p-chart>
+      </div>
+      <div class="chart doughnut-chart">
+        <h2>Students</h2>
+        <p-chart type="pie" [data]="datasets" [options]="basic"></p-chart>
+      </div>
+    </div>
+  </section>
 </div>

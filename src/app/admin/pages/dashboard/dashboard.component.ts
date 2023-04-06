@@ -75,6 +75,19 @@ export class DashboardComponent implements OnInit {
   BammcStu: Istudents[] = [];
   BmsStu: Istudents[] = [];
 
+  FYITStu: Istudents[] = [];
+  SYITStu: Istudents[] = [];
+  TYITStu: Istudents[] = [];
+  FYBafStu: Istudents[] = [];
+  SYBafStu: Istudents[] = [];
+  TYBafStu: Istudents[] = [];
+  FYBammcStu: Istudents[] = [];
+  SYBammcStu: Istudents[] = [];
+  TYBammcStu: Istudents[] = [];
+  FYBmsStu: Istudents[] = [];
+  SYBmsStu: Istudents[] = [];
+  TYBmsStu: Istudents[] = [];
+
   //extras
   data: any;
   datasets: any;
@@ -129,8 +142,8 @@ export class DashboardComponent implements OnInit {
           },
           {
             label: 'BMS Attendance',
-            backgroundColor: documentStyle.getPropertyValue('--red-500'),
-            borderColor: documentStyle.getPropertyValue('--red-500'),
+            backgroundColor: documentStyle.getPropertyValue('--purple-500'),
+            borderColor: documentStyle.getPropertyValue('--purple-500'),
             data: [40, 52, 86, 71, 46, 35, 49, 79, 59, 58, 59, 57],
           },
           {
@@ -141,8 +154,8 @@ export class DashboardComponent implements OnInit {
           },
           {
             label: 'BAF Attendance',
-            backgroundColor: documentStyle.getPropertyValue('--green-500'),
-            borderColor: documentStyle.getPropertyValue('--green-500'),
+            backgroundColor: documentStyle.getPropertyValue('--cyan-500'),
+            borderColor: documentStyle.getPropertyValue('--cyan-500'),
             data: [44, 55, 46, 74, 49, 75, 69, 89, 54, 77, 56, 81],
           },
         ],
@@ -192,7 +205,7 @@ export class DashboardComponent implements OnInit {
           labels: ['IT', 'BMS', 'BAMMC', 'BAF'],
           datasets: [
             {
-              data: [210,400,200,180],
+              data: [210, 400, 200, 180],
               backgroundColor: [
                 documentStyle.getPropertyValue('--blue-800'),
                 documentStyle.getPropertyValue('--blue-600'),
@@ -229,6 +242,20 @@ export class DashboardComponent implements OnInit {
     this.getAllCourses();
     this.findBamStuChart();
 
+    //INit
+    this.findFYIT();
+    this.findSYIT();
+    this.findTYIT();
+    this.findFYBAF();
+    this.findSYBAF();
+    this.findTYBAF();
+    this.findFYBAMMC();
+    this.findSYBAMMC();
+    this.findTYBAMMC();
+    this.findFYBMS();
+    this.findSYBMS();
+    this.findTYBMS();
+
     (this.stuValue = this.formsbuilder.group({
       roll: new FormControl(''),
       name: new FormControl(''),
@@ -262,6 +289,67 @@ export class DashboardComponent implements OnInit {
       );
     });
   }
+  findFYIT(){
+    this.adminService.findAllStudents().subscribe((res:Istudents[])=>{
+      this.FYITStu=res.filter((Fyit)=>Fyit.classGrp==='FYIT')
+    })
+  }
+  findSYIT(){
+    this.adminService.findAllStudents().subscribe((res:Istudents[])=>{
+      this.SYITStu=res.filter((Syit)=>Syit.classGrp==='SYIT')
+    })
+  }
+  findTYIT(){
+    this.adminService.findAllStudents().subscribe((res:Istudents[])=>{
+      this.TYITStu=res.filter((Tyit)=>Tyit.classGrp==='TYIT')
+    })
+  }
+  findFYBAF(){
+    this.adminService.findAllStudents().subscribe((res:Istudents[])=>{
+      this.FYBafStu=res.filter((Fybaf)=>Fybaf.classGrp==='FYBAF')
+    })
+  }
+  findSYBAF(){
+    this.adminService.findAllStudents().subscribe((res:Istudents[])=>{
+      this.SYBafStu=res.filter((SYBAF)=>SYBAF.classGrp==='SYBAF')
+    })
+  }
+  findTYBAF(){
+    this.adminService.findAllStudents().subscribe((res:Istudents[])=>{
+      this.TYBafStu=res.filter((TyBAF)=>TyBAF.classGrp==='TYBAF')
+    })
+  }
+  findFYBAMMC(){
+    this.adminService.findAllStudents().subscribe((res:Istudents[])=>{
+      this.FYBammcStu=res.filter((FyBAMMC)=>FyBAMMC.classGrp==='FYBAMMC')
+    })
+  }
+  findSYBAMMC(){
+    this.adminService.findAllStudents().subscribe((res:Istudents[])=>{
+      this.SYBammcStu=res.filter((SyBAMMC)=>SyBAMMC.classGrp==='SYBAMMC')
+    })
+  }
+  findTYBAMMC(){
+    this.adminService.findAllStudents().subscribe((res:Istudents[])=>{
+      this.TYBammcStu=res.filter((TyBAMMC)=>TyBAMMC.classGrp==='TYBAMMC')
+    })
+  }
+  findFYBMS(){
+    this.adminService.findAllStudents().subscribe((res:Istudents[])=>{
+      this.FYBmsStu=res.filter((FYBMS)=>FYBMS.classGrp==='FYBMS')
+    })
+  }
+  findSYBMS(){
+    this.adminService.findAllStudents().subscribe((res:Istudents[])=>{
+      this.SYBmsStu=res.filter((SYBMS)=>SYBMS.classGrp==='SYBMS')
+    })
+  }
+  findTYBMS(){
+    this.adminService.findAllStudents().subscribe((res:Istudents[])=>{
+      this.TYBmsStu=res.filter((TYBMS)=>TYBMS.classGrp==='TYBMS')
+    })
+  }
+
   //filters for charts
   findItStuChart() {
     this.adminService.findAllStudents().subscribe((res: Istudents[]) => {
@@ -301,7 +389,7 @@ export class DashboardComponent implements OnInit {
           BmsChart.classGrp === 'SYBMS' ||
           BmsChart.classGrp === 'TYBMS'
       );
-      console.log(this.BmsStu,'BMS Stu');
+      console.log(this.BmsStu, 'BMS Stu');
     });
   }
 
