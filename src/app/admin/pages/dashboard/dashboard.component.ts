@@ -154,7 +154,7 @@ export class DashboardComponent implements OnInit {
           labels: ['Fy', 'Sy', 'Ty'],
           datasets: [
               {
-                  data: [540, 325, 702],
+                  data: [92, 80, 72],
                   backgroundColor: [documentStyle.getPropertyValue('--blue-500'), documentStyle.getPropertyValue('--yellow-500'), documentStyle.getPropertyValue('--green-500')],
                   hoverBackgroundColor: [documentStyle.getPropertyValue('--blue-400'), documentStyle.getPropertyValue('--yellow-400'), documentStyle.getPropertyValue('--green-400')]
               }
