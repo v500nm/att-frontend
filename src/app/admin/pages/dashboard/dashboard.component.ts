@@ -15,10 +15,9 @@ import {
   Isubject,
   roles,
   Ischedule,
-  Ifaculties
+  Ifaculties,
 } from '../../../shared/interfaces/admin.interface';
 import * as FileSaver from 'file-saver';
-
 
 @Component({
   selector: 'app-dashboard',
@@ -57,10 +56,10 @@ export class DashboardComponent implements OnInit {
   subUploadValue!: FormGroup;
   classValue!: FormGroup;
   classUploadValue!: FormGroup;
-  
-  stuRole=roles;
 
-   attData: Iattendance[] = [];
+  stuRole = roles;
+
+  attData: Iattendance[] = [];
   facData: Ifaculties[] = [];
   schData: Ischedule[] = [];
   stuData: Istudents[] = [];
@@ -69,9 +68,17 @@ export class DashboardComponent implements OnInit {
   classData: Iclassroom[] = [];
   courseData: Icourses[] = [];
   stuExcelData: Istudents[] = [];
+
+  //filterdata
+  ITStu: Istudents[] = [];
+  BafStu: Istudents[] = [];
+  BammcStu: Istudents[] = [];
+  BmsStu: Istudents[] = [];
+
+  //extras
   data: any;
   datasets: any;
-  basic:any
+  basic: any;
   chartOptions: any;
   options: any;
 
@@ -89,92 +96,130 @@ export class DashboardComponent implements OnInit {
       this.classData = res;
       this.loading = false;
     });
+    //bar graph
     {
-    
       const documentStyle = getComputedStyle(document.documentElement);
       const textColor = documentStyle.getPropertyValue('--text-color');
-      const textColorSecondary = documentStyle.getPropertyValue('--text-color-secondary');
+      const textColorSecondary = documentStyle.getPropertyValue(
+        '--text-color-secondary'
+      );
       const surfaceBorder = documentStyle.getPropertyValue('--surface-border');
-  
+
       this.data = {
-        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September','October','November','December'],
+        labels: [
+          'January',
+          'February',
+          'March',
+          'April',
+          'May',
+          'June',
+          'July',
+          'August',
+          'September',
+          'October',
+          'November',
+          'December',
+        ],
         datasets: [
           {
-            label: 'Total Attendance',
+            label: 'IT Attendance',
             backgroundColor: documentStyle.getPropertyValue('--blue-500'),
             borderColor: documentStyle.getPropertyValue('--blue-500'),
-            data: [65, 59, 80, 81, 56, 55, 40, 99, 89, 85, 90, 75]
+            data: [65, 59, 80, 81, 56, 55, 40, 99, 89, 85, 90, 75],
           },
-  
-        ]
+          {
+            label: 'BMS Attendance',
+            backgroundColor: documentStyle.getPropertyValue('--red-500'),
+            borderColor: documentStyle.getPropertyValue('--red-500'),
+            data: [40, 52, 86, 71, 46, 35, 49, 79, 59, 58, 59, 57],
+          },
+          {
+            label: 'BAMMC Attendance',
+            backgroundColor: documentStyle.getPropertyValue('--yellow-500'),
+            borderColor: documentStyle.getPropertyValue('--yellow-500'),
+            data: [50, 72, 62, 61, 64, 53, 94, 59, 58, 38, 82, 71],
+          },
+          {
+            label: 'BAF Attendance',
+            backgroundColor: documentStyle.getPropertyValue('--green-500'),
+            borderColor: documentStyle.getPropertyValue('--green-500'),
+            data: [44, 55, 46, 74, 49, 75, 69, 89, 54, 77, 56, 81],
+          },
+        ],
       };
-  
+
       this.options = {
         maintainAspectRatio: false,
         aspectRatio: 0.8,
         plugins: {
           legend: {
             labels: {
-              color: textColor
-            }
-          }
+              color: textColor,
+            },
+          },
         },
         scales: {
           x: {
             ticks: {
               color: textColorSecondary,
               font: {
-                weight: 500
-              }
+                weight: 500,
+              },
             },
             grid: {
               color: surfaceBorder,
-              drawBorder: false
-            }
+              drawBorder: false,
+            },
           },
           y: {
             ticks: {
-              color: textColorSecondary
+              color: textColorSecondary,
             },
             grid: {
               color: surfaceBorder,
-              drawBorder: false
-            }
-          }
-  
-        }
+              drawBorder: false,
+            },
+          },
+        },
       };
-    
-  
-    {
-      const documentStyle = getComputedStyle(document.documentElement);
-      const textColor = documentStyle.getPropertyValue('--text-color');
-  
-      this.datasets = {
-          labels: ['Fy', 'Sy', 'Ty'],
-          datasets: [
-              {
-                  data: [92, 80, 72],
-                  backgroundColor: [documentStyle.getPropertyValue('--blue-500'), documentStyle.getPropertyValue('--yellow-500'), documentStyle.getPropertyValue('--green-500')],
-                  hoverBackgroundColor: [documentStyle.getPropertyValue('--blue-400'), documentStyle.getPropertyValue('--yellow-400'), documentStyle.getPropertyValue('--green-400')]
-              }
-          ]
-      };
-  
-      this.basic = {
-          plugins: {
-              legend: {
-                  labels: {
-                      usePointStyle: true,
-                      color: textColor
-                  }
-              }
-          }
-      };
-  }
-  
-  }
 
+      //piechart
+      {
+        const documentStyle = getComputedStyle(document.documentElement);
+        const textColor = documentStyle.getPropertyValue('--text-color');
+
+        this.datasets = {
+          labels: ['IT', 'BMS', 'BAMMC', 'BAF'],
+          datasets: [
+            {
+              data: [210,400,200,180],
+              backgroundColor: [
+                documentStyle.getPropertyValue('--blue-800'),
+                documentStyle.getPropertyValue('--blue-600'),
+                documentStyle.getPropertyValue('--blue-400'),
+                documentStyle.getPropertyValue('--blue-200'),
+              ],
+              hoverBackgroundColor: [
+                documentStyle.getPropertyValue('--blue-700'),
+                documentStyle.getPropertyValue('--blue-500'),
+                documentStyle.getPropertyValue('--blue-300'),
+                documentStyle.getPropertyValue('--blue-100'),
+              ],
+            },
+          ],
+        };
+        this.basic = {
+          plugins: {
+            legend: {
+              labels: {
+                usePointStyle: true,
+                color: textColor,
+              },
+            },
+          },
+        };
+      }
+    }
     //forms
     this.findAllStudents();
     this.findAllGroup();
@@ -182,12 +227,13 @@ export class DashboardComponent implements OnInit {
     this.findAllSchedule();
     this.getAllFaculties();
     this.getAllCourses();
+    this.findBamStuChart();
 
     (this.stuValue = this.formsbuilder.group({
       roll: new FormControl(''),
       name: new FormControl(''),
       classGrp: new FormControl(''),
-      role:new FormControl('')
+      role: new FormControl(''),
     })),
       (this.stuUploadValue = this.formsbuilder.group({
         file: ['', Validators.required],
@@ -203,7 +249,7 @@ export class DashboardComponent implements OnInit {
       })),
       (this.classUploadValue = this.formsbuilder.group({
         file: ['', Validators.required],
-      }))
+      }));
     //crud buttons
   }
   getAllCourses() {
@@ -216,7 +262,50 @@ export class DashboardComponent implements OnInit {
       );
     });
   }
- 
+  //filters for charts
+  findItStuChart() {
+    this.adminService.findAllStudents().subscribe((res: Istudents[]) => {
+      this.ITStu = res.filter(
+        (itChart) =>
+          itChart.classGrp === 'FYIT' ||
+          itChart.classGrp === 'SYIT' ||
+          itChart.classGrp === 'TYIT'
+      );
+    });
+  }
+  findBafStuChart() {
+    this.adminService.findAllStudents().subscribe((res: Istudents[]) => {
+      this.BafStu = res.filter(
+        (bafChart) =>
+          bafChart.classGrp === 'FYBAF' ||
+          bafChart.classGrp === 'SYBAF' ||
+          bafChart.classGrp === 'TYBAF'
+      );
+    });
+  }
+  findBammcStuChart() {
+    this.adminService.findAllStudents().subscribe((res: Istudents[]) => {
+      this.BammcStu = res.filter(
+        (BammcChart) =>
+          BammcChart.classGrp === 'FYBAMMC' ||
+          BammcChart.classGrp === 'SYBAMMC' ||
+          BammcChart.classGrp === 'TYBAMMC'
+      );
+    });
+  }
+  findBamStuChart() {
+    this.adminService.findAllStudents().subscribe((res: Istudents[]) => {
+      this.BmsStu = res.filter(
+        (BmsChart) =>
+          BmsChart.classGrp === 'FYBMS' ||
+          BmsChart.classGrp === 'SYBMS' ||
+          BmsChart.classGrp === 'TYBMS'
+      );
+      console.log(this.BmsStu,'BMS Stu');
+    });
+  }
+
+  //get all
   findAllSchedule() {
     this.adminService.findAllSchedule().subscribe((Response: Ischedule[]) => {
       this.schData = Response;
@@ -475,5 +564,4 @@ export class DashboardComponent implements OnInit {
       fileName + '_export_' + new Date().getTime() + EXCEL_EXTENSION
     );
   }
-
 }
