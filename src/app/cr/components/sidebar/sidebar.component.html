@@ -1,0 +1,41 @@
+<p-sidebar [(visible)]="visibleSidebar" [baseZIndex]="10000">
+    <h1 style="font-weight:normal">Attendance Portal (Admin)</h1>
+    <hr>
+    <div class="sideNav">
+      <div class="subNav" [ngClass]="{active :activeTab == 'adminHome'}" (click)="adminHome()">
+        <div>
+          <a>Home</a>
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="36" height="36">
+            <path fill="none" d="M0 0h24v24H0z" />
+            <path d="M13.172 12l-4.95-4.95 1.414-1.414L16 12l-6.364 6.364-1.414-1.414z" />
+          </svg>
+        </div>
+      </div>
+      <div class="subNav" [ngClass]="{active :activeTab  == 'defaulter'}" (click)="Defaulter()">
+        <div>
+          <a>Manage Logins</a>
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="36" height="36">
+            <path fill="none" d="M0 0h24v24H0z" />
+            <path d="M13.172 12l-4.95-4.95 1.414-1.414L16 12l-6.364 6.364-1.414-1.414z" />
+          </svg>
+        </div>
+      </div>
+      <div class="subNav" [ngClass]="{active :activeTab  == 'logout'}" (click)="onLogout()">
+        <div>
+          <a>Logout</a>
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="36" height="36">
+            <path fill="none" d="M0 0h24v24H0z" />
+            <path d="M13.172 12l-4.95-4.95 1.414-1.414L16 12l-6.364 6.364-1.414-1.414z" />
+          </svg>
+        </div>
+      </div>
+    </div>
+  
+  </p-sidebar>
+  <p-button type="button" (click)="visibleSidebar = true" icon="pi pi-bars"></p-button>

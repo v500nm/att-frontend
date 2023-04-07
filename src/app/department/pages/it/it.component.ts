@@ -29,6 +29,7 @@ export class ItComponent implements OnInit {
     private adminService: AdminService,
     private formsbuilder: FormBuilder
   ) {}
+
   activeIndex: number = 0;
   stuSwitch: boolean = true;
   displayStu: boolean = false;
@@ -157,10 +158,32 @@ export class ItComponent implements OnInit {
 
     //crud buttons
   }
+  //sem Games
+  //year separation
+  fyData: Istudents[] = [];
+  syData: Istudents[] = [];
+  tyData: Istudents[] = [];
+  fyitFilter() {
+    this.adminService.findAllStudents().subscribe((res: Istudents[]) => {
+      this.fyData = res.filter((fyRes) => fyRes.classGrp === 'FYIT');
+    });
+  }
+  syitFilter() {
+    this.adminService.findAllStudents().subscribe((res: Istudents[]) => {
+      this.syData = res.filter((syRes) => syRes.classGrp === 'SYIT');
+    });
+  }
+  tyitFilter() {
+    this.adminService.findAllStudents().subscribe((res: Istudents[]) => {
+      this.tyData = res.filter((tyRes) => tyRes.classGrp === 'TYIT');
+    });
+  }
+  //sem separations
+
   //get
   getAllCourses() {
     this.adminService.getAllCourses().subscribe((res: Icourses[]) => {
-      this.courseData = res
+      this.courseData = res;
     });
   }
   findAllClass() {
@@ -208,13 +231,7 @@ export class ItComponent implements OnInit {
   //students
   findAllStudents() {
     this.adminService.findAllStudents().subscribe((res: Istudents[]) => {
-      this.filteredIT = res.filter(
-        (itStu) =>
-          itStu.classGrp === 'FYIT' ||
-          itStu.classGrp === 'SYIT' ||
-          itStu.classGrp === 'TYIT'
-      );
-      console.log(this.filteredIT, 'students IT get');
+      this.stuData = res;
     });
   }
 

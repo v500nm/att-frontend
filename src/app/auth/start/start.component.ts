@@ -22,4 +22,8 @@ export class StartComponent {
     this.activeTab='studentlogin/';
     this.router.navigate(['studentlogin/']);
   }
+  crLogin(){
+    this.activeTab='cr/';
+    this.router.navigate(['cr/'])
+  }
 }

@@ -129,7 +129,7 @@ export class AdminService {
 
   updateSubject(_id: string, subjects: Isubject): Observable<Isubject> {
     return this.http.put<Isubject>(
-      this.subjectUrl + '/' + subjects._id,
+      this.subjectUrl + '/' + _id,
       subjects
     );
   }
@@ -156,7 +156,7 @@ export class AdminService {
   }
   updateClass(_id: string, classroom: Iclassroom): Observable<Iclassroom> {
     return this.http.put<Iclassroom>(
-      this.classroomUrl + '/' + classroom._id,
+      this.classroomUrl + '/' + _id,
       classroom
     );
   }

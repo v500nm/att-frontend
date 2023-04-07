@@ -293,7 +293,7 @@
                         </div>
                         <hr>
                         <div class="view">
-                            <p-table responsiveLayout="stack" #studentTable [value]="filteredIT" dataKey="id" [rows]="5"
+                            <p-table responsiveLayout="stack" #studentTable [value]="stuData" dataKey="id" [rows]="5"
                                 [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,20,30,40,50,60,70,80]"
                                 [loading]="loading" styleClass="p-datatable-customers p-datatable-gridlines"
                                 [paginator]="true"
@@ -345,27 +345,27 @@
                                         </th>
                                     </tr>
                                 </ng-template>
-                                <ng-template pTemplate="body" let-filteredIT>
+                                <ng-template pTemplate="body" let-stuData>
                                     <tr>
                                         <td><span class="p-column-title">Roll</span>
-                                            {{filteredIT.roll}}
+                                            {{stuData.roll}}
                                         </td>
                                         <td><span class="p-column-title">Name</span>
-                                            {{filteredIT.name}}
+                                            {{stuData.name}}
                                         </td>
                                         <td><span class="p-column-title">Name</span>
-                                            {{filteredIT.role}}
+                                            {{stuData.role}}
                                         </td>
                                         <td><span class="p-column-title">Class</span>
-                                            {{filteredIT.classGrp}}
+                                            {{stuData.classGrp}}
                                         </td>
                                         <td><span class="p-column-title">Options</span>
                                             <div class="editGrp">
                                                 <div class="edit">
-                                                    <button (click)="recoverStudent(filteredIT)">Edit</button>
+                                                    <button (click)="recoverStudent(stuData)">Edit</button>
                                                 </div>
                                                 <div class="delete">
-                                                    <button (click)="removeStudent(filteredIT._id)">Delete</button>
+                                                    <button (click)="removeStudent(stuData._id)">Delete</button>
                                                 </div>
                                             </div>
                                         </td>
@@ -406,20 +406,20 @@
                                             <select name="class" formControlName="courses">
                                                 <option value="">--select--</option>
                                                 <option [value]="courseDrop._id" *ngFor="let courseDrop of courseData">
-                                                    {{courseDrop.courses}}</option>
+                                                    {{courseDrop.courses}}-{{courseDrop.semester}}</option>
                                             </select>
                                         </ng-container>
                                     </div>
                                     <div class="sub">
                                         <ng-container>
                                             <h3>Select Students</h3>
-                                            <p-listbox formControlName="students" [options]="filteredIT"
+                                            <p-listbox formControlName="students" [options]="stuData"
                                                 [metaKeySelection]="false" [checkbox]="true" [filter]="true"
                                                 [listStyle]="{'max-height':'200px'}" [multiple]="true"
                                                 optionLabel="classGrp">
-                                                <ng-template let-filteredIT pTemplate="item">
+                                                <ng-template let-stuData pTemplate="item">
                                                     <div class="country-item">
-                                                        <span>{{filteredIT.classGrp}}-{{filteredIT.roll}}</span>
+                                                        <span>{{stuData.classGrp}}-{{stuData.roll}}</span>
                                                     </div>
                                                 </ng-template>
                                             </p-listbox>
