@@ -58,7 +58,7 @@
                                                     display="menu"></p-columnFilter>
                                             </div>
                                         </th>
-                                        
+
                                     </tr>
                                 </ng-template>
                                 <ng-template pTemplate="body" let-filteredIT>
@@ -75,7 +75,7 @@
                                         <td><span class="p-column-title">Class</span>
                                             {{filteredIT.classGrp}}
                                         </td>
-                                        
+
                                     </tr>
                                 </ng-template>
                                 <ng-template pTemplate="emptymessage">
@@ -87,44 +87,134 @@
                         </section>
                     </p-tabPanel>
                     <p-tabPanel header="Faculties">
-                        
+                        <p-table #dt1 responsiveLayout="stack" [value]="facData" dataKey="id" [rows]="5"
+                            [showCurrentPageReport]="true" [rowsPerPageOptions]="[5,10,15]" [loading]="loading"
+                            styleClass="p-datatable-customers p-datatable-gridlines" [paginator]="true"
+                            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
+                            <ng-template pTemplate="caption">
+                                Faculty List
+                            </ng-template>
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th>
+                                        <div class="p-d-flex p-jc-between p-ai-center">
+                                            Faculty Name
+                                            <p-columnFilter type="text" field="fname" display="menu"></p-columnFilter>
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <div class="p-d-flex p-jc-between p-ai-center">
+                                            Department
+                                            <p-columnFilter type="text" field="department"
+                                                display="menu"></p-columnFilter>
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <div class="p-d-flex p-jc-between p-ai-center">
+                                            Designation
+                                            <p-columnFilter type="text" field="designation"
+                                                display="menu"></p-columnFilter>
+                                        </div>
+                                    </th>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-facData>
+                                <tr>
+                                    <td><span class="p-column-title">Faculty Name</span>
+                                        {{facData.fname}}
+                                    </td>
+                                    <td><span class="p-column-title">Department</span>
+                                        {{facData.department}}
+                                    </td>
+                                    <td><span class="p-column-title">Designation</span>
+                                        {{facData.designation}}
+                                    </td>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="emptymessage">
+                                <tr>
+                                    <td colspan="7">No customers found.</td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
                     </p-tabPanel>
                     <p-tabPanel header="Subjects">
                         <p-table #dt1 responsiveLayout="stack" [value]="subData" dataKey="id" [rows]="5"
-                        [showCurrentPageReport]="true" [rowsPerPageOptions]="[5,10,15]" [loading]="loading"
-                        styleClass="p-datatable-customers p-datatable-gridlines" [paginator]="true"
-                        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
-                        <ng-template pTemplate="caption">
-                            Subjects List
-                        </ng-template>
-                        <ng-template pTemplate="header">
-                            <tr>
-                                <th>
-                                    <div class="p-d-flex p-jc-between p-ai-center">
-                                        Subject Name
-                                        <p-columnFilter type="text" field="subject" display="menu"></p-columnFilter>
-                                    </div>
-                                </th>
-                                
-                            </tr>
-                        </ng-template>
-                        <ng-template pTemplate="body" let-subData>
-                            <tr>
-                                <td><span class="p-column-title">Subject</span>
-                                    {{subData.subject}}
-                                </td>
-                                
-                            </tr>
-                        </ng-template>
-                        <ng-template pTemplate="emptymessage">
-                            <tr>
-                                <td colspan="7">No customers found.</td>
-                            </tr>
-                        </ng-template>
-                    </p-table>
+                            [showCurrentPageReport]="true" [rowsPerPageOptions]="[5,10,15]" [loading]="loading"
+                            styleClass="p-datatable-customers p-datatable-gridlines" [paginator]="true"
+                            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
+                            <ng-template pTemplate="caption">
+                                Subjects List
+                            </ng-template>
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th>
+                                        <div class="p-d-flex p-jc-between p-ai-center">
+                                            Subject Name
+                                            <p-columnFilter type="text" field="subject" display="menu"></p-columnFilter>
+                                        </div>
+                                    </th>
+
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-subData>
+                                <tr>
+                                    <td><span class="p-column-title">Subject</span>
+                                        {{subData.subject}}
+                                    </td>
+
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="emptymessage">
+                                <tr>
+                                    <td colspan="7">No customers found.</td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
                     </p-tabPanel>
                     <p-tabPanel header="Courses">
-                        
+                        <p-table #dt1 responsiveLayout="stack" [value]="courseData" dataKey="id" [rows]="5"
+                            [showCurrentPageReport]="true" [rowsPerPageOptions]="[5,10,15]" [loading]="loading"
+                            styleClass="p-datatable-customers p-datatable-gridlines" [paginator]="true"
+                            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
+                            <ng-template pTemplate="caption">
+                                Courses List
+                            </ng-template>
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th>
+                                        <div class="p-d-flex p-jc-between p-ai-center">
+                                            Courses
+                                            <p-columnFilter type="text" field="courses" display="menu"></p-columnFilter>
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <div class="p-d-flex p-jc-between p-ai-center">
+                                            Semester
+                                            <p-columnFilter type="number" field="semester"
+                                                display="menu"></p-columnFilter>
+                                        </div>
+                                    </th>
+
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-courseData>
+                                <tr>
+                                    <td><span class="p-column-title">Courses</span>
+                                        {{courseData.courses}}
+                                    </td>
+                                    <td><span class="p-column-title">Semester</span>
+                                        {{courseData.semester}}
+                                    </td>
+
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="emptymessage">
+                                <tr>
+                                    <td colspan="7">No customers found.</td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
                     </p-tabPanel>
                 </p-tabView>
             </p-accordionTab>
@@ -132,116 +222,204 @@
                 <p-tabView [(activeIndex)]="activeIndex">
                     <p-tabPanel header="Students">
                         <p-table responsiveLayout="stack" #studentTable [value]="filteredIT" dataKey="id" [rows]="5"
-                        [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,20,30,40,50,60,70,80]"
-                        [loading]="loading" styleClass="p-datatable-customers p-datatable-gridlines"
-                        [paginator]="true"
-                        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-                        [globalFilterFields]="[
+                            [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,20,30,40,50,60,70,80]"
+                            [loading]="loading" styleClass="p-datatable-customers p-datatable-gridlines"
+                            [paginator]="true"
+                            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                            [globalFilterFields]="[
                         'filteredIT.name',
                         'filteredIT.roll',
                         'filteredIT.classGrp'
                       ]">
-                        <ng-template pTemplate="caption">
-                            Students List
+                            <ng-template pTemplate="caption">
+                                Students List
 
-                        </ng-template>
-                        <ng-template pTemplate="header">
-                            <tr>
-                                <th pSortableColumn="roll">
-                                    <div class="p-d-flex p-jc-between p-ai-center">
-                                        <p-sortIcon field="roll"></p-sortIcon>
-                                        Roll Number
-                                        <p-columnFilter type="text" field="roll"
-                                            display="menu"></p-columnFilter>
-                                    </div>
-                                </th>
-                                <th>
-                                    <div class="p-d-flex p-jc-between p-ai-center">
-                                        Students Name
-                                        <p-columnFilter type="text" field="name"
-                                            display="menu"></p-columnFilter>
-                                    </div>
-                                </th>
-                                <th>
-                                    <div class="p-d-flex p-jc-between p-ai-center">
-                                        role
-                                        <p-columnFilter type="text" field="role"
-                                            display="menu"></p-columnFilter>
-                                    </div>
-                                </th>
-                                <th>
-                                    <div class="p-d-flex p-jc-between p-ai-center">
-                                        Class
-                                        <p-columnFilter type="text" field="classGrp"
-                                            display="menu"></p-columnFilter>
-                                    </div>
-                                </th>
-                               
-                            </tr>
-                        </ng-template>
-                        <ng-template pTemplate="body" let-filteredIT>
-                            <tr>
-                                <td><span class="p-column-title">Roll</span>
-                                    {{filteredIT.roll}}
-                                </td>
-                                <td><span class="p-column-title">Name</span>
-                                    {{filteredIT.name}}
-                                </td>
-                                <td><span class="p-column-title">Name</span>
-                                    {{filteredIT.role}}
-                                </td>
-                                <td><span class="p-column-title">Class</span>
-                                    {{filteredIT.classGrp}}
-                                </td>
-                               
-                            </tr>
-                        </ng-template>
-                        <ng-template pTemplate="emptymessage">
-                            <tr>
-                                <td colspan="7">No customers found.</td>
-                            </tr>
-                        </ng-template>
-                    </p-table>
+                            </ng-template>
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th pSortableColumn="roll">
+                                        <div class="p-d-flex p-jc-between p-ai-center">
+                                            <p-sortIcon field="roll"></p-sortIcon>
+                                            Roll Number
+                                            <p-columnFilter type="text" field="roll" display="menu"></p-columnFilter>
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <div class="p-d-flex p-jc-between p-ai-center">
+                                            Students Name
+                                            <p-columnFilter type="text" field="name" display="menu"></p-columnFilter>
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <div class="p-d-flex p-jc-between p-ai-center">
+                                            role
+                                            <p-columnFilter type="text" field="role" display="menu"></p-columnFilter>
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <div class="p-d-flex p-jc-between p-ai-center">
+                                            Class
+                                            <p-columnFilter type="text" field="classGrp"
+                                                display="menu"></p-columnFilter>
+                                        </div>
+                                    </th>
+
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-filteredIT>
+                                <tr>
+                                    <td><span class="p-column-title">Roll</span>
+                                        {{filteredIT.roll}}
+                                    </td>
+                                    <td><span class="p-column-title">Name</span>
+                                        {{filteredIT.name}}
+                                    </td>
+                                    <td><span class="p-column-title">Name</span>
+                                        {{filteredIT.role}}
+                                    </td>
+                                    <td><span class="p-column-title">Class</span>
+                                        {{filteredIT.classGrp}}
+                                    </td>
+
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="emptymessage">
+                                <tr>
+                                    <td colspan="7">No customers found.</td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
                     </p-tabPanel>
                     <p-tabPanel header="Faculties">
-                        
+                        <p-table #dt1 responsiveLayout="stack" [value]="facData" dataKey="id" [rows]="5"
+                            [showCurrentPageReport]="true" [rowsPerPageOptions]="[5,10,15]" [loading]="loading"
+                            styleClass="p-datatable-customers p-datatable-gridlines" [paginator]="true"
+                            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
+                            <ng-template pTemplate="caption">
+                                Faculty List
+                            </ng-template>
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th>
+                                        <div class="p-d-flex p-jc-between p-ai-center">
+                                            Faculty Name
+                                            <p-columnFilter type="text" field="fname" display="menu"></p-columnFilter>
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <div class="p-d-flex p-jc-between p-ai-center">
+                                            Department
+                                            <p-columnFilter type="text" field="department"
+                                                display="menu"></p-columnFilter>
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <div class="p-d-flex p-jc-between p-ai-center">
+                                            Designation
+                                            <p-columnFilter type="text" field="designation"
+                                                display="menu"></p-columnFilter>
+                                        </div>
+                                    </th>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-facData>
+                                <tr>
+                                    <td><span class="p-column-title">Faculty Name</span>
+                                        {{facData.fname}}
+                                    </td>
+                                    <td><span class="p-column-title">Department</span>
+                                        {{facData.department}}
+                                    </td>
+                                    <td><span class="p-column-title">Designation</span>
+                                        {{facData.designation}}
+                                    </td>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="emptymessage">
+                                <tr>
+                                    <td colspan="7">No customers found.</td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
                     </p-tabPanel>
                     <p-tabPanel header="Subjects">
                         <p-table #dt1 responsiveLayout="stack" [value]="subData" dataKey="id" [rows]="5"
-                        [showCurrentPageReport]="true" [rowsPerPageOptions]="[5,10,15]" [loading]="loading"
-                        styleClass="p-datatable-customers p-datatable-gridlines" [paginator]="true"
-                        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
-                        <ng-template pTemplate="caption">
-                            Subjects List
-                        </ng-template>
-                        <ng-template pTemplate="header">
-                            <tr>
-                                <th>
-                                    <div class="p-d-flex p-jc-between p-ai-center">
-                                        Subject Name
-                                        <p-columnFilter type="text" field="subject" display="menu"></p-columnFilter>
-                                    </div>
-                                </th>
-                               
-                            </tr>
-                        </ng-template>
-                        <ng-template pTemplate="body" let-subData>
-                            <tr>
-                                <td><span class="p-column-title">Subject</span>
-                                    {{subData.subject}}
-                                </td>
-                               
-                            </tr>
-                        </ng-template>
-                        <ng-template pTemplate="emptymessage">
-                            <tr>
-                                <td colspan="7">No customers found.</td>
-                            </tr>
-                        </ng-template>
-                    </p-table>
+                            [showCurrentPageReport]="true" [rowsPerPageOptions]="[5,10,15]" [loading]="loading"
+                            styleClass="p-datatable-customers p-datatable-gridlines" [paginator]="true"
+                            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
+                            <ng-template pTemplate="caption">
+                                Subjects List
+                            </ng-template>
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th>
+                                        <div class="p-d-flex p-jc-between p-ai-center">
+                                            Subject Name
+                                            <p-columnFilter type="text" field="subject" display="menu"></p-columnFilter>
+                                        </div>
+                                    </th>
+
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-subData>
+                                <tr>
+                                    <td><span class="p-column-title">Subject</span>
+                                        {{subData.subject}}
+                                    </td>
+
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="emptymessage">
+                                <tr>
+                                    <td colspan="7">No customers found.</td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
                     </p-tabPanel>
                     <p-tabPanel header="Courses">
-                        
+                        <p-table #dt1 responsiveLayout="stack" [value]="courseData" dataKey="id" [rows]="5"
+                            [showCurrentPageReport]="true" [rowsPerPageOptions]="[5,10,15]" [loading]="loading"
+                            styleClass="p-datatable-customers p-datatable-gridlines" [paginator]="true"
+                            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
+                            <ng-template pTemplate="caption">
+                                Courses List
+                            </ng-template>
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th>
+                                        <div class="p-d-flex p-jc-between p-ai-center">
+                                            Courses
+                                            <p-columnFilter type="text" field="courses" display="menu"></p-columnFilter>
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <div class="p-d-flex p-jc-between p-ai-center">
+                                            Semester
+                                            <p-columnFilter type="number" field="semester"
+                                                display="menu"></p-columnFilter>
+                                        </div>
+                                    </th>
+
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-courseData>
+                                <tr>
+                                    <td><span class="p-column-title">Courses</span>
+                                        {{courseData.courses}}
+                                    </td>
+                                    <td><span class="p-column-title">Semester</span>
+                                        {{courseData.semester}}
+                                    </td>
+
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="emptymessage">
+                                <tr>
+                                    <td colspan="7">No customers found.</td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
+
                     </p-tabPanel>
                 </p-tabView>
             </p-accordionTab>
@@ -249,116 +427,206 @@
                 <p-tabView [(activeIndex)]="activeIndex">
                     <p-tabPanel header="Students">
                         <p-table responsiveLayout="stack" #studentTable [value]="filteredIT" dataKey="id" [rows]="5"
-                        [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,20,30,40,50,60,70,80]"
-                        [loading]="loading" styleClass="p-datatable-customers p-datatable-gridlines"
-                        [paginator]="true"
-                        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-                        [globalFilterFields]="[
+                            [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,20,30,40,50,60,70,80]"
+                            [loading]="loading" styleClass="p-datatable-customers p-datatable-gridlines"
+                            [paginator]="true"
+                            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                            [globalFilterFields]="[
                         'filteredIT.name',
                         'filteredIT.roll',
                         'filteredIT.classGrp'
                       ]">
-                        <ng-template pTemplate="caption">
-                            Students List
+                            <ng-template pTemplate="caption">
+                                Students List
 
-                        </ng-template>
-                        <ng-template pTemplate="header">
-                            <tr>
-                                <th pSortableColumn="roll">
-                                    <div class="p-d-flex p-jc-between p-ai-center">
-                                        <p-sortIcon field="roll"></p-sortIcon>
-                                        Roll Number
-                                        <p-columnFilter type="text" field="roll"
-                                            display="menu"></p-columnFilter>
-                                    </div>
-                                </th>
-                                <th>
-                                    <div class="p-d-flex p-jc-between p-ai-center">
-                                        Students Name
-                                        <p-columnFilter type="text" field="name"
-                                            display="menu"></p-columnFilter>
-                                    </div>
-                                </th>
-                                <th>
-                                    <div class="p-d-flex p-jc-between p-ai-center">
-                                        role
-                                        <p-columnFilter type="text" field="role"
-                                            display="menu"></p-columnFilter>
-                                    </div>
-                                </th>
-                                <th>
-                                    <div class="p-d-flex p-jc-between p-ai-center">
-                                        Class
-                                        <p-columnFilter type="text" field="classGrp"
-                                            display="menu"></p-columnFilter>
-                                    </div>
-                                </th>
-                               
-                            </tr>
-                        </ng-template>
-                        <ng-template pTemplate="body" let-filteredIT>
-                            <tr>
-                                <td><span class="p-column-title">Roll</span>
-                                    {{filteredIT.roll}}
-                                </td>
-                                <td><span class="p-column-title">Name</span>
-                                    {{filteredIT.name}}
-                                </td>
-                                <td><span class="p-column-title">Name</span>
-                                    {{filteredIT.role}}
-                                </td>
-                                <td><span class="p-column-title">Class</span>
-                                    {{filteredIT.classGrp}}
-                                </td>
-                                
-                            </tr>
-                        </ng-template>
-                        <ng-template pTemplate="emptymessage">
-                            <tr>
-                                <td colspan="7">No customers found.</td>
-                            </tr>
-                        </ng-template>
-                    </p-table>
+                            </ng-template>
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th pSortableColumn="roll">
+                                        <div class="p-d-flex p-jc-between p-ai-center">
+                                            <p-sortIcon field="roll"></p-sortIcon>
+                                            Roll Number
+                                            <p-columnFilter type="text" field="roll" display="menu"></p-columnFilter>
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <div class="p-d-flex p-jc-between p-ai-center">
+                                            Students Name
+                                            <p-columnFilter type="text" field="name" display="menu"></p-columnFilter>
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <div class="p-d-flex p-jc-between p-ai-center">
+                                            role
+                                            <p-columnFilter type="text" field="role" display="menu"></p-columnFilter>
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <div class="p-d-flex p-jc-between p-ai-center">
+                                            Class
+                                            <p-columnFilter type="text" field="classGrp"
+                                                display="menu"></p-columnFilter>
+                                        </div>
+                                    </th>
+
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-filteredIT>
+                                <tr>
+                                    <td><span class="p-column-title">Roll</span>
+                                        {{filteredIT.roll}}
+                                    </td>
+                                    <td><span class="p-column-title">Name</span>
+                                        {{filteredIT.name}}
+                                    </td>
+                                    <td><span class="p-column-title">Name</span>
+                                        {{filteredIT.role}}
+                                    </td>
+                                    <td><span class="p-column-title">Class</span>
+                                        {{filteredIT.classGrp}}
+                                    </td>
+
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="emptymessage">
+                                <tr>
+                                    <td colspan="7">No customers found.</td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
                     </p-tabPanel>
                     <p-tabPanel header="Faculties">
-                        
+                        <p-table #dt1 responsiveLayout="stack" [value]="facData" dataKey="id" [rows]="5"
+                            [showCurrentPageReport]="true" [rowsPerPageOptions]="[5,10,15]" [loading]="loading"
+                            styleClass="p-datatable-customers p-datatable-gridlines" [paginator]="true"
+                            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
+                            <ng-template pTemplate="caption">
+                                Faculty List
+                            </ng-template>
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th>
+                                        <div class="p-d-flex p-jc-between p-ai-center">
+                                            Faculty Name
+                                            <p-columnFilter type="text" field="fname" display="menu"></p-columnFilter>
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <div class="p-d-flex p-jc-between p-ai-center">
+                                            Department
+                                            <p-columnFilter type="text" field="department"
+                                                display="menu"></p-columnFilter>
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <div class="p-d-flex p-jc-between p-ai-center">
+                                            Designation
+                                            <p-columnFilter type="text" field="designation"
+                                                display="menu"></p-columnFilter>
+                                        </div>
+                                    </th>
+
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-facData>
+                                <tr>
+                                    <td><span class="p-column-title">Faculty Name</span>
+                                        {{facData.fname}}
+                                    </td>
+                                    <td><span class="p-column-title">Department</span>
+                                        {{facData.department}}
+                                    </td>
+                                    <td><span class="p-column-title">Designation</span>
+                                        {{facData.designation}}
+                                    </td>
+
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="emptymessage">
+                                <tr>
+                                    <td colspan="7">No customers found.</td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
                     </p-tabPanel>
                     <p-tabPanel header="Subjects">
                         <p-table #dt1 responsiveLayout="stack" [value]="subData" dataKey="id" [rows]="5"
-                        [showCurrentPageReport]="true" [rowsPerPageOptions]="[5,10,15]" [loading]="loading"
-                        styleClass="p-datatable-customers p-datatable-gridlines" [paginator]="true"
-                        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
-                        <ng-template pTemplate="caption">
-                            Subjects List
-                        </ng-template>
-                        <ng-template pTemplate="header">
-                            <tr>
-                                <th>
-                                    <div class="p-d-flex p-jc-between p-ai-center">
-                                        Subject Name
-                                        <p-columnFilter type="text" field="subject" display="menu"></p-columnFilter>
-                                    </div>
-                                </th>
-                               
-                            </tr>
-                        </ng-template>
-                        <ng-template pTemplate="body" let-subData>
-                            <tr>
-                                <td><span class="p-column-title">Subject</span>
-                                    {{subData.subject}}
-                                </td>
-                       
-                            </tr>
-                        </ng-template>
-                        <ng-template pTemplate="emptymessage">
-                            <tr>
-                                <td colspan="7">No customers found.</td>
-                            </tr>
-                        </ng-template>
-                    </p-table>
+                            [showCurrentPageReport]="true" [rowsPerPageOptions]="[5,10,15]" [loading]="loading"
+                            styleClass="p-datatable-customers p-datatable-gridlines" [paginator]="true"
+                            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
+                            <ng-template pTemplate="caption">
+                                Subjects List
+                            </ng-template>
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th>
+                                        <div class="p-d-flex p-jc-between p-ai-center">
+                                            Subject Name
+                                            <p-columnFilter type="text" field="subject" display="menu"></p-columnFilter>
+                                        </div>
+                                    </th>
+
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-subData>
+                                <tr>
+                                    <td><span class="p-column-title">Subject</span>
+                                        {{subData.subject}}
+                                    </td>
+
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="emptymessage">
+                                <tr>
+                                    <td colspan="7">No customers found.</td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
                     </p-tabPanel>
                     <p-tabPanel header="Courses">
-                        
+                        <p-table #dt1 responsiveLayout="stack" [value]="courseData" dataKey="id" [rows]="5"
+                            [showCurrentPageReport]="true" [rowsPerPageOptions]="[5,10,15]" [loading]="loading"
+                            styleClass="p-datatable-customers p-datatable-gridlines" [paginator]="true"
+                            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
+                            <ng-template pTemplate="caption">
+                                Courses List
+                            </ng-template>
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th>
+                                        <div class="p-d-flex p-jc-between p-ai-center">
+                                            Courses
+                                            <p-columnFilter type="text" field="courses" display="menu"></p-columnFilter>
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <div class="p-d-flex p-jc-between p-ai-center">
+                                            Semester
+                                            <p-columnFilter type="number" field="semester"
+                                                display="menu"></p-columnFilter>
+                                        </div>
+                                    </th>
+
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-courseData>
+                                <tr>
+                                    <td><span class="p-column-title">Courses</span>
+                                        {{courseData.courses}}
+                                    </td>
+                                    <td><span class="p-column-title">Semester</span>
+                                        {{courseData.semester}}
+                                    </td>
+
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="emptymessage">
+                                <tr>
+                                    <td colspan="7">No customers found.</td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
+
                     </p-tabPanel>
                 </p-tabView>
             </p-accordionTab>
@@ -366,123 +634,209 @@
                 <p-tabView [(activeIndex)]="activeIndex">
                     <p-tabPanel header="Students">
                         <p-table responsiveLayout="stack" #studentTable [value]="filteredIT" dataKey="id" [rows]="5"
-                        [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,20,30,40,50,60,70,80]"
-                        [loading]="loading" styleClass="p-datatable-customers p-datatable-gridlines"
-                        [paginator]="true"
-                        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-                        [globalFilterFields]="[
+                            [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,20,30,40,50,60,70,80]"
+                            [loading]="loading" styleClass="p-datatable-customers p-datatable-gridlines"
+                            [paginator]="true"
+                            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                            [globalFilterFields]="[
                         'filteredIT.name',
                         'filteredIT.roll',
                         'filteredIT.classGrp'
                       ]">
-                        <ng-template pTemplate="caption">
-                            Students List
+                            <ng-template pTemplate="caption">
+                                Students List
 
-                        </ng-template>
-                        <ng-template pTemplate="header">
-                            <tr>
-                                <th pSortableColumn="roll">
-                                    <div class="p-d-flex p-jc-between p-ai-center">
-                                        <p-sortIcon field="roll"></p-sortIcon>
-                                        Roll Number
-                                        <p-columnFilter type="text" field="roll"
-                                            display="menu"></p-columnFilter>
-                                    </div>
-                                </th>
-                                <th>
-                                    <div class="p-d-flex p-jc-between p-ai-center">
-                                        Students Name
-                                        <p-columnFilter type="text" field="name"
-                                            display="menu"></p-columnFilter>
-                                    </div>
-                                </th>
-                                <th>
-                                    <div class="p-d-flex p-jc-between p-ai-center">
-                                        role
-                                        <p-columnFilter type="text" field="role"
-                                            display="menu"></p-columnFilter>
-                                    </div>
-                                </th>
-                                <th>
-                                    <div class="p-d-flex p-jc-between p-ai-center">
-                                        Class
-                                        <p-columnFilter type="text" field="classGrp"
-                                            display="menu"></p-columnFilter>
-                                    </div>
-                                </th>
-                              
-                            </tr>
-                        </ng-template>
-                        <ng-template pTemplate="body" let-filteredIT>
-                            <tr>
-                                <td><span class="p-column-title">Roll</span>
-                                    {{filteredIT.roll}}
-                                </td>
-                                <td><span class="p-column-title">Name</span>
-                                    {{filteredIT.name}}
-                                </td>
-                                <td><span class="p-column-title">Name</span>
-                                    {{filteredIT.role}}
-                                </td>
-                                <td><span class="p-column-title">Class</span>
-                                    {{filteredIT.classGrp}}
-                                </td>
-                                
-                            </tr>
-                        </ng-template>
-                        <ng-template pTemplate="emptymessage">
-                            <tr>
-                                <td colspan="7">No customers found.</td>
-                            </tr>
-                        </ng-template>
-                    </p-table>
+                            </ng-template>
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th pSortableColumn="roll">
+                                        <div class="p-d-flex p-jc-between p-ai-center">
+                                            <p-sortIcon field="roll"></p-sortIcon>
+                                            Roll Number
+                                            <p-columnFilter type="text" field="roll" display="menu"></p-columnFilter>
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <div class="p-d-flex p-jc-between p-ai-center">
+                                            Students Name
+                                            <p-columnFilter type="text" field="name" display="menu"></p-columnFilter>
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <div class="p-d-flex p-jc-between p-ai-center">
+                                            role
+                                            <p-columnFilter type="text" field="role" display="menu"></p-columnFilter>
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <div class="p-d-flex p-jc-between p-ai-center">
+                                            Class
+                                            <p-columnFilter type="text" field="classGrp"
+                                                display="menu"></p-columnFilter>
+                                        </div>
+                                    </th>
+
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-filteredIT>
+                                <tr>
+                                    <td><span class="p-column-title">Roll</span>
+                                        {{filteredIT.roll}}
+                                    </td>
+                                    <td><span class="p-column-title">Name</span>
+                                        {{filteredIT.name}}
+                                    </td>
+                                    <td><span class="p-column-title">Name</span>
+                                        {{filteredIT.role}}
+                                    </td>
+                                    <td><span class="p-column-title">Class</span>
+                                        {{filteredIT.classGrp}}
+                                    </td>
+
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="emptymessage">
+                                <tr>
+                                    <td colspan="7">No customers found.</td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
                     </p-tabPanel>
                     <p-tabPanel header="Faculties">
-                        
+                        <p-table #dt1 responsiveLayout="stack" [value]="facData" dataKey="id" [rows]="5"
+                            [showCurrentPageReport]="true" [rowsPerPageOptions]="[5,10,15]" [loading]="loading"
+                            styleClass="p-datatable-customers p-datatable-gridlines" [paginator]="true"
+                            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
+                            <ng-template pTemplate="caption">
+                                Faculty List
+                            </ng-template>
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th>
+                                        <div class="p-d-flex p-jc-between p-ai-center">
+                                            Faculty Name
+                                            <p-columnFilter type="text" field="fname" display="menu"></p-columnFilter>
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <div class="p-d-flex p-jc-between p-ai-center">
+                                            Department
+                                            <p-columnFilter type="text" field="department"
+                                                display="menu"></p-columnFilter>
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <div class="p-d-flex p-jc-between p-ai-center">
+                                            Designation
+                                            <p-columnFilter type="text" field="designation"
+                                                display="menu"></p-columnFilter>
+                                        </div>
+                                    </th>
+
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-facData>
+                                <tr>
+                                    <td><span class="p-column-title">Faculty Name</span>
+                                        {{facData.fname}}
+                                    </td>
+                                    <td><span class="p-column-title">Department</span>
+                                        {{facData.department}}
+                                    </td>
+                                    <td><span class="p-column-title">Designation</span>
+                                        {{facData.designation}}
+                                    </td>
+
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="emptymessage">
+                                <tr>
+                                    <td colspan="7">No customers found.</td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
                     </p-tabPanel>
                     <p-tabPanel header="Subjects">
                         <p-table #dt1 responsiveLayout="stack" [value]="subData" dataKey="id" [rows]="5"
-                        [showCurrentPageReport]="true" [rowsPerPageOptions]="[5,10,15]" [loading]="loading"
-                        styleClass="p-datatable-customers p-datatable-gridlines" [paginator]="true"
-                        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
-                        <ng-template pTemplate="caption">
-                            Subjects List
-                        </ng-template>
-                        <ng-template pTemplate="header">
-                            <tr>
-                                <th>
-                                    <div class="p-d-flex p-jc-between p-ai-center">
-                                        Subject Name
-                                        <p-columnFilter type="text" field="subject" display="menu"></p-columnFilter>
-                                    </div>
-                                </th>
-                                
-                            </tr>
-                        </ng-template>
-                        <ng-template pTemplate="body" let-subData>
-                            <tr>
-                                <td><span class="p-column-title">Subject</span>
-                                    {{subData.subject}}
-                                </td>
-                               
-                            </tr>
-                        </ng-template>
-                        <ng-template pTemplate="emptymessage">
-                            <tr>
-                                <td colspan="7">No customers found.</td>
-                            </tr>
-                        </ng-template>
-                    </p-table>
+                            [showCurrentPageReport]="true" [rowsPerPageOptions]="[5,10,15]" [loading]="loading"
+                            styleClass="p-datatable-customers p-datatable-gridlines" [paginator]="true"
+                            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
+                            <ng-template pTemplate="caption">
+                                Subjects List
+                            </ng-template>
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th>
+                                        <div class="p-d-flex p-jc-between p-ai-center">
+                                            Subject Name
+                                            <p-columnFilter type="text" field="subject" display="menu"></p-columnFilter>
+                                        </div>
+                                    </th>
+
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-subData>
+                                <tr>
+                                    <td><span class="p-column-title">Subject</span>
+                                        {{subData.subject}}
+                                    </td>
+
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="emptymessage">
+                                <tr>
+                                    <td colspan="7">No customers found.</td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
                     </p-tabPanel>
                     <p-tabPanel header="Courses">
-                        
+                        <p-table #dt1 responsiveLayout="stack" [value]="courseData" dataKey="id" [rows]="5"
+                            [showCurrentPageReport]="true" [rowsPerPageOptions]="[5,10,15]" [loading]="loading"
+                            styleClass="p-datatable-customers p-datatable-gridlines" [paginator]="true"
+                            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
+                            <ng-template pTemplate="caption">
+                                Courses List
+                            </ng-template>
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th>
+                                        <div class="p-d-flex p-jc-between p-ai-center">
+                                            Courses
+                                            <p-columnFilter type="text" field="courses" display="menu"></p-columnFilter>
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <div class="p-d-flex p-jc-between p-ai-center">
+                                            Semester
+                                            <p-columnFilter type="number" field="semester"
+                                                display="menu"></p-columnFilter>
+                                        </div>
+                                    </th>
+
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-courseData>
+                                <tr>
+                                    <td><span class="p-column-title">Courses</span>
+                                        {{courseData.courses}}
+                                    </td>
+                                    <td><span class="p-column-title">Semester</span>
+                                        {{courseData.semester}}
+                                    </td>
+
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="emptymessage">
+                                <tr>
+                                    <td colspan="7">No customers found.</td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
                     </p-tabPanel>
                 </p-tabView>
             </p-accordionTab>
-            <p-accordionTab header="Seminars">
-
-            </p-accordionTab>
-            <p-accordionTab header="Workshops">
+            <p-accordionTab header="Events">
 
             </p-accordionTab>
         </p-accordion>

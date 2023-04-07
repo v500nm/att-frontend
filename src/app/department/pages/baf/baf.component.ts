@@ -158,12 +158,7 @@ export class BafComponent {
   //get
   getAllCourses() {
     this.adminService.getAllCourses().subscribe((res: Icourses[]) => {
-      this.courseData = res.filter(
-        (itStu) =>
-          itStu.courses === 'FYBAF' ||
-          itStu.courses === 'SYBAF' ||
-          itStu.courses === 'TYBAF'
-      );
+      this.courseData = res
     });
   }
   findAllClass() {

@@ -157,12 +157,7 @@ export class BammcComponent {
   //get
   getAllCourses() {
     this.adminService.getAllCourses().subscribe((res: Icourses[]) => {
-      this.courseData = res.filter(
-        (itStu) =>
-          itStu.courses === 'FYBAMMC' ||
-          itStu.courses === 'SYBAMMC' ||
-          itStu.courses === 'TYBAMMC'
-      );
+      this.courseData = res
     });
   }
   findAllClass() {

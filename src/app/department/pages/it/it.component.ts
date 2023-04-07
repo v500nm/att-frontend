@@ -160,12 +160,7 @@ export class ItComponent implements OnInit {
   //get
   getAllCourses() {
     this.adminService.getAllCourses().subscribe((res: Icourses[]) => {
-      this.courseData = res.filter(
-        (itStu) =>
-          itStu.courses === 'FYIT' ||
-          itStu.courses === 'SYIT' ||
-          itStu.courses === 'TYIT'
-      );
+      this.courseData = res
     });
   }
   findAllClass() {

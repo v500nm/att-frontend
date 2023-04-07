@@ -158,12 +158,7 @@ export class BmsComponent {
   //get
   getAllCourses() {
     this.adminService.getAllCourses().subscribe((res: Icourses[]) => {
-      this.courseData = res.filter(
-        (itStu) =>
-          itStu.courses === 'FYBMS' ||
-          itStu.courses === 'SYBMS' ||
-          itStu.courses === 'TYBMS'
-      );
+      this.courseData = res
     });
   }
   findAllClass() {
