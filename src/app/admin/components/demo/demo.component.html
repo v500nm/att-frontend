@@ -1,0 +1,21 @@
+<header>
+    <nav>
+      <div class="navbar">
+        <div class="navbar-logo">
+          <a href="#">Company Name</a>
+        </div>
+        <ul class="nav-links" [class.open]="isNavOpen">
+          <li><a href="#">Link 1</a></li>
+          <li><a href="#">Link 2</a></li>
+          <li><a href="#">Link 3</a></li>
+          <li><a href="#">Link 4</a></li>
+        </ul>
+        <div class="hamburger-menu" (click)="toggleNav()">
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      </div>
+    </nav>
+  </header>
+  

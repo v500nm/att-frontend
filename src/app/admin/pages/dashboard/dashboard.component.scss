@@ -2,8 +2,10 @@
 .body {
   display: flex;
   flex-direction: column;
-  h2{text-align: center;}
-  .cards{
+  h2 {
+    text-align: center;
+  }
+  .cards {
     padding: 1.6rem;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -43,46 +45,55 @@
     width: 100%;
     padding: 20px;
     padding-top: 0;
-    
-}
+  }
 
-.chart {
+  .chart {
     background-color: #fff;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 2px 4px 6px 6px rgba(0, 0, 0, 0.08);
     width: 100%;
-}
+  }
 
-.chart h2 {
+  .chart h2 {
     margin-bottom: 5px;
     font-size: 20px;
     color: #666;
-    text-align: center
-}
-
+    text-align: center;
+  }
 }
 @media screen and (max-width: 1000px) {
-    .body{
-        .cards{
-          display: grid;
-          grid-template-columns: repeat(2, 1fr);
-        }
+  .body {
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
     }
+    .charts{
+      display: grid;
+      grid-template-columns: 1fr;
+      .chart{
+        max-width: 30rem;
+        margin: auto;
+      }
+    }
+  }
 }
-@media screen and (max-width:500px) {
-    .body{
-        .cards{
-            display: grid;
-            grid-template-columns: repeat(2,1fr);
-            .card{
-                display: flex;
-                flex-direction: column-reverse;
-                align-items: center;
-                .card-content{
-                    text-align: center;
-                }
-            }
+@media screen and (max-width: 500px) {
+  .body {
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      .card {
+        display: flex;
+        flex-direction: column-reverse;
+        align-items: center;
+        .card-content {
+          text-align: center;
         }
+      }
     }
+    .charts,.chartName{
+      display: none;
+    }
+  }
 }

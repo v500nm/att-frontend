@@ -22,6 +22,7 @@ import { AddsubsComponent } from './pages/addsubs/addsubs.component';
 import { AddclassComponent } from './pages/addclass/addclass.component';
 import { ManagelogsComponent } from './pages/managelogs/managelogs.component';
 import { ChartModule } from 'primeng/chart';
+import { DemoComponent } from './components/demo/demo.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { ChartModule } from 'primeng/chart';
     AddsubsComponent,
     AddclassComponent,
     ManagelogsComponent,
+    DemoComponent,
   ],
   imports: [
     AdminRoutingModule,
