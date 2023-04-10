@@ -25,6 +25,7 @@ import { UserService } from './shared/services/user.service';
     AppComponent,
   ],
   imports: [
+    NgModule,
     BrowserModule,
     AppRoutingModule,
     SidebarModule,

@@ -100,15 +100,9 @@ export class OthersComponent {
       this.loading = false;
     });
 
+    
+    //crud buttons
     //forms
-    this.findAllStudents();
-    this.findAllGroup();
-    this.findAllStudents();
-    this.findAllSchedule();
-    this.findAllAtt();
-    this.getAllFaculties();
-    this.getAllCourses();
-
     (this.stuValue = this.formsbuilder.group({
       roll: new FormControl(''),
       name: new FormControl(''),
@@ -138,8 +132,6 @@ export class OthersComponent {
         subjects: new FormControl(''),
         classrooms: new FormControl(''),
       }));
-
-    //crud buttons
   }
   getAllCourses() {
     this.adminService.getAllCourses().subscribe((res: Icourses[]) => {
