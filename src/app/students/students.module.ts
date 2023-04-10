@@ -15,7 +15,6 @@ import { ButtonModule } from 'primeng/button';
 import {TableModule } from 'primeng/table';
 import { DropdownModule } from 'primeng/dropdown';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ChartModule } from 'primeng/chart';
 
 @NgModule({
   declarations: [
@@ -33,8 +32,7 @@ import { ChartModule } from 'primeng/chart';
     CommonModule,
     StudentsRoutingModule,
     SidebarModule,ButtonModule,TableModule,DropdownModule,FormsModule,
-    ReactiveFormsModule,
-    ChartModule
+    ReactiveFormsModule
   ]
 })
 export class StudentsModule { }
