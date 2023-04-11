@@ -115,6 +115,14 @@ export class BammcComponent {
     });
 
     //forms
+    this.findAllStudents();
+    this.findAllGroup();
+    this.findAllStudents();
+    this.findAllSchedule();
+    this.findAllAtt();
+    this.getAllFaculties();
+    this.findCR();
+    this.getAllCourses();
 
     (this.stuValue = this.formsbuilder.group({
       roll: new FormControl(''),
