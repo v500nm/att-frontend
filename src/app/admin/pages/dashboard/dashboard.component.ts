@@ -88,13 +88,6 @@ export class DashboardComponent implements OnInit {
   SYBmsStu: Istudents[] = [];
   TYBmsStu: Istudents[] = [];
 
-  //extras
-  data: any;
-  datasets: any;
-  basic: any;
-  chartOptions: any;
-  options: any;
-
   ngOnInit(): void {
     //table
     this.adminService.findAllStudents().subscribe((res) => {
@@ -109,139 +102,8 @@ export class DashboardComponent implements OnInit {
       this.classData = res;
       this.loading = false;
     });
-    //bar graph
-    {
-      const documentStyle = getComputedStyle(document.documentElement);
-      const textColor = documentStyle.getPropertyValue('--text-color');
-      const textColorSecondary = documentStyle.getPropertyValue(
-        '--text-color-secondary'
-      );
-      const surfaceBorder = documentStyle.getPropertyValue('--surface-border');
-
-      this.data = {
-        labels: [
-          'January',
-          'February',
-          'March',
-          'April',
-          'May',
-          'June',
-          'July',
-          'August',
-          'September',
-          'October',
-          'November',
-          'December',
-        ],
-        datasets: [
-          {
-            label: 'IT Attendance',
-            backgroundColor: documentStyle.getPropertyValue('--blue-500'),
-            borderColor: documentStyle.getPropertyValue('--blue-500'),
-            data: [65, 59, 80, 81, 56, 55, 40, 99, 89, 85, 90, 75],
-          },
-          {
-            label: 'BMS Attendance',
-            backgroundColor: documentStyle.getPropertyValue('--purple-500'),
-            borderColor: documentStyle.getPropertyValue('--purple-500'),
-            data: [40, 52, 86, 71, 46, 35, 49, 79, 59, 58, 59, 57],
-          },
-          {
-            label: 'BAMMC Attendance',
-            backgroundColor: documentStyle.getPropertyValue('--yellow-500'),
-            borderColor: documentStyle.getPropertyValue('--yellow-500'),
-            data: [50, 72, 62, 61, 64, 53, 94, 59, 58, 38, 82, 71],
-          },
-          {
-            label: 'BAF Attendance',
-            backgroundColor: documentStyle.getPropertyValue('--cyan-500'),
-            borderColor: documentStyle.getPropertyValue('--cyan-500'),
-            data: [44, 55, 46, 74, 49, 75, 69, 89, 54, 77, 56, 81],
-          },
-        ],
-      };
-
-      this.options = {
-        maintainAspectRatio: false,
-        aspectRatio: 0.8,
-        plugins: {
-          legend: {
-            labels: {
-              color: textColor,
-            },
-          },
-        },
-        scales: {
-          x: {
-            ticks: {
-              color: textColorSecondary,
-              font: {
-                weight: 500,
-              },
-            },
-            grid: {
-              color: surfaceBorder,
-              drawBorder: false,
-            },
-          },
-          y: {
-            ticks: {
-              color: textColorSecondary,
-            },
-            grid: {
-              color: surfaceBorder,
-              drawBorder: false,
-            },
-          },
-        },
-      };
-
-      //piechart
-      {
-        const documentStyle = getComputedStyle(document.documentElement);
-        const textColor = documentStyle.getPropertyValue('--text-color');
-
-        this.datasets = {
-          labels: ['IT', 'BMS', 'BAMMC', 'BAF'],
-          datasets: [
-            {
-              data: [210, 400, 200, 180],
-              backgroundColor: [
-                documentStyle.getPropertyValue('--blue-800'),
-                documentStyle.getPropertyValue('--blue-600'),
-                documentStyle.getPropertyValue('--blue-400'),
-                documentStyle.getPropertyValue('--blue-200'),
-              ],
-              hoverBackgroundColor: [
-                documentStyle.getPropertyValue('--blue-700'),
-                documentStyle.getPropertyValue('--blue-500'),
-                documentStyle.getPropertyValue('--blue-300'),
-                documentStyle.getPropertyValue('--blue-100'),
-              ],
-            },
-          ],
-        };
-        this.basic = {
-          plugins: {
-            legend: {
-              labels: {
-                usePointStyle: true,
-                color: textColor,
-              },
-            },
-          },
-        };
-      }
-    }
+    
     //forms
-    this.findAllStudents();
-    this.findAllGroup();
-    this.findAllStudents();
-    this.findAllSchedule();
-    this.getAllFaculties();
-    this.getAllCourses();
-    this.findBamStuChart();
-
     //INit
     this.findFYIT();
     this.findSYIT();

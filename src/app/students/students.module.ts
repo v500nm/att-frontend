@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 import { StudentsRoutingModule } from './students-routing.module';
 import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
@@ -12,10 +11,9 @@ import { ScheduleComponent } from './pages/schedule/schedule.component';
 import { SubjectComponent } from './pages/subject/subject.component';
 import { SidebarModule } from 'primeng/sidebar';
 import { ButtonModule } from 'primeng/button';
-import {TableModule } from 'primeng/table';
+import { TableModule } from 'primeng/table';
 import { DropdownModule } from 'primeng/dropdown';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ChartModule } from 'primeng/chart';
 
 @NgModule({
   declarations: [
@@ -27,14 +25,16 @@ import { ChartModule } from 'primeng/chart';
     DefaulterComponent,
     ScheduleComponent,
     SubjectComponent,
-    
   ],
   imports: [
     CommonModule,
     StudentsRoutingModule,
-    SidebarModule,ButtonModule,TableModule,DropdownModule,FormsModule,
+    SidebarModule,
+    ButtonModule,
+    TableModule,
+    DropdownModule,
+    FormsModule,
     ReactiveFormsModule,
-    ChartModule
-  ]
+  ],
 })
-export class StudentsModule { }
+export class StudentsModule {}
