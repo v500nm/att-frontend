@@ -33,12 +33,12 @@ export interface Iclassroom{
 export interface Iattendance{
     _id:string;
     schedules:Ischedule;
-    // attStat:attStat[];
-    students:Istudents[];
+    attStat:attStat;
+    students:Istudents;
 }
 export enum attStat{
-    present="P",
-    absent="A"
+    P="P",
+    A="A"
 }
 export interface Igroups{
     _id:string;

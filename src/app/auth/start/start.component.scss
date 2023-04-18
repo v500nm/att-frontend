@@ -9,6 +9,9 @@
   align-items: center;
   .select {
     display: flex;
+    .mob{
+      display:flex;
+    }
     .card {
       margin: 1rem;
       padding: 2.5rem;
@@ -40,6 +43,25 @@
     .select {
       display: flex;
       flex-direction: column;
+      .card {
+        flex-direction: row;
+        padding: 1.5rem;
+        justify-content: space-between;
+        gap: 1rem;
+      }
+    }
+  }
+}
+@media screen and (max-width:600px) {
+  .container {
+    margin: 1rem;
+    .select {
+      display: flex;
+      flex-direction: column;
+      .mob{
+        display: flex;
+        flex-direction: column;
+      }
       .card {
         flex-direction: row;
         padding: 1.5rem;

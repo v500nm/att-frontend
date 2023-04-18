@@ -16,15 +16,23 @@ export class OthersComponent {
   ) {}
   activeIndex: number = 0;
   stuSwitch: boolean = true;
-  display: boolean = false;
+  displayStu: boolean = false;
+  displaySch: boolean = false;
+  displayGrp: boolean = false;
   uploadDialog: boolean = false;
   AttDisplay: boolean = false;
   displayEdit: boolean = false;
   displayMaximizable: boolean = false;
-  displaySch:boolean=false;
   loading: boolean = true;
-  showDialog() {
-    this.display = true;
+  showDialogStu() {
+    this.displayStu = true;
+  }
+  showDialogGrp() {
+    this.displayGrp = true;
+  }
+
+  showDialogSch() {
+    this.displaySch = true;
   }
   markAttDisplay() {
     this.AttDisplay = true;
@@ -35,18 +43,9 @@ export class OthersComponent {
   showMaximizableDialog() {
     this.displayMaximizable = true;
   }
-  showDialogSch() {
-    this.displaySch = true;
-  }
 
   stuValue!: FormGroup;
   stuUploadValue!: FormGroup;
-  subValue!: FormGroup;
-  subUploadValue!: FormGroup;
-  classValue!: FormGroup;
-  classUploadValue!: FormGroup;
-  facValue!: FormGroup;
-  facUploadValue!: FormGroup;
   grpValue!: FormGroup;
   attValue!: FormGroup;
   schValue!: FormGroup;
@@ -60,6 +59,13 @@ export class OthersComponent {
   grpData: Igroups[] = [];
   classData: Iclassroom[] = [];
   courseData: Icourses[] = [];
+
+  //filterations
+  filteredCR: Istudents[] = [];
+  filteredBAF: Istudents[] = [];
+  filteredBAFFac: Istudents[] = [];
+  filteredBAFSub: Istudents[] = [];
+  filteredBAFAttStu: Istudents[] = [];
 
   stuExcelData: Istudents[] = [];
   ngOnInit(): void {
@@ -95,12 +101,15 @@ export class OthersComponent {
     });
 
     //forms
-    this.adminService.findAllSchedule().subscribe((res) => {
-      this.schData = res;
-      this.loading = false;
-    });
-
-    //forms
+    this.findAllSchedule();
+    this.findAllAtt();
+    this.findAllClass();
+    this.findAllGroup();
+    this.findAllStudents();
+    this.findAllSubjects();
+    this.getAllCourses();
+    this.getAllFaculties();
+    this.findCR();
 
     (this.stuValue = this.formsbuilder.group({
       roll: new FormControl(''),
@@ -111,11 +120,7 @@ export class OthersComponent {
       (this.stuUploadValue = this.formsbuilder.group({
         file: ['', Validators.required],
       })),
-      (this.attValue = this.formsbuilder.group({
-        schedules: new FormControl(''),
-        // attStat: new FormControl(''),
-        students: new FormControl(''),
-      })),
+      
       (this.grpValue = this.formsbuilder.group({
         gName: new FormControl(''),
         courses: new FormControl(''),
@@ -130,13 +135,18 @@ export class OthersComponent {
         faculties: new FormControl(''),
         subjects: new FormControl(''),
         classrooms: new FormControl(''),
-      }));
-
-    //crud buttons
+      }))
+    ,(this.attValue = this.formsbuilder.group({
+      schedules: new FormControl(''),
+      students: new FormControl(''),
+      attStat: new FormControl('')
+    }));
   }
+
+  //get
   getAllCourses() {
     this.adminService.getAllCourses().subscribe((res: Icourses[]) => {
-      this.courseData = res
+      this.courseData = res;
     });
   }
   findAllClass() {
@@ -157,17 +167,21 @@ export class OthersComponent {
       console.log(res, 'faculty get');
     });
   }
-  
-
+  //filtered
+  findCR() {
+    this.adminService.findAllStudents().subscribe((res: Istudents[]) => {
+      this.filteredCR = res.filter(
+        (CRdata) => CRdata.role === 'CR' || CRdata.role === 'DI'
+      );
+      console.log(this.filteredCR, 'cr list');
+    });
+  }
   //students
   findAllStudents() {
     this.adminService.findAllStudents().subscribe((res: Istudents[]) => {
-      this.stuData = res
-     
+      this.stuData = res;
     });
   }
-
-  
   //groups
   findAllGroup() {
     this.adminService.findAllGroup().subscribe((res: Igroups[]) => {
@@ -175,7 +189,39 @@ export class OthersComponent {
       console.log(res, 'groups get');
     });
   }
-  
+  createGroup() {
+    this.grpData = this.grpValue.value;
+    this.adminService.createGroup(this.grpValue.value).subscribe((res) => {
+      console.log(res, 'group Post');
+      this.grpValue.reset();
+      this.findAllGroup();
+    });
+  }
+  removeGrp(_id: string) {
+    this.adminService.removeGroup(_id).subscribe((res) => {
+      console.log(res, 'delete works');
+      this.findAllGroup();
+    });
+  }
+  recoverGrp(grpData: any) {
+    delete grpData.__v;
+    this.grpValue.addControl('_id', new FormControl(''));
+    this.grpValue.setValue(grpData);
+    this.stuSwitch = false;
+    this.showDialogGrp();
+    console.log(this.grpData, 'grp coming');
+  }
+  updateGrp() {
+    const id = this.grpValue.value._id;
+    this.adminService
+      .updateGroup(id, this.grpValue.value)
+      .subscribe((res: any) => {
+        this.grpData = res;
+        this.stuSwitch = true;
+        this.findAllGroup();
+      });
+    this.grpValue.reset();
+  }
   //att
   findAllAtt() {
     this.adminService.findAllAtt().subscribe((res: Iattendance[]) => {

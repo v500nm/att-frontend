@@ -1,1 +1,24 @@
-@use '/src/app/shared/styles/admin.scss';
+@use "/src/app/shared/styles/admin.scss";
+th,
+td {
+  padding: 10px;
+}
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+tr:hover {
+  background-color: #ddd;
+}
+    td,
+th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: rgb(85, 85, 85);
+    color: white;
+  }

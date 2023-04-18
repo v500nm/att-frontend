@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AdminService } from '../../../shared/services/admin.service';
 import {
+  FormArray,
   FormBuilder,
   FormControl,
   FormGroup,
@@ -14,6 +15,7 @@ import {
   Ischedule,
   Istudents,
   Isubject,
+  attStat,
   roles,
 } from '../../../shared/interfaces/admin.interface';
 import * as FileSaver from 'file-saver';
@@ -59,7 +61,6 @@ export class ItComponent implements OnInit {
   showMaximizableDialog() {
     this.displayMaximizable = true;
   }
-
   stuValue!: FormGroup;
   stuUploadValue!: FormGroup;
   grpValue!: FormGroup;
@@ -78,12 +79,13 @@ export class ItComponent implements OnInit {
 
   //filterations
   filteredCR: Istudents[] = [];
-  filteredIT: Istudents[] = [];
-  filteredItFac: Istudents[] = [];
-  filteredItSub: Istudents[] = [];
-  filteredItAttStu: Istudents[] = [];
+  filteredBAF: Istudents[] = [];
+  filteredBAFFac: Istudents[] = [];
+  filteredBAFSub: Istudents[] = [];
+  filteredBAFAttStu: Istudents[] = [];
 
   stuExcelData: Istudents[] = [];
+  
   ngOnInit(): void {
     //table
     this.adminService.findAllStudents().subscribe((res) => {
@@ -117,7 +119,19 @@ export class ItComponent implements OnInit {
     });
 
     //forms
+    this.findAllSchedule();
+    this.findAllAtt();
+    this.findAllClass();
+    this.findAllGroup();
+    this.findAllStudents();
+    this.findAllSubjects();
+    this.getAllCourses();
+    this.getAllFaculties();
+    this.findCR();
 
+    this.fyitFilter();
+    this.syitFilter();
+    this.tyitFilter();
     (this.stuValue = this.formsbuilder.group({
       roll: new FormControl(''),
       name: new FormControl(''),
@@ -127,11 +141,7 @@ export class ItComponent implements OnInit {
       (this.stuUploadValue = this.formsbuilder.group({
         file: ['', Validators.required],
       })),
-      (this.attValue = this.formsbuilder.group({
-        schedules: new FormControl(''),
-        // attStat: new FormControl(''),
-        students: new FormControl(''),
-      })),
+      
       (this.grpValue = this.formsbuilder.group({
         gName: new FormControl(''),
         courses: new FormControl(''),
@@ -146,10 +156,14 @@ export class ItComponent implements OnInit {
         faculties: new FormControl(''),
         subjects: new FormControl(''),
         classrooms: new FormControl(''),
-      }));
-
-    //crud buttons
+      }))
+    ,(this.attValue = this.formsbuilder.group({
+      schedules: new FormControl(''),
+      students: new FormControl(''),
+      attStat: new FormControl('')
+    }));
   }
+
   //sem Games
   //year separation
   fyData: Istudents[] = [];
@@ -157,8 +171,9 @@ export class ItComponent implements OnInit {
   tyData: Istudents[] = [];
   fyitFilter() {
     this.adminService.findAllStudents().subscribe((res: Istudents[]) => {
-      this.fyData = res.filter((fyRes) => fyRes.classGrp === 'FYIT');
+      this.fyData = res.filter((fyRes) => fyRes.classGrp   === 'FYIT');
     });
+    console.log(this.fyData,'fyData')
   }
   syitFilter() {
     this.adminService.findAllStudents().subscribe((res: Istudents[]) => {
@@ -199,27 +214,12 @@ export class ItComponent implements OnInit {
   //filtered
   findCR() {
     this.adminService.findAllStudents().subscribe((res: Istudents[]) => {
-      this.filteredCR = this.filteredIT.filter(
+      this.filteredCR = res.filter(
         (CRdata) => CRdata.role === 'CR' || CRdata.role === 'DI'
       );
       console.log(this.filteredCR, 'cr list');
     });
   }
-  filteredItAttStudent() {
-    this.adminService.findAllStudents().subscribe((res: Istudents[]) => {
-      const extGrpStu = this.schData.forEach((one) => {
-        one.groups.forEach((two) => {
-          two.students.forEach((three) => {
-            this.filteredItAttStu = this.filteredIT.filter(
-              (grpStu) => grpStu.classGrp === three.classGrp
-            );
-            console.log(this.filteredItAttStu, 'dvfhvsvfwuevhecyvwefvev');
-          });
-        });
-      });
-    });
-  }
-
   //students
   findAllStudents() {
     this.adminService.findAllStudents().subscribe((res: Istudents[]) => {
@@ -394,7 +394,7 @@ export class ItComponent implements OnInit {
   updateSch() {
     const id = this.schValue.value._id;
     this.adminService
-      .updateSchedule(id, this.schValue.value)
+      .updateSchedule(id, this.schValue.value) 
       .subscribe((res: any) => {
         this.schData = res;
         this.stuSwitch = true;

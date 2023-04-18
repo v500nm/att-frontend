@@ -58,7 +58,6 @@ export class BafComponent {
   showMaximizableDialog() {
     this.displayMaximizable = true;
   }
-
   stuValue!: FormGroup;
   stuUploadValue!: FormGroup;
   grpValue!: FormGroup;
@@ -116,8 +115,19 @@ export class BafComponent {
     });
 
     //forms
+    this.findAllSchedule();
+    this.findAllAtt();
+    this.findAllClass();
+    this.findAllGroup();
+    this.findAllStudents();
+    this.findAllSubjects();
+    this.getAllCourses();
+    this.getAllFaculties();
+    this.findCR();
 
-
+    this.fyitFilter();
+    this.syitFilter();
+    this.tyitFilter();
     (this.stuValue = this.formsbuilder.group({
       roll: new FormControl(''),
       name: new FormControl(''),
@@ -127,11 +137,7 @@ export class BafComponent {
       (this.stuUploadValue = this.formsbuilder.group({
         file: ['', Validators.required],
       })),
-      (this.attValue = this.formsbuilder.group({
-        schedules: new FormControl(''),
-        // attStat: new FormControl(''),
-        students: new FormControl(''),
-      })),
+      
       (this.grpValue = this.formsbuilder.group({
         gName: new FormControl(''),
         courses: new FormControl(''),
@@ -146,12 +152,41 @@ export class BafComponent {
         faculties: new FormControl(''),
         subjects: new FormControl(''),
         classrooms: new FormControl(''),
-      }));
+      }))
+    ,(this.attValue = this.formsbuilder.group({
+      schedules: new FormControl(''),
+      students: new FormControl(''),
+      attStat: new FormControl('')
+    }));
   }
+
+  //sem Games
+  //year separation
+  fyData: Istudents[] = [];
+  syData: Istudents[] = [];
+  tyData: Istudents[] = [];
+  fyitFilter() {
+    this.adminService.findAllStudents().subscribe((res: Istudents[]) => {
+      this.fyData = res.filter((fyRes) => fyRes.classGrp   === 'FYIT');
+    });
+    console.log(this.fyData,'fyData')
+  }
+  syitFilter() {
+    this.adminService.findAllStudents().subscribe((res: Istudents[]) => {
+      this.syData = res.filter((syRes) => syRes.classGrp === 'SYIT');
+    });
+  }
+  tyitFilter() {
+    this.adminService.findAllStudents().subscribe((res: Istudents[]) => {
+      this.tyData = res.filter((tyRes) => tyRes.classGrp === 'TYIT');
+    });
+  }
+  //sem separations
+
   //get
   getAllCourses() {
     this.adminService.getAllCourses().subscribe((res: Icourses[]) => {
-      this.courseData = res
+      this.courseData = res;
     });
   }
   findAllClass() {
@@ -175,37 +210,16 @@ export class BafComponent {
   //filtered
   findCR() {
     this.adminService.findAllStudents().subscribe((res: Istudents[]) => {
-      this.filteredCR = this.filteredBAF.filter(
+      this.filteredCR = res.filter(
         (CRdata) => CRdata.role === 'CR' || CRdata.role === 'DI'
       );
       console.log(this.filteredCR, 'cr list');
     });
   }
-  filteredItAttStudent() {
-    this.adminService.findAllStudents().subscribe((res: Istudents[]) => {
-      const extGrpStu = this.schData.forEach((one) => {
-        one.groups.forEach((two) => {
-          two.students.forEach((three) => {
-            this.filteredBAFAttStu = this.filteredBAF.filter(
-              (grpStu) => grpStu.classGrp === three.classGrp
-            );
-            console.log(this.filteredBAFAttStu, 'dvfhvsvfwuevhecyvwefvev');
-          });
-        });
-      });
-    });
-  }
-
   //students
   findAllStudents() {
     this.adminService.findAllStudents().subscribe((res: Istudents[]) => {
-      this.filteredBAF = res.filter(
-        (itStu) =>
-          itStu.classGrp === 'FYBAF' ||
-          itStu.classGrp === 'SYBAF' ||
-          itStu.classGrp === 'TYBAF'
-      );
-      console.log(this.filteredBAF, 'students BAF get');
+      this.stuData = res;
     });
   }
 

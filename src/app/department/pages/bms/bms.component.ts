@@ -58,7 +58,6 @@ export class BmsComponent {
   showMaximizableDialog() {
     this.displayMaximizable = true;
   }
-
   stuValue!: FormGroup;
   stuUploadValue!: FormGroup;
   grpValue!: FormGroup;
@@ -77,10 +76,10 @@ export class BmsComponent {
 
   //filterations
   filteredCR: Istudents[] = [];
-  filteredBMS: Istudents[] = [];
-  filteredBMSFac: Istudents[] = [];
-  filteredBMSSub: Istudents[] = [];
-  filteredBMSAttStu: Istudents[] = [];
+  filteredBAF: Istudents[] = [];
+  filteredBAFFac: Istudents[] = [];
+  filteredBAFSub: Istudents[] = [];
+  filteredBAFAttStu: Istudents[] = [];
 
   stuExcelData: Istudents[] = [];
   ngOnInit(): void {
@@ -116,8 +115,19 @@ export class BmsComponent {
     });
 
     //forms
+    this.findAllSchedule();
+    this.findAllAtt();
+    this.findAllClass();
+    this.findAllGroup();
+    this.findAllStudents();
+    this.findAllSubjects();
+    this.getAllCourses();
+    this.getAllFaculties();
+    this.findCR();
 
-
+    this.fyitFilter();
+    this.syitFilter();
+    this.tyitFilter();
     (this.stuValue = this.formsbuilder.group({
       roll: new FormControl(''),
       name: new FormControl(''),
@@ -127,11 +137,7 @@ export class BmsComponent {
       (this.stuUploadValue = this.formsbuilder.group({
         file: ['', Validators.required],
       })),
-      (this.attValue = this.formsbuilder.group({
-        schedules: new FormControl(''),
-        // attStat: new FormControl(''),
-        students: new FormControl(''),
-      })),
+      
       (this.grpValue = this.formsbuilder.group({
         gName: new FormControl(''),
         courses: new FormControl(''),
@@ -146,12 +152,41 @@ export class BmsComponent {
         faculties: new FormControl(''),
         subjects: new FormControl(''),
         classrooms: new FormControl(''),
-      }));
+      }))
+    ,(this.attValue = this.formsbuilder.group({
+      schedules: new FormControl(''),
+      students: new FormControl(''),
+      attStat: new FormControl('')
+    }));
   }
+
+  //sem Games
+  //year separation
+  fyData: Istudents[] = [];
+  syData: Istudents[] = [];
+  tyData: Istudents[] = [];
+  fyitFilter() {
+    this.adminService.findAllStudents().subscribe((res: Istudents[]) => {
+      this.fyData = res.filter((fyRes) => fyRes.classGrp   === 'FYIT');
+    });
+    console.log(this.fyData,'fyData')
+  }
+  syitFilter() {
+    this.adminService.findAllStudents().subscribe((res: Istudents[]) => {
+      this.syData = res.filter((syRes) => syRes.classGrp === 'SYIT');
+    });
+  }
+  tyitFilter() {
+    this.adminService.findAllStudents().subscribe((res: Istudents[]) => {
+      this.tyData = res.filter((tyRes) => tyRes.classGrp === 'TYIT');
+    });
+  }
+  //sem separations
+
   //get
   getAllCourses() {
     this.adminService.getAllCourses().subscribe((res: Icourses[]) => {
-      this.courseData = res
+      this.courseData = res;
     });
   }
   findAllClass() {
@@ -175,37 +210,16 @@ export class BmsComponent {
   //filtered
   findCR() {
     this.adminService.findAllStudents().subscribe((res: Istudents[]) => {
-      this.filteredCR = this.filteredBMS.filter(
+      this.filteredCR = res.filter(
         (CRdata) => CRdata.role === 'CR' || CRdata.role === 'DI'
       );
       console.log(this.filteredCR, 'cr list');
     });
   }
-  filteredItAttStudent() {
-    this.adminService.findAllStudents().subscribe((res: Istudents[]) => {
-      const extGrpStu = this.schData.forEach((one) => {
-        one.groups.forEach((two) => {
-          two.students.forEach((three) => {
-            this.filteredBMSAttStu = this.filteredBMS.filter(
-              (grpStu) => grpStu.classGrp === three.classGrp
-            );
-            console.log(this.filteredBMSAttStu, 'dvfhvsvfwuevhecyvwefvev');
-          });
-        });
-      });
-    });
-  }
-
   //students
   findAllStudents() {
     this.adminService.findAllStudents().subscribe((res: Istudents[]) => {
-      this.filteredBMS = res.filter(
-        (itStu) =>
-          itStu.classGrp === 'FYBMS' ||
-          itStu.classGrp === 'SYBMS' ||
-          itStu.classGrp === 'TYBMS'
-      );
-      console.log(this.filteredBMS, 'students IT get');
+      this.stuData = res;
     });
   }
 

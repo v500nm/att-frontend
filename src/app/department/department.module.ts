@@ -22,6 +22,7 @@ import { ListboxModule } from 'primeng/listbox';
 import { FileUploadModule } from 'primeng/fileupload';
 import {AccordionModule} from 'primeng/accordion';
 import { OthersComponent } from './pages/others/others.component';
+import { SelectButtonModule } from 'primeng/selectbutton';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { OthersComponent } from './pages/others/others.component';
     InputTextModule,
     FormsModule,
     DropdownModule,
+    SelectButtonModule,
     DialogModule,
     ButtonModule,
     ReactiveFormsModule,

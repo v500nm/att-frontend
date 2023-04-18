@@ -613,7 +613,7 @@
 
         </p-accordionTab>
         <p-accordionTab header="Attendance">
-            <p-tabView [(activeIndex)]="activeIndex" [scrollable]="true"> 
+            <p-tabView [(activeIndex)]="activeIndex"> 
                 <p-tabPanel header="Mark Attendance">
                     <section class="Attendance">
                         <div class="title">
@@ -715,35 +715,38 @@
                                                 [resizable]="false">
 
                                                 <form [formGroup]="attValue">
+                                                    <h3>Mark Attendance</h3>
                                                     <div class="sub">
                                                         <ng-container>
-                                                            <label for="schedule">schedule</label>
+                                                            <label for="schedule">Schedule</label>
                                                             <select name="schedule" formControlName="schedules">
-                                                                <option value="">--select--</option>
-                                                                <option [value]="schData._id">{{schData.scheduleName}}
-                                                                </option>
+                                                                <option>--select--</option>
+                                                                <option [value]="schData._id">
+                                                                    {{schData.scheduleName}}</option>
                                                             </select>
                                                         </ng-container>
                                                     </div>
                                                     <div class="sub">
                                                         <ng-container>
-                                                            <h3>Mark Attendance</h3>
-                                                            <p-listbox formControlName="students" [options]="filteredBMS"
-                                                                [metaKeySelection]="false" [checkbox]="true"
-                                                                [filter]="true" [listStyle]="{'max-height':'200px'}"
-                                                                [multiple]="true" optionLabel="classGrp">
-                                                                <ng-template let-filteredBMS pTemplate="item">
-                                                                    <div class="country-item">
-                                                                        <span>{{filteredBMS.roll}}-{{filteredBMS.classGrp}}</span>
-                                                                    </div>
-                                                                </ng-template>
-                                                            </p-listbox>
+                                                            <label for="Students">Students</label>
+                                                            <select name="Students" formControlName="students">
+                                                                <option>--select--</option>
+                                                                <option *ngFor="let stu of schData.groups.students"
+                                                                    [value]="stu._id">{{stu.roll}}</option>
+                                                            </select>
                                                         </ng-container>
                                                     </div>
-
+                                                    <div class="sub">
+                                                        <ng-container>
+                                                            <label for="att">Attendance</label>
+                                                            <select name="att" formControlName="attStat">
+                                                                <option value="P">P</option>
+                                                                <option value="A">A</option>
+                                                            </select>
+                                                        </ng-container>
+                                                    </div>
                                                     <button pButton type="button" label="Add"
                                                         (click)="markAtt()"></button>
-
                                                 </form>
                                             </p-dialog>
                                         </td>
@@ -853,7 +856,7 @@
                                         <td><span class="p-column-title">Attendance</span>
                                             <button pButton type="button" label="view" icon="pi pi-list"
                                                 (click)="markAttDisplay()"></button>
-                                            <p-dialog header="Schedule: {{schData.scheduleName}}-{{schData.Date}}"
+                                                <p-dialog header="Schedule: {{schData.scheduleName}}-{{schData.Date}}"
                                                 [(visible)]="AttDisplay" [modal]="true"
                                                 [style]="{ width: '80vw',height:'50vh' }" [maximizable]="true"
                                                 [baseZIndex]="10000" [draggable]="false" [resizable]="false">
@@ -893,19 +896,17 @@
                                     </tr>
                                 </ng-template>
                                 <ng-template pTemplate="body" let-attData>
-                                    <ng-container *ngFor="let attNestView of attData.schedules.groups.students">
-                                        <tr>
-                                            <td><span class="p-column-title">Roll No.</span>
-                                                {{attNestView.roll}}
-                                            </td>
-                                            <td><span class="p-column-title">Name</span>
-                                                {{attNestView.name}}
-                                            </td>
-                                            <td><span class="p-column-title">Attendance</span>
-                                                P
-                                            </td>
-                                        </tr>
-                                    </ng-container>
+                                    <tr>
+                                        <td><span class="p-column-title">Roll No.</span>
+                                            {{attData.students.roll}}
+                                        </td>
+                                        <td><span class="p-column-title">Name</span>
+                                            {{attData.students.name}}
+                                        </td>
+                                        <td><span class="p-column-title">Attendance</span>
+                                            {{attData.attStat}}
+                                        </td>
+                                    </tr>
                                 </ng-template>
                             </p-table>
                             </p-dialog>
@@ -921,9 +922,7 @@
                         </div>
                     </section>
                 </p-tabPanel>
-                <p-tabPanel header="Defaulters">
-        
-                </p-tabPanel>
+
             </p-tabView>
         </p-accordionTab>
     </p-accordion>

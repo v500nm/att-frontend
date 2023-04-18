@@ -1,39 +1,46 @@
 <div class="container">
     <div class="top">
-        <h1>Attendance App</h1><hr>
+        <h1>Attendance App</h1>
+        <hr>
     </div>
     <div class="select">
-        <div class="admin card">
-            <div class="img">
-                <h1>Admin</h1>
+        <div class="mob">
+
+            <div class="admin card">
+                <div class="img">
+                    <h1>Admin</h1>
+                </div>
+                <div class="btn">
+                    <button (click)="adLogin()">Login</button>
+                </div>
             </div>
-            <div class="btn">
-                <button (click)="adLogin()">Login</button>
-            </div>
-        </div>
-        <div class="department card">
-            <div class="img">
-                <h1>Department</h1>
-            </div>
-            <div class="btn">
-                <button (click)="depLogin()">Login</button>
-            </div>
-        </div>
-        <div class="student card">
-            <div class="img">
-                <h1>Student</h1>
-            </div>
-            <div class="btn">
-                <button (click)="stuLogin()">Login</button>
+            <div class="department card">
+                <div class="img">
+                    <h1>Department</h1>
+                </div>
+                <div class="btn">
+                    <button (click)="depLogin()">Login</button>
+                </div>
             </div>
         </div>
-        <div class="cr card">
-            <div class="img">
-                <h1>CR</h1>
+        <div class="mob">
+            <div class="cr card">
+                <div class="img">
+                    <h1>CR</h1>
+                </div>
+                <div class="btn">
+                    <button (click)="crLogin()">Login</button>
+                </div>
             </div>
-            <div class="btn">
-                <button (click)="crLogin()">Login</button>
+            <div class="student card">
+                <div class="img">
+                    <h1>Student</h1>
+                </div>
+                <div class="btn">
+                    <button (click)="stuLogin()">Login</button>
+                </div>
             </div>
         </div>
     </div>
+
 </div>

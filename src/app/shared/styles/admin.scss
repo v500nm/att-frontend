@@ -1,97 +1,104 @@
-
 @mixin buttonStyle {
-    background-color: #3b82f6;
-    color: white;
-    padding: 15px;
-    border: none;
-    border-radius: 10px;
+  background-color: #3b82f6;
+  color: white;
+  padding: 15px;
+  border: none;
+  border-radius: 10px;
+}
+.container {
+  border-radius: 8px;
+  margin: 1rem;
+  padding: 2rem;
+  background-color: white;
+  .top {
+    h1 {
+      text-align: center;
+    }
   }
-  .container {
-    border-radius: 8px;
-      margin: 1rem;
+  .sub {
+    margin: 2rem;
+    label {
+      font-size: 18px;
+    }
+    select {
+      margin-left: 5px;
+      border-radius: 8px;
+      padding: 5px;
+      box-shadow: 2px 2px solid grey;
+    }
+  }
+}
+.editGrp {
+  display: flex;
+  gap: 0.5rem;
+}
+button {
+  @include buttonStyle();
+  font-weight: 600;
+}
+.adminOptions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.view {
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+.grpView {
+  display: flex;
+  box-shadow: none;
+  gap: 2rem;
+  .grpCards {
+    padding: 3rem;
+    border-radius: 12px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    h2 {
+      font-size: 32px;
+    }
+    .grpTitleOpt {
+      display: flex;
+      flex-direction: row;
+      gap: 1rem;
+    }
+    .grpList {
+      box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
       padding: 2rem;
-      background-color: white;
-    .top {
-      h1 {
+      margin: 1rem;
+      li {
+        list-style: none;
+        display: flex;
+        justify-content: space-between;
+        gap: 1rem;
         text-align: center;
+        border: 1px solid black;
+        margin: 5px;
+        padding: 10px;
+        border-radius: 12px;
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 5px;
       }
     }
-    .sub {
-      margin: 2rem;
-    }
   }
-  .editGrp {
-    display: flex;
-    gap: 0.5rem;
-  }
-  button {
-    @include buttonStyle();
-    font-weight: 600;
+}
+@media screen and (max-width: 1000px) {
+  .container {
+    margin: 1rem;
+    padding: 1.5rem;
   }
   .adminOptions {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
+    overflow-x: scroll;
   }
   .view {
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    overflow-y: scroll;
+    max-height: 20rem;
   }
   .grpView {
     display: flex;
-    box-shadow: none;
-    gap: 2rem;
+    flex-direction: column;
+    overflow-y: scroll;
+    max-height: 20rem;
     .grpCards {
-      padding: 3rem;
-      border-radius: 12px;
-      box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-      h2 {
-        font-size: 32px;
-      }
-      .grpTitleOpt {
-        display: flex;
-        flex-direction: row;
-        gap: 1rem;
-      }
-      .grpList {
-        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-        padding: 2rem;
-        margin: 1rem;
-        li {
-          list-style: none;
-          display: flex;
-          justify-content: space-between;
-          gap: 1rem;
-          text-align: center;
-          border: 1px solid black;
-          margin: 5px;
-          padding: 10px;
-          border-radius: 12px;
-          box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 5px;
-        }
-      }
+      margin: 0.5rem;
+      padding: 2rem;
     }
   }
-  @media screen and (max-width: 1000px) {
-    .container{
-      margin: 1rem;
-      padding: 1.5rem;
-  }
-    .adminOptions {
-      overflow-x: scroll;
-    }
-    .view {
-      overflow-y: scroll;
-      max-height: 20rem;
-    }
-    .grpView {
-      display: flex;
-      flex-direction: column;
-      overflow-y: scroll;
-      max-height: 20rem;
-      .grpCards {
-        margin: 0.5rem;
-        padding: 2rem;
-      }
-    }
-  }
-  
+}
