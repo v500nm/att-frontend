@@ -1,4 +1,4 @@
-@use "/src/app/shared/styles/admin.scss";
+@use "/src/app/shared/styles/global.scss";
 .body {
   display: flex;
   flex-direction: column;
@@ -38,29 +38,8 @@
       }
     }
   }
-  .charts {
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    grid-gap: 20px;
-    width: 100%;
-    padding: 20px;
-    padding-top: 0;
-  }
-
-  .chart {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 2px 4px 6px 6px rgba(0, 0, 0, 0.08);
-    width: 100%;
-  }
-
-  .chart h2 {
-    margin-bottom: 5px;
-    font-size: 20px;
-    color: #666;
-    text-align: center;
-  }
+  
+ 
 }
 @media screen and (max-width: 1000px) {
   .body {
@@ -68,14 +47,7 @@
       display: grid;
       grid-template-columns: repeat(2, 1fr);
     }
-    .charts{
-      display: grid;
-      grid-template-columns: 1fr;
-      .chart{
-        max-width: 30rem;
-        margin: auto;
-      }
-    }
+    
   }
 }
 @media screen and (max-width: 500px) {
@@ -92,8 +64,6 @@
         }
       }
     }
-    .charts,.chartName{
-      display: none;
-    }
+    
   }
 }
