@@ -773,7 +773,13 @@
                 <p-tabPanel header="View Attendance">
                     <section class="Attendance">
                         <div class="title">
-                            <h1>View Attendance</h1>
+                            <div class="leftHead">
+                                <h1>View Attendance</h1>
+                            </div>
+                            <div class="right">
+                                <button type="button" pButton pRipple icon="pi pi-file-excel" label="Export"
+                                    (click)="exportAttExcel()" class="p-button-success mr-2"></button>
+                            </div>
                         </div>
                         <div class="Add viewAdd">
                             <p-table #attAdd responsiveLayout="stack" [value]="schData" dataKey="id" [rows]="5"

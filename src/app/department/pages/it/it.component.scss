@@ -22,3 +22,11 @@ th {
     background-color: rgb(85, 85, 85);
     color: white;
   }
+.Attendance{
+  .title{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 1rem;
+  }
+}
